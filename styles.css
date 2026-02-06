@@ -1,149 +1,336 @@
+:root {
+  --bg-main: #030814;
+  --bg-panel: rgba(10, 22, 46, 0.82);
+  --bg-elevated: #0c1b39;
+  --text-main: #e8f1ff;
+  --text-soft: #b8c6ea;
+  --line: rgba(84, 164, 255, 0.5);
+  --line-strong: rgba(99, 184, 255, 0.9);
+  --glow: 0 0 0.7rem rgba(89, 173, 255, 0.45);
+}
+
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: #f5f7fa;
-    color: #0a1f44;
+  margin: 0;
+  font-family: "Inter", system-ui, sans-serif;
+  color: var(--text-main);
+  background: radial-gradient(circle at 20% 0%, #13254d 0%, #050a17 40%, #03060f 100%);
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
-/* HERO */
+body.no-scroll {
+  overflow: hidden;
+}
+
+.bg-effects {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(99, 179, 255, 0.15) 0 2px, transparent 2px),
+    radial-gradient(circle at 75% 20%, rgba(99, 179, 255, 0.18) 0 1px, transparent 1px),
+    repeating-linear-gradient(90deg, transparent 0 32px, rgba(59, 104, 163, 0.1) 33px),
+    linear-gradient(to bottom, rgba(75, 130, 210, 0.07), transparent 24%);
+  opacity: 0.85;
+}
+
+.section {
+  width: min(1100px, 92%);
+  margin: 0 auto;
+  padding: 2.8rem 0;
+}
+
+h1,
+h2,
+h3,
+.hero-kicker {
+  font-family: "Orbitron", "Inter", sans-serif;
+  letter-spacing: 0.04em;
+}
+
+h2 {
+  margin: 0 0 1rem;
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  text-shadow: var(--glow);
+}
+
 .hero {
-    background: linear-gradient(135deg, #0a1f44, #0d47a1);
-    color: white;
-    padding: 60px 20px;
-    text-align: center;
+  text-align: center;
+  padding-top: 4.2rem;
+}
+
+.hero-kicker {
+  margin: 0;
+  font-size: 0.78rem;
+  color: #90bbff;
+  text-transform: uppercase;
 }
 
 .hero h1 {
-    font-size: 48px;
-    margin-bottom: 10px;
+  margin: 0.8rem 0 0.5rem;
+  font-size: clamp(2.2rem, 13vw, 5.8rem);
+  line-height: 1;
+  text-shadow: 0 0 1rem rgba(70, 148, 255, 0.65);
 }
 
-.hero h2 {
-    font-size: 20px;
-    font-weight: normal;
-    opacity: 0.9;
+.subtitle,
+.hero-copy {
+  margin: 0 auto;
+  max-width: 740px;
+  color: var(--text-soft);
 }
 
-.hero p {
-    max-width: 600px;
-    margin: 20px auto;
+.subtitle {
+  font-weight: 700;
+  margin-bottom: 0.8rem;
 }
 
-/* BOTONES */
+.hero-actions {
+  display: flex;
+  gap: 0.8rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1.4rem;
+}
+
 .btn {
-    padding: 12px 22px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: bold;
-    display: inline-block;
-    cursor: pointer;
+  border: 1px solid var(--line);
+  color: #ddedff;
+  text-decoration: none;
+  background: rgba(27, 58, 107, 0.28);
+  padding: 0.72rem 1.05rem;
+  border-radius: 0.7rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 180ms ease, box-shadow 220ms ease, border-color 220ms ease;
 }
 
-.primary {
-    background: #2196f3;
-    color: white;
+.btn:hover,
+.btn:focus-visible {
+  transform: translateY(-2px);
+  border-color: var(--line-strong);
+  box-shadow: var(--glow), 0 0 1.2rem rgba(90, 170, 255, 0.3);
 }
 
-.secondary {
-    background: white;
-    color: #0d47a1;
+.btn:focus-visible,
+.league-card:focus-visible,
+summary:focus-visible,
+.close-btn:focus-visible {
+  outline: 2px solid #8ec5ff;
+  outline-offset: 2px;
 }
 
-/* SECCIONES */
-.section {
-    padding: 50px 20px;
-    max-width: 1000px;
-    margin: auto;
+.btn-primary {
+  background: linear-gradient(180deg, rgba(58, 121, 218, 0.4), rgba(14, 36, 74, 0.75));
 }
 
-.section h2 {
-    text-align: center;
-    margin-bottom: 20px;
+.btn-secondary {
+  background: rgba(6, 18, 38, 0.72);
 }
 
-/* LIGAS */
-.ligas-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
+.panel-section,
+.faq,
+.league-card,
+.league-modal {
+  background: var(--bg-panel);
+  border: 1px solid rgba(92, 163, 250, 0.35);
+  border-radius: 1rem;
+  box-shadow: inset 0 0 0 1px rgba(52, 93, 155, 0.2), 0 12px 40px rgba(3, 8, 19, 0.55);
+  backdrop-filter: blur(4px);
 }
 
-.liga-card {
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    overflow: hidden;
-    cursor: pointer;
-    transition: transform 0.2s;
+.hud-separator {
+  position: relative;
 }
 
-.liga-card:hover {
-    transform: scale(1.03);
+.hud-separator::after {
+  content: "";
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: -0.35rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(99, 184, 255, 0.9), transparent);
 }
 
-.liga-img {
-    height: 160px;
+.panel-section,
+.faq {
+  padding: 1.4rem;
 }
 
-.liga-img.pes {
-    background: linear-gradient(45deg, #1565c0, #42a5f5);
+.league-grid {
+  display: grid;
+  gap: 1rem;
 }
 
-.liga-img.sf {
-    background: linear-gradient(45deg, #b71c1c, #e53935);
+.league-card {
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 180ms ease, box-shadow 220ms ease;
 }
 
-.liga-card h3 {
-    padding: 15px;
-    text-align: center;
+.league-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 1.5rem rgba(99, 184, 255, 0.25);
 }
 
-/* PANEL */
-.panel {
-    position: fixed;
-    top: 5%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-    max-width: 800px;
-    background: white;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
-    overflow-y: auto;
-    max-height: 90vh;
-    z-index: 100;
+.league-card img,
+.modal-banner {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
 }
 
-.hidden {
-    display: none;
+.league-card-content {
+  padding: 1rem;
 }
 
-.close {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    border: none;
-    background: none;
-    font-size: 20px;
-    cursor: pointer;
+.feature-list {
+  padding-left: 1.2rem;
+  margin: 0;
 }
 
-/* COPY */
+.feature-list li {
+  margin-bottom: 0.45rem;
+}
+
+.whatsapp-grid {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.btn-large {
+  text-align: center;
+  padding: 1rem;
+  font-size: 1rem;
+}
+
+.faq details {
+  border: 1px solid rgba(90, 151, 228, 0.3);
+  border-radius: 0.75rem;
+  padding: 0.8rem;
+  background: rgba(8, 24, 51, 0.6);
+  margin-bottom: 0.6rem;
+}
+
+.faq summary {
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.faq p {
+  color: var(--text-soft);
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 8, 20, 0.78);
+  z-index: 20;
+  padding: 1rem;
+  display: grid;
+  place-items: center;
+}
+
+.league-modal {
+  width: min(900px, 95vw);
+  max-height: 92vh;
+  overflow-y: auto;
+  padding: 1.1rem;
+  position: relative;
+  animation: modal-in 220ms ease;
+}
+
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.close-btn {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  border: 1px solid var(--line);
+  color: #e5f3ff;
+  background: rgba(4, 13, 28, 0.9);
+  font-size: 1.5rem;
+  line-height: 1;
+  border-radius: 0.4rem;
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+}
+
 .copy-box textarea {
-    width: 100%;
-    height: 180px;
-    margin: 10px 0;
+  width: 100%;
+  min-height: 230px;
+  resize: vertical;
+  padding: 0.8rem;
+  color: #dfeeff;
+  font-family: "Inter", sans-serif;
+  border-radius: 0.8rem;
+  border: 1px solid rgba(113, 182, 255, 0.35);
+  background: rgba(5, 19, 39, 0.8);
 }
 
-/* TOP */
-#top {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    padding: 10px;
+.copy-btn {
+  margin-top: 0.65rem;
+}
+
+.back-to-top {
+  position: fixed;
+  right: 0.9rem;
+  bottom: 1rem;
+  z-index: 10;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (min-width: 760px) {
+  .section {
+    padding: 3.2rem 0;
+  }
+
+  .league-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .whatsapp-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .league-card img,
+  .modal-banner {
+    height: 260px;
+  }
+
+  .league-modal {
+    padding: 1.6rem;
+  }
+}
+
+.modal-overlay[hidden],
+.league-modal[hidden] {
+  display: none !important;
 }
