@@ -1,143 +1,216 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>Sudaka League</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sudaka League</title>
+  <meta name="description" content="Sudaka League - Comunidad de juegos retro online con formato competitivo." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Orbitron:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <div class="bg-effects" aria-hidden="true"></div>
 
-<header class="hero">
+  <header class="hero section" id="inicio">
+    <p class="hero-kicker">Liga Oficial Retro Competitiva</p>
     <h1>SUDAKA LEAGUE</h1>
-    <p class="subtitulo">Comunidad de juegos retro online con formato competitivo</p>
-    <p class="hero-text">
-        Jugá clásicos como PES 6 y Street Fighter II en ligas organizadas, 
-        sin horarios fijos y coordinando partidas por WhatsApp
+    <p class="subtitle">Comunidad de juegos retro online con formato competitivo</p>
+    <p class="hero-copy">
+      Jugá clásicos como PES 6 y Street Fighter II en ligas organizadas,
+      sin horarios fijos y coordinando partidas por WhatsApp
     </p>
-    <div class="hero-btns">
-        <a href="#" class="btn primary">Unirme a la comunidad</a>
-        <a href="#ligas" class="btn secondary">Ver ligas</a>
+    <div class="hero-actions">
+      <a id="cta-comunidad" class="btn btn-primary" href="#" target="_blank" rel="noopener noreferrer">Unirme a la comunidad</a>
+      <a class="btn btn-secondary" href="#ligas">Ver ligas</a>
     </div>
-</header>
+  </header>
 
-<section class="what-is">
-    <h2>¿QUÉ ES SUDAKA LEAGUE?</h2>
-    <p>Sudaka League es una comunidad de juegos retro online llevados a un formato competitivo. 
-    No hay horarios fijos: los partidos se juegan cuando coinciden dos jugadores disponibles. 
-    La coordinación se realiza por WhatsApp y los resultados cuentan para tablas, ascensos y posiciones.</p>
-</section>
+  <main>
+    <section class="section panel-section hud-separator" aria-labelledby="que-es-title">
+      <h2 id="que-es-title">¿QUÉ ES SUDAKA LEAGUE?</h2>
+      <p>
+        Sudaka League es una comunidad de juegos retro online llevados a un formato competitivo. No hay horarios fijos:
+        los partidos se juegan cuando coinciden dos jugadores disponibles. La coordinación se realiza por WhatsApp y los
+        resultados cuentan para tablas, ascensos y posiciones.
+      </p>
+    </section>
 
-<section id="ligas" class="ligas">
-    <h2>LIGAS</h2>
-    <div class="cards">
-
-        <div class="card" data-target="pes6-panel">
-            <img src="https://via.placeholder.com/400x200?text=PES+6+Infinity+Patch" alt="PES6">
+    <section id="ligas" class="section hud-separator" aria-labelledby="ligas-title">
+      <h2 id="ligas-title">LIGAS</h2>
+      <div class="league-grid">
+        <article class="league-card" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="pes6-panel" data-target="pes6-panel">
+          <img src="assets/pes6.png" alt="PES 6 - Infinity Patch" />
+          <div class="league-card-content">
             <h3>PES 6 – Infinity Patch</h3>
-        </div>
+            <p>Competí en divisiones y escalá posiciones.</p>
+          </div>
+        </article>
 
-        <div class="card" data-target="sf-panel">
-            <img src="https://via.placeholder.com/400x200?text=Street+Fighter+II" alt="Street Fighter II">
+        <article class="league-card" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="sf-panel" data-target="sf-panel">
+          <img src="assets/sfii.png" alt="Street Fighter II - Fightcade" />
+          <div class="league-card-content">
             <h3>Street Fighter II – Fightcade</h3>
-        </div>
+            <p>Liga 1 vs 1 con formato competitivo oficial.</p>
+          </div>
+        </article>
+      </div>
+    </section>
 
-    </div>
-</section>
-
-<!-- PES6 PANEL -->
-<div id="pes6-panel" class="panel hidden">
-    <button class="close-btn">&times;</button>
-    <img src="https://via.placeholder.com/800x200?text=PES+6+Infinity+Patch+Banner" alt="PES 6 Banner">
-    <h2>PES 6 – Infinity Patch</h2>
-
-    <h3>¿QUÉ ES?</h3>
-    <p>Liga online de PES 6 utilizando Infinity Patch.</p>
-
-    <h3>DIVISIONES</h3>
-    <p>- 4 divisiones</p>
-    <p>- 20 jugadores por división</p>
-
-    <h3>CÓMO SE JUEGA</h3>
-    <p>Los partidos se juegan cuando dos jugadores coinciden disponibles y coordinan por WhatsApp.</p>
-
-    <h3>QUÉ TENÉS QUE INSTALAR</h3>
-    <p>- PES 6</p>
-    <p>- Infinity Patch</p>
-
-    <h3>MENSAJE OFICIAL PARA NUEVOS JUGADORES</h3>
-    <div class="copy-box">
-        <textarea id="pes6-msg" readonly>
---------------------------------
-BIENVENIDO!
-EN ESTE MENSAJE TE DEJO TODO LO NECESARIO PARA EMPEZAR EN LA LIGA...
-https://youtu.be/IsKefVidC4A?si=RBQ4j3CIhWm2N2KJ
-...
---------------------------------
-        </textarea>
-        <button class="copy-btn" data-copy="pes6-msg">📋 Copiar mensaje</button>
-    </div>
-
-    <a href="#" class="btn primary" id="whatsapp-pes6">Ir al WhatsApp de PES 6</a>
-</div>
-
-<!-- Street Fighter Panel -->
-<div id="sf-panel" class="panel hidden">
-    <button class="close-btn">&times;</button>
-    <img src="https://via.placeholder.com/800x200?text=SF+II+Fightcade+Banner" alt="SFII Banner">
-    <h2>Street Fighter II – Fightcade</h2>
-
-    <h3>¿QUÉ ES?</h3>
-    <p>Liga 1 vs 1 de Street Fighter II jugada en Fightcade.</p>
-
-    <h3>DIVISIONES</h3>
-    <p>- Primera División (en inauguración)</p>
-
-    <h3>DÓNDE SE JUEGA</h3>
-    <p>Salón obligatorio de Fightcade: #STREET FIGHTER II – CHAMPION EDITION</p>
-
-    <h3>MENSAJE OFICIAL DE LA LIGA</h3>
-    <div class="copy-box">
-        <textarea id="sf-msg" readonly>
---------------------------------
-🔥 BIENVENIDO A LA LIGA DE STREET FIGHTER II – SUDAKA LEAGUE 🔥
-📹 VIDEO DE INSTALACIÓN (OBLIGATORIO)...
---------------------------------
-        </textarea>
-        <button class="copy-btn" data-copy="sf-msg">📋 Copiar mensaje</button>
-    </div>
-
-    <a href="#" class="btn primary" id="whatsapp-sf">Ir al WhatsApp de Street Fighter</a>
-</div>
-
-<section class="how-to-play">
-    <h2>¿CÓMO SE JUEGA?</h2>
-    <ul>
+    <section class="section panel-section hud-separator" aria-labelledby="como-juega-title">
+      <h2 id="como-juega-title">CÓMO SE JUEGA</h2>
+      <ul class="feature-list">
         <li>Sistema de divisiones</li>
         <li>Partidos coordinados por WhatsApp</li>
         <li>Resultados cuentan para tablas</li>
         <li>Respeto y juego limpio</li>
-    </ul>
-</section>
+      </ul>
+    </section>
 
-<section class="whatsapp-buttons">
-    <a href="#" class="btn big" id="whatsapp-pes6-2">Unirme a PES 6</a>
-    <a href="#" class="btn big" id="whatsapp-sf-2">Unirme a Street Fighter</a>
-</section>
+    <section class="section hud-separator" aria-labelledby="whatsapp-title">
+      <h2 id="whatsapp-title">WHATSAPP</h2>
+      <div class="whatsapp-grid">
+        <a id="wa-pes6" class="btn btn-primary btn-large" href="#" target="_blank" rel="noopener noreferrer">Unirme a PES 6</a>
+        <a id="wa-sf" class="btn btn-primary btn-large" href="#" target="_blank" rel="noopener noreferrer">Unirme a Street Fighter</a>
+      </div>
+    </section>
 
-<section class="faq">
-    <h2>FAQ</h2>
-    <details><summary>¿Hay horarios fijos?</summary><p>No, no hay horarios fijos.</p></details>
-    <details><summary>¿Cómo consigo rival?</summary><p>Coordinando por WhatsApp cuando estás disponible.</p></details>
-    <details><summary>¿Qué pasa si no juego una semana?</summary><p>Depende de tu división y reglas internas.</p></details>
-    <details><summary>¿Cómo se reportan resultados?</summary><p>En el grupo de WhatsApp correspondiente.</p></details>
-    <details><summary>¿Necesito joystick?</summary><p>No es obligatorio, pero recomendado.</p></details>
-    <details><summary>¿Dónde pido ayuda?</summary><p>En el grupo de WhatsApp oficial.</p></details>
-</section>
+    <section class="section faq" aria-labelledby="faq-title">
+      <h2 id="faq-title">FAQ</h2>
+      <details>
+        <summary>¿Hay horarios fijos?</summary>
+        <p>No. Se juega cuando coinciden dos jugadores disponibles.</p>
+      </details>
+      <details>
+        <summary>¿Cómo consigo rival?</summary>
+        <p>Entrás al grupo de WhatsApp de tu liga y avisás que estás disponible.</p>
+      </details>
+      <details>
+        <summary>¿Qué pasa si no juego una semana?</summary>
+        <p>Puede impactar en tu posición. Recomendamos avisar en tu grupo y mantener actividad.</p>
+      </details>
+      <details>
+        <summary>¿Cómo se reportan resultados?</summary>
+        <p>En el grupo correspondiente de WhatsApp, según el formato de cada liga.</p>
+      </details>
+      <details>
+        <summary>¿Necesito joystick?</summary>
+        <p>No es obligatorio, pero sí muy recomendado para una mejor experiencia competitiva.</p>
+      </details>
+      <details>
+        <summary>¿Dónde pido ayuda?</summary>
+        <p>En la comunidad de WhatsApp o en tu grupo de liga.</p>
+      </details>
+    </section>
+  </main>
 
-<button id="back-to-top">Volver arriba ⬆️</button>
+  <div id="modal-overlay" class="modal-overlay" hidden>
+    <section id="pes6-panel" class="league-modal" role="dialog" aria-modal="true" aria-labelledby="pes6-modal-title" hidden>
+      <button class="close-btn" type="button" aria-label="Cerrar panel">×</button>
+      <img class="modal-banner" src="assets/pes6.png" alt="PES 6 Banner" />
+      <h2 id="pes6-modal-title">PES 6 – INFINITY PATCH</h2>
 
-<script src="app.js"></script>
+      <h3>¿QUÉ ES?</h3>
+      <p>Liga online de PES 6 utilizando Infinity Patch.</p>
 
+      <h3>DIVISIONES</h3>
+      <ul>
+        <li>4 divisiones</li>
+        <li>20 jugadores por división</li>
+      </ul>
+
+      <h3>CÓMO SE JUEGA</h3>
+      <p>Los partidos se juegan cuando dos jugadores coinciden disponibles y coordinan por WhatsApp.</p>
+
+      <h3>QUÉ TENÉS QUE INSTALAR</h3>
+      <ul>
+        <li>PES 6</li>
+        <li>Infinity Patch</li>
+      </ul>
+
+      <h3>MENSAJE OFICIAL PARA NUEVOS JUGADORES</h3>
+      <div class="copy-box">
+        <textarea id="pes6-message" readonly>BIENVENIDO!
+
+EN ESTE MENSAJE TE DEJO TODO LO NECESARIO PARA EMPEZAR EN LA LIGA SOLO NECESITAS ESTAS DOS COSAS:
+
+INFINITTY PATCH, ESTE ES EL PARCHE QUE USAMOS: https://youtu.be/IsKefVidC4A?si=RBQ4j3CIhWm2N2KJ
+
+RECORDÁ QUE LA INSTALACIÓN DE LOS ESTADIOS ES OPCIONAL Y NO OBLIGATORIA
+
+Y ACA TE DEJO UNA BREVE EXPLICACIÓN DEL ARCHIVO HOST:
+
+van a la pagina: https://pes6comunidad.trixnodes.com
+en "registro" se crean la cuenta del server
+
+Una vez que están registrados, el último paso sería descargar el selector de host: https://www.mediafire.com/file/cue87dwh4rt8phs/PES6HostSelector.zip/file
+
+Una vez instalado lo ejecutan como administrador seleccionan pes6comunidad y apretan en salir
+
+UNA VEZ QUE TERMINES EL REGISTRO NO OLVIDES DEJARNOS TU NOMBRE DE USUARIO DE PES6</textarea>
+        <button class="btn btn-secondary copy-btn" type="button" data-copy-target="pes6-message">📋 Copiar mensaje</button>
+      </div>
+
+      <a id="wa-pes6-modal" class="btn btn-primary" href="#" target="_blank" rel="noopener noreferrer">Ir al WhatsApp de PES 6</a>
+    </section>
+
+    <section id="sf-panel" class="league-modal" role="dialog" aria-modal="true" aria-labelledby="sf-modal-title" hidden>
+      <button class="close-btn" type="button" aria-label="Cerrar panel">×</button>
+      <img class="modal-banner" src="assets/sfii.png" alt="Street Fighter II Banner" />
+      <h2 id="sf-modal-title">STREET FIGHTER II – FIGHTCADE</h2>
+
+      <h3>¿QUÉ ES?</h3>
+      <p>Liga 1 vs 1 de Street Fighter II jugada en Fightcade.</p>
+
+      <h3>DIVISIONES</h3>
+      <ul>
+        <li>Primera División (en inauguración)</li>
+      </ul>
+
+      <h3>DÓNDE SE JUEGA</h3>
+      <p>Salón obligatorio de Fightcade: #STREET FIGHTER II – CHAMPION EDITION</p>
+
+      <h3>MENSAJE OFICIAL DE LA LIGA</h3>
+      <div class="copy-box">
+        <textarea id="sf-message" readonly>🔥 BIENVENIDO A LA LIGA DE STREET FIGHTER II – SUDAKA LEAGUE 🔥
+
+📹 VIDEO DE INSTALACIÓN (OBLIGATORIO)
+Este video explica únicamente cómo instalar y configurar Fightcade y el juego: https://www.youtube.com/watch?v=tM5yVYoY-7w&t=126s
+
+⚠️ IMPORTANTE: El video NO explica el funcionamiento de la liga.
+
+🎮 ¿CÓMO FUNCIONA LA LIGA?
+La liga se juega en Fightcade con Street Fighter II.
+
+📍 SALÓN DE FIGHTCADE (OBLIGATORIO)
+#STREET FIGHTER II – CHAMPION EDITION
+
+🔍 ¿CÓMO BUSCAR PARTIDA?
+1) Entrar a Fightcade
+2) Buscar el salón indicado
+3) Avisar en el grupo de WhatsApp que estás disponible
+4) Coordinar, invitar y jugar
+5) Enviar resultado al grupo
+
+⏱️ DATOS CLAVE
+- No hay horarios fijos
+- No hay lobby automático
+- Los partidos se juegan cuando coinciden dos jugadores
+
+🏆 OBJETIVO
+Competir, sumar puntos y escalar posiciones.
+
+🔥 Bienvenido a Sudaka League – Street Fighter II 🔥</textarea>
+        <button class="btn btn-secondary copy-btn" type="button" data-copy-target="sf-message">📋 Copiar mensaje</button>
+      </div>
+
+      <a id="wa-sf-modal" class="btn btn-primary" href="#" target="_blank" rel="noopener noreferrer">Ir al WhatsApp de Street Fighter</a>
+    </section>
+  </div>
+
+  <button id="back-to-top" class="btn btn-primary back-to-top" type="button" aria-label="Volver arriba">Volver arriba ↑</button>
+
+  <script src="app.js"></script>
 </body>
 </html>
