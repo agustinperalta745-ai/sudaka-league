@@ -167,7 +167,7 @@ summary:focus-visible,
 
 .panel-section,
 .faq {
-  padding: clamp(1.75rem, 4.8vw, 2.35rem);
+  padding: clamp(2.25rem, 5.6vw, 3.1rem);
 }
 
 .panel-section h2,
@@ -191,6 +191,19 @@ summary:focus-visible,
 .league-card-content h3,
 .league-modal h3 {
   font-size: clamp(0.95rem, 2.35vw, 1.15rem);
+}
+
+
+.panel-section h2 {
+  margin-bottom: 1.2rem;
+  padding-inline: clamp(0.3rem, 1.2vw, 0.55rem);
+}
+
+.panel-section p,
+.panel-section li {
+  line-height: 1.62;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .league-grid {
@@ -333,9 +346,27 @@ summary:focus-visible,
   pointer-events: auto;
 }
 
+
+@media (max-width: 759px) {
+  .panel-section,
+  .faq {
+    padding: clamp(2.25rem, 8vw, 2.85rem);
+  }
+
+  .panel-section h2 {
+    margin-bottom: 1.05rem;
+    padding-inline: 0.45rem;
+  }
+}
+
 @media (min-width: 760px) {
   .section {
     padding: 3.2rem 0;
+  }
+
+  .panel-section,
+  .faq {
+    padding: clamp(2.5rem, 4vw, 3.1rem);
   }
 
   .league-grid {

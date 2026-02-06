@@ -1,5 +1,3 @@
-const WHATSAPP_PES6 = "https://...";
-const WHATSAPP_SF = "https://...";
 const WHATSAPP_COMUNIDAD = "https://...";
 
 const overlay = document.getElementById("modal-overlay");
@@ -16,10 +14,8 @@ let lastFocusedElement = null;
 function applyWhatsAppLinks() {
   const links = {
     "cta-comunidad": WHATSAPP_COMUNIDAD,
-    "wa-pes6": WHATSAPP_PES6,
-    "wa-pes6-modal": WHATSAPP_PES6,
-    "wa-sf": WHATSAPP_SF,
-    "wa-sf-modal": WHATSAPP_SF
+    "wa-pes6-modal": WHATSAPP_COMUNIDAD,
+    "wa-sf-modal": WHATSAPP_COMUNIDAD
   };
 
   Object.entries(links).forEach(([id, value]) => {
