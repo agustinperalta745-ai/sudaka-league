@@ -8,10 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Orbitron:wght@600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=3">
-...
-<script src="app.js?v=3"></script>
-
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="bg-effects" aria-hidden="true"></div>
@@ -25,14 +22,7 @@
       sin horarios fijos y coordinando partidas por WhatsApp
     </p>
     <div class="hero-actions">
-      <a id="cta-comunidad"
-   class="btn btn-primary"
-   href="https://chat.whatsapp.com/DvRyA2bxAC67x0ulPQYvCa?mode=gi_t"
-   target="_blank"
-   rel="noopener noreferrer">
-  Unirme a la comunidad
-</a>
-
+      <a id="cta-comunidad" class="btn btn-primary" href="https://chat.whatsapp.com/DvRyA2bxAC67x0ulPQYvCa?mode=gi_t" target="_blank" rel="noopener noreferrer">Unirme a la comunidad</a>
       <a class="btn btn-secondary" href="#ligas">Ver ligas</a>
     </div>
   </header>
@@ -110,30 +100,48 @@
   <div id="modal-overlay" class="modal-overlay" hidden>
     <section id="pes6-panel" class="league-modal" role="dialog" aria-modal="true" aria-labelledby="pes6-modal-title" hidden>
       <button class="close-btn" type="button" aria-label="Cerrar panel">×</button>
-      <img class="modal-banner" src="assets/pes6.png" alt="PES 6 Banner" />
+      <img class="modal-banner" src="assets/pes6.jpg" alt="PES 6 Banner" />
       <h2 id="pes6-modal-title">PES 6 – INFINITY PATCH</h2>
 
-      <h3>¿QUÉ ES?</h3>
-      <p>Liga online de PES 6 utilizando Infinity Patch.</p>
+      <div class="tab-bar" role="tablist" aria-label="Contenido de PES 6">
+        <button class="tab-btn is-active" type="button" role="tab" aria-selected="true" aria-controls="pes6-tab-necesitas" id="pes6-tab-btn-necesitas" data-tab="pes6-tab-necesitas">Qué necesitás para jugar</button>
+        <button class="tab-btn" type="button" role="tab" aria-selected="false" aria-controls="pes6-tab-sistema" id="pes6-tab-btn-sistema" data-tab="pes6-tab-sistema">Sistema de liga</button>
+        <button class="tab-btn" type="button" role="tab" aria-selected="false" aria-controls="pes6-tab-temporadas" id="pes6-tab-btn-temporadas" data-tab="pes6-tab-temporadas">Temporadas</button>
+      </div>
 
-      <h3>DIVISIONES</h3>
-      <ul>
-        <li>4 divisiones</li>
-        <li>20 jugadores por división</li>
-      </ul>
+      <div class="tab-content">
+        <section class="tab-panel is-active" role="tabpanel" id="pes6-tab-necesitas" aria-labelledby="pes6-tab-btn-necesitas">
+          <h3>¿Qué necesitás para jugar PES 6 en Sudaka League?</h3>
+          <p>Para jugar en la liga PES 6 – Infinity Patch necesitás dos cosas obligatorias:</p>
+          <ol>
+            <li>
+              <strong>Infinity Patch (obligatorio)</strong>
+              <p>Este es el parche oficial que usamos en la liga.</p>
+              <p><a href="https://youtu.be/IsKefVidC4A?si=RBQ4j3CIhWm2N2KJ" target="_blank" rel="noopener noreferrer">https://youtu.be/IsKefVidC4A?si=RBQ4j3CIhWm2N2KJ</a></p>
+              <p class="note-text">La instalación de estadios es OPCIONAL, no es obligatoria.</p>
+            </li>
+            <li>
+              <strong>Configurar el Host Online (obligatorio)</strong>
+              <p><strong>Paso 1:</strong> Crear cuenta en el servidor</p>
+              <p><a href="https://pes6comunidad.trixnodes.com" target="_blank" rel="noopener noreferrer">https://pes6comunidad.trixnodes.com</a></p>
+              <p>En la sección ‘Registro’ creás tu cuenta del server.</p>
 
-      <h3>CÓMO SE JUEGA</h3>
-      <p>Los partidos se juegan cuando dos jugadores coinciden disponibles y coordinan por WhatsApp.</p>
+              <p><strong>Paso 2:</strong> Descargar el Host Selector</p>
+              <p><a href="https://www.mediafire.com/file/cue87dwh4rt8phs/PES6HostSelector.zip/file" target="_blank" rel="noopener noreferrer">https://www.mediafire.com/file/cue87dwh4rt8phs/PES6HostSelector.zip/file</a></p>
 
-      <h3>QUÉ TENÉS QUE INSTALAR</h3>
-      <ul>
-        <li>PES 6</li>
-        <li>Infinity Patch</li>
-      </ul>
+              <p><strong>Paso 3:</strong> Configurar el Host</p>
+              <ol>
+                <li>Descomprimir el archivo</li>
+                <li>Ejecutar PES6HostSelector.exe como administrador</li>
+                <li>Seleccionar el host ‘pes6comunidad’</li>
+                <li>Apretar ‘Salir’</li>
+              </ol>
+            </li>
+          </ol>
+          <p class="highlight-text">Una vez que terminás todo el registro y la instalación: enviarnos tu nombre de usuario de PES6 para sumarte a la lista de espera.</p>
 
-      <h3>MENSAJE OFICIAL PARA NUEVOS JUGADORES</h3>
-      <div class="copy-box">
-        <textarea id="pes6-message" readonly>BIENVENIDO!
+          <div class="copy-box">
+            <textarea id="pes6-message" readonly>BIENVENIDO!
 
 EN ESTE MENSAJE TE DEJO TODO LO NECESARIO PARA EMPEZAR EN LA LIGA SOLO NECESITAS ESTAS DOS COSAS:
 
@@ -151,31 +159,61 @@ Una vez que están registrados, el último paso sería descargar el selector de 
 Una vez instalado lo ejecutan como administrador seleccionan pes6comunidad y apretan en salir
 
 UNA VEZ QUE TERMINES EL REGISTRO NO OLVIDES DEJARNOS TU NOMBRE DE USUARIO DE PES6</textarea>
-        <button class="btn btn-secondary copy-btn" type="button" data-copy-target="pes6-message">📋 Copiar mensaje</button>
+            <button class="btn btn-secondary copy-btn" type="button" data-copy-target="pes6-message">📋 Copiar mensaje</button>
+          </div>
+        </section>
+
+        <section class="tab-panel" role="tabpanel" id="pes6-tab-sistema" aria-labelledby="pes6-tab-btn-sistema" hidden>
+          <ul>
+            <li>Sistema de divisiones</li>
+            <li>Partidos sin horarios fijos: se juegan cuando coinciden dos jugadores</li>
+            <li>Coordinación por la comunidad de WhatsApp</li>
+            <li>Resultados: se reportan en el grupo y se cargan en GesLiga (tablas, posiciones, ascensos)</li>
+            <li>Respeto y juego limpio</li>
+          </ul>
+        </section>
+
+        <section class="tab-panel" role="tabpanel" id="pes6-tab-temporadas" aria-labelledby="pes6-tab-btn-temporadas" hidden>
+          <ul>
+            <li>Cada temporada dura 2 semanas</li>
+            <li>Los equipos NO se eligen: se sortean en vivo por TikTok antes de empezar cada temporada</li>
+            <li>Las temáticas cambian cada temporada: equipos sudamericanos, europeos, selecciones, etc.</li>
+          </ul>
+        </section>
       </div>
 
-      <a id="wa-pes6-modal" class="btn btn-primary" href="#" target="_blank" rel="noopener noreferrer">Ir a la comunidad</a>
+      <a id="wa-pes6-modal" class="btn btn-primary" href="#" target="_blank" rel="noopener noreferrer">Unirme a la comunidad</a>
     </section>
 
     <section id="sf-panel" class="league-modal" role="dialog" aria-modal="true" aria-labelledby="sf-modal-title" hidden>
       <button class="close-btn" type="button" aria-label="Cerrar panel">×</button>
-      <img class="modal-banner" src="assets/sfii.png" alt="Street Fighter II Banner" />
+      <img class="modal-banner" src="assets/sfii.jpg" alt="Street Fighter II Banner" />
       <h2 id="sf-modal-title">STREET FIGHTER II – FIGHTCADE</h2>
 
-      <h3>¿QUÉ ES?</h3>
-      <p>Liga 1 vs 1 de Street Fighter II jugada en Fightcade.</p>
+      <div class="tab-bar" role="tablist" aria-label="Contenido de Street Fighter II">
+        <button class="tab-btn is-active" type="button" role="tab" aria-selected="true" aria-controls="sf-tab-necesitas" id="sf-tab-btn-necesitas" data-tab="sf-tab-necesitas">Qué necesitás para jugar</button>
+        <button class="tab-btn" type="button" role="tab" aria-selected="false" aria-controls="sf-tab-sistema" id="sf-tab-btn-sistema" data-tab="sf-tab-sistema">Sistema de liga</button>
+        <button class="tab-btn" type="button" role="tab" aria-selected="false" aria-controls="sf-tab-temporadas" id="sf-tab-btn-temporadas" data-tab="sf-tab-temporadas">Temporadas</button>
+      </div>
 
-      <h3>DIVISIONES</h3>
-      <ul>
-        <li>Primera División (en inauguración)</li>
-      </ul>
+      <div class="tab-content">
+        <section class="tab-panel is-active" role="tabpanel" id="sf-tab-necesitas" aria-labelledby="sf-tab-btn-necesitas">
+          <h3>¿Qué necesitás para jugar Street Fighter II en Sudaka League?</h3>
+          <ol>
+            <li>
+              <strong>Instalar Fightcade y el juego (obligatorio)</strong>
+              <p><a href="https://www.youtube.com/watch?v=tM5yVYoY-7w&t=126s" target="_blank" rel="noopener noreferrer">https://www.youtube.com/watch?v=tM5yVYoY-7w&t=126s</a></p>
+              <p class="highlight-text">Este video SOLO explica la instalación. El funcionamiento de la liga se explica en otra pestaña.</p>
+            </li>
+            <li>
+              <strong>Entrar al salón correcto (obligatorio)</strong>
+              <p>Todos los partidos de liga se juegan exclusivamente en el salón:</p>
+              <p><strong>#STREET FIGHTER II – CHAMPION EDITION</strong></p>
+            </li>
+          </ol>
 
-      <h3>DÓNDE SE JUEGA</h3>
-      <p>Salón obligatorio de Fightcade: #STREET FIGHTER II – CHAMPION EDITION</p>
-
-      <h3>MENSAJE OFICIAL DE LA LIGA</h3>
-      <div class="copy-box">
-        <textarea id="sf-message" readonly>🔥 BIENVENIDO A LA LIGA DE STREET FIGHTER II – SUDAKA LEAGUE 🔥
+          <div class="copy-box">
+            <textarea id="sf-message" readonly>🔥 BIENVENIDO A LA LIGA DE STREET FIGHTER II – SUDAKA LEAGUE 🔥
 
 📹 VIDEO DE INSTALACIÓN (OBLIGATORIO)
 Este video explica únicamente cómo instalar y configurar Fightcade y el juego: https://www.youtube.com/watch?v=tM5yVYoY-7w&t=126s
@@ -204,10 +242,31 @@ La liga se juega en Fightcade con Street Fighter II.
 Competir, sumar puntos y escalar posiciones.
 
 🔥 Bienvenido a Sudaka League – Street Fighter II 🔥</textarea>
-        <button class="btn btn-secondary copy-btn" type="button" data-copy-target="sf-message">📋 Copiar mensaje</button>
+            <button class="btn btn-secondary copy-btn" type="button" data-copy-target="sf-message">📋 Copiar mensaje</button>
+          </div>
+        </section>
+
+        <section class="tab-panel" role="tabpanel" id="sf-tab-sistema" aria-labelledby="sf-tab-btn-sistema" hidden>
+          <ul>
+            <li>Liga 1 vs 1</li>
+            <li>Sin horarios fijos, se coordina por WhatsApp</li>
+            <li>Se juega en Fightcade dentro del salón oficial</li>
+            <li>Resultados: se reportan y se cargan en GesLiga</li>
+            <li>Ranking / posiciones oficiales</li>
+            <li>Respeto y juego limpio</li>
+          </ul>
+        </section>
+
+        <section class="tab-panel" role="tabpanel" id="sf-tab-temporadas" aria-labelledby="sf-tab-btn-temporadas" hidden>
+          <ul>
+            <li>Cada temporada dura 2 semanas</li>
+            <li>Los jugadores eligen colores que los representan</li>
+            <li>Los personajes son libres para todos: cualquiera puede usar cualquier personaje en cada partida</li>
+          </ul>
+        </section>
       </div>
 
-      <a id="wa-sf-modal" class="btn btn-primary" href="#" target="_blank" rel="noopener noreferrer">Ir a la comunidad</a>
+      <a id="wa-sf-modal" class="btn btn-primary" href="#" target="_blank" rel="noopener noreferrer">Unirme a la comunidad</a>
     </section>
   </div>
 
