@@ -54,13 +54,16 @@ h2,
 h3,
 .hero-kicker {
   font-family: "Orbitron", "Inter", sans-serif;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
 }
 
 h2 {
   margin: 0 0 1rem;
-  font-size: clamp(1.4rem, 4vw, 2rem);
+  font-size: clamp(1.25rem, 3.6vw, 1.85rem);
+  line-height: 1.18;
   text-shadow: var(--glow);
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .hero {
@@ -164,7 +167,24 @@ summary:focus-visible,
 
 .panel-section,
 .faq {
-  padding: 1.4rem;
+  padding: clamp(1.5rem, 4vw, 2rem);
+}
+
+.panel-section h2,
+.faq h2,
+.league-modal h2,
+.league-card-content h3,
+.league-modal h3 {
+  letter-spacing: 0.02em;
+  line-height: 1.18;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+.league-card-content h3,
+.league-modal h3 {
+  font-size: clamp(1rem, 2.8vw, 1.28rem);
 }
 
 .league-grid {
@@ -192,7 +212,7 @@ summary:focus-visible,
 }
 
 .league-card-content {
-  padding: 1rem;
+  padding: clamp(1.1rem, 3vw, 1.35rem);
 }
 
 .feature-list {
@@ -218,7 +238,7 @@ summary:focus-visible,
 .faq details {
   border: 1px solid rgba(90, 151, 228, 0.3);
   border-radius: 0.75rem;
-  padding: 0.8rem;
+  padding: clamp(0.95rem, 2.5vw, 1.15rem);
   background: rgba(8, 24, 51, 0.6);
   margin-bottom: 0.6rem;
 }
@@ -246,7 +266,7 @@ summary:focus-visible,
   width: min(900px, 95vw);
   max-height: 92vh;
   overflow-y: auto;
-  padding: 1.1rem;
+  padding: clamp(1.25rem, 3.5vw, 1.8rem);
   position: relative;
   animation: modal-in 220ms ease;
 }
