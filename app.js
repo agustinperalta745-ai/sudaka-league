@@ -1,5 +1,6 @@
 const WHATSAPP_COMUNIDAD = "https://chat.whatsapp.com/DvRyA2bxAC67x0ulPQYvCa?mode=gi_t";
 
+
 const overlay = document.getElementById("modal-overlay");
 const modals = [...document.querySelectorAll(".league-modal")];
 const triggers = [...document.querySelectorAll(".league-card")];
