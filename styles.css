@@ -396,3 +396,17 @@ summary:focus-visible,
 .league-modal[hidden] {
   display: none !important;
 }
+/* ===== League card banner images ===== */
+.league-card-banner{
+  width: 100%;
+  height: 230px;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 16px 16px 0 0;
+}
+
+/* Para que no se recorte raro dentro de la card */
+.league-card{
+  overflow: hidden;
+}
