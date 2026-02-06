@@ -1,6 +1,5 @@
 const WHATSAPP_COMUNIDAD = "https://chat.whatsapp.com/DvRyA2bxAC67x0ulPQYvCa?mode=gi_t";
 
-
 const overlay = document.getElementById("modal-overlay");
 const modals = [...document.querySelectorAll(".league-modal")];
 const triggers = [...document.querySelectorAll(".league-card")];
@@ -27,7 +26,7 @@ function applyWhatsAppLinks() {
 
 function getFocusableElements(container) {
   return [...container.querySelectorAll('button, [href], textarea, details, summary, [tabindex]:not([tabindex="-1"])')]
-    .filter((element) => !element.hasAttribute("disabled"));
+    .filter((element) => !element.hasAttribute("disabled") && !element.hidden);
 }
 
 function trapFocus(event) {
@@ -51,6 +50,40 @@ function trapFocus(event) {
   }
 }
 
+function activateTab(modal, tabButton) {
+  const tabButtons = [...modal.querySelectorAll(".tab-btn")];
+  const tabPanels = [...modal.querySelectorAll(".tab-panel")];
+  const targetPanelId = tabButton.dataset.tab;
+
+  tabButtons.forEach((button) => {
+    const isActive = button === tabButton;
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-selected", String(isActive));
+  });
+
+  tabPanels.forEach((panel) => {
+    const isActive = panel.id === targetPanelId;
+    panel.hidden = !isActive;
+    panel.classList.toggle("is-active", isActive);
+  });
+}
+
+function setupTabs() {
+  modals.forEach((modal) => {
+    const tabButtons = [...modal.querySelectorAll(".tab-btn")];
+    if (!tabButtons.length) return;
+
+    tabButtons.forEach((button) => {
+      button.addEventListener("click", () => activateTab(modal, button));
+    });
+  });
+}
+
+function resetModalToDefaultTab(modal) {
+  const defaultTabButton = modal.querySelector(".tab-btn");
+  if (defaultTabButton) activateTab(modal, defaultTabButton);
+}
+
 function openModal(modalId) {
   const modal = document.getElementById(modalId);
   if (!modal) return;
@@ -61,6 +94,8 @@ function openModal(modalId) {
   activeModal = modal;
   document.body.classList.add("no-scroll");
   lastFocusedElement = document.activeElement;
+
+  resetModalToDefaultTab(modal);
 
   const initialFocusable = getFocusableElements(modal)[0];
   if (initialFocusable) initialFocusable.focus();
@@ -151,4 +186,5 @@ backToTopButton.addEventListener("click", () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
+setupTabs();
 applyWhatsAppLinks();

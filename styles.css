@@ -352,6 +352,79 @@ summary:focus-visible,
 }
 
 
+
+.tab-bar {
+  display: flex;
+  gap: 0.55rem;
+  margin: 1rem 0 1.1rem;
+  padding-bottom: 0.35rem;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.tab-btn {
+  border: 1px solid rgba(106, 178, 255, 0.35);
+  background: rgba(6, 22, 47, 0.72);
+  color: #ddecff;
+  padding: 0.62rem 0.85rem;
+  border-radius: 0.65rem;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color 200ms ease, box-shadow 220ms ease, transform 180ms ease;
+}
+
+.tab-btn:hover,
+.tab-btn:focus-visible {
+  border-color: var(--line-strong);
+  box-shadow: var(--glow);
+  transform: translateY(-1px);
+}
+
+.tab-btn.is-active {
+  border-color: rgba(129, 198, 255, 0.9);
+  background: linear-gradient(180deg, rgba(56, 117, 206, 0.42), rgba(13, 33, 67, 0.82));
+  box-shadow: var(--glow);
+}
+
+.tab-content {
+  position: relative;
+}
+
+.tab-panel {
+  animation: tab-panel-in 220ms ease;
+}
+
+.tab-panel p,
+.tab-panel li {
+  line-height: 1.62;
+  color: var(--text-main);
+}
+
+.note-text {
+  color: var(--text-soft);
+  font-style: italic;
+}
+
+.highlight-text {
+  border: 1px solid rgba(110, 177, 255, 0.45);
+  background: rgba(12, 32, 66, 0.72);
+  padding: 0.75rem 0.85rem;
+  border-radius: 0.75rem;
+  box-shadow: inset 0 0 0 1px rgba(72, 130, 214, 0.2);
+}
+
+@keyframes tab-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @media (max-width: 759px) {
   .panel-section,
   .faq {
@@ -361,6 +434,10 @@ summary:focus-visible,
   .panel-section h2 {
     margin-bottom: 1.05rem;
     padding-inline: 0.45rem;
+  }
+
+  .tab-btn {
+    font-size: 0.92rem;
   }
 }
 
