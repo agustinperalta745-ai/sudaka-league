@@ -154,9 +154,15 @@ const PES6_TITLE_META = {
     interliga: { type: "Copa", title: "Final Interliga vs S.F.A" }
   },
   awards: {
-    balonOro: { type: "Premio", title: "Balón de Oro (últimas 3 temporadas)" },
+    balonOro: { type: "Premio", title: "Balón de Oro" },
     puskas: { type: "Premio", title: "Premio Puskás" }
   }
+};
+
+const PES6_COUNTED_TITLES = {
+  divisions: ["div1"],
+  cups: ["interdiv", "superfinal", "interliga"],
+  awards: ["balonOro", "puskas"]
 };
 
 const PES6_HISTORY_META = {
@@ -721,11 +727,16 @@ function buildPes6TitleMap(history) {
   const titleMap = {};
 
   history.forEach((seasonData) => {
-    ["divisions", "cups", "awards"].forEach((groupKey) => {
+    Object.entries(PES6_COUNTED_TITLES).forEach(([groupKey, allowedKeys]) => {
       const groupData = seasonData[groupKey] || {};
       const groupMeta = PES6_TITLE_META[groupKey];
 
-      Object.entries(groupMeta).forEach(([key, meta]) => {
+      allowedKeys.forEach((key) => {
+        const meta = groupMeta[key];
+        if (!meta) {
+          return;
+        }
+
         const winner = groupData[key];
 
         if (!isValidTitleWinner(winner)) {
