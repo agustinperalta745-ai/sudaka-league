@@ -1,49 +1,49 @@
 // === HISTORIAL PES 6 (EDITAR SOLO ESTO) ===
 const PES6_HISTORY = [
   {
-    season: "Temporada XX",
+    season: "Temporada 18",
     divisions: {
-      div1: "POR DEFINIR",
-      div2: "POR DEFINIR",
-      div3: "POR DEFINIR",
-      div4: "POR DEFINIR"
+      div1: "Loloo",
+      div2: "Sebajm28",
+      div3: "Cacherinhooo",
+      div4: "NO EXISTIA"
     },
     cups: {
-      interdiv: "POR DEFINIR",
-      superfinal: "POR DEFINIR",
-      interliga: "POR DEFINIR"
+      interdiv: "Sebajm28",
+      superfinal: "Sebajm28",
+      interliga: "NO EXISTIA"
     },
     awards: {
-      balonOro: "POR DEFINIR",
-      puskas: "POR DEFINIR"
+      balonOro: "NO EXISTIA",
+      puskas: "NO EXISTIA"
     }
   },
   {
-    season: "Temporada XX",
-    divisions: { div1: "POR DEFINIR", div2: "POR DEFINIR", div3: "POR DEFINIR", div4: "POR DEFINIR" },
-    cups: { interdiv: "POR DEFINIR", superfinal: "POR DEFINIR", interliga: "POR DEFINIR" },
-    awards: { balonOro: "POR DEFINIR", puskas: "POR DEFINIR" }
+    season: "Temporada 19",
+    divisions: { div1: "Alex_CABJ", div2: "Cacherinhooo", div3: "Switch", div4: "NO EXISTIA" },
+    cups: { interdiv: "Pelufo", superfinal: "Pelufo", interliga: "Feretche (S.F.A)" },
+    awards: { balonOro: "NO EXISTIA", puskas: "Gargarensis" }
   },
   {
-    season: "Temporada XX",
-    divisions: { div1: "POR DEFINIR", div2: "POR DEFINIR", div3: "POR DEFINIR", div4: "POR DEFINIR" },
-    cups: { interdiv: "POR DEFINIR", superfinal: "POR DEFINIR", interliga: "POR DEFINIR" },
-    awards: { balonOro: "POR DEFINIR", puskas: "POR DEFINIR" }
+    season: "Temporada 20 ",
+    divisions: { div1: "Josemirlujambio", div2: "Switch", div3: "TCL06", div4: "NO EXISTIA" },
+    cups: { interdiv: "MMAURI455", superfinal: "Josemirlujambio", interliga: "NO SE DISPUTO" },
+    awards: { balonOro: "POR DEFINIR", puskas: "Gargarensis" }
   },
   {
-    season: "Temporada XX",
-    divisions: { div1: "POR DEFINIR", div2: "POR DEFINIR", div3: "POR DEFINIR", div4: "POR DEFINIR" },
-    cups: { interdiv: "POR DEFINIR", superfinal: "POR DEFINIR", interliga: "POR DEFINIR" },
-    awards: { balonOro: "POR DEFINIR", puskas: "POR DEFINIR" }
+    season: "Temporada 21",
+    divisions: { div1: "Switch", div2: "Tank", div3: "MartinPalermo", div4: "Sally1901" },
+    cups: { interdiv: "Tank", superfinal: "Switch", interliga: "POR DEFINIR" },
+    awards: { balonOro: "POR DEFINIR", puskas: "Switch" }
   },
   {
-    season: "Temporada XX",
-    divisions: { div1: "POR DEFINIR", div2: "POR DEFINIR", div3: "POR DEFINIR", div4: "POR DEFINIR" },
-    cups: { interdiv: "POR DEFINIR", superfinal: "POR DEFINIR", interliga: "POR DEFINIR" },
-    awards: { balonOro: "POR DEFINIR", puskas: "POR DEFINIR" }
+    season: "Temporada 22",
+    divisions: { div1: "Eduug98", div2: "MartinPalermo", div3: "H09", div4: "Cacherinhooo" },
+    cups: { interdiv: "Larrierismo", superfinal: "Larrierismo", interliga: "NO SE DISPUTO" },
+    awards: { balonOro: "Pelufo", puskas: "Naxul90" }
   },
   {
-    season: "Temporada XX",
+    season: "Temporada 23",
     divisions: { div1: "POR DEFINIR", div2: "POR DEFINIR", div3: "POR DEFINIR", div4: "POR DEFINIR" },
     cups: { interdiv: "POR DEFINIR", superfinal: "POR DEFINIR", interliga: "POR DEFINIR" },
     awards: { balonOro: "POR DEFINIR", puskas: "POR DEFINIR" }
