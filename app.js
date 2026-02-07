@@ -1,13 +1,35 @@
 // === CONFIGURACIÓN DE CUPOS (EDITAR SOLO ESTO) ===
 const PES6_CUPOS_LIBRES = 8; // 4ta división
-const SF_CUPOS_LIBRES = 3;   // Street Fighter II
+const KOF_CUPOS_LIBRES = 3;  // King of Fighters 2002
 
 const WHATSAPP_COMUNIDAD = "https://chat.whatsapp.com/DvRyA2bxAC67x0ulPQYvCa?mode=gi_t";
 const PES6_SEASON_NAME = "Temporada 23";
 const PES6_SEASON_END = "2026-02-07T23:59:00-03:00";
-const SF_SEASON_NAME = "Temporada 1";
-const SF_SEASON_STATUS = "EN ESPERA";
-const SF_SEASON_NOTE = "En espera hasta completar cupos.";
+const KOF_LEAGUE = {
+  nombre: "King of Fighters 2002 – Fightcade",
+  nombreCorto: "KOF 2002",
+  logo: "assets/kof2002.jpg",
+  temporada: {
+    nombre: "Temporada 1",
+    estado: "EN ESPERA",
+    nota: "En espera hasta completar cupos"
+  },
+  card: {
+    descripcion: "Liga 1 vs 1 con formato competitivo oficial."
+  },
+  caracteristicas: [
+    "Formato 1 vs 1",
+    "Personajes libres (todos pueden usar cualquier personaje)",
+    "Los colores representan al jugador",
+    "Victoria: 3 puntos",
+    "Derrota: 0 puntos",
+    "Temporadas de 2 semanas",
+    "Resultados cargados en Gesliga",
+    "Coordinación por WhatsApp"
+  ],
+  salaFightcade: "#THE KING OF FIGHTERS 2002",
+  videoInstalacion: "https://www.youtube.com/watch?v=tM5yVYoY-7w&t=126s"
+};
 
 const PES6_PALMARES = {
   divisiones: [
@@ -81,6 +103,25 @@ const pes6SlotsValue = document.getElementById("pes6-slots");
 const pes6SlotsBadge = document.getElementById("pes6-slots-badge");
 const sfSlotsValue = document.getElementById("sf-slots");
 const sfSlotsBadge = document.getElementById("sf-slots-badge");
+const kofContentBindings = {
+  heroName: document.getElementById("kofHeroName"),
+  seasonTitle: document.getElementById("kof-season-title"),
+  seasonSlotsLabel: document.getElementById("kofSeasonSlotsLabel"),
+  cardImage: document.getElementById("kofCardImage"),
+  cardHeading: document.getElementById("kofCardHeading"),
+  cardDescription: document.getElementById("kofCardDescription"),
+  modalBanner: document.getElementById("kofModalBanner"),
+  modalTitle: document.getElementById("kofModalTitle"),
+  modalTabsLabel: document.getElementById("kofModalTabsLabel"),
+  modalNeedTitle: document.getElementById("kofNeedTitle"),
+  modalRoom: document.getElementById("kofRoomName"),
+  modalMessage: document.getElementById("kof-message"),
+  modalInstallLink: document.getElementById("kofInstallVideoLink"),
+  modalSystemList: document.getElementById("kofSystemList"),
+  modalSeasonsList: document.getElementById("kofSeasonsList"),
+  systemTabButton: document.getElementById("sistema-tab-btn-sfii"),
+  systemTabList: document.getElementById("kofSystemPanelList")
+};
 
 
 let activeModal = null;
@@ -123,9 +164,9 @@ function updateSeasonStatus() {
   }
 
   pes6SeasonName.textContent = PES6_SEASON_NAME;
-  sfSeasonName.textContent = SF_SEASON_NAME;
-  sfStatus.textContent = SF_SEASON_STATUS;
-  sfSeasonNote.textContent = SF_SEASON_NOTE;
+  sfSeasonName.textContent = KOF_LEAGUE.temporada.nombre;
+  sfStatus.textContent = KOF_LEAGUE.temporada.estado;
+  sfSeasonNote.textContent = KOF_LEAGUE.temporada.nota;
 
   const countdownText = getCountdownText();
 
@@ -159,7 +200,7 @@ function updateSlotsStatus() {
       badge: pes6SlotsBadge
     },
     {
-      slots: SF_CUPOS_LIBRES,
+      slots: KOF_CUPOS_LIBRES,
       value: sfSlotsValue,
       badge: sfSlotsBadge
     }
@@ -174,6 +215,132 @@ function updateSlotsStatus() {
     badge.classList.toggle("mini-badge--open", isOpen);
     badge.classList.toggle("mini-badge--closed", !isOpen);
   });
+}
+
+function renderList(target, items) {
+  if (!target) return;
+  target.replaceChildren();
+  items.forEach((item) => {
+    const li = document.createElement("li");
+    li.textContent = item;
+    target.appendChild(li);
+  });
+}
+
+function applyKofLeagueContent() {
+  const {
+    nombre,
+    nombreCorto,
+    logo,
+    card,
+    caracteristicas,
+    salaFightcade,
+    videoInstalacion
+  } = KOF_LEAGUE;
+
+  if (kofContentBindings.heroName) {
+    kofContentBindings.heroName.textContent = nombre;
+  }
+
+  if (kofContentBindings.seasonTitle) {
+    kofContentBindings.seasonTitle.textContent = `🥊 ${nombre}`;
+  }
+
+  if (kofContentBindings.seasonSlotsLabel) {
+    kofContentBindings.seasonSlotsLabel.setAttribute("aria-label", `Cupos ${nombreCorto}`);
+  }
+
+  if (kofContentBindings.cardImage) {
+    kofContentBindings.cardImage.src = logo;
+    kofContentBindings.cardImage.alt = `${nombre} - Sudaka League`;
+  }
+
+  if (kofContentBindings.cardHeading) {
+    kofContentBindings.cardHeading.textContent = nombre;
+  }
+
+  if (kofContentBindings.cardDescription) {
+    kofContentBindings.cardDescription.textContent = card.descripcion;
+  }
+
+  if (kofContentBindings.modalBanner) {
+    kofContentBindings.modalBanner.src = logo;
+    kofContentBindings.modalBanner.alt = `${nombre} Banner`;
+  }
+
+  if (kofContentBindings.modalTitle) {
+    kofContentBindings.modalTitle.textContent = nombre.toUpperCase();
+  }
+
+  if (kofContentBindings.modalTabsLabel) {
+    kofContentBindings.modalTabsLabel.setAttribute("aria-label", `Contenido de ${nombre}`);
+  }
+
+  if (kofContentBindings.modalNeedTitle) {
+    kofContentBindings.modalNeedTitle.textContent = `¿Qué necesitás para jugar ${nombre} en Sudaka League?`;
+  }
+
+  if (kofContentBindings.modalRoom) {
+    kofContentBindings.modalRoom.textContent = salaFightcade;
+  }
+
+  if (kofContentBindings.modalInstallLink) {
+    kofContentBindings.modalInstallLink.href = videoInstalacion;
+    kofContentBindings.modalInstallLink.textContent = videoInstalacion;
+  }
+
+  if (kofContentBindings.modalMessage) {
+    kofContentBindings.modalMessage.value = `🔥 BIENVENIDO A LA LIGA DE ${nombre.toUpperCase()} – SUDAKA LEAGUE 🔥
+
+📹 VIDEO DE INSTALACIÓN (OBLIGATORIO)
+Este video explica únicamente cómo instalar y configurar Fightcade y el juego: ${videoInstalacion}
+
+⚠️ IMPORTANTE: El video NO explica el funcionamiento de la liga.
+
+🎮 ¿CÓMO FUNCIONA LA LIGA?
+La liga se juega en Fightcade con ${nombreCorto}.
+
+📍 SALÓN DE FIGHTCADE (OBLIGATORIO)
+${salaFightcade}
+
+🔍 ¿CÓMO BUSCAR PARTIDA?
+1) Entrar a Fightcade
+2) Buscar el salón indicado
+3) Avisar en el grupo de WhatsApp que estás disponible
+4) Coordinar, invitar y jugar
+5) Enviar resultado al grupo
+
+⏱️ DATOS CLAVE
+- No hay horarios fijos
+- No hay lobby automático
+- Los partidos se juegan cuando coinciden dos jugadores
+
+🏆 OBJETIVO
+Competir, sumar puntos y escalar posiciones.
+
+🔥 Bienvenido a Sudaka League – ${nombreCorto} 🔥`;
+  }
+
+  renderList(kofContentBindings.modalSystemList, [
+    "Formato 1 vs 1",
+    "Sin horarios fijos, se coordina por WhatsApp",
+    "Se juega en Fightcade dentro del salón oficial",
+    "Resultados cargados en Gesliga",
+    "Ranking / posiciones oficiales",
+    "Respeto y juego limpio"
+  ]);
+
+  renderList(kofContentBindings.modalSeasonsList, [
+    "Temporadas de 2 semanas",
+    "Los colores representan al jugador",
+    "Personajes libres (todos pueden usar cualquier personaje)"
+  ]);
+
+  if (kofContentBindings.systemTabButton) {
+    kofContentBindings.systemTabButton.textContent = nombre;
+  }
+
+  renderList(kofContentBindings.systemTabList, caracteristicas);
 }
 
 function applyWhatsAppLinks() {
@@ -446,6 +613,7 @@ function renderPalmares() {
 
 setupTabs();
 renderPalmares();
+applyKofLeagueContent();
 applyWhatsAppLinks();
 updateSeasonStatus();
 updateSlotsStatus();
