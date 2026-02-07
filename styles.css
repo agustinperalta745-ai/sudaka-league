@@ -713,6 +713,33 @@ summary:focus-visible,
   opacity: 1;
 }
 
+
+.pes6-ranking-breakdown,
+.pes6-ranking-titles {
+  margin: 0 0.75rem 0.75rem;
+  padding: 0.7rem 0.8rem;
+  border-radius: 0.7rem;
+  border: 1px solid rgba(126, 193, 255, 0.26);
+  background: rgba(9, 24, 52, 0.78);
+  color: #e6f3ff;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.pes6-ranking-titles {
+  margin-top: -0.35rem;
+}
+
+.pes6-ranking-empty {
+  margin: 0;
+  padding: 1rem;
+  border-radius: 0.8rem;
+  border: 1px solid rgba(120, 188, 255, 0.28);
+  background: rgba(8, 24, 49, 0.72);
+  color: var(--text-soft);
+}
+
+
 .pes6-ranking-list {
   margin: 0 0.75rem 0.75rem;
   padding: 0.7rem 0.8rem 0.7rem 1.35rem;
