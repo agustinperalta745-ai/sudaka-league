@@ -1,3 +1,7 @@
+// === CONFIGURACIÓN DE CUPOS (EDITAR SOLO ESTO) ===
+const PES6_CUPOS_LIBRES = 8; // 4ta división
+const SF_CUPOS_LIBRES = 3;   // Street Fighter II
+
 const WHATSAPP_COMUNIDAD = "https://chat.whatsapp.com/DvRyA2bxAC67x0ulPQYvCa?mode=gi_t";
 const PES6_SEASON_NAME = "Temporada 23";
 const PES6_SEASON_END = "2026-02-07T23:59:00-03:00";
@@ -17,6 +21,12 @@ const pes6SeasonName = document.getElementById("pes6SeasonName");
 const sfStatus = document.getElementById("sfStatus");
 const sfSeasonName = document.getElementById("sfSeasonName");
 const sfSeasonNote = document.getElementById("sfSeasonNote");
+const pes6SlotsCard = document.getElementById("pes6SlotsCard");
+const pes6SlotsBadge = document.getElementById("pes6SlotsBadge");
+const pes6SlotsCount = document.getElementById("pes6SlotsCount");
+const sfSlotsCard = document.getElementById("sfSlotsCard");
+const sfSlotsBadge = document.getElementById("sfSlotsBadge");
+const sfSlotsCount = document.getElementById("sfSlotsCount");
 
 
 let activeModal = null;
@@ -74,6 +84,46 @@ function updateSeasonStatus() {
   pes6Status.classList.add("season-badge-active");
   pes6Status.classList.remove("season-badge-ended");
   pes6Countdown.textContent = countdownText;
+}
+
+function updateSlotsStatus() {
+  const slotsElements = [
+    pes6SlotsCard,
+    pes6SlotsBadge,
+    pes6SlotsCount,
+    sfSlotsCard,
+    sfSlotsBadge,
+    sfSlotsCount
+  ];
+
+  if (slotsElements.some((element) => !element)) {
+    return;
+  }
+
+  const slotsConfig = [
+    {
+      slots: PES6_CUPOS_LIBRES,
+      card: pes6SlotsCard,
+      badge: pes6SlotsBadge,
+      count: pes6SlotsCount
+    },
+    {
+      slots: SF_CUPOS_LIBRES,
+      card: sfSlotsCard,
+      badge: sfSlotsBadge,
+      count: sfSlotsCount
+    }
+  ];
+
+  slotsConfig.forEach(({ slots, card, badge, count }) => {
+    const isOpen = slots > 0;
+    const safeSlots = Math.max(0, slots);
+
+    card.classList.toggle("status-open", isOpen);
+    card.classList.toggle("status-closed", !isOpen);
+    badge.innerHTML = `<span class="slots-led" aria-hidden="true">●</span> ${isOpen ? "ABIERTA" : "COMPLETA"}`;
+    count.textContent = `${safeSlots} cupos libres`;
+  });
 }
 
 function applyWhatsAppLinks() {
@@ -254,4 +304,5 @@ backToTopButton.addEventListener("click", () => {
 setupTabs();
 applyWhatsAppLinks();
 updateSeasonStatus();
+updateSlotsStatus();
 setInterval(updateSeasonStatus, 30000);
