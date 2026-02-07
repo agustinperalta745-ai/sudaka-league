@@ -14,51 +14,53 @@ const PES6_PALMARES = {
     {
       nombre: "División 1",
       trofeo: "assets/trofeo_div1.png",
-      campeones: ["A confirmar"]
+      campeones: ["Edug98"]
     },
     {
       nombre: "División 2",
       trofeo: "assets/trofeo_div2.png",
-      campeones: ["A confirmar"]
+      campeones: ["MartinPalermo"]
     },
     {
       nombre: "División 3",
       trofeo: "assets/trofeo_div3.png",
-      campeones: ["A confirmar"]
+      campeones: ["H09"]
     },
     {
       nombre: "División 4",
       trofeo: "assets/trofeo_div4.png",
-      campeones: ["A confirmar"]
+      campeones: ["Cacherinhooo"]
     }
   ],
   copas: [
     {
       nombre: "Copa Interdivisional",
       trofeo: "assets/trofeo_interdiv.png",
-      campeones: ["A confirmar"]
+      campeones: ["Larrierismo"]
     },
     {
-      nombre: "Superfinal",
+      nombre: "Super Final",
       trofeo: "assets/trofeo_superfinal.png",
-      campeones: ["A confirmar"]
+      campeones: ["Larrierismo"]
     },
     {
-      nombre: "Interliga",
+      nombre: "Final Interliga vs S.F.A",
       trofeo: "assets/trofeo_interliga.png",
-      campeones: ["A confirmar"]
+      campeones: ["Faquuvilla (S.F.A)"]
     }
   ],
   individuales: [
     {
       nombre: "Balón de Oro",
       trofeo: "assets/trofeo_balon_oro.png",
-      ganadores: ["A confirmar"]
+      subtitulo: "Ganador (últimas 3 temporadas)",
+      ganadores: ["Pelufo"]
     },
     {
       nombre: "Premio Puskás",
       trofeo: "assets/trofeo_puskas.png",
-      ganadores: ["A confirmar"]
+      subtitulo: "Ganador (Temporada 22)",
+      ganadores: ["Naxul90"]
     }
   ]
 };
@@ -177,7 +179,6 @@ function updateSlotsStatus() {
 function applyWhatsAppLinks() {
   const links = {
     "cta-comunidad": WHATSAPP_COMUNIDAD,
-    "wa-pes6-modal": WHATSAPP_COMUNIDAD,
     "wa-sf-modal": WHATSAPP_COMUNIDAD
   };
 
@@ -365,13 +366,25 @@ function createPalmaresCard(item, winnersKey, winnerLabel) {
   const winners = document.createElement("ul");
   winners.className = "palmares-winners";
 
-  item[winnersKey].forEach((winner) => {
+  const winnersList = item[winnersKey].filter((winner) => winner && winner.trim() !== "");
+  const safeWinners = winnersList.length ? winnersList : ["A confirmar"];
+
+  safeWinners.forEach((winner) => {
     const winnerItem = document.createElement("li");
     winnerItem.textContent = `${winnerLabel}: ${winner}`;
     winners.appendChild(winnerItem);
   });
 
-  card.append(title, trophy, winners);
+  card.appendChild(title);
+
+  if (item.subtitulo) {
+    const subtitle = document.createElement("p");
+    subtitle.className = "palmares-subtitle";
+    subtitle.textContent = item.subtitulo;
+    card.appendChild(subtitle);
+  }
+
+  card.append(trophy, winners);
   return card;
 }
 
@@ -381,22 +394,24 @@ function renderPalmares() {
 
   const sections = [
     {
-      title: "Últimos campeones por División (Temporada 22)",
+      title: "Campeones por División",
+      subtitle: "Últimos campeones (Temporada 22)",
       items: PES6_PALMARES.divisiones,
       winnersKey: "campeones",
       winnerLabel: "Último campeón"
     },
     {
-      title: "Últimos campeones de Copas (Temporada 22)",
+      title: "Copas",
+      subtitle: "Últimos campeones de copas (Temporada 22)",
       items: PES6_PALMARES.copas,
       winnersKey: "campeones",
       winnerLabel: "Último campeón"
     },
     {
-      title: "Últimos ganadores de Premios (Temporada 22)",
+      title: "Premios individuales",
       items: PES6_PALMARES.individuales,
       winnersKey: "ganadores",
-      winnerLabel: "Último ganador"
+      winnerLabel: "Ganador"
     }
   ];
 
@@ -408,6 +423,14 @@ function renderPalmares() {
 
     const heading = document.createElement("h3");
     heading.textContent = section.title;
+    block.appendChild(heading);
+
+    if (section.subtitle) {
+      const subtitle = document.createElement("p");
+      subtitle.className = "palmares-subtitle";
+      subtitle.textContent = section.subtitle;
+      block.appendChild(subtitle);
+    }
 
     const grid = document.createElement("div");
     grid.className = "palmares-grid";
@@ -416,7 +439,7 @@ function renderPalmares() {
       grid.appendChild(createPalmaresCard(item, section.winnersKey, section.winnerLabel));
     });
 
-    block.append(heading, grid);
+    block.appendChild(grid);
     container.appendChild(block);
   });
 }
