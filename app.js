@@ -140,6 +140,25 @@ const PES6_PALMARES = {
 };
 
 
+
+const PES6_TITLE_META = {
+  divisions: {
+    div1: { type: "División 1", title: "Campeón 1ra División" },
+    div2: { type: "División 2", title: "Campeón 2da División" },
+    div3: { type: "División 3", title: "Campeón 3ra División" },
+    div4: { type: "División 4", title: "Campeón 4ta División" }
+  },
+  cups: {
+    interdiv: { type: "Copa", title: "Copa Interdivicional" },
+    superfinal: { type: "Copa", title: "Super Final" },
+    interliga: { type: "Copa", title: "Final Interliga vs S.F.A" }
+  },
+  awards: {
+    balonOro: { type: "Premio", title: "Balón de Oro (últimas 3 temporadas)" },
+    puskas: { type: "Premio", title: "Premio Puskás" }
+  }
+};
+
 const PES6_HISTORY_META = {
   divisions: [
     { key: "div1", label: "División 1", trophy: "assets/trofeo_div1.png" },
@@ -682,6 +701,203 @@ function renderPalmares() {
   });
 }
 
+
+function isValidTitleWinner(value) {
+  if (!value) return false;
+
+  const normalized = value.trim();
+  if (!normalized) return false;
+
+  const invalidValues = ["POR DEFINIR", "NO EXISTIA", "NO SE DISPUTO"];
+  return !invalidValues.includes(normalized.toUpperCase());
+}
+
+function getSeasonOrder(seasonLabel = "") {
+  const match = seasonLabel.match(/(\d+)/);
+  return match ? Number(match[1]) : 0;
+}
+
+function buildPes6TitleMap(history) {
+  const titleMap = {};
+
+  history.forEach((seasonData) => {
+    ["divisions", "cups", "awards"].forEach((groupKey) => {
+      const groupData = seasonData[groupKey] || {};
+      const groupMeta = PES6_TITLE_META[groupKey];
+
+      Object.entries(groupMeta).forEach(([key, meta]) => {
+        const winner = groupData[key];
+
+        if (!isValidTitleWinner(winner)) {
+          return;
+        }
+
+        const player = winner.trim();
+        if (!titleMap[player]) {
+          titleMap[player] = { total: 0, items: [] };
+        }
+
+        titleMap[player].total += 1;
+        titleMap[player].items.push({
+          season: seasonData.season,
+          type: meta.type,
+          title: meta.title,
+          order: getSeasonOrder(seasonData.season)
+        });
+      });
+    });
+  });
+
+  Object.values(titleMap).forEach((playerData) => {
+    playerData.items.sort((a, b) => b.order - a.order || a.title.localeCompare(b.title, "es"));
+  });
+
+  return titleMap;
+}
+
+function animateRankingPanel(panel, expand) {
+  const isExpanded = panel.dataset.expanded === "true";
+  if (isExpanded === expand) return;
+
+  panel.dataset.expanded = String(expand);
+
+  if (expand) {
+    panel.hidden = false;
+    panel.style.maxHeight = "0px";
+
+    requestAnimationFrame(() => {
+      panel.style.maxHeight = `${panel.scrollHeight}px`;
+    });
+
+    const finishExpand = () => {
+      if (panel.dataset.expanded === "true") {
+        panel.style.maxHeight = "none";
+      }
+      panel.removeEventListener("transitionend", finishExpand);
+    };
+
+    panel.addEventListener("transitionend", finishExpand);
+    return;
+  }
+
+  const currentHeight = panel.scrollHeight;
+  panel.style.maxHeight = `${currentHeight}px`;
+
+  requestAnimationFrame(() => {
+    panel.style.maxHeight = "0px";
+  });
+
+  const finishCollapse = () => {
+    if (panel.dataset.expanded === "false") {
+      panel.hidden = true;
+    }
+    panel.removeEventListener("transitionend", finishCollapse);
+  };
+
+  panel.addEventListener("transitionend", finishCollapse);
+}
+
+function createPes6RankingItem(player, playerData, index) {
+  const row = document.createElement("article");
+  row.className = "pes6-ranking-row";
+
+  const header = document.createElement("div");
+  header.className = "pes6-ranking-header";
+
+  const position = document.createElement("span");
+  position.className = "pes6-ranking-position";
+  position.textContent = `#${index + 1}`;
+
+  const name = document.createElement("span");
+  name.className = "pes6-ranking-player";
+  name.textContent = player;
+
+  const total = document.createElement("span");
+  total.className = "pes6-ranking-total";
+  total.textContent = String(playerData.total);
+
+  const totalLabel = document.createElement("span");
+  totalLabel.className = "pes6-ranking-total-label";
+  totalLabel.textContent = playerData.total === 1 ? "título" : "títulos";
+
+  const stats = document.createElement("div");
+  stats.className = "pes6-ranking-stats";
+  stats.append(total, totalLabel);
+
+  const toggle = document.createElement("button");
+  toggle.type = "button";
+  toggle.className = "pes6-ranking-toggle";
+  toggle.setAttribute("aria-expanded", "false");
+  toggle.setAttribute("aria-controls", `pes6-ranking-panel-${index}`);
+  toggle.innerHTML = '<span>Ver títulos</span><span class="pes6-ranking-chevron" aria-hidden="true">⌄</span>';
+
+  header.append(position, name, stats, toggle);
+
+  const panel = document.createElement("div");
+  panel.className = "pes6-ranking-panel";
+  panel.id = `pes6-ranking-panel-${index}`;
+  panel.hidden = true;
+  panel.dataset.expanded = "false";
+
+  const list = document.createElement("ul");
+  list.className = "pes6-ranking-list";
+
+  playerData.items.forEach((item) => {
+    const li = document.createElement("li");
+    li.textContent = `${item.season} — ${item.type} — ${item.title}`;
+    list.appendChild(li);
+  });
+
+  panel.appendChild(list);
+
+  toggle.addEventListener("click", () => {
+    const isOpen = toggle.getAttribute("aria-expanded") === "true";
+    const nextOpen = !isOpen;
+
+    toggle.setAttribute("aria-expanded", String(nextOpen));
+    row.classList.toggle("is-open", nextOpen);
+    animateRankingPanel(panel, nextOpen);
+  });
+
+  row.append(header, panel);
+  return row;
+}
+
+function renderPes6Ranking() {
+  const container = document.getElementById("pes6-ranking");
+  if (!container) return;
+
+  const titleMap = buildPes6TitleMap(PES6_HISTORY);
+  const ranking = Object.entries(titleMap)
+    .sort((a, b) => b[1].total - a[1].total || a[0].localeCompare(b[0], "es"));
+
+  container.replaceChildren();
+
+  if (!ranking.length) {
+    return;
+  }
+
+  const wrapper = document.createElement("section");
+  wrapper.className = "pes6-ranking";
+
+  const heading = document.createElement("h3");
+  heading.textContent = "Ranking de títulos";
+
+  const subtitle = document.createElement("p");
+  subtitle.className = "pes6-ranking-subtitle";
+  subtitle.textContent = "Conteo total histórico por cantidad de títulos.";
+
+  const list = document.createElement("div");
+  list.className = "pes6-ranking-list-wrap";
+
+  ranking.forEach(([player, data], index) => {
+    list.appendChild(createPes6RankingItem(player, data, index));
+  });
+
+  wrapper.append(heading, subtitle, list);
+  container.appendChild(wrapper);
+}
+
 function createHistoryRow(itemMeta, value) {
   const row = document.createElement("div");
   row.className = "history-row";
@@ -825,6 +1041,7 @@ function renderPes6History() {
 
 setupTabs();
 renderPalmares();
+renderPes6Ranking();
 renderPes6History();
 applyKofLeagueContent();
 applyWhatsAppLinks();
