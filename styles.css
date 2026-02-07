@@ -289,6 +289,54 @@ summary:focus-visible,
   box-shadow: 0 0 0.75rem rgba(255, 101, 101, 0.28);
 }
 
+.season-slots {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-top: 0.65rem;
+}
+
+.season-slots-label {
+  font-size: 0.82rem;
+  color: var(--text-soft);
+}
+
+.season-slots-value {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #e4efff;
+}
+
+.mini-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 0.2rem 0.55rem;
+  font-family: "Orbitron", "Inter", sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.mini-badge--open {
+  color: #e9fff3;
+  border-color: rgba(68, 206, 132, 0.58);
+  background: rgba(28, 101, 66, 0.28);
+  box-shadow: 0 0 0.5rem rgba(68, 206, 132, 0.2);
+}
+
+.mini-badge--closed {
+  color: #fff0ee;
+  border-color: rgba(235, 101, 88, 0.58);
+  background: rgba(109, 41, 36, 0.3);
+  box-shadow: 0 0 0.5rem rgba(235, 101, 88, 0.2);
+}
+
 .league-card {
   overflow: hidden;
   cursor: pointer;
@@ -646,9 +694,6 @@ summary:focus-visible,
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .slots-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
 
   .season-card:hover {
     transform: translateY(-3px);
@@ -685,111 +730,3 @@ summary:focus-visible,
   overflow: hidden;
 }
 
-.slots-header-wrap {
-  margin-top: 1.3rem;
-}
-
-.slots-title {
-  margin: 0;
-  font-size: clamp(1rem, 2.6vw, 1.2rem);
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: #dbe9ff;
-}
-
-.slots-grid {
-  margin-top: 0.85rem;
-  display: grid;
-  gap: 1rem;
-}
-
-.slots-card {
-  background: rgba(8, 21, 47, 0.82);
-  border: 1px solid rgba(96, 170, 255, 0.4);
-  border-radius: 1rem;
-  padding: clamp(1rem, 3.5vw, 1.35rem);
-  box-shadow: inset 0 0 0 1px rgba(50, 91, 150, 0.23), 0 10px 24px rgba(1, 8, 22, 0.42);
-  transition: border-color 220ms ease, box-shadow 220ms ease;
-}
-
-.slots-card-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-}
-
-.slots-card h4 {
-  margin: 0;
-  font-size: clamp(0.95rem, 2.8vw, 1.08rem);
-}
-
-.slots-count {
-  margin: 0.75rem 0 0;
-  font-family: "Orbitron", "Inter", sans-serif;
-  font-size: clamp(1.15rem, 4.6vw, 1.55rem);
-  letter-spacing: 0.02em;
-}
-
-.slots-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  border-radius: 999px;
-  padding: 0.3rem 0.7rem;
-  font-family: "Orbitron", "Inter", sans-serif;
-  font-size: 0.72rem;
-  letter-spacing: 0.05em;
-  font-weight: 700;
-  text-transform: uppercase;
-  border: 1px solid transparent;
-  white-space: nowrap;
-}
-
-.slots-led {
-  font-size: 0.62rem;
-}
-
-.status-open .slots-badge {
-  color: #eafff4;
-  border-color: rgba(46, 204, 113, 0.72);
-  background: linear-gradient(180deg, rgba(32, 171, 95, 0.42), rgba(12, 82, 48, 0.78));
-  box-shadow: 0 0 0.8rem rgba(46, 204, 113, 0.28);
-}
-
-.status-closed .slots-badge {
-  color: #fff0ee;
-  border-color: rgba(231, 76, 60, 0.72);
-  background: linear-gradient(180deg, rgba(185, 62, 49, 0.45), rgba(103, 30, 23, 0.82));
-  box-shadow: 0 0 0.8rem rgba(231, 76, 60, 0.28);
-}
-
-.status-open {
-  border-color: rgba(46, 204, 113, 0.56);
-  box-shadow: inset 0 0 0 1px rgba(50, 150, 98, 0.25), 0 0 1rem rgba(46, 204, 113, 0.18);
-  animation: slots-open-pulse 2.8s ease-in-out infinite;
-}
-
-.status-closed {
-  border-color: rgba(231, 76, 60, 0.56);
-  box-shadow: inset 0 0 0 1px rgba(173, 70, 60, 0.25), 0 0 1rem rgba(231, 76, 60, 0.18);
-  animation: slots-closed-pulse 2.8s ease-in-out infinite;
-}
-
-@keyframes slots-open-pulse {
-  0%, 100% {
-    box-shadow: inset 0 0 0 1px rgba(50, 150, 98, 0.24), 0 0 0.85rem rgba(46, 204, 113, 0.14);
-  }
-  50% {
-    box-shadow: inset 0 0 0 1px rgba(50, 150, 98, 0.26), 0 0 1.15rem rgba(46, 204, 113, 0.24);
-  }
-}
-
-@keyframes slots-closed-pulse {
-  0%, 100% {
-    box-shadow: inset 0 0 0 1px rgba(173, 70, 60, 0.24), 0 0 0.85rem rgba(231, 76, 60, 0.14);
-  }
-  50% {
-    box-shadow: inset 0 0 0 1px rgba(173, 70, 60, 0.26), 0 0 1.15rem rgba(231, 76, 60, 0.24);
-  }
-}
