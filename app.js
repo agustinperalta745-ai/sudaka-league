@@ -9,6 +9,60 @@ const SF_SEASON_NAME = "Temporada 1";
 const SF_SEASON_STATUS = "EN ESPERA";
 const SF_SEASON_NOTE = "En espera hasta completar cupos.";
 
+const PES6_PALMARES = {
+  divisiones: [
+    {
+      nombre: "División 1",
+      trofeo: "assets/trofeo_div1.png",
+      campeones: ["A confirmar"]
+    },
+    {
+      nombre: "División 2",
+      trofeo: "assets/trofeo_div2.png",
+      campeones: ["A confirmar"]
+    },
+    {
+      nombre: "División 3",
+      trofeo: "assets/trofeo_div3.png",
+      campeones: ["A confirmar"]
+    },
+    {
+      nombre: "División 4",
+      trofeo: "assets/trofeo_div4.png",
+      campeones: ["A confirmar"]
+    }
+  ],
+  copas: [
+    {
+      nombre: "Copa Interdivisional",
+      trofeo: "assets/trofeo_interdiv.png",
+      campeones: ["A confirmar"]
+    },
+    {
+      nombre: "Superfinal",
+      trofeo: "assets/trofeo_superfinal.png",
+      campeones: ["A confirmar"]
+    },
+    {
+      nombre: "Interliga",
+      trofeo: "assets/trofeo_interliga.png",
+      campeones: ["A confirmar"]
+    }
+  ],
+  individuales: [
+    {
+      nombre: "Balón de Oro",
+      trofeo: "assets/trofeo_balon_oro.png",
+      ganadores: ["A confirmar"]
+    },
+    {
+      nombre: "Premio Puskás",
+      trofeo: "assets/trofeo_puskas.png",
+      ganadores: ["A confirmar"]
+    }
+  ]
+};
+
 const overlay = document.getElementById("modal-overlay");
 const modals = [...document.querySelectorAll(".league-modal")];
 const triggers = [...document.querySelectorAll(".modal-trigger")];
@@ -295,7 +349,77 @@ backToTopButton.addEventListener("click", () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
+function createPalmaresCard(item, winnersKey) {
+  const card = document.createElement("article");
+  card.className = "palmares-card";
+
+  const title = document.createElement("h4");
+  title.textContent = item.nombre;
+
+  const trophy = document.createElement("img");
+  trophy.className = "palmares-trophy";
+  trophy.src = item.trofeo;
+  trophy.alt = `Trofeo ${item.nombre}`;
+  trophy.loading = "lazy";
+
+  const winners = document.createElement("ul");
+  winners.className = "palmares-winners";
+
+  item[winnersKey].forEach((winner) => {
+    const winnerItem = document.createElement("li");
+    winnerItem.textContent = winner;
+    winners.appendChild(winnerItem);
+  });
+
+  card.append(title, trophy, winners);
+  return card;
+}
+
+function renderPalmares() {
+  const container = document.getElementById("pes6-palmares-content");
+  if (!container) return;
+
+  const sections = [
+    {
+      title: "Campeones por División",
+      items: PES6_PALMARES.divisiones,
+      winnersKey: "campeones"
+    },
+    {
+      title: "Copas",
+      items: PES6_PALMARES.copas,
+      winnersKey: "campeones"
+    },
+    {
+      title: "Premios Individuales",
+      items: PES6_PALMARES.individuales,
+      winnersKey: "ganadores"
+    }
+  ];
+
+  container.replaceChildren();
+
+  sections.forEach((section) => {
+    const block = document.createElement("section");
+    block.className = "palmares-block";
+
+    const heading = document.createElement("h3");
+    heading.textContent = section.title;
+
+    const grid = document.createElement("div");
+    grid.className = "palmares-grid";
+
+    section.items.forEach((item) => {
+      grid.appendChild(createPalmaresCard(item, section.winnersKey));
+    });
+
+    block.append(heading, grid);
+    container.appendChild(block);
+  });
+}
+
 setupTabs();
+renderPalmares();
 applyWhatsAppLinks();
 updateSeasonStatus();
 updateSlotsStatus();
