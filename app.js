@@ -33,8 +33,8 @@ const PES6_HISTORY = [
   {
     season: "Temporada 21",
     divisions: { div1: "Switch", div2: "Tank", div3: "MartinPalermo", div4: "Sally1901" },
-    cups: { interdiv: "Tank", superfinal: "Switch", interliga: "POR DEFINIR" },
-    awards: { balonOro: "POR DEFINIR", puskas: "Switch" }
+    cups: { interdiv: "Tank", superfinal: "Switch", interliga: "FaquuVilla (S.F.A)" },
+    awards: { balonOro: "NO EXISTIA", puskas: "Switch" }
   },
   {
     season: "Temporada 22",
