@@ -745,10 +745,19 @@ function buildPes6TitleMap(history) {
 
         const player = winner.trim();
         if (!titleMap[player]) {
-          titleMap[player] = { total: 0, items: [] };
+          titleMap[player] = {
+            total: 0,
+            counts: { primera: 0, copas: 0, individuales: 0 },
+            items: []
+          };
         }
 
         titleMap[player].total += 1;
+
+        if (groupKey === "divisions") titleMap[player].counts.primera += 1;
+        if (groupKey === "cups") titleMap[player].counts.copas += 1;
+        if (groupKey === "awards") titleMap[player].counts.individuales += 1;
+
         titleMap[player].items.push({
           season: seasonData.season,
           type: meta.type,
@@ -840,7 +849,7 @@ function createPes6RankingItem(player, playerData, index) {
   toggle.className = "pes6-ranking-toggle";
   toggle.setAttribute("aria-expanded", "false");
   toggle.setAttribute("aria-controls", `pes6-ranking-panel-${index}`);
-  toggle.innerHTML = '<span>Ver títulos</span><span class="pes6-ranking-chevron" aria-hidden="true">⌄</span>';
+  toggle.innerHTML = '<span>Ver detalle</span><span class="pes6-ranking-chevron" aria-hidden="true">⌄</span>';
 
   header.append(position, name, stats, toggle);
 
@@ -850,16 +859,16 @@ function createPes6RankingItem(player, playerData, index) {
   panel.hidden = true;
   panel.dataset.expanded = "false";
 
-  const list = document.createElement("ul");
-  list.className = "pes6-ranking-list";
+  const breakdown = document.createElement("p");
+  breakdown.className = "pes6-ranking-breakdown";
+  breakdown.textContent = `Primera División: ${playerData.counts.primera} | Copas: ${playerData.counts.copas} | Individuales: ${playerData.counts.individuales}`;
 
-  playerData.items.forEach((item) => {
-    const li = document.createElement("li");
-    li.textContent = `${item.season} — ${item.type} — ${item.title}`;
-    list.appendChild(li);
-  });
+  const titles = playerData.items.map((item) => `${item.season} ${item.title}`);
+  const titlesLine = document.createElement("p");
+  titlesLine.className = "pes6-ranking-titles";
+  titlesLine.textContent = `Títulos: ${titles.join(" | ")}`;
 
-  panel.appendChild(list);
+  panel.append(breakdown, titlesLine);
 
   toggle.addEventListener("click", () => {
     const isOpen = toggle.getAttribute("aria-expanded") === "true";
@@ -885,6 +894,10 @@ function renderPes6Ranking() {
   container.replaceChildren();
 
   if (!ranking.length) {
+    const empty = document.createElement("p");
+    empty.className = "pes6-ranking-empty";
+    empty.textContent = "Sin datos";
+    container.appendChild(empty);
     return;
   }
 
@@ -892,11 +905,11 @@ function renderPes6Ranking() {
   wrapper.className = "pes6-ranking";
 
   const heading = document.createElement("h3");
-  heading.textContent = "Ranking de títulos";
+  heading.textContent = "RANKING DE TÍTULOS";
 
   const subtitle = document.createElement("p");
   subtitle.className = "pes6-ranking-subtitle";
-  subtitle.textContent = "Conteo total histórico por cantidad de títulos.";
+  subtitle.textContent = "Solo cuenta Primera División, Copas y Premios individuales.";
 
   const list = document.createElement("div");
   list.className = "pes6-ranking-list-wrap";
