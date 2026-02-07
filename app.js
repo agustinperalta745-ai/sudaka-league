@@ -2,7 +2,7 @@ const WHATSAPP_COMUNIDAD = "https://chat.whatsapp.com/DvRyA2bxAC67x0ulPQYvCa?mod
 
 const overlay = document.getElementById("modal-overlay");
 const modals = [...document.querySelectorAll(".league-modal")];
-const triggers = [...document.querySelectorAll(".league-card")];
+const triggers = [...document.querySelectorAll(".modal-trigger")];
 const closeButtons = [...document.querySelectorAll(".close-btn")];
 const copyButtons = [...document.querySelectorAll(".copy-btn")];
 const backToTopButton = document.getElementById("back-to-top");

@@ -40,7 +40,7 @@
     <section id="ligas" class="section hud-separator" aria-labelledby="ligas-title">
       <h2 id="ligas-title">LIGAS</h2>
       <div class="league-grid">
-        <article class="league-card" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="pes6-panel" data-target="pes6-panel">
+        <article class="league-card modal-trigger" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="pes6-panel" data-target="pes6-panel">
           <img class="league-card-banner" src="assets/pes6.jpg" alt="PES 6 - Infinity Patch" />
           <div class="league-card-content">
             <h3>PES 6 – Infinity Patch</h3>
@@ -48,7 +48,7 @@
           </div>
         </article>
 
-        <article class="league-card" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="sf-panel" data-target="sf-panel">
+        <article class="league-card modal-trigger" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="sf-panel" data-target="sf-panel">
           <img class="league-card-banner" src="assets/sfii.jpg" alt="Street Fighter II - Fightcade" />
           <div class="league-card-content">
             <h3>Street Fighter II – Fightcade</h3>
@@ -58,14 +58,18 @@
       </div>
     </section>
 
-    <section class="section panel-section hud-separator" aria-labelledby="como-juega-title">
-      <h2 id="como-juega-title">CÓMO SE JUEGA</h2>
-      <ul class="feature-list">
-        <li>Sistema de divisiones</li>
-        <li>Partidos coordinados por WhatsApp</li>
-        <li>Resultados cuentan para tablas</li>
-        <li>Respeto y juego limpio</li>
-      </ul>
+    <section class="section hud-separator" aria-labelledby="sistema-liga-title">
+      <article
+        class="panel-section system-panel-trigger modal-trigger"
+        role="button"
+        tabindex="0"
+        aria-haspopup="dialog"
+        aria-controls="sistema-panel"
+        data-target="sistema-panel"
+      >
+        <h2 id="sistema-liga-title">SISTEMA DE LIGA</h2>
+        <p>Revisá reglas, puntajes y formatos por liga en un panel separado por pestañas.</p>
+      </article>
     </section>
 
     <section class="section faq" aria-labelledby="faq-title">
@@ -267,6 +271,68 @@ Competir, sumar puntos y escalar posiciones.
       </div>
 
       <a id="wa-sf-modal" class="btn btn-primary" href="#" target="_blank" rel="noopener noreferrer">Unirme a la comunidad</a>
+    </section>
+
+    <section id="sistema-panel" class="league-modal system-modal" role="dialog" aria-modal="true" aria-labelledby="sistema-panel-title" hidden>
+      <button class="close-btn" type="button" aria-label="Cerrar panel">×</button>
+      <h2 id="sistema-panel-title">SISTEMA DE LIGA</h2>
+
+      <div class="tab-bar system-tab-bar" role="tablist" aria-label="Sistema por liga">
+        <button class="tab-btn system-tab-btn is-active" type="button" role="tab" aria-selected="true" aria-controls="sistema-tab-pes6" id="sistema-tab-btn-pes6" data-tab="sistema-tab-pes6">PES 6 – Infinity Patch</button>
+        <button class="tab-btn system-tab-btn" type="button" role="tab" aria-selected="false" aria-controls="sistema-tab-sfii" id="sistema-tab-btn-sfii" data-tab="sistema-tab-sfii">Street Fighter II – Fightcade</button>
+      </div>
+
+      <div class="tab-content">
+        <section class="tab-panel is-active" role="tabpanel" id="sistema-tab-pes6" aria-labelledby="sistema-tab-btn-pes6">
+          <article class="system-card">
+            <h3>SECCIÓN 1: PUNTAJE</h3>
+            <ul>
+              <li>3 puntos por ganar</li>
+              <li>1 punto por empatar</li>
+              <li>0 puntos por perder</li>
+            </ul>
+          </article>
+
+          <article class="system-card">
+            <h3>SECCIÓN 2: CLASIFICACIÓN A COPAS</h3>
+            <ul>
+              <li><strong>Campeón de 1ra División:</strong> Clasifica directamente a la SUPERFINAL.</li>
+              <li><strong>Campeón de 2da División:</strong> Clasifica directamente a la FINAL de la Copa Interdivicional.</li>
+              <li><strong>1ra División:</strong> Puestos 2 al 9 clasifican a Octavos de Final (Playoffs) de Copa Interdivicional.</li>
+              <li><strong>2da División:</strong> Puestos 2 al 5 clasifican a Octavos de Final (Playoffs) de Copa Interdivicional.</li>
+              <li><strong>3ra División:</strong> Puestos 1 al 2 clasifican a Octavos de Final (Playoffs) de Copa Interdivicional.</li>
+            </ul>
+          </article>
+
+          <article class="system-card">
+            <h3>SECCIÓN 3: SUPERFINAL / INTERLIGA</h3>
+            <ul>
+              <li>El campeón de Copa Interdivicional juega la SUPERFINAL vs el campeón de 1ra División.</li>
+              <li>El campeón de la SUPERFINAL juega la FINAL INTERLIGA contra el campeón de la liga S.F.A (liga hermana de Sudaka League).</li>
+            </ul>
+          </article>
+        </section>
+
+        <section class="tab-panel" role="tabpanel" id="sistema-tab-sfii" aria-labelledby="sistema-tab-btn-sfii" hidden>
+          <article class="system-card">
+            <h3>SECCIÓN 1: PUNTAJE</h3>
+            <ul>
+              <li>3 puntos por ganar</li>
+              <li>0 puntos por perder</li>
+            </ul>
+          </article>
+
+          <article class="system-card">
+            <h3>SECCIÓN 2: FORMATO (ACLARACIÓN)</h3>
+            <ul>
+              <li>Liga 1 vs 1</li>
+              <li>Personajes libres (cada jugador puede usar el personaje que quiera en cada partida)</li>
+              <li>Temporadas de 2 semanas</li>
+              <li>Resultados se cargan en GesLiga</li>
+            </ul>
+          </article>
+        </section>
+      </div>
     </section>
   </div>
 
