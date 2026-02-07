@@ -596,6 +596,138 @@ summary:focus-visible,
   padding-left: 1rem;
 }
 
+.history-layout {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.history-accordion-item {
+  border: 1px solid rgba(110, 177, 255, 0.35);
+  border-radius: 0.85rem;
+  background: rgba(8, 24, 49, 0.72);
+  box-shadow: inset 0 0 0 1px rgba(70, 131, 211, 0.2);
+  overflow: clip;
+}
+
+.history-accordion-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  border: 0;
+  color: var(--text-main);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: left;
+  padding: 0.9rem 1rem;
+  background: linear-gradient(180deg, rgba(18, 45, 90, 0.65), rgba(8, 22, 48, 0.7));
+  cursor: pointer;
+  transition: background-color 200ms ease;
+}
+
+.history-accordion-trigger:hover,
+.history-accordion-trigger:focus-visible {
+  background: linear-gradient(180deg, rgba(28, 61, 117, 0.68), rgba(11, 30, 62, 0.82));
+}
+
+.history-accordion-trigger:focus-visible {
+  outline: 2px solid rgba(148, 212, 255, 0.9);
+  outline-offset: -2px;
+}
+
+.history-chevron {
+  font-size: 1.15rem;
+  color: #b9dcff;
+  transition: transform 240ms ease;
+}
+
+.history-accordion-item.is-open .history-chevron {
+  transform: rotate(180deg);
+}
+
+.history-accordion-panel {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 320ms ease, opacity 220ms ease;
+}
+
+.history-accordion-item.is-open .history-accordion-panel {
+  opacity: 1;
+}
+
+.history-section {
+  padding: 0.35rem 0.8rem 0.85rem;
+}
+
+.history-section + .history-section {
+  border-top: 1px solid rgba(106, 178, 255, 0.2);
+}
+
+.history-section h4 {
+  margin: 0.35rem 0 0.7rem;
+  font-size: 0.9rem;
+  color: #d8ecff;
+}
+
+.history-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.55rem 0.85rem;
+  padding: 0.45rem 0;
+}
+
+.history-row + .history-row {
+  border-top: 1px dashed rgba(110, 177, 255, 0.2);
+}
+
+.history-row-left {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-width: min(220px, 100%);
+}
+
+.history-trophy {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 0.35rem rgba(101, 184, 255, 0.45));
+}
+
+.history-label {
+  font-weight: 600;
+}
+
+.history-value {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-weight: 700;
+  color: #eef6ff;
+  word-break: break-word;
+}
+
+.history-value.is-pending {
+  opacity: 0.62;
+}
+
+.history-pending-badge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.16rem 0.42rem;
+  border-radius: 999px;
+  border: 1px solid rgba(160, 198, 235, 0.45);
+  background: rgba(116, 148, 187, 0.24);
+  color: #d5e9ff;
+}
+
 @keyframes tab-panel-in {
   from {
     opacity: 0;
@@ -764,6 +896,11 @@ summary:focus-visible,
 
   .league-modal {
     padding: 1.85rem;
+  }
+
+  .history-trophy {
+    width: 36px;
+    height: 36px;
   }
 }
 

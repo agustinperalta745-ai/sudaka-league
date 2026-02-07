@@ -1,3 +1,55 @@
+// === HISTORIAL PES 6 (EDITAR SOLO ESTO) ===
+const PES6_HISTORY = [
+  {
+    season: "Temporada XX",
+    divisions: {
+      div1: "POR DEFINIR",
+      div2: "POR DEFINIR",
+      div3: "POR DEFINIR",
+      div4: "POR DEFINIR"
+    },
+    cups: {
+      interdiv: "POR DEFINIR",
+      superfinal: "POR DEFINIR",
+      interliga: "POR DEFINIR"
+    },
+    awards: {
+      balonOro: "POR DEFINIR",
+      puskas: "POR DEFINIR"
+    }
+  },
+  {
+    season: "Temporada XX",
+    divisions: { div1: "POR DEFINIR", div2: "POR DEFINIR", div3: "POR DEFINIR", div4: "POR DEFINIR" },
+    cups: { interdiv: "POR DEFINIR", superfinal: "POR DEFINIR", interliga: "POR DEFINIR" },
+    awards: { balonOro: "POR DEFINIR", puskas: "POR DEFINIR" }
+  },
+  {
+    season: "Temporada XX",
+    divisions: { div1: "POR DEFINIR", div2: "POR DEFINIR", div3: "POR DEFINIR", div4: "POR DEFINIR" },
+    cups: { interdiv: "POR DEFINIR", superfinal: "POR DEFINIR", interliga: "POR DEFINIR" },
+    awards: { balonOro: "POR DEFINIR", puskas: "POR DEFINIR" }
+  },
+  {
+    season: "Temporada XX",
+    divisions: { div1: "POR DEFINIR", div2: "POR DEFINIR", div3: "POR DEFINIR", div4: "POR DEFINIR" },
+    cups: { interdiv: "POR DEFINIR", superfinal: "POR DEFINIR", interliga: "POR DEFINIR" },
+    awards: { balonOro: "POR DEFINIR", puskas: "POR DEFINIR" }
+  },
+  {
+    season: "Temporada XX",
+    divisions: { div1: "POR DEFINIR", div2: "POR DEFINIR", div3: "POR DEFINIR", div4: "POR DEFINIR" },
+    cups: { interdiv: "POR DEFINIR", superfinal: "POR DEFINIR", interliga: "POR DEFINIR" },
+    awards: { balonOro: "POR DEFINIR", puskas: "POR DEFINIR" }
+  },
+  {
+    season: "Temporada XX",
+    divisions: { div1: "POR DEFINIR", div2: "POR DEFINIR", div3: "POR DEFINIR", div4: "POR DEFINIR" },
+    cups: { interdiv: "POR DEFINIR", superfinal: "POR DEFINIR", interliga: "POR DEFINIR" },
+    awards: { balonOro: "POR DEFINIR", puskas: "POR DEFINIR" }
+  }
+];
+
 // === CONFIGURACIÓN DE CUPOS (EDITAR SOLO ESTO) ===
 const PES6_CUPOS_LIBRES = 8; // 4ta división
 const KOF_CUPOS_LIBRES = 10;  // King of Fighters 2002
@@ -84,6 +136,25 @@ const PES6_PALMARES = {
       subtitulo: "Ganador (Temporada 22)",
       ganadores: ["Naxul90"]
     }
+  ]
+};
+
+
+const PES6_HISTORY_META = {
+  divisions: [
+    { key: "div1", label: "División 1", trophy: "assets/trofeo_div1.png" },
+    { key: "div2", label: "División 2", trophy: "assets/trofeo_div2.png" },
+    { key: "div3", label: "División 3", trophy: "assets/trofeo_div3.png" },
+    { key: "div4", label: "División 4", trophy: "assets/trofeo_div4.png" }
+  ],
+  cups: [
+    { key: "interdiv", label: "Copa Interdivisional", trophy: "assets/trofeo_interdiv.png" },
+    { key: "superfinal", label: "Super Final", trophy: "assets/trofeo_superfinal.png" },
+    { key: "interliga", label: "Final Interliga vs S.F.A", trophy: "assets/trofeo_interliga.png" }
+  ],
+  awards: [
+    { key: "balonOro", label: "Balón de Oro", trophy: "assets/trofeo_balon_oro.png" },
+    { key: "puskas", label: "Premio Puskás", trophy: "assets/trofeo_puskas.png" }
   ]
 };
 
@@ -611,8 +682,150 @@ function renderPalmares() {
   });
 }
 
+function createHistoryRow(itemMeta, value) {
+  const row = document.createElement("div");
+  row.className = "history-row";
+
+  const left = document.createElement("div");
+  left.className = "history-row-left";
+
+  const trophy = document.createElement("img");
+  trophy.className = "history-trophy";
+  trophy.src = itemMeta.trophy;
+  trophy.alt = `Trofeo ${itemMeta.label}`;
+  trophy.loading = "lazy";
+
+  const label = document.createElement("span");
+  label.className = "history-label";
+  label.textContent = itemMeta.label;
+
+  left.append(trophy, label);
+
+  const winner = document.createElement("div");
+  winner.className = "history-value";
+  const safeValue = value && value.trim() !== "" ? value : "POR DEFINIR";
+  const isPending = safeValue.toUpperCase() === "POR DEFINIR";
+  winner.textContent = safeValue;
+
+  if (isPending) {
+    winner.classList.add("is-pending");
+    const badge = document.createElement("span");
+    badge.className = "history-pending-badge";
+    badge.textContent = "Pendiente";
+    winner.appendChild(badge);
+  }
+
+  row.append(left, winner);
+  return row;
+}
+
+function createHistorySection(title, itemsMeta, values = {}) {
+  const section = document.createElement("section");
+  section.className = "history-section";
+
+  const heading = document.createElement("h4");
+  heading.textContent = title;
+  section.appendChild(heading);
+
+  itemsMeta.forEach((itemMeta) => {
+    section.appendChild(createHistoryRow(itemMeta, values[itemMeta.key]));
+  });
+
+  return section;
+}
+
+function animateHistoryPanel(panel, expand) {
+  const isExpanded = panel.dataset.expanded === "true";
+  if (isExpanded === expand) return;
+
+  panel.dataset.expanded = String(expand);
+
+  if (expand) {
+    panel.hidden = false;
+    panel.style.maxHeight = "0px";
+
+    requestAnimationFrame(() => {
+      panel.style.maxHeight = `${panel.scrollHeight}px`;
+    });
+
+    const finishExpand = () => {
+      if (panel.dataset.expanded === "true") {
+        panel.style.maxHeight = "none";
+      }
+      panel.removeEventListener("transitionend", finishExpand);
+    };
+
+    panel.addEventListener("transitionend", finishExpand);
+    return;
+  }
+
+  const currentHeight = panel.scrollHeight;
+  panel.style.maxHeight = `${currentHeight}px`;
+
+  requestAnimationFrame(() => {
+    panel.style.maxHeight = "0px";
+  });
+
+  const finishCollapse = () => {
+    if (panel.dataset.expanded === "false") {
+      panel.hidden = true;
+    }
+    panel.removeEventListener("transitionend", finishCollapse);
+  };
+
+  panel.addEventListener("transitionend", finishCollapse);
+}
+
+function createHistoryAccordionItem(seasonData, index) {
+  const item = document.createElement("article");
+  item.className = "history-accordion-item";
+
+  const trigger = document.createElement("button");
+  trigger.type = "button";
+  trigger.className = "history-accordion-trigger";
+  trigger.setAttribute("aria-expanded", "false");
+  trigger.setAttribute("aria-controls", `pes6-history-panel-${index}`);
+  trigger.innerHTML = `<span>${seasonData.season}</span><span class="history-chevron" aria-hidden="true">⌄</span>`;
+
+  const panel = document.createElement("div");
+  panel.className = "history-accordion-panel";
+  panel.id = `pes6-history-panel-${index}`;
+  panel.hidden = true;
+  panel.dataset.expanded = "false";
+
+  panel.append(
+    createHistorySection("Campeones por División", PES6_HISTORY_META.divisions, seasonData.divisions),
+    createHistorySection("Copas", PES6_HISTORY_META.cups, seasonData.cups),
+    createHistorySection("Premios Individuales", PES6_HISTORY_META.awards, seasonData.awards)
+  );
+
+  trigger.addEventListener("click", () => {
+    const isOpen = trigger.getAttribute("aria-expanded") === "true";
+    const nextOpen = !isOpen;
+
+    trigger.setAttribute("aria-expanded", String(nextOpen));
+    item.classList.toggle("is-open", nextOpen);
+    animateHistoryPanel(panel, nextOpen);
+  });
+
+  item.append(trigger, panel);
+  return item;
+}
+
+function renderPes6History() {
+  const container = document.getElementById("pes6-history");
+  if (!container) return;
+
+  container.replaceChildren();
+
+  PES6_HISTORY.forEach((seasonData, index) => {
+    container.appendChild(createHistoryAccordionItem(seasonData, index));
+  });
+}
+
 setupTabs();
 renderPalmares();
+renderPes6History();
 applyKofLeagueContent();
 applyWhatsAppLinks();
 updateSeasonStatus();
