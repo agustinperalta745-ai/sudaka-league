@@ -21,12 +21,10 @@ const pes6SeasonName = document.getElementById("pes6SeasonName");
 const sfStatus = document.getElementById("sfStatus");
 const sfSeasonName = document.getElementById("sfSeasonName");
 const sfSeasonNote = document.getElementById("sfSeasonNote");
-const pes6SlotsCard = document.getElementById("pes6SlotsCard");
-const pes6SlotsBadge = document.getElementById("pes6SlotsBadge");
-const pes6SlotsCount = document.getElementById("pes6SlotsCount");
-const sfSlotsCard = document.getElementById("sfSlotsCard");
-const sfSlotsBadge = document.getElementById("sfSlotsBadge");
-const sfSlotsCount = document.getElementById("sfSlotsCount");
+const pes6SlotsValue = document.getElementById("pes6-slots");
+const pes6SlotsBadge = document.getElementById("pes6-slots-badge");
+const sfSlotsValue = document.getElementById("sf-slots");
+const sfSlotsBadge = document.getElementById("sf-slots-badge");
 
 
 let activeModal = null;
@@ -88,12 +86,10 @@ function updateSeasonStatus() {
 
 function updateSlotsStatus() {
   const slotsElements = [
-    pes6SlotsCard,
+    pes6SlotsValue,
     pes6SlotsBadge,
-    pes6SlotsCount,
-    sfSlotsCard,
-    sfSlotsBadge,
-    sfSlotsCount
+    sfSlotsValue,
+    sfSlotsBadge
   ];
 
   if (slotsElements.some((element) => !element)) {
@@ -103,26 +99,24 @@ function updateSlotsStatus() {
   const slotsConfig = [
     {
       slots: PES6_CUPOS_LIBRES,
-      card: pes6SlotsCard,
-      badge: pes6SlotsBadge,
-      count: pes6SlotsCount
+      value: pes6SlotsValue,
+      badge: pes6SlotsBadge
     },
     {
       slots: SF_CUPOS_LIBRES,
-      card: sfSlotsCard,
-      badge: sfSlotsBadge,
-      count: sfSlotsCount
+      value: sfSlotsValue,
+      badge: sfSlotsBadge
     }
   ];
 
-  slotsConfig.forEach(({ slots, card, badge, count }) => {
+  slotsConfig.forEach(({ slots, value, badge }) => {
     const isOpen = slots > 0;
     const safeSlots = Math.max(0, slots);
 
-    card.classList.toggle("status-open", isOpen);
-    card.classList.toggle("status-closed", !isOpen);
-    badge.innerHTML = `<span class="slots-led" aria-hidden="true">●</span> ${isOpen ? "ABIERTA" : "COMPLETA"}`;
-    count.textContent = `${safeSlots} cupos libres`;
+    value.textContent = `${safeSlots} libres`;
+    badge.textContent = isOpen ? "ABIERTA" : "COMPLETA";
+    badge.classList.toggle("mini-badge--open", isOpen);
+    badge.classList.toggle("mini-badge--closed", !isOpen);
   });
 }
 
