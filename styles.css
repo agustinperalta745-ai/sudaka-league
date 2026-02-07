@@ -558,6 +558,12 @@ summary:focus-visible,
   margin: 0 0 0.8rem;
 }
 
+.palmares-subtitle {
+  margin: -0.35rem 0 0.8rem;
+  font-size: 0.9rem;
+  color: var(--text-soft);
+}
+
 .palmares-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
