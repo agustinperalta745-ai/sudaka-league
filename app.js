@@ -1,4 +1,9 @@
 const WHATSAPP_COMUNIDAD = "https://chat.whatsapp.com/DvRyA2bxAC67x0ulPQYvCa?mode=gi_t";
+const PES6_SEASON_NAME = "Temporada 23";
+const PES6_SEASON_END = "2026-02-07T23:59:00-03:00";
+const SF_SEASON_NAME = "Temporada 1";
+const SF_SEASON_STATUS = "EN ESPERA";
+const SF_SEASON_NOTE = "En espera hasta completar cupos.";
 
 const overlay = document.getElementById("modal-overlay");
 const modals = [...document.querySelectorAll(".league-modal")];
@@ -6,11 +11,71 @@ const triggers = [...document.querySelectorAll(".modal-trigger")];
 const closeButtons = [...document.querySelectorAll(".close-btn")];
 const copyButtons = [...document.querySelectorAll(".copy-btn")];
 const backToTopButton = document.getElementById("back-to-top");
+const pes6Status = document.getElementById("pes6Status");
+const pes6Countdown = document.getElementById("pes6Countdown");
+const pes6SeasonName = document.getElementById("pes6SeasonName");
+const sfStatus = document.getElementById("sfStatus");
+const sfSeasonName = document.getElementById("sfSeasonName");
+const sfSeasonNote = document.getElementById("sfSeasonNote");
+
 
 let activeModal = null;
 let lastFocusedElement = null;
 
 // Asignación centralizada de links editables.
+
+function setPes6EndedState() {
+  pes6Status.textContent = "FINALIZADA";
+  pes6Status.classList.remove("season-badge-active");
+  pes6Status.classList.add("season-badge-ended");
+  pes6Countdown.textContent = "Temporada finalizada";
+}
+
+function getCountdownText() {
+  const msRemaining = new Date(PES6_SEASON_END).getTime() - Date.now();
+
+  if (msRemaining <= 0) {
+    return null;
+  }
+
+  const totalMinutes = Math.floor(msRemaining / (1000 * 60));
+  const totalHours = Math.floor(msRemaining / (1000 * 60 * 60));
+  const totalDays = Math.floor(msRemaining / (1000 * 60 * 60 * 24));
+
+  if (msRemaining >= 1000 * 60 * 60 * 48) {
+    return `${totalDays} días`;
+  }
+
+  if (msRemaining >= 1000 * 60 * 60 * 2) {
+    return `${totalHours} horas`;
+  }
+
+  return `${Math.max(totalMinutes, 0)} min`;
+}
+
+function updateSeasonStatus() {
+  if (!pes6Status || !pes6Countdown || !pes6SeasonName || !sfStatus || !sfSeasonName || !sfSeasonNote) {
+    return;
+  }
+
+  pes6SeasonName.textContent = PES6_SEASON_NAME;
+  sfSeasonName.textContent = SF_SEASON_NAME;
+  sfStatus.textContent = SF_SEASON_STATUS;
+  sfSeasonNote.textContent = SF_SEASON_NOTE;
+
+  const countdownText = getCountdownText();
+
+  if (!countdownText) {
+    setPes6EndedState();
+    return;
+  }
+
+  pes6Status.textContent = "ACTIVA";
+  pes6Status.classList.add("season-badge-active");
+  pes6Status.classList.remove("season-badge-ended");
+  pes6Countdown.textContent = countdownText;
+}
+
 function applyWhatsAppLinks() {
   const links = {
     "cta-comunidad": WHATSAPP_COMUNIDAD,
@@ -188,3 +253,5 @@ backToTopButton.addEventListener("click", () => {
 
 setupTabs();
 applyWhatsAppLinks();
+updateSeasonStatus();
+setInterval(updateSeasonStatus, 30000);
