@@ -349,7 +349,7 @@ backToTopButton.addEventListener("click", () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
-function createPalmaresCard(item, winnersKey) {
+function createPalmaresCard(item, winnersKey, winnerLabel) {
   const card = document.createElement("article");
   card.className = "palmares-card";
 
@@ -367,7 +367,7 @@ function createPalmaresCard(item, winnersKey) {
 
   item[winnersKey].forEach((winner) => {
     const winnerItem = document.createElement("li");
-    winnerItem.textContent = winner;
+    winnerItem.textContent = `${winnerLabel}: ${winner}`;
     winners.appendChild(winnerItem);
   });
 
@@ -381,19 +381,22 @@ function renderPalmares() {
 
   const sections = [
     {
-      title: "Campeones por División",
+      title: "Últimos campeones por División (Temporada 22)",
       items: PES6_PALMARES.divisiones,
-      winnersKey: "campeones"
+      winnersKey: "campeones",
+      winnerLabel: "Último campeón"
     },
     {
-      title: "Copas",
+      title: "Últimos campeones de Copas (Temporada 22)",
       items: PES6_PALMARES.copas,
-      winnersKey: "campeones"
+      winnersKey: "campeones",
+      winnerLabel: "Último campeón"
     },
     {
-      title: "Premios Individuales",
+      title: "Últimos ganadores de Premios (Temporada 22)",
       items: PES6_PALMARES.individuales,
-      winnersKey: "ganadores"
+      winnersKey: "ganadores",
+      winnerLabel: "Último ganador"
     }
   ];
 
@@ -410,7 +413,7 @@ function renderPalmares() {
     grid.className = "palmares-grid";
 
     section.items.forEach((item) => {
-      grid.appendChild(createPalmaresCard(item, section.winnersKey));
+      grid.appendChild(createPalmaresCard(item, section.winnersKey, section.winnerLabel));
     });
 
     block.append(heading, grid);
