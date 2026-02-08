@@ -222,6 +222,7 @@ const kofContentBindings = {
 
 let activeModal = null;
 let lastFocusedElement = null;
+let showAllTitlesRanking = false;
 
 // Asignación centralizada de links editables.
 
@@ -714,7 +715,7 @@ function isValidTitleWinner(value) {
   const normalized = value.trim();
   if (!normalized) return false;
 
-  const invalidValues = ["POR DEFINIR", "NO EXISTIA", "NO SE DISPUTO"];
+  const invalidValues = ["POR DEFINIR", "NO EXISTIA", "NO SE DISPUTO", "NO SE DISPUTA"];
   return !invalidValues.includes(normalized.toUpperCase());
 }
 
@@ -914,11 +915,25 @@ function renderPes6Ranking() {
   const list = document.createElement("div");
   list.className = "pes6-ranking-list-wrap";
 
-  ranking.forEach(([player, data], index) => {
+  const visibleRanking = showAllTitlesRanking ? ranking : ranking.slice(0, 5);
+
+  visibleRanking.forEach(([player, data], index) => {
     list.appendChild(createPes6RankingItem(player, data, index));
   });
 
-  wrapper.append(heading, subtitle, list);
+  const listToggle = document.createElement("button");
+  listToggle.type = "button";
+  listToggle.className = "pes6-ranking-toggle";
+  listToggle.textContent = showAllTitlesRanking ? "Ver top 5" : "Ver todos";
+  listToggle.style.margin = "0.85rem auto 0";
+  listToggle.style.display = "flex";
+
+  listToggle.addEventListener("click", () => {
+    showAllTitlesRanking = !showAllTitlesRanking;
+    renderPes6Ranking();
+  });
+
+  wrapper.append(heading, subtitle, list, listToggle);
   container.appendChild(wrapper);
 }
 
