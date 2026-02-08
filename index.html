@@ -337,6 +337,48 @@ UNA VEZ QUE TERMINES EL REGISTRO NO OLVIDES DEJARNOS TU NOMBRE DE USUARIO DE PES
 
   <button id="back-to-top" class="btn btn-primary back-to-top" type="button" aria-label="Volver arriba">Volver arriba ↑</button>
 
+  <div id="visitor-counter" style="text-align:center; padding:16px 12px 28px; font-size:0.95rem; opacity:0.9;">
+    Visitantes: <strong id="visitor-count">Cargando…</strong>
+  </div>
+
   <script src="app.js"></script>
+  <script>
+    (function () {
+      var namespace = "sudaka-league";
+      var key = "home";
+      var storageKey = "sudaka-league-home-visited";
+      var counterEl = document.getElementById("visitor-count");
+
+      function setCount(value) {
+        if (counterEl) {
+          counterEl.textContent = value;
+        }
+      }
+
+      function fetchCount(url) {
+        return fetch(url).then(function (response) {
+          if (!response.ok) throw new Error("CountAPI request failed");
+          return response.json();
+        });
+      }
+
+      var hasVisited = localStorage.getItem(storageKey) === "1";
+      var endpoint = hasVisited
+        ? "https://api.countapi.xyz/get/" + namespace + "/" + key
+        : "https://api.countapi.xyz/hit/" + namespace + "/" + key;
+
+      fetchCount(endpoint)
+        .then(function (data) {
+          if (!hasVisited) {
+            localStorage.setItem(storageKey, "1");
+          }
+          setCount(typeof data.value === "number" ? data.value : "N/D");
+        })
+        .catch(function () {
+          setCount("No disponible");
+        });
+    })();
+  </script>
+
 </body>
 </html>
