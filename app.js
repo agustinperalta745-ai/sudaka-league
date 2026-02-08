@@ -658,7 +658,7 @@ function renderPalmares() {
   const sections = [
     {
       title: "Campeones por División",
-      subtitle: "Últimos campeones (Temporada 22)",
+      subtitle: "Últimos campeones (Temporada 23)",
       items: PES6_PALMARES.divisiones,
       winnersKey: "campeones",
       winnerLabel: "Último campeón"
