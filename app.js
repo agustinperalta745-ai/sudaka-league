@@ -44,9 +44,9 @@ const PES6_HISTORY = [
   },
   {
     season: "Temporada 23",
-    divisions: { div1: "POR DEFINIR", div2: "POR DEFINIR", div3: "POR DEFINIR", div4: "POR DEFINIR" },
+    divisions: { div1: "Alex_CABJ", div2: "H09", div3: "Leom", div4: "Jona96delgado" },
     cups: { interdiv: "POR DEFINIR", superfinal: "POR DEFINIR", interliga: "POR DEFINIR" },
-    awards: { balonOro: "POR DEFINIR", puskas: "POR DEFINIR" }
+    awards: { balonOro: "NO SE DISPUTA", puskas: "POR DEFINIR" }
   }
 ];
 
@@ -88,22 +88,22 @@ const PES6_PALMARES = {
     {
       nombre: "División 1",
       trofeo: "assets/trofeo_div1.png",
-      campeones: ["Edug98"]
+      campeones: ["Alex_CABJ"]
     },
     {
       nombre: "División 2",
       trofeo: "assets/trofeo_div2.png",
-      campeones: ["MartinPalermo"]
+      campeones: ["H09"]
     },
     {
       nombre: "División 3",
       trofeo: "assets/trofeo_div3.png",
-      campeones: ["H09"]
+      campeones: ["Leom"]
     },
     {
       nombre: "División 4",
       trofeo: "assets/trofeo_div4.png",
-      campeones: ["Cacherinhooo"]
+      campeones: ["Jona96delgado"]
     }
   ],
   copas: [
