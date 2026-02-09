@@ -1,18 +1,18 @@
 :root {
-  /* Variables globales unificadas para toda la UI (único :root). */
-  --bg-main: #05040d;
-  --bg-surface: rgba(11, 9, 24, 0.86);
-  --bg-surface-strong: rgba(16, 12, 34, 0.95);
-  --bg-card: linear-gradient(180deg, rgba(19, 15, 39, 0.92), rgba(9, 7, 22, 0.96));
-  --text-main: #eef6ff;
-  --text-soft: #b8b2d5;
-  --text-muted: #9e97c4;
-  --line: rgba(78, 188, 255, 0.5);
-  --line-strong: rgba(137, 96, 255, 0.92);
-  --radius-lg: 1.2rem;
+  --bg-main: #06060f;
+  --bg-alt: #0d0b1d;
+  --bg-surface: rgba(18, 16, 40, 0.88);
+  --bg-surface-strong: rgba(12, 12, 29, 0.96);
+  --bg-card: linear-gradient(160deg, rgba(26, 21, 56, 0.92) 0%, rgba(14, 13, 33, 0.96) 55%, rgba(7, 9, 22, 0.98) 100%);
+  --text-main: #f3f7ff;
+  --text-soft: #c2c8e8;
+  --text-muted: #a3abd1;
+  --line: rgba(99, 225, 255, 0.5);
+  --line-strong: rgba(157, 120, 255, 0.95);
+  --radius-lg: 1.3rem;
   --radius-md: 1rem;
-  --shadow-soft: 0 20px 50px rgba(2, 5, 12, 0.58);
-  --shadow-glow: 0 0 1.15rem rgba(43, 214, 255, 0.2);
+  --shadow-soft: 0 26px 60px rgba(2, 4, 15, 0.6);
+  --shadow-glow: 0 0 1.2rem rgba(82, 211, 255, 0.26);
 }
 
 * { box-sizing: border-box; }
@@ -25,13 +25,13 @@ body {
   overflow-x: hidden;
   font-family: "Inter", system-ui, sans-serif;
   font-size: 16px;
-  line-height: 1.7;
+  line-height: 1.75;
   color: var(--text-main);
   background:
-    radial-gradient(circle at 12% 8%, rgba(43, 214, 255, 0.12), transparent 34%),
-    radial-gradient(circle at 88% 10%, rgba(124, 77, 255, 0.18), transparent 34%),
-    radial-gradient(circle at 50% 100%, rgba(19, 12, 45, 0.74), transparent 55%),
-    linear-gradient(180deg, #090612 0%, #05040d 48%, #030208 100%);
+    radial-gradient(circle at 10% 0%, rgba(81, 237, 255, 0.2), transparent 38%),
+    radial-gradient(circle at 84% 6%, rgba(158, 96, 255, 0.24), transparent 42%),
+    radial-gradient(circle at 56% 86%, rgba(50, 34, 118, 0.38), transparent 46%),
+    linear-gradient(160deg, var(--bg-alt) 0%, #06070f 45%, #050509 100%);
 }
 
 body.no-scroll { overflow: hidden; }
@@ -41,18 +41,19 @@ body.no-scroll { overflow: hidden; }
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  opacity: 0.9;
+  opacity: 0.8;
   mix-blend-mode: screen;
   background-image:
-    repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 0, rgba(255, 255, 255, 0.03) 1px, transparent 2px, transparent 4px),
-    radial-gradient(circle at 20% 20%, rgba(43, 214, 255, 0.18) 0 1px, transparent 1px),
-    radial-gradient(circle at 78% 35%, rgba(124, 77, 255, 0.18) 0 1px, transparent 1px);
+    linear-gradient(120deg, rgba(255, 255, 255, 0.035), transparent 28%),
+    repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 0, rgba(255, 255, 255, 0.02) 1px, transparent 3px, transparent 6px),
+    radial-gradient(circle at 18% 26%, rgba(43, 214, 255, 0.18) 0 2px, transparent 2px),
+    radial-gradient(circle at 82% 72%, rgba(154, 122, 255, 0.2) 0 2px, transparent 2px);
 }
 
 .section {
-  width: min(1140px, 92%);
+  width: min(1180px, 92%);
   margin: 0 auto;
-  padding: clamp(3.25rem, 7vw, 5.8rem) 0;
+  padding: clamp(4.5rem, 8vw, 6.7rem) 0;
 }
 
 h1,
@@ -64,7 +65,7 @@ h3,
 .season-badge {
   font-family: "Orbitron", "Inter", sans-serif;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
 }
 
 h1,
@@ -72,52 +73,52 @@ h2,
 .league-card-content h3,
 .league-modal h2,
 .league-modal h3 {
-  text-shadow: 0 0 0.3rem rgba(43, 214, 255, 0.55), 0 0 0.95rem rgba(124, 77, 255, 0.25);
+  text-shadow: 0 0 0.4rem rgba(99, 225, 255, 0.5), 0 0 1rem rgba(148, 108, 255, 0.28);
 }
 
 h2 {
-  margin: 0 0 1.6rem;
-  font-size: clamp(1.25rem, 2.7vw, 1.8rem);
-  line-height: 1.25;
+  margin: 0 0 2rem;
+  font-size: clamp(1.35rem, 2.9vw, 2rem);
+  line-height: 1.3;
 }
 
 p,
 li {
   margin-top: 0;
-  line-height: 1.7;
+  line-height: 1.75;
 }
 
 .hero {
   text-align: center;
-  padding-top: clamp(4.4rem, 8vw, 7.3rem);
+  padding-top: clamp(5.1rem, 9vw, 8rem);
 }
 
 .hero-kicker {
   margin: 0;
-  color: #96bdff;
-  font-size: 0.82rem;
+  color: #a3d4ff;
+  font-size: 0.86rem;
 }
 
 .hero h1 {
-  margin: 1.2rem 0 0.8rem;
-  font-size: clamp(2.6rem, 12vw, 6.4rem);
-  line-height: 0.96;
+  margin: 1.5rem 0 1rem;
+  font-size: clamp(2.9rem, 11vw, 6.8rem);
+  line-height: 0.92;
 }
 
 .subtitle,
 .hero-copy {
   margin-inline: auto;
   color: var(--text-soft);
-  max-width: 68ch;
+  max-width: 70ch;
 }
 
 .subtitle {
-  margin-bottom: 1.1rem;
+  margin-bottom: 1.2rem;
   font-weight: 700;
 }
 
 .hero-actions {
-  margin-top: 2rem;
+  margin-top: 2.4rem;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -126,28 +127,28 @@ li {
 
 .btn {
   border: 1px solid var(--line);
-  border-radius: 0.9rem;
-  min-height: 50px;
-  padding: 0.86rem 1.3rem;
+  border-radius: 0.95rem;
+  min-height: 52px;
+  padding: 0.9rem 1.4rem;
   font-size: 0.86rem;
   font-weight: 800;
   text-decoration: none;
   color: #ecf5ff;
-  background: linear-gradient(180deg, rgba(18, 16, 38, 0.98), rgba(9, 8, 23, 0.96));
-  box-shadow: inset 0 0 0 1px rgba(124, 77, 255, 0.26), 0 0 0.9rem rgba(43, 214, 255, 0.22);
+  background: linear-gradient(180deg, rgba(23, 20, 49, 0.98), rgba(11, 10, 28, 0.96));
+  box-shadow: inset 0 0 0 1px rgba(124, 77, 255, 0.24), 0 0 0.95rem rgba(69, 201, 255, 0.2);
   cursor: pointer;
   transition: transform 180ms ease, box-shadow 220ms ease, filter 200ms ease;
 }
 
 .btn-primary {
-  color: #04131a;
-  border-color: #2bd6ff;
-  background: linear-gradient(180deg, #7bf0ff 0%, #2bd6ff 100%);
+  color: #051720;
+  border-color: #50d8ff;
+  background: linear-gradient(180deg, #8df0ff 0%, #38d2ff 100%);
 }
 
 .btn-secondary {
-  border-color: rgba(124, 77, 255, 0.95);
-  background: linear-gradient(180deg, #9d79ff 0%, #7c4dff 100%);
+  border-color: rgba(147, 98, 255, 0.95);
+  background: linear-gradient(180deg, #a587ff 0%, #7d56ff 100%);
 }
 
 .btn:hover,
@@ -157,8 +158,8 @@ li {
 .league-card:hover,
 .season-card:hover {
   transform: translateY(-2px);
-  filter: brightness(1.05);
-  box-shadow: 0 0 1rem rgba(43, 214, 255, 0.45), 0 0 1.6rem rgba(124, 77, 255, 0.26);
+  filter: brightness(1.06);
+  box-shadow: 0 0 1rem rgba(83, 219, 255, 0.4), 0 0 1.8rem rgba(142, 105, 255, 0.3);
 }
 
 .btn:focus-visible,
@@ -167,7 +168,7 @@ li {
 summary:focus-visible,
 .close-btn:focus-visible,
 .tab-btn:focus-visible {
-  outline: 2px solid #8ec5ff;
+  outline: 2px solid #9fd2ff;
   outline-offset: 2px;
 }
 
@@ -178,12 +179,12 @@ summary:focus-visible,
 .hud-separator::after {
   content: "";
   position: absolute;
-  left: 7%;
-  right: 7%;
+  left: 6%;
+  right: 6%;
   bottom: -0.45rem;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #2bd6ff, #7c4dff, transparent);
-  filter: drop-shadow(0 0 0.45rem rgba(43, 214, 255, 0.78));
+  background: linear-gradient(90deg, transparent, #38d2ff, #8b65ff, transparent);
+  filter: drop-shadow(0 0 0.5rem rgba(67, 214, 255, 0.8));
 }
 
 .panel-section,
@@ -194,64 +195,65 @@ summary:focus-visible,
 .palmares-block,
 .pes6-ranking,
 .season-status {
-  border: 1px solid rgba(43, 214, 255, 0.46);
+  border: 1px solid rgba(86, 223, 255, 0.46);
   border-radius: var(--radius-lg);
   background: var(--bg-card);
-  box-shadow: inset 0 0 0 1px rgba(124, 77, 255, 0.24), var(--shadow-glow), var(--shadow-soft);
+  box-shadow: inset 0 0 0 1px rgba(137, 95, 255, 0.24), var(--shadow-glow), var(--shadow-soft);
 }
 
 .season-status {
-  padding: clamp(2.4rem, 4.8vw, 3.3rem);
+  padding: clamp(3rem, 5.4vw, 3.8rem);
 }
 
 .season-status h2 {
-  margin-bottom: 2rem;
+  margin-bottom: 2.2rem;
 }
 
 .season-grid,
 .league-grid {
   display: grid;
-  gap: clamp(1.25rem, 2.6vw, 1.6rem);
+  gap: clamp(1.6rem, 2.9vw, 2rem);
 }
 
 .season-card {
-  padding: clamp(1.55rem, 3.3vw, 2.2rem);
+  padding: clamp(1.8rem, 3.3vw, 2.4rem);
 }
 
 .season-card-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.95rem;
-  margin-bottom: 0.8rem;
+  gap: 1rem;
+  margin-bottom: 1rem;
 }
 
 .season-card h3 {
   margin: 0;
-  font-size: clamp(0.96rem, 2vw, 1.15rem);
+  font-size: clamp(1rem, 2vw, 1.2rem);
 }
 
 .season-title,
 .season-note {
-  margin-bottom: 1rem;
+  margin-bottom: 1.2rem;
   color: var(--text-soft);
 }
 
 .season-countdown-label {
-  margin: 1rem 0 1.15rem;
+  margin: 1.2rem 0 1.6rem;
 }
 
 .season-end {
   display: block;
   width: 100%;
-  border: 1px solid rgba(43, 214, 255, 0.55);
+  border: 1px solid rgba(79, 228, 255, 0.62);
   border-radius: 1rem;
-  padding: 1rem 1.1rem;
+  padding: 1.4rem 1.2rem;
   font-family: "Orbitron", "Inter", sans-serif;
-  font-size: clamp(1rem, 2.4vw, 1.25rem);
-  letter-spacing: 0.04em;
-  background: linear-gradient(180deg, rgba(8, 36, 56, 0.8), rgba(10, 15, 38, 0.95));
-  box-shadow: inset 0 0 0 1px rgba(114, 199, 255, 0.25), 0 0 1rem rgba(43, 214, 255, 0.18);
+  font-size: clamp(1.25rem, 3.2vw, 1.8rem);
+  text-align: center;
+  letter-spacing: 0.06em;
+  background: linear-gradient(165deg, rgba(16, 52, 76, 0.9), rgba(18, 22, 51, 0.95));
+  box-shadow: inset 0 0 0 1px rgba(128, 221, 255, 0.3), 0 0 1.4rem rgba(67, 212, 255, 0.24);
 }
 
 .season-badge,
@@ -268,27 +270,30 @@ summary:focus-visible,
 }
 
 .season-badge {
-  padding: 0.34rem 0.72rem;
+  padding: 0.36rem 0.75rem;
 }
 
 .season-badge-active {
-  color: #03212b;
-  border-color: #2bd6ff;
-  background: linear-gradient(180deg, #89efff, #2bd6ff);
+  color: #042530;
+  border-color: #4bdfff;
+  background: linear-gradient(180deg, #95f2ff, #38d2ff);
 }
 
 .season-badge-wait,
 .season-badge-ended {
-  color: #f8eeff;
-  border-color: rgba(124, 77, 255, 0.88);
-  background: linear-gradient(180deg, #a689ff, #7c4dff);
+  color: #fbf2ff;
+  border-color: rgba(138, 94, 255, 0.9);
+  background: linear-gradient(180deg, #b096ff, #7e57ff);
 }
 
 .season-slots {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.7rem;
+  margin-top: 0.6rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(88, 168, 255, 0.3);
   color: var(--text-soft);
 }
 
@@ -301,9 +306,9 @@ summary:focus-visible,
 
 .mini-badge {
   padding: 0.24rem 0.65rem;
-  border-color: rgba(43, 214, 255, 0.38);
-  background: rgba(14, 29, 60, 0.75);
-  color: #d6efff;
+  border-color: rgba(72, 217, 255, 0.38);
+  background: rgba(18, 33, 70, 0.75);
+  color: #dbf3ff;
 }
 
 .mini-badge--open {
@@ -324,32 +329,32 @@ summary:focus-visible,
 .league-card-banner,
 .modal-banner {
   width: 100%;
-  height: clamp(280px, 32vw, 320px);
+  height: clamp(300px, 34vw, 340px);
   display: block;
   object-fit: cover;
   object-position: center;
 }
 
 .league-card-content {
-  padding: clamp(1.5rem, 3vw, 2rem);
+  padding: 2rem;
 }
 
 .league-card-content h3 {
-  margin: 0 0 0.85rem;
-  font-size: clamp(1rem, 2.2vw, 1.26rem);
+  margin: 0 0 1rem;
+  font-size: clamp(1.06rem, 2.2vw, 1.3rem);
 }
 
 .league-card-content p {
   margin: 0;
   color: var(--text-soft);
-  line-height: 1.78;
-  max-width: 42ch;
+  line-height: 1.85;
+  max-width: 60ch;
 }
 
 .panel-section,
 .faq,
 .about-section {
-  padding: clamp(2.25rem, 4.8vw, 3.25rem);
+  padding: clamp(3rem, 5.3vw, 3.6rem);
 }
 
 .panel-section p,
@@ -369,39 +374,43 @@ summary:focus-visible,
   justify-content: space-between;
   align-items: center;
   gap: 0.7rem;
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.65rem;
 }
 
 .system-panel-hint {
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.9rem;
   color: #9fe8ff;
   font-weight: 600;
 }
 
 .system-panel-indicator {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   color: #94e9ff;
 }
 
 .faq details {
-  border: 1px solid rgba(79, 173, 255, 0.36);
+  border: 1px solid rgba(106, 184, 255, 0.38);
   border-radius: var(--radius-md);
-  background: rgba(10, 16, 34, 0.75);
-  padding: 1rem 1.1rem;
+  background: rgba(13, 19, 42, 0.82);
+  padding: 1.4rem 1.5rem;
+  margin-bottom: 1.2rem;
 }
 
-.faq details + details { margin-top: 0.95rem; }
+.faq details[open] {
+  padding-bottom: 1.5rem;
+}
 
 .faq summary {
   cursor: pointer;
   font-weight: 700;
-  color: #9beaff;
+  color: #aeeeff;
 }
 
 .faq details p {
-  margin: 0.8rem 0 0;
+  margin: 1rem 0 0;
+  padding-top: 0.5rem;
   color: var(--text-muted);
-  line-height: 1.8;
+  line-height: 1.85;
 }
 
 .about-section p {
@@ -426,8 +435,8 @@ summary:focus-visible,
 .history-accordion-item {
   padding: 1rem;
   border-radius: var(--radius-md);
-  border: 1px solid rgba(86, 178, 255, 0.36);
-  background: rgba(9, 13, 31, 0.85);
+  border: 1px solid rgba(103, 190, 255, 0.36);
+  background: rgba(8, 13, 33, 0.86);
 }
 
 .palmares-grid {
@@ -436,10 +445,10 @@ summary:focus-visible,
 }
 
 .palmares-card {
-  border: 1px solid rgba(76, 166, 250, 0.35);
+  border: 1px solid rgba(93, 174, 255, 0.35);
   border-radius: 0.85rem;
   padding: 0.85rem;
-  background: rgba(11, 16, 35, 0.84);
+  background: rgba(10, 16, 37, 0.86);
 }
 
 .palmares-trophy,
@@ -460,7 +469,7 @@ summary:focus-visible,
 
 .pes6-ranking-row,
 .history-row {
-  border: 1px solid rgba(84, 172, 255, 0.33);
+  border: 1px solid rgba(98, 182, 255, 0.33);
   border-radius: 0.85rem;
   padding: 0.75rem;
   background: rgba(11, 16, 35, 0.8);
@@ -575,7 +584,7 @@ summary:focus-visible,
   padding: 0.9rem;
   background: rgba(5, 11, 28, 0.88);
   color: var(--text-main);
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
 .highlight-text {
@@ -616,7 +625,7 @@ summary:focus-visible,
 @media (max-width: 768px) {
   .section {
     width: min(1120px, 94%);
-    padding: clamp(2.8rem, 10vw, 3.8rem) 0;
+    padding: clamp(3rem, 10vw, 4rem) 0;
   }
 
   .hero-copy,
@@ -648,7 +657,7 @@ summary:focus-visible,
   .panel-section,
   .faq,
   .about-section {
-    padding: 1.35rem;
+    padding: 1.6rem;
   }
 
   .season-card-header {
@@ -658,7 +667,12 @@ summary:focus-visible,
 
   .league-card-banner,
   .modal-banner {
-    height: 230px;
+    height: 250px;
+  }
+
+  .season-end {
+    font-size: clamp(1.05rem, 5.5vw, 1.35rem);
+    padding: 1.1rem;
   }
 
   .league-modal {
