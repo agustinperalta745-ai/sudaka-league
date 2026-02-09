@@ -56,7 +56,6 @@ const KOF_CUPOS_LIBRES = 10;  // King of Fighters 2002
 
 const WHATSAPP_COMUNIDAD = "https://chat.whatsapp.com/DvRyA2bxAC67x0ulPQYvCa?mode=gi_t";
 const PES6_SEASON_NAME = "Temporada 24";
-const PES6_SEASON_END = "2026-02-07T23:59:00-03:00";
 const KOF_LEAGUE = {
   nombre: "King of Fighters 2002 – Fightcade",
   nombreCorto: "KOF 2002",
@@ -190,7 +189,7 @@ const closeButtons = [...document.querySelectorAll(".close-btn")];
 const copyButtons = [...document.querySelectorAll(".copy-btn")];
 const backToTopButton = document.getElementById("back-to-top");
 const pes6Status = document.getElementById("pes6Status");
-const pes6Countdown = document.getElementById("pes6Countdown");
+const pes6Remaining = document.getElementById("pes6-remaining");
 const pes6SeasonName = document.getElementById("pes6SeasonName");
 const sfStatus = document.getElementById("sfStatus");
 const sfSeasonName = document.getElementById("sfSeasonName");
@@ -226,37 +225,32 @@ let showAllTitlesRanking = false;
 
 // Asignación centralizada de links editables.
 
-function setPes6EndedState() {
-  pes6Status.textContent = "FINALIZADA";
-  pes6Status.classList.remove("season-badge-active");
-  pes6Status.classList.add("season-badge-ended");
-  pes6Countdown.textContent = "Temporada finalizada";
-}
+const PES6_FINAL_TARGET = new Date(2026, 1, 22, 23, 59, 0, 0);
 
-function getCountdownText() {
-  const msRemaining = new Date(PES6_SEASON_END).getTime() - Date.now();
+function updatePes6Remaining() {
+  const el = document.getElementById("pes6-remaining");
+  if (!el) return;
 
-  if (msRemaining <= 0) {
-    return null;
+  const now = new Date();
+  const ms = PES6_FINAL_TARGET.getTime() - now.getTime();
+
+  if (ms <= 0) {
+    el.textContent = "Finaliza en: 0 días";
+    return;
   }
 
-  const totalMinutes = Math.floor(msRemaining / (1000 * 60));
-  const totalHours = Math.floor(msRemaining / (1000 * 60 * 60));
-  const totalDays = Math.floor(msRemaining / (1000 * 60 * 60 * 24));
-
-  if (msRemaining >= 1000 * 60 * 60 * 48) {
-    return `${totalDays} días`;
+  if (ms < 24 * 60 * 60 * 1000) {
+    const hours = Math.max(0, Math.ceil(ms / (60 * 60 * 1000)));
+    el.textContent = `Finaliza en: ${hours} horas`;
+    return;
   }
 
-  if (msRemaining >= 1000 * 60 * 60 * 2) {
-    return `${totalHours} horas`;
-  }
-
-  return `${Math.max(totalMinutes, 0)} min`;
+  const days = Math.max(0, Math.ceil(ms / (24 * 60 * 60 * 1000)));
+  el.textContent = `Finaliza en: ${days} días`;
 }
 
 function updateSeasonStatus() {
-  if (!pes6Status || !pes6Countdown || !pes6SeasonName || !sfStatus || !sfSeasonName || !sfSeasonNote) {
+  if (!pes6Status || !pes6SeasonName || !sfStatus || !sfSeasonName || !sfSeasonNote || !pes6Remaining) {
     return;
   }
 
@@ -265,17 +259,11 @@ function updateSeasonStatus() {
   sfStatus.textContent = KOF_LEAGUE.temporada.estado;
   sfSeasonNote.textContent = KOF_LEAGUE.temporada.nota;
 
-  const countdownText = getCountdownText();
+  const seasonEnded = PES6_FINAL_TARGET.getTime() - Date.now() <= 0;
 
-  if (!countdownText) {
-    setPes6EndedState();
-    return;
-  }
-
-  pes6Status.textContent = "ACTIVA";
-  pes6Status.classList.add("season-badge-active");
-  pes6Status.classList.remove("season-badge-ended");
-  pes6Countdown.textContent = countdownText;
+  pes6Status.textContent = seasonEnded ? "FINALIZADA" : "ACTIVA";
+  pes6Status.classList.toggle("season-badge-active", !seasonEnded);
+  pes6Status.classList.toggle("season-badge-ended", seasonEnded);
 }
 
 function updateSlotsStatus() {
@@ -1085,5 +1073,7 @@ renderPes6History();
 applyKofLeagueContent();
 applyWhatsAppLinks();
 updateSeasonStatus();
+updatePes6Remaining();
 updateSlotsStatus();
-setInterval(updateSeasonStatus, 30000);
+setInterval(updateSeasonStatus, 60000);
+setInterval(updatePes6Remaining, 60000);
