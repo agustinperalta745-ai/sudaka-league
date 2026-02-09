@@ -351,6 +351,33 @@ summary:focus-visible,
   max-width: 60ch;
 }
 
+
+.sponsor-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.sponsor-card .league-card-content {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.sponsor-cta {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(147, 98, 255, 0.95);
+  border-radius: 0.95rem;
+  min-height: 44px;
+  padding: 0.65rem 1.1rem;
+  font-size: 0.84rem;
+  font-weight: 800;
+  color: #ecf5ff;
+  background: linear-gradient(180deg, #a587ff 0%, #7d56ff 100%);
+}
+
 .panel-section,
 .faq,
 .about-section {
