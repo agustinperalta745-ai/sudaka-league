@@ -52,7 +52,7 @@ const PES6_HISTORY = [
 
 // === CONFIGURACIÓN DE CUPOS (EDITAR SOLO ESTO) ===
 const PES6_CUPOS_LIBRES = 8; // 4ta división
-const KOF_CUPOS_LIBRES = 10;  // King of Fighters 2002
+const KOF_CUPOS_LIBRES = 7;  // King of Fighters 2002
 
 const WHATSAPP_COMUNIDAD = "https://chat.whatsapp.com/DvRyA2bxAC67x0ulPQYvCa?mode=gi_t";
 const PES6_SEASON_NAME = "Temporada 24";
