@@ -1099,3 +1099,221 @@ summary:focus-visible,
   overflow: hidden;
 }
 
+
+/* =========================================================
+   RETRO ARCADE DARK THEME OVERRIDES
+   Estas reglas pisan estilos base para lograr una estética
+   arcade oscura con acentos neón celeste y violeta.
+   ========================================================= */
+
+:root {
+  /* Paleta principal retro (fondo oscuro + neón) */
+  --bg-main: #04030b;
+  --bg-panel: rgba(12, 10, 24, 0.86);
+  --bg-elevated: #17122b;
+  --text-main: #eef7ff;
+  --text-soft: #b5b0d1;
+  --line: rgba(43, 214, 255, 0.48);
+  --line-strong: rgba(124, 77, 255, 0.9);
+  --glow: 0 0 0.8rem rgba(43, 214, 255, 0.4);
+}
+
+/* Fondo global con gradientes sutiles + scanlines para textura CRT */
+body {
+  background:
+    radial-gradient(circle at 12% 8%, rgba(43, 214, 255, 0.13), transparent 32%),
+    radial-gradient(circle at 88% 10%, rgba(124, 77, 255, 0.18), transparent 34%),
+    radial-gradient(circle at 50% 100%, rgba(19, 12, 45, 0.75), transparent 55%),
+    linear-gradient(180deg, #090612 0%, #05040d 48%, #030208 100%);
+  color: var(--text-main);
+}
+
+/* Capa visual de ruido, líneas y glow ambiental retro */
+.bg-effects {
+  background-image:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.03) 0,
+      rgba(255, 255, 255, 0.03) 1px,
+      transparent 2px,
+      transparent 4px
+    ),
+    radial-gradient(circle at 20% 20%, rgba(43, 214, 255, 0.2) 0 1px, transparent 1px),
+    radial-gradient(circle at 80% 30%, rgba(124, 77, 255, 0.2) 0 1px, transparent 1px),
+    linear-gradient(110deg, rgba(43, 214, 255, 0.06), transparent 30%, rgba(124, 77, 255, 0.08));
+  opacity: 0.9;
+  mix-blend-mode: screen;
+}
+
+/* Tipografía arcade para títulos, manteniendo Inter para lectura */
+h1,
+h2,
+h3,
+.hero-kicker,
+.btn,
+.season-badge,
+.tab-btn {
+  font-family: "Orbitron", "Inter", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Glow sutil en títulos para emular carteles luminosos */
+h1,
+h2,
+.league-card-content h3,
+.league-modal h2,
+.league-modal h3 {
+  text-shadow:
+    0 0 0.3rem rgba(43, 214, 255, 0.55),
+    0 0 0.9rem rgba(124, 77, 255, 0.28);
+}
+
+/* Paneles estilo gabinete arcade: borde neón + profundidad */
+.panel-section,
+.faq,
+.league-card,
+.league-modal,
+.season-card,
+.palmares-block,
+.pes6-ranking {
+  border: 1px solid rgba(43, 214, 255, 0.45);
+  background:
+    linear-gradient(180deg, rgba(15, 11, 31, 0.9), rgba(9, 7, 20, 0.92));
+  box-shadow:
+    inset 0 0 0 1px rgba(124, 77, 255, 0.25),
+    0 0 1.2rem rgba(43, 214, 255, 0.13),
+    0 0 2rem rgba(124, 77, 255, 0.16),
+    0 18px 45px rgba(0, 0, 0, 0.55);
+}
+
+/* Líneas separadoras brillantes para reforzar el estilo HUD */
+.hud-separator::after {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #2bd6ff, #7c4dff, transparent);
+  filter: drop-shadow(0 0 0.45rem rgba(43, 214, 255, 0.75));
+}
+
+/* Botones grandes y muy visibles, como botones de arcade */
+.btn {
+  border: 1px solid rgba(43, 214, 255, 0.75);
+  min-height: 48px;
+  padding: 0.82rem 1.25rem;
+  border-radius: 0.85rem;
+  font-weight: 800;
+  background: linear-gradient(180deg, rgba(18, 16, 38, 0.98), rgba(9, 8, 23, 0.96));
+  box-shadow:
+    inset 0 0 0 1px rgba(124, 77, 255, 0.28),
+    0 0 0.9rem rgba(43, 214, 255, 0.25);
+}
+
+/* CTA principal celeste neón */
+.btn-primary {
+  color: #02131a;
+  border-color: #2bd6ff;
+  background: linear-gradient(180deg, #6eebff 0%, #2bd6ff 100%);
+  box-shadow:
+    0 0 0.95rem rgba(43, 214, 255, 0.65),
+    0 0 1.8rem rgba(43, 214, 255, 0.28);
+}
+
+/* CTA secundario violeta neón */
+.btn-secondary {
+  color: #f3ecff;
+  border-color: rgba(124, 77, 255, 0.95);
+  background: linear-gradient(180deg, #9a74ff 0%, #7c4dff 100%);
+  box-shadow:
+    0 0 0.9rem rgba(124, 77, 255, 0.55),
+    0 0 1.7rem rgba(124, 77, 255, 0.22);
+}
+
+/* Hover/focus: pequeño levantamiento + brillo extra */
+.btn:hover,
+.btn:focus-visible,
+.tab-btn:hover,
+.tab-btn:focus-visible,
+.league-card:hover,
+.season-card:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.06);
+  box-shadow:
+    0 0 1rem rgba(43, 214, 255, 0.48),
+    0 0 1.7rem rgba(124, 77, 255, 0.28);
+}
+
+/* Badges de estado con contraste alto y neón suave */
+.season-badge-active {
+  color: #03202a;
+  border-color: #2bd6ff;
+  background: linear-gradient(180deg, #89efff, #2bd6ff);
+}
+
+.season-badge-wait {
+  color: #f8eeff;
+  border-color: rgba(124, 77, 255, 0.88);
+  background: linear-gradient(180deg, #a689ff, #7c4dff);
+}
+
+/* Tarjetas/tablas internas con contraste oscuro legible */
+.palmares-card,
+.pes6-ranking-row,
+.pes6-ranking-list,
+.pes6-ranking-breakdown,
+.pes6-ranking-titles,
+.highlight-text,
+.tab-btn {
+  border-color: rgba(43, 214, 255, 0.35);
+  background: linear-gradient(180deg, rgba(21, 15, 41, 0.92), rgba(10, 8, 22, 0.95));
+}
+
+/* Enlaces y detalles FAQ en tono neón */
+a,
+summary {
+  color: #9ae8ff;
+}
+
+/* Ajustes responsive: mejor aire en mobile y botones full-width */
+@media (max-width: 768px) {
+  .section {
+    width: min(1100px, 94%);
+    padding: 2.15rem 0;
+  }
+
+  .hero {
+    padding-top: 3.2rem;
+  }
+
+  .hero-copy,
+  .subtitle {
+    max-width: 36ch;
+  }
+
+  .hero-actions {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .season-card-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+/* Desktop ancho: más presencia visual del hero y grillas balanceadas */
+@media (min-width: 1024px) {
+  .hero h1 {
+    letter-spacing: 0.08em;
+  }
+
+  .season-grid,
+  .league-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
