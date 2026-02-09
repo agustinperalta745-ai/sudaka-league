@@ -1,12 +1,13 @@
 :root {
-  --bg-main: #030814;
-  --bg-panel: rgba(10, 22, 46, 0.82);
-  --bg-elevated: #0c1b39;
-  --text-main: #e8f1ff;
-  --text-soft: #b8c6ea;
-  --line: rgba(84, 164, 255, 0.5);
-  --line-strong: rgba(99, 184, 255, 0.9);
-  --glow: 0 0 0.7rem rgba(89, 173, 255, 0.45);
+  /* Variables unificadas: se conserva la paleta retro arcade final. */
+  --bg-main: #04030b;
+  --bg-panel: rgba(12, 10, 24, 0.86);
+  --bg-elevated: #17122b;
+  --text-main: #eef7ff;
+  --text-soft: #b5b0d1;
+  --line: rgba(43, 214, 255, 0.48);
+  --line-strong: rgba(124, 77, 255, 0.9);
+  --glow: 0 0 0.8rem rgba(43, 214, 255, 0.4);
 }
 
 * {
@@ -213,8 +214,20 @@ summary:focus-visible,
 }
 
 
+.season-status {
+  border: 1px solid rgba(43, 214, 255, 0.45);
+  border-radius: 1rem;
+  padding: clamp(2rem, 4vw, 2.5rem);
+  background: linear-gradient(180deg, rgba(17, 13, 36, 0.92), rgba(10, 8, 22, 0.95));
+  box-shadow: inset 0 0 0 1px rgba(124, 77, 255, 0.2), 0 0 1.2rem rgba(43, 214, 255, 0.2);
+}
+
 .season-status h2 {
   margin-bottom: 1.2rem;
+}
+
+.about-section {
+  padding: clamp(1.6rem, 3.6vw, 2.15rem);
 }
 
 .season-grid {
@@ -1106,17 +1119,6 @@ summary:focus-visible,
    arcade oscura con acentos neón celeste y violeta.
    ========================================================= */
 
-:root {
-  /* Paleta principal retro (fondo oscuro + neón) */
-  --bg-main: #04030b;
-  --bg-panel: rgba(12, 10, 24, 0.86);
-  --bg-elevated: #17122b;
-  --text-main: #eef7ff;
-  --text-soft: #b5b0d1;
-  --line: rgba(43, 214, 255, 0.48);
-  --line-strong: rgba(124, 77, 255, 0.9);
-  --glow: 0 0 0.8rem rgba(43, 214, 255, 0.4);
-}
 
 /* Fondo global con gradientes sutiles + scanlines para textura CRT */
 body {
@@ -1303,6 +1305,10 @@ summary {
   .season-card-header {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .about-section {
+    padding: 1.4rem;
   }
 }
 
