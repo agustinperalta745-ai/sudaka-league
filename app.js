@@ -185,6 +185,117 @@ const PES6_HISTORY_META = {
   ]
 };
 
+const CUP_HISTORY_T23 = {
+  title: "T23 – Copa Interdivisional SLP",
+  rounds: [
+    {
+      name: "Octavos Playoff",
+      matches: [
+        {
+          label: "Octavo 1",
+          teamA: { club: "Lanús", player: "Edug98 (Primera)", shield: "/img/escudos/lanus.png" },
+          teamB: { club: "Argentinos", player: "Facualanis (Segunda)", shield: "/img/escudos/argentinos.png" }
+        },
+        {
+          label: "Octavo 2",
+          teamA: { club: "Millonarios", player: "Fafafa (Primera)", shield: "/img/escudos/millonarios.png" },
+          teamB: { club: "Cruzeiro", player: "Crislot26 (Segunda)", shield: "/img/escudos/cruzeiro.png" }
+        },
+        {
+          label: "Octavo 3",
+          teamA: { club: "Santos FC", player: "LombardoCABJ (Primera)", shield: "/img/escudos/santos_fc.png" },
+          teamB: { club: "Sao Paulo", player: "SoyLefo (Segunda)", shield: "/img/escudos/sao_paulo.png" }
+        },
+        {
+          label: "Octavo 4",
+          teamA: { club: "Estudiantes", player: "Exeeneta (Primera)", shield: "/img/escudos/estudiantes.png" },
+          teamB: { club: "Internacional SC", player: "Joser17 (Segunda)", shield: "/img/escudos/internacional_sc.png" }
+        },
+        {
+          label: "Octavo 5",
+          teamA: { club: "Peñarol", player: "TunTun (Primera)", shield: "/img/escudos/penarol.png" },
+          teamB: { club: "Huracán", player: "Leom (Tercera)", shield: "/img/escudos/huracan.png" }
+        },
+        {
+          label: "Octavo 6",
+          teamA: { club: "Nacional", player: "Aacuis09 (Primera)", shield: "/img/escudos/nacional.png" },
+          teamB: { club: "Peñarol", player: "Cacherinhooo (Tercera)", shield: "/img/escudos/penarol.png" }
+        },
+        {
+          label: "Octavo 7",
+          teamA: { club: "Colo Colo", player: "Broko (Primera)", shield: "/img/escudos/colo_colo.png" },
+          teamB: { club: "Internacional SC", player: "Gab0211 (Tercera)", shield: "/img/escudos/internacional_sc.png" }
+        },
+        {
+          label: "Octavo 8",
+          teamA: { club: "Argentinos JRS", player: "Ivanarocela (Primera)", shield: "/img/escudos/argentinos_jrs.png" },
+          teamB: { club: "Colo Colo", player: "Joelignacho (Segunda)", shield: "/img/escudos/colo_colo.png" }
+        }
+      ]
+    },
+    {
+      name: "Cuartos Playoff",
+      matches: [
+        {
+          label: "Cuarto 1",
+          teamA: { club: "Ganador Octavo 1", player: "Por definir", shield: "/img/escudos/ganador_octavo_1.png" },
+          teamB: { club: "Ganador Octavo 2", player: "Por definir", shield: "/img/escudos/ganador_octavo_2.png" }
+        },
+        {
+          label: "Cuarto 2",
+          teamA: { club: "Ganador Octavo 3", player: "Por definir", shield: "/img/escudos/ganador_octavo_3.png" },
+          teamB: { club: "Ganador Octavo 4", player: "Por definir", shield: "/img/escudos/ganador_octavo_4.png" }
+        },
+        {
+          label: "Cuarto 3",
+          teamA: { club: "Ganador Octavo 5", player: "Por definir", shield: "/img/escudos/ganador_octavo_5.png" },
+          teamB: { club: "Ganador Octavo 6", player: "Por definir", shield: "/img/escudos/ganador_octavo_6.png" }
+        },
+        {
+          label: "Cuarto 4",
+          teamA: { club: "Ganador Octavo 7", player: "Por definir", shield: "/img/escudos/ganador_octavo_7.png" },
+          teamB: { club: "Ganador Octavo 8", player: "Por definir", shield: "/img/escudos/ganador_octavo_8.png" }
+        }
+      ]
+    },
+    {
+      name: "Semis Playoff",
+      matches: [
+        {
+          label: "Semi 1",
+          teamA: { club: "Ganador Cuarto 1", player: "Por definir", shield: "/img/escudos/ganador_cuarto_1.png" },
+          teamB: { club: "Ganador Cuarto 2", player: "Por definir", shield: "/img/escudos/ganador_cuarto_2.png" }
+        },
+        {
+          label: "Semi 2",
+          teamA: { club: "Ganador Cuarto 3", player: "Por definir", shield: "/img/escudos/ganador_cuarto_3.png" },
+          teamB: { club: "Ganador Cuarto 4", player: "Por definir", shield: "/img/escudos/ganador_cuarto_4.png" }
+        }
+      ]
+    },
+    {
+      name: "Final Playoff",
+      matches: [
+        {
+          label: "Final Playoff",
+          teamA: { club: "Ganador Semi 1", player: "Por definir", shield: "/img/escudos/ganador_semi_1.png" },
+          teamB: { club: "Ganador Semi 2", player: "Por definir", shield: "/img/escudos/ganador_semi_2.png" }
+        }
+      ]
+    },
+    {
+      name: "Final Interdivisional",
+      matches: [
+        {
+          label: "Final Interdivisional",
+          teamA: { club: "Universitario", player: "H09", shield: "/img/escudos/universitario.png" },
+          teamB: { club: "Ganador Final Playoff", player: "Por definir", shield: "/img/escudos/ganador_final_playoff.png" }
+        }
+      ]
+    }
+  ]
+};
+
 const overlay = document.getElementById("modal-overlay");
 const modals = [...document.querySelectorAll(".league-modal")];
 const triggers = [...document.querySelectorAll(".modal-trigger")];
@@ -1079,11 +1190,103 @@ function createHistoryAccordionItem(seasonData, index) {
   return item;
 }
 
+function createCupTeamNode(team) {
+  const teamNode = document.createElement("article");
+  teamNode.className = "cup-team";
+
+  const shield = document.createElement("img");
+  shield.className = "cup-team-shield";
+  shield.src = team.shield;
+  shield.alt = `Escudo de ${team.club}`;
+  shield.loading = "lazy";
+
+  const info = document.createElement("div");
+  info.className = "cup-team-info";
+
+  const club = document.createElement("p");
+  club.className = "cup-team-club";
+  club.textContent = team.club;
+
+  const player = document.createElement("p");
+  player.className = "cup-team-player";
+  player.textContent = team.player;
+
+  info.append(club, player);
+  teamNode.append(shield, info);
+  return teamNode;
+}
+
+function createCupMatchCard(matchData) {
+  const card = document.createElement("article");
+  card.className = "cup-match-card";
+
+  const label = document.createElement("p");
+  label.className = "cup-match-label";
+  label.textContent = matchData.label;
+
+  const body = document.createElement("div");
+  body.className = "cup-match-body";
+
+  const versus = document.createElement("span");
+  versus.className = "cup-match-versus";
+  versus.textContent = "VS";
+
+  body.append(createCupTeamNode(matchData.teamA), versus, createCupTeamNode(matchData.teamB));
+  card.append(label, body);
+  return card;
+}
+
+function createCupRoundSection(roundData) {
+  const section = document.createElement("section");
+  section.className = "cup-round-section";
+
+  const heading = document.createElement("h4");
+  heading.className = "cup-round-title";
+  heading.textContent = roundData.name;
+
+  const matchesGrid = document.createElement("div");
+  matchesGrid.className = "cup-round-grid";
+
+  roundData.matches.forEach((match) => {
+    matchesGrid.appendChild(createCupMatchCard(match));
+  });
+
+  section.append(heading, matchesGrid);
+  return section;
+}
+
+function renderCupHistory() {
+  const container = document.getElementById("pes6-cup-history");
+  if (!container) return;
+
+  container.replaceChildren();
+
+  const wrapper = document.createElement("section");
+  wrapper.className = "cup-history-block";
+
+  const heading = document.createElement("h3");
+  heading.className = "cup-history-heading";
+  heading.textContent = "Historial de Copas";
+
+  const title = document.createElement("h4");
+  title.className = "cup-history-title";
+  title.textContent = CUP_HISTORY_T23.title;
+
+  wrapper.append(heading, title);
+  CUP_HISTORY_T23.rounds.forEach((round) => {
+    wrapper.appendChild(createCupRoundSection(round));
+  });
+
+  container.appendChild(wrapper);
+}
+
 function renderPes6History() {
   const container = document.getElementById("pes6-history");
   if (!container) return;
 
   container.replaceChildren();
+
+  renderCupHistory();
 
   PES6_HISTORY.forEach((seasonData, index) => {
     container.appendChild(createHistoryAccordionItem(seasonData, index));
