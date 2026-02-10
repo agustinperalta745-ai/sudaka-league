@@ -114,6 +114,7 @@ a {
   width: var(--max-width);
   margin: 0 auto;
   min-height: 60px;
+  padding-inline: clamp(0.6rem, 2vw, 1rem);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -121,6 +122,7 @@ a {
 }
 
 .topbar-brand {
+  min-width: 0;
   display: inline-flex;
   align-items: center;
   gap: 0.7rem;
@@ -128,10 +130,21 @@ a {
   color: inherit;
 }
 
+.topbar-logo,
 .topbar-shield {
   width: 34px;
   height: 34px;
   border-radius: 0.65rem;
+  flex: 0 0 auto;
+}
+
+.topbar-logo {
+  object-fit: cover;
+  border: 1px solid var(--line-strong);
+  background: #0b111e;
+}
+
+.topbar-shield {
   display: grid;
   place-items: center;
   font-family: "Rajdhani", sans-serif;
@@ -144,8 +157,22 @@ a {
 }
 
 .topbar-title {
+  min-width: 0;
   font-size: 1.05rem;
   font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: 0.07em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-shadow: 0 0 8px rgba(77, 177, 255, 0.2);
+}
+
+.topbar-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-left: auto;
 }
 
 .topbar-preview-link {
@@ -1053,10 +1080,18 @@ summary:focus-visible,
 
   .topbar-inner {
     width: min(1160px, 94%);
+    min-height: 56px;
+    gap: 0.65rem;
+  }
+
+  .topbar-logo,
+  .topbar-shield {
+    width: 30px;
+    height: 30px;
   }
 
   .topbar-title {
-    font-size: 0.95rem;
+    font-size: clamp(0.74rem, 3.6vw, 0.95rem);
   }
 
   .hero-copy,
@@ -1077,8 +1112,7 @@ summary:focus-visible,
   .tab-btn,
   .copy-btn,
   .back-to-top,
-  .cup-tab-btn,
-  .topbar-preview-link {
+  .cup-tab-btn {
     width: 100%;
     text-align: center;
     justify-content: center;
