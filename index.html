@@ -16,11 +16,16 @@
   <header class="topbar" aria-label="Barra superior de Sudaka League">
     <div class="topbar-inner">
       <a class="topbar-brand" href="#inicio" aria-label="Ir al inicio">
-        <!-- Placeholder de escudo Sudaka League: reemplazar por asset oficial si se agrega al repo -->
-        <span class="topbar-shield" aria-hidden="true">SL</span>
-        <span class="topbar-title">Sudaka League</span>
+        <img
+          class="topbar-logo"
+          src="/assets/sudaka-league-logo.png"
+          alt="Logo de Sudaka League"
+          onerror="this.style.display='none'; this.nextElementSibling.hidden = false;"
+        />
+        <span class="topbar-shield" aria-hidden="true" hidden>SL</span>
+        <span class="topbar-title">SUDAKA LEAGUE</span>
       </a>
-      <a class="topbar-preview-link" href="preview.html">Preview</a>
+      <nav class="topbar-actions" aria-label="Acciones de navegación"></nav>
     </div>
   </header>
 
