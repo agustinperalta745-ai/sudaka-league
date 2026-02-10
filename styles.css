@@ -1,18 +1,15 @@
 :root {
-  --bg-main: #07122b;
-  --bg-alt: #0d0b1d;
-  --bg-surface: rgba(18, 16, 40, 0.88);
-  --bg-surface-strong: rgba(12, 12, 29, 0.96);
-  --bg-card: linear-gradient(160deg, rgba(26, 21, 56, 0.92) 0%, rgba(14, 13, 33, 0.96) 55%, rgba(7, 9, 22, 0.98) 100%);
+  --bg-main: #061a34;
+  --surface: #0d2747;
+  --surface-alt: #103157;
   --text-main: #f3f7ff;
-  --text-soft: #c2c8e8;
-  --text-muted: #a3abd1;
-  --line: rgba(99, 225, 255, 0.5);
-  --line-strong: rgba(157, 120, 255, 0.95);
-  --radius-lg: 1.3rem;
-  --radius-md: 1rem;
-  --shadow-soft: 0 26px 60px rgba(2, 4, 15, 0.6);
-  --shadow-glow: 0 0 1.2rem rgba(82, 211, 255, 0.26);
+  --text-soft: #ced9e6;
+  --accent: #7fcfff;
+  --line: rgba(127, 207, 255, 0.35);
+  --line-strong: rgba(127, 207, 255, 0.65);
+  --radius-lg: 1rem;
+  --radius-md: 0.8rem;
+  --shadow-soft: 0 10px 24px rgba(0, 0, 0, 0.25);
 }
 
 * { box-sizing: border-box; }
@@ -25,25 +22,19 @@ body {
   overflow-x: hidden;
   font-family: "Inter", system-ui, sans-serif;
   font-size: 16px;
-  line-height: 1.75;
+  line-height: 1.7;
   color: var(--text-main);
-  background-color: var(--bg-main);
+  background: var(--bg-main);
 }
 
 body.no-scroll { overflow: hidden; }
 
-.bg-effects {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  display: none;
-}
+.bg-effects { display: none; }
 
 .section {
   width: min(1180px, 92%);
   margin: 0 auto;
-  padding: clamp(4.5rem, 8vw, 6.7rem) 0;
+  padding: clamp(4rem, 8vw, 6rem) 0;
 }
 
 h1,
@@ -55,15 +46,7 @@ h3,
 .season-badge {
   font-family: "Orbitron", "Inter", sans-serif;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-
-h1,
-h2,
-.league-card-content h3,
-.league-modal h2,
-.league-modal h3 {
-  text-shadow: 0 0 0.4rem rgba(99, 225, 255, 0.5), 0 0 1rem rgba(148, 108, 255, 0.28);
+  letter-spacing: 0.05em;
 }
 
 h2 {
@@ -75,24 +58,24 @@ h2 {
 p,
 li {
   margin-top: 0;
-  line-height: 1.75;
+  line-height: 1.7;
 }
 
 .hero {
   text-align: center;
-  padding-top: clamp(5.1rem, 9vw, 8rem);
+  padding-top: clamp(5rem, 9vw, 7.5rem);
 }
 
 .hero-kicker {
   margin: 0;
-  color: #a3d4ff;
-  font-size: 0.86rem;
+  color: var(--text-soft);
+  font-size: 0.84rem;
 }
 
 .hero h1 {
-  margin: 1.5rem 0 1rem;
-  font-size: clamp(2.9rem, 11vw, 6.8rem);
-  line-height: 0.92;
+  margin: 1.4rem 0 1rem;
+  font-size: clamp(2.9rem, 11vw, 6.6rem);
+  line-height: 0.95;
 }
 
 .subtitle,
@@ -108,7 +91,7 @@ li {
 }
 
 .hero-actions {
-  margin-top: 2.4rem;
+  margin-top: 2.2rem;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -116,29 +99,25 @@ li {
 }
 
 .btn {
-  border: 1px solid var(--line);
-  border-radius: 0.95rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 0.85rem;
   min-height: 52px;
   padding: 0.9rem 1.4rem;
   font-size: 0.86rem;
   font-weight: 800;
   text-decoration: none;
-  color: #ecf5ff;
-  background: linear-gradient(180deg, rgba(23, 20, 49, 0.98), rgba(11, 10, 28, 0.96));
-  box-shadow: inset 0 0 0 1px rgba(124, 77, 255, 0.24), 0 0 0.95rem rgba(69, 201, 255, 0.2);
+  color: #052035;
+  background: var(--accent);
+  box-shadow: var(--shadow-soft);
   cursor: pointer;
-  transition: transform 180ms ease, box-shadow 220ms ease, filter 200ms ease;
+  transition: opacity 160ms ease;
 }
 
-.btn-primary {
-  color: #051720;
-  border-color: #50d8ff;
-  background: linear-gradient(180deg, #8df0ff 0%, #38d2ff 100%);
-}
-
+.btn-primary,
 .btn-secondary {
-  border-color: rgba(147, 98, 255, 0.95);
-  background: linear-gradient(180deg, #a587ff 0%, #7d56ff 100%);
+  color: #052035;
+  border-color: var(--accent);
+  background: var(--accent);
 }
 
 .btn:hover,
@@ -147,9 +126,7 @@ li {
 .tab-btn:focus-visible,
 .league-card:hover,
 .season-card:hover {
-  transform: translateY(-2px);
-  filter: brightness(1.06);
-  box-shadow: 0 0 1rem rgba(83, 219, 255, 0.4), 0 0 1.8rem rgba(142, 105, 255, 0.3);
+  opacity: 0.92;
 }
 
 .btn:focus-visible,
@@ -158,7 +135,7 @@ li {
 summary:focus-visible,
 .close-btn:focus-visible,
 .tab-btn:focus-visible {
-  outline: 2px solid #9fd2ff;
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
 
@@ -172,9 +149,8 @@ summary:focus-visible,
   left: 6%;
   right: 6%;
   bottom: -0.45rem;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #38d2ff, #8b65ff, transparent);
-  filter: drop-shadow(0 0 0.5rem rgba(67, 214, 255, 0.8));
+  height: 1px;
+  background: var(--line);
 }
 
 .panel-section,
@@ -184,29 +160,30 @@ summary:focus-visible,
 .season-card,
 .palmares-block,
 .pes6-ranking,
-.season-status {
-  border: 1px solid rgba(86, 223, 255, 0.46);
+.season-status,
+.about-section {
+  border: 1px solid var(--line);
   border-radius: var(--radius-lg);
-  background: var(--bg-card);
-  box-shadow: inset 0 0 0 1px rgba(137, 95, 255, 0.24), var(--shadow-glow), var(--shadow-soft);
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
 }
 
 .season-status {
-  padding: clamp(3rem, 5.4vw, 3.8rem);
+  padding: clamp(2.2rem, 5vw, 3rem);
 }
 
 .season-status h2 {
-  margin-bottom: 2.2rem;
+  margin-bottom: 2rem;
 }
 
 .season-grid,
 .league-grid {
   display: grid;
-  gap: clamp(1.6rem, 2.9vw, 2rem);
+  gap: clamp(1.2rem, 2.5vw, 1.8rem);
 }
 
 .season-card {
-  padding: clamp(1.8rem, 3.3vw, 2.4rem);
+  padding: clamp(1.4rem, 3vw, 2rem);
 }
 
 .season-card-header {
@@ -224,26 +201,25 @@ summary:focus-visible,
 
 .season-title,
 .season-note {
-  margin-bottom: 1.2rem;
+  margin-bottom: 1.1rem;
   color: var(--text-soft);
 }
 
 .season-countdown-label {
-  margin: 1.2rem 0 1.6rem;
+  margin: 1rem 0 1.4rem;
 }
 
 .season-end {
   display: block;
   width: 100%;
-  border: 1px solid rgba(79, 228, 255, 0.62);
-  border-radius: 1rem;
-  padding: 1.4rem 1.2rem;
+  border: 1px solid var(--line);
+  border-radius: 0.9rem;
+  padding: 1.2rem 1rem;
   font-family: "Orbitron", "Inter", sans-serif;
-  font-size: clamp(1.25rem, 3.2vw, 1.8rem);
+  font-size: clamp(1.2rem, 3.2vw, 1.7rem);
   text-align: center;
-  letter-spacing: 0.06em;
-  background: linear-gradient(165deg, rgba(16, 52, 76, 0.9), rgba(18, 22, 51, 0.95));
-  box-shadow: inset 0 0 0 1px rgba(128, 221, 255, 0.3), 0 0 1.4rem rgba(67, 212, 255, 0.24);
+  letter-spacing: 0.05em;
+  background: var(--surface-alt);
 }
 
 .season-badge,
@@ -260,20 +236,18 @@ summary:focus-visible,
 }
 
 .season-badge {
-  padding: 0.36rem 0.75rem;
+  padding: 0.34rem 0.72rem;
+  color: #052035;
+  border-color: var(--accent);
+  background: var(--accent);
 }
 
-.season-badge-active {
-  color: #042530;
-  border-color: #4bdfff;
-  background: linear-gradient(180deg, #95f2ff, #38d2ff);
-}
-
+.season-badge-active,
 .season-badge-wait,
 .season-badge-ended {
-  color: #fbf2ff;
-  border-color: rgba(138, 94, 255, 0.9);
-  background: linear-gradient(180deg, #b096ff, #7e57ff);
+  color: #052035;
+  border-color: var(--accent);
+  background: var(--accent);
 }
 
 .season-slots {
@@ -281,9 +255,9 @@ summary:focus-visible,
   flex-wrap: wrap;
   align-items: center;
   gap: 0.7rem;
-  margin-top: 0.6rem;
-  padding-top: 1rem;
-  border-top: 1px solid rgba(88, 168, 255, 0.3);
+  margin-top: 0.5rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--line);
   color: var(--text-soft);
 }
 
@@ -294,21 +268,13 @@ summary:focus-visible,
   font-weight: 700;
 }
 
-.mini-badge {
-  padding: 0.24rem 0.65rem;
-  border-color: rgba(72, 217, 255, 0.38);
-  background: rgba(18, 33, 70, 0.75);
-  color: #dbf3ff;
-}
-
-.mini-badge--open {
-  border-color: rgba(76, 255, 194, 0.6);
-  color: #aaffdf;
-}
-
+.mini-badge,
+.mini-badge--open,
 .mini-badge--closed {
-  border-color: rgba(255, 134, 179, 0.62);
-  color: #ffd5e7;
+  padding: 0.24rem 0.62rem;
+  border-color: var(--line-strong);
+  background: var(--surface-alt);
+  color: var(--text-main);
 }
 
 .league-card {
@@ -337,10 +303,9 @@ summary:focus-visible,
 .league-card-content p {
   margin: 0;
   color: var(--text-soft);
-  line-height: 1.85;
+  line-height: 1.75;
   max-width: 60ch;
 }
-
 
 .sponsor-card {
   display: block;
@@ -355,8 +320,8 @@ summary:focus-visible,
 
 .sponsor-description {
   margin: 0;
-  color: var(--text-muted);
-  line-height: 1.85;
+  color: var(--text-soft);
+  line-height: 1.75;
   text-transform: none;
   letter-spacing: normal;
 }
@@ -370,20 +335,20 @@ summary:focus-visible,
   width: fit-content;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(147, 98, 255, 0.95);
-  border-radius: 0.95rem;
+  border: 1px solid var(--accent);
+  border-radius: 0.85rem;
   min-height: 44px;
   padding: 0.65rem 1.1rem;
   font-size: 0.84rem;
   font-weight: 800;
-  color: #ecf5ff;
-  background: linear-gradient(180deg, #a587ff 0%, #7d56ff 100%);
+  color: #052035;
+  background: var(--accent);
 }
 
 .panel-section,
 .faq,
 .about-section {
-  padding: clamp(3rem, 5.3vw, 3.6rem);
+  padding: clamp(2.2rem, 5vw, 3rem);
 }
 
 .panel-section p,
@@ -394,9 +359,7 @@ summary:focus-visible,
   max-width: 70ch;
 }
 
-.system-panel-trigger {
-  cursor: pointer;
-}
+.system-panel-trigger { cursor: pointer; }
 
 .system-panel-header {
   display: flex;
@@ -408,47 +371,41 @@ summary:focus-visible,
 
 .system-panel-hint {
   margin-bottom: 0.9rem;
-  color: #9fe8ff;
+  color: var(--text-soft);
   font-weight: 600;
 }
 
 .system-panel-indicator {
   font-size: 1.25rem;
-  color: #94e9ff;
+  color: var(--text-soft);
 }
 
 .faq details {
-  border: 1px solid rgba(106, 184, 255, 0.38);
+  border: 1px solid var(--line);
   border-radius: var(--radius-md);
-  background: rgba(13, 19, 42, 0.82);
-  padding: 1.4rem 1.5rem;
-  margin-bottom: 1.2rem;
+  background: var(--surface-alt);
+  padding: 1.2rem 1.3rem;
+  margin-bottom: 1rem;
 }
 
-.faq details[open] {
-  padding-bottom: 1.5rem;
-}
+.faq details[open] { padding-bottom: 1.3rem; }
 
 .faq summary {
   cursor: pointer;
   font-weight: 700;
-  color: #aeeeff;
+  color: var(--text-main);
 }
 
 .faq details p {
-  margin: 1rem 0 0;
-  padding-top: 0.5rem;
-  color: var(--text-muted);
-  line-height: 1.85;
-}
-
-.about-section p {
   margin: 0.9rem 0 0;
+  padding-top: 0.5rem;
+  color: var(--text-soft);
+  line-height: 1.75;
 }
 
-.donations-section h2 {
-  text-transform: none;
-}
+.about-section p { margin: 0.9rem 0 0; }
+
+.donations-section h2 { text-transform: none; }
 
 .donation-copy {
   white-space: pre-line;
@@ -466,15 +423,15 @@ summary:focus-visible,
   margin: 0;
   font-family: "Orbitron", "Inter", sans-serif;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: #aeeeff;
+  letter-spacing: 0.05em;
+  color: var(--text-main);
 }
 
 .donation-goal-track {
   width: 100%;
   border-radius: 999px;
-  border: 1px solid rgba(79, 228, 255, 0.62);
-  background: rgba(8, 13, 33, 0.86);
+  border: 1px solid var(--line-strong);
+  background: var(--surface-alt);
   height: 14px;
   overflow: hidden;
 }
@@ -483,8 +440,7 @@ summary:focus-visible,
   display: block;
   width: 0;
   height: 100%;
-  background: linear-gradient(90deg, #89efff 0%, #38d2ff 100%);
-  box-shadow: 0 0 0.8rem rgba(67, 212, 255, 0.5);
+  background: var(--accent);
 }
 
 .donation-actions {
@@ -494,9 +450,9 @@ summary:focus-visible,
 
 .donation-transfer-card {
   margin-top: 1.2rem;
-  border: 1px solid rgba(103, 190, 255, 0.36);
+  border: 1px solid var(--line);
   border-radius: var(--radius-md);
-  background: rgba(8, 13, 33, 0.86);
+  background: var(--surface-alt);
   padding: 1rem;
 }
 
@@ -505,17 +461,15 @@ summary:focus-visible,
   font-size: clamp(1rem, 2.1vw, 1.14rem);
 }
 
-.donation-transfer-item {
-  margin: 0.2rem 0;
-}
+.donation-transfer-item { margin: 0.2rem 0; }
 
 .donation-transfer-note {
   margin: 0.75rem 0 0;
-  color: var(--text-muted);
+  color: var(--text-soft);
 }
 
 .note-text {
-  color: var(--text-muted);
+  color: var(--text-soft);
   font-style: italic;
 }
 
@@ -532,8 +486,8 @@ summary:focus-visible,
 .history-accordion-item {
   padding: 1rem;
   border-radius: var(--radius-md);
-  border: 1px solid rgba(103, 190, 255, 0.36);
-  background: rgba(8, 13, 33, 0.86);
+  border: 1px solid var(--line);
+  background: var(--surface-alt);
 }
 
 .palmares-grid {
@@ -542,10 +496,10 @@ summary:focus-visible,
 }
 
 .palmares-card {
-  border: 1px solid rgba(93, 174, 255, 0.35);
+  border: 1px solid var(--line);
   border-radius: 0.85rem;
   padding: 0.85rem;
-  background: rgba(10, 16, 37, 0.86);
+  background: var(--surface);
 }
 
 .palmares-trophy,
@@ -558,7 +512,7 @@ summary:focus-visible,
 .palmares-subtitle,
 .pes6-ranking-subtitle {
   margin: 0 0 0.75rem;
-  color: #a8ecff;
+  color: var(--text-main);
   font-weight: 700;
 }
 
@@ -566,10 +520,10 @@ summary:focus-visible,
 
 .pes6-ranking-row,
 .history-row {
-  border: 1px solid rgba(98, 182, 255, 0.33);
+  border: 1px solid var(--line);
   border-radius: 0.85rem;
   padding: 0.75rem;
-  background: rgba(11, 16, 35, 0.8);
+  background: var(--surface);
 }
 
 .pes6-ranking-header,
@@ -584,26 +538,23 @@ summary:focus-visible,
 .history-accordion-panel {
   margin-top: 0.65rem;
   padding-top: 0.65rem;
-  border-top: 1px solid rgba(83, 169, 255, 0.26);
+  border-top: 1px solid var(--line);
 }
 
 .pes6-ranking-toggle,
 .history-accordion-trigger {
-  border: 1px solid rgba(83, 165, 255, 0.5);
+  border: 1px solid var(--line-strong);
   border-radius: 0.7rem;
-  background: rgba(11, 22, 46, 0.88);
-  color: #d5ecff;
+  background: var(--surface-alt);
+  color: var(--text-main);
   padding: 0.42rem 0.7rem;
   font-weight: 700;
   cursor: pointer;
 }
 
-.history-value.is-pending { color: #ffd2ec; }
-
+.history-value.is-pending,
 .history-pending-badge {
-  margin-left: 0.5rem;
-  font-size: 0.75rem;
-  color: #ffd7ec;
+  color: var(--text-soft);
 }
 
 .league-modal {
@@ -621,18 +572,17 @@ summary:focus-visible,
   position: fixed;
   inset: 0;
   z-index: 50;
-  background: rgba(1, 3, 9, 0.76);
-  backdrop-filter: blur(3px);
+  background: rgba(0, 0, 0, 0.55);
 }
 
 .close-btn {
   position: sticky;
   top: 0;
   float: right;
-  border: 1px solid rgba(112, 190, 255, 0.55);
+  border: 1px solid var(--line-strong);
   border-radius: 0.72rem;
-  background: rgba(8, 21, 44, 0.94);
-  color: #d7ecff;
+  background: var(--surface-alt);
+  color: var(--text-main);
   font-size: 1.25rem;
   line-height: 1;
   width: 2.1rem;
@@ -648,10 +598,10 @@ summary:focus-visible,
 }
 
 .tab-btn {
-  border: 1px solid rgba(96, 176, 255, 0.52);
+  border: 1px solid var(--line);
   border-radius: 0.75rem;
-  background: rgba(10, 20, 42, 0.9);
-  color: #d9edff;
+  background: var(--surface-alt);
+  color: var(--text-main);
   font-size: 0.74rem;
   font-weight: 700;
   padding: 0.55rem 0.75rem;
@@ -659,9 +609,9 @@ summary:focus-visible,
 }
 
 .tab-btn.is-active {
-  color: #04131a;
-  border-color: #2bd6ff;
-  background: linear-gradient(180deg, #89efff, #2bd6ff);
+  color: #052035;
+  border-color: var(--accent);
+  background: var(--accent);
 }
 
 .tab-panel[hidden] { display: none; }
@@ -677,17 +627,17 @@ summary:focus-visible,
   min-height: 135px;
   resize: vertical;
   border-radius: 0.95rem;
-  border: 1px solid rgba(89, 172, 255, 0.48);
+  border: 1px solid var(--line);
   padding: 0.9rem;
-  background: rgba(5, 11, 28, 0.88);
+  background: var(--surface-alt);
   color: var(--text-main);
   line-height: 1.65;
 }
 
 .highlight-text {
-  border-left: 3px solid rgba(123, 206, 255, 0.72);
+  border-left: 3px solid var(--line-strong);
   padding-left: 0.7rem;
-  color: #bfe9ff;
+  color: var(--text-soft);
 }
 
 .back-to-top {
@@ -754,7 +704,7 @@ summary:focus-visible,
   .panel-section,
   .faq,
   .about-section {
-    padding: 1.6rem;
+    padding: 1.4rem;
   }
 
   .season-card-header {
