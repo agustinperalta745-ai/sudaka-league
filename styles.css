@@ -566,8 +566,49 @@ summary:focus-visible,
   border-radius: 0.65rem;
   padding: 0.55rem 0.65rem;
   background: var(--surface-alt);
-  font-size: 0.86rem;
-  line-height: 1.35;
+  display: flex;
+  align-items: center;
+  gap: 0.62rem;
+  min-width: 0;
+}
+
+.cup-crossing-shield {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  border-radius: 0.65rem;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  padding: 0.2rem;
+  flex-shrink: 0;
+}
+
+.cup-crossing-content {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-width: 0;
+  flex-wrap: wrap;
+}
+
+.cup-crossing-player {
+  margin: 0;
+  font-size: 0.98rem;
+  font-weight: 700;
+  line-height: 1.2;
+  word-break: break-word;
+}
+
+.cup-crossing-division {
+  font-size: 0.72rem;
+  line-height: 1;
+  padding: 0.24rem 0.4rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  color: var(--text-soft);
+  background: color-mix(in srgb, var(--surface) 90%, transparent);
+  opacity: 0.82;
+  white-space: nowrap;
 }
 
 .pes6-ranking-row,
