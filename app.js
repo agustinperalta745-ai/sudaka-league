@@ -1226,13 +1226,52 @@ function normalizeMatchResult(result) {
 
   const hasPensHome = result.pensHome != null && Number.isFinite(Number(result.pensHome));
   const hasPensAway = result.pensAway != null && Number.isFinite(Number(result.pensAway));
-  const hasPens = hasPensHome && hasPensAway;
+  const hasPens = home === away && hasPensHome && hasPensAway;
 
   return {
     home,
     away,
     pensHome: hasPens ? Number(result.pensHome) : null,
     pensAway: hasPens ? Number(result.pensAway) : null
+  };
+}
+
+function isMatchPlayed(match, seasonStatus = "active") {
+  if (!match || typeof match !== "object") return false;
+
+  if (match.played === true || match.finalized === true) {
+    return true;
+  }
+
+  if (typeof match.status === "string") {
+    const normalizedStatus = match.status.trim().toLowerCase();
+    if (["played", "jugado", "finalizado", "completed"].includes(normalizedStatus)) {
+      return true;
+    }
+  }
+
+  return seasonStatus === "completed" && (!!normalizeMatchResult(match.result) || normalizeWinnerValue(match.winner) != null);
+}
+
+function normalizeMatchData(match, seasonStatus = "active") {
+  const winner = normalizeWinnerValue(match.winner);
+  const result = normalizeMatchResult(match.result);
+  const played = isMatchPlayed(match, seasonStatus);
+
+  if (!played) {
+    return {
+      ...match,
+      played: false,
+      winner: null,
+      result: null
+    };
+  }
+
+  return {
+    ...match,
+    played: true,
+    winner,
+    result
   };
 }
 
@@ -1243,8 +1282,7 @@ function normalizeActiveOctavos(data) {
     label: match.label || `Octavos Play-offs ${index + 1}`,
     home: match.home,
     away: match.away,
-    winner: normalizeWinnerValue(match.winner),
-    result: normalizeMatchResult(match.result)
+    ...normalizeMatchData(match, "active")
   }));
 }
 
@@ -1353,9 +1391,9 @@ function normalizeInterdivisionalState(data) {
       }
 
       season.phases[phase.key].forEach((match, index) => {
-        match.label = match.label || `${phase.label} ${index + 1}`;
-        match.winner = normalizeWinnerValue(match.winner);
-        match.result = normalizeMatchResult(match.result);
+        const normalizedMatch = normalizeMatchData(match, season.status);
+        normalizedMatch.label = normalizedMatch.label || `${phase.label} ${index + 1}`;
+        season.phases[phase.key][index] = normalizedMatch;
       });
     });
   });
@@ -1448,12 +1486,13 @@ function createCupCrossingTeamNode(teamData, context = {}) {
   }
 
   if (matchData) {
+    const isPlayed = matchData.played === true;
     const winner = normalizeWinnerValue(matchData.winner);
     const isHomeWinner = winner === "home";
     const isAwayWinner = winner === "away";
     const isWinner = (side === "home" && isHomeWinner) || (side === "away" && isAwayWinner);
 
-    if (winner) {
+    if (isPlayed && winner) {
       team.classList.toggle("is-winner", isWinner);
       team.classList.toggle("is-loser", !isWinner);
       team.classList.toggle("cup-crossing--winner", isWinner);
@@ -1488,7 +1527,7 @@ function createCupCrossingTeamNode(teamData, context = {}) {
   content.append(player, division);
   team.appendChild(content);
 
-  if (matchData?.result) {
+  if (matchData?.played && matchData?.result) {
     const scoreBox = document.createElement("div");
     scoreBox.className = "cup-crossing-score";
 

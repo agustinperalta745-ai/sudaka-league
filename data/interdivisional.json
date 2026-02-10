@@ -50,7 +50,11 @@
               "player": "SoyLefo",
               "division": "Segunda"
             },
-            "winner": "home"
+            "winner": "away",
+            "result": {
+              "home": 1,
+              "away": 2
+            }
           },
           {
             "label": "Octavos Play-offs 4",
