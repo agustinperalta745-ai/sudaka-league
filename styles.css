@@ -555,6 +555,55 @@ summary:focus-visible,
   max-height: 2200px;
 }
 
+.cup-card-tabs {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.cup-tab-btn {
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text-main);
+  font-weight: 700;
+  padding: 0.38rem 0.8rem;
+  cursor: pointer;
+}
+
+.cup-tab-btn.is-active {
+  background: color-mix(in srgb, var(--line-strong) 24%, var(--surface));
+}
+
+.cup-tab-panel {
+  display: none;
+}
+
+.cup-tab-panel.is-active {
+  display: block;
+}
+
+.cup-history-toolbar {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 0.85rem;
+}
+
+.cup-history-toolbar select {
+  border: 1px solid var(--line);
+  border-radius: 0.7rem;
+  background: var(--surface);
+  color: var(--text-main);
+  padding: 0.38rem 0.55rem;
+}
+
+.cup-interdivisional-rounds {
+  display: grid;
+  gap: 0.75rem;
+}
+
 .cup-crossing-body {
   display: grid;
   gap: 0.55rem;
@@ -570,6 +619,31 @@ summary:focus-visible,
   align-items: center;
   gap: 0.62rem;
   min-width: 0;
+}
+
+.cup-crossing-team.is-selectable {
+  cursor: pointer;
+  transition: transform 120ms ease, border-color 120ms ease;
+  text-align: left;
+  color: inherit;
+}
+
+.cup-crossing-team.is-selectable:hover {
+  transform: translateY(-1px);
+  border-color: var(--line-strong);
+}
+
+.cup-crossing-team.is-winner {
+  border-color: #27ae60;
+  background: color-mix(in srgb, #27ae60 16%, var(--surface-alt));
+}
+
+.cup-crossing-team.is-winner .cup-crossing-player {
+  color: #27ae60;
+}
+
+.cup-crossing-team.is-loser {
+  opacity: 0.72;
 }
 
 .cup-crossing-shield {
@@ -862,6 +936,10 @@ summary:focus-visible,
 
   .cup-round-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cup-history-toolbar {
+    justify-content: flex-start;
   }
 }
 
