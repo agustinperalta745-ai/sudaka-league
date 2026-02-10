@@ -1519,7 +1519,9 @@ function updateCupCardHeader() {
   const visiblePhases = getVisiblePhaseKeysForSeason(currentSeason);
   const activePhase = visiblePhases[visiblePhases.length - 1] || INTERDIVISIONAL_PHASES[0].key;
 
-  if (cupCurrentSeason) cupCurrentSeason.textContent = `Temporada ${currentSeason.season}`;
+  const displaySeason = currentSeason.season === "T24" ? "T23" : currentSeason.season;
+
+  if (cupCurrentSeason) cupCurrentSeason.textContent = `Temporada ${displaySeason}`;
   if (cupCurrentPhase) cupCurrentPhase.textContent = `Fase: ${getPhaseLabel(activePhase)}`;
 
   if (cupStatus) {
