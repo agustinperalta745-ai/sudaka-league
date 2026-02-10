@@ -228,6 +228,58 @@ const CUP_CROSSINGS_OCTAVOS = [
   }
 ];
 
+const CUP_CROSSING_DIVISION_SHORT = {
+  Primera: "1ra Div",
+  Segunda: "2da Div",
+  Tercera: "3ra Div",
+  Cuarta: "4ta Div"
+};
+
+const CUP_CROSSING_CLUB_LOGO_MAP = {
+  lanus: "/assets/lanus.png",
+  argentinos: "/assets/argentinos.png",
+  "argentinos jrs": "/assets/argentinos.png",
+  cruzeiro: "/assets/cruzeiro.png",
+  "santos fc": "/assets/santos.png",
+  "sao paulo": "/assets/saopaulo.png",
+  estudiantes: "/assets/estudiantes.png",
+  "internacional sc": "/assets/internacional_sc.png",
+  penarol: "/assets/penarol (1).png",
+  huracan: "/assets/huracan.png",
+  nacional: "/assets/nacional.png",
+  "colo colo": "/assets/colocolo.png"
+};
+
+function normalizeClubName(value = "") {
+  return value
+    .trim()
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9\s-]/g, "")
+    .replace(/\s+/g, " ");
+}
+
+function getCupCrossingDivisionLabel(division = "") {
+  return CUP_CROSSING_DIVISION_SHORT[division] || division;
+}
+
+function getCupCrossingTeamLogoPath(teamData) {
+  if (teamData.logo) {
+    return teamData.logo.startsWith("/") ? teamData.logo : `/${teamData.logo}`;
+  }
+
+  const normalizedClub = normalizeClubName(teamData.club);
+  if (CUP_CROSSING_CLUB_LOGO_MAP[normalizedClub]) {
+    return CUP_CROSSING_CLUB_LOGO_MAP[normalizedClub];
+  }
+
+  if (!normalizedClub) return "";
+
+  const assetName = normalizedClub.replace(/\s+/g, "_");
+  return `/assets/${assetName}.png`;
+}
+
 const overlay = document.getElementById("modal-overlay");
 const modals = [...document.querySelectorAll(".league-modal")];
 const triggers = [...document.querySelectorAll(".modal-trigger")];
@@ -1150,7 +1202,35 @@ function createHistoryAccordionItem(seasonData, index) {
 function createCupCrossingTeamNode(teamData) {
   const team = document.createElement("div");
   team.className = "cup-crossing-team";
-  team.textContent = `${teamData.club} – ${teamData.player} – ${teamData.division}`;
+
+  const logoPath = getCupCrossingTeamLogoPath(teamData);
+  if (logoPath) {
+    const shield = document.createElement("img");
+    shield.className = "cup-crossing-shield";
+    shield.src = logoPath;
+    shield.alt = `Escudo de ${teamData.club}`;
+    shield.loading = "lazy";
+    shield.decoding = "async";
+    shield.addEventListener("error", () => {
+      shield.style.display = "none";
+    });
+    team.appendChild(shield);
+  }
+
+  const content = document.createElement("div");
+  content.className = "cup-crossing-content";
+
+  const player = document.createElement("p");
+  player.className = "cup-crossing-player";
+  player.textContent = teamData.player;
+
+  const division = document.createElement("span");
+  division.className = "cup-crossing-division";
+  division.textContent = getCupCrossingDivisionLabel(teamData.division);
+
+  content.append(player, division);
+  team.appendChild(content);
+
   return team;
 }
 
