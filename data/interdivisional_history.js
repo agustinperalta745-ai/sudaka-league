@@ -22,7 +22,8 @@ window.INTERDIVISIONAL_HISTORY_SEASONS = [
           label: "Octavos Play-offs 3",
           home: { club: "Santos FC", player: "LombardoCABJ", division: "Primera" },
           away: { club: "Sao Paulo", player: "SoyLefo", division: "Segunda" },
-          winner: "home"
+          winner: "away",
+          result: { home: 1, away: 2 }
         },
         {
           label: "Octavos Play-offs 4",
