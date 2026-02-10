@@ -185,47 +185,15 @@ const PES6_HISTORY_META = {
   ]
 };
 
-const CUP_CROSSINGS_OCTAVOS = [
-  {
-    label: "Octavo 1",
-    teamA: { club: "Lanús", player: "Edug98", division: "Primera" },
-    teamB: { club: "Argentinos", player: "Facualanis", division: "Segunda" }
-  },
-  {
-    label: "Octavo 2",
-    teamA: { club: "Millonarios", player: "Fafafa", division: "Primera" },
-    teamB: { club: "Cruzeiro", player: "Crislot26", division: "Segunda" }
-  },
-  {
-    label: "Octavo 3",
-    teamA: { club: "Santos FC", player: "LombardoCABJ", division: "Primera" },
-    teamB: { club: "Sao Paulo", player: "SoyLefo", division: "Segunda" }
-  },
-  {
-    label: "Octavo 4",
-    teamA: { club: "Estudiantes", player: "Exeeneta", division: "Primera" },
-    teamB: { club: "Internacional SC", player: "Joser17", division: "Segunda" }
-  },
-  {
-    label: "Octavo 5",
-    teamA: { club: "Peñarol", player: "TunTun", division: "Primera" },
-    teamB: { club: "Huracán", player: "Leom", division: "Tercera" }
-  },
-  {
-    label: "Octavo 6",
-    teamA: { club: "Nacional", player: "Aacuis09", division: "Primera" },
-    teamB: { club: "Peñarol", player: "Cacherinhooo", division: "Tercera" }
-  },
-  {
-    label: "Octavo 7",
-    teamA: { club: "Colo Colo", player: "Broko", division: "Primera" },
-    teamB: { club: "Internacional SC", player: "Gab0211", division: "Tercera" }
-  },
-  {
-    label: "Octavo 8",
-    teamA: { club: "Argentinos JRS", player: "Ivanarocela", division: "Primera" },
-    teamB: { club: "Colo Colo", player: "Joelignacho", division: "Segunda" }
-  }
+const INTERDIVISIONAL_DATA_URL = "data/interdivisional.json";
+const INTERDIVISIONAL_STORAGE_KEY = "interdivisional_progress_v1";
+
+const INTERDIVISIONAL_PHASES = [
+  { key: "octavos_playoffs", label: "Octavos Play-offs" },
+  { key: "cuartos_playoffs", label: "Cuartos de final Play-offs" },
+  { key: "semifinal_playoffs", label: "Semifinal Play-offs" },
+  { key: "final_playoffs", label: "Final Play-offs" },
+  { key: "final_copa_interdivisional", label: "Final Copa Interdivisional" }
 ];
 
 const CUP_CROSSING_DIVISION_SHORT = {
@@ -318,7 +286,15 @@ const cupStatus = document.getElementById("cupStatus");
 const cupInterdivisionalCard = document.getElementById("cup-interdivisional-card");
 const cupCrossingsPanel = document.getElementById("cup-crossings-panel");
 const cupCrossingsList = document.getElementById("cup-crossings-list");
+const cupHistoryList = document.getElementById("cup-history-list");
 const cupToggleLabel = document.getElementById("cup-toggle-label");
+const cupCurrentSeason = document.getElementById("cup-current-season");
+const cupCurrentPhase = document.getElementById("cup-current-phase");
+const cupTabActive = document.getElementById("cup-tab-active");
+const cupTabHistory = document.getElementById("cup-tab-history");
+const cupTabPanelActive = document.getElementById("cup-tab-panel-active");
+const cupTabPanelHistory = document.getElementById("cup-tab-panel-history");
+const cupHistorySeasonSelect = document.getElementById("cup-history-season");
 const sfStatus = document.getElementById("sfStatus");
 const sfSeasonName = document.getElementById("sfSeasonName");
 const sfSeasonNote = document.getElementById("sfSeasonNote");
@@ -354,6 +330,8 @@ const kofContentBindings = {
 let activeModal = null;
 let lastFocusedElement = null;
 let showAllTitlesRanking = false;
+let interdivisionalState = null;
+let cupPanelTab = "active";
 
 // Asignación centralizada de links editables.
 
@@ -396,7 +374,7 @@ function updateCupRemaining() {
 }
 
 function updateSeasonStatus() {
-  if (!pes6Status || !pes6SeasonName || !sfStatus || !sfSeasonName || !sfSeasonNote || !pes6Remaining || !cupStatus) {
+  if (!pes6Status || !pes6SeasonName || !sfStatus || !sfSeasonName || !sfSeasonNote || !pes6Remaining) {
     return;
   }
 
@@ -411,10 +389,7 @@ function updateSeasonStatus() {
   pes6Status.classList.toggle("season-badge-active", !seasonEnded);
   pes6Status.classList.toggle("season-badge-ended", seasonEnded);
 
-  const cupEnded = CUP_INTERDIVISIONAL_FINAL_TARGET.getTime() - Date.now() <= 0;
-  cupStatus.textContent = cupEnded ? "FINALIZADA" : "ACTIVA";
-  cupStatus.classList.toggle("season-badge-active", !cupEnded);
-  cupStatus.classList.toggle("season-badge-ended", cupEnded);
+  updateCupCardHeader();
 }
 
 function updateSlotsStatus() {
@@ -1223,9 +1198,142 @@ function createHistoryAccordionItem(seasonData, index) {
   return item;
 }
 
-function createCupCrossingTeamNode(teamData) {
-  const team = document.createElement("div");
+function getPhaseLabel(phaseKey) {
+  const phase = INTERDIVISIONAL_PHASES.find((item) => item.key === phaseKey);
+  return phase ? phase.label : phaseKey;
+}
+
+function cloneInterdivisionalData(data) {
+  return JSON.parse(JSON.stringify(data));
+}
+
+function normalizeInterdivisionalState(data) {
+  const cloned = cloneInterdivisionalData(data);
+  cloned.seasons = Array.isArray(cloned.seasons) ? cloned.seasons : [];
+
+  cloned.seasons.forEach((season) => {
+    season.status = season.status === "completed" ? "completed" : "active";
+    season.phases = season.phases || {};
+
+    INTERDIVISIONAL_PHASES.forEach((phase) => {
+      if (!Array.isArray(season.phases[phase.key])) {
+        season.phases[phase.key] = [];
+      }
+
+      season.phases[phase.key].forEach((match, index) => {
+        match.label = match.label || `${phase.label} ${index + 1}`;
+        match.winner = match.winner || null;
+      });
+    });
+  });
+
+  return cloned;
+}
+
+function loadInterdivisionalState() {
+  try {
+    const raw = localStorage.getItem(INTERDIVISIONAL_STORAGE_KEY);
+    if (!raw) return null;
+
+    const parsed = JSON.parse(raw);
+    return normalizeInterdivisionalState(parsed);
+  } catch (error) {
+    console.warn("No se pudo leer progreso Interdivisional desde localStorage", error);
+    return null;
+  }
+}
+
+function saveInterdivisionalState() {
+  if (!interdivisionalState) return;
+  localStorage.setItem(INTERDIVISIONAL_STORAGE_KEY, JSON.stringify(interdivisionalState));
+}
+
+function getCurrentInterdivisionalSeason() {
+  if (!interdivisionalState || !Array.isArray(interdivisionalState.seasons)) return null;
+
+  const active = interdivisionalState.seasons.find((season) => season.status === "active");
+  return active || interdivisionalState.seasons[interdivisionalState.seasons.length - 1] || null;
+}
+
+function isPhaseComplete(matches = []) {
+  return Array.isArray(matches) && matches.length > 0 && matches.every((match) => !!match.winner);
+}
+
+function createNextPhaseMatchesFromWinners(matches, phaseLabel) {
+  const winners = matches.map((match) => (match.winner === "away" ? match.away : match.home));
+  const next = [];
+
+  for (let index = 0; index < winners.length; index += 2) {
+    const home = winners[index];
+    const away = winners[index + 1];
+    if (!home || !away) continue;
+
+    next.push({
+      label: `${phaseLabel} ${next.length + 1}`,
+      home,
+      away,
+      winner: null
+    });
+  }
+
+  return next;
+}
+
+function ensureInterdivisionalProgression(season) {
+  if (!season || !season.phases) return;
+
+  for (let index = 0; index < INTERDIVISIONAL_PHASES.length - 1; index += 1) {
+    const currentKey = INTERDIVISIONAL_PHASES[index].key;
+    const nextKey = INTERDIVISIONAL_PHASES[index + 1].key;
+    const currentMatches = season.phases[currentKey] || [];
+
+    if (!isPhaseComplete(currentMatches)) break;
+
+    const nextMatches = season.phases[nextKey] || [];
+    if (nextMatches.length === 0) {
+      season.phases[nextKey] = createNextPhaseMatchesFromWinners(currentMatches, getPhaseLabel(nextKey));
+    }
+  }
+
+  const finalMatches = season.phases.final_copa_interdivisional || [];
+  if (isPhaseComplete(finalMatches)) {
+    season.status = "completed";
+    const finalMatch = finalMatches[0];
+    season.champion = finalMatch.winner === "away" ? finalMatch.away.player : finalMatch.home.player;
+  }
+}
+
+function getVisiblePhaseKeysForSeason(season) {
+  const visible = [];
+
+  for (let index = 0; index < INTERDIVISIONAL_PHASES.length; index += 1) {
+    const phaseKey = INTERDIVISIONAL_PHASES[index].key;
+    const matches = season.phases[phaseKey] || [];
+
+    if (matches.length === 0) break;
+
+    visible.push(phaseKey);
+
+    if (!isPhaseComplete(matches)) break;
+  }
+
+  return visible;
+}
+
+function createCupCrossingTeamNode(teamData, context = {}) {
+  const { editable = false, side = "home", matchData = null, season = null } = context;
+  const team = document.createElement(editable ? "button" : "div");
   team.className = "cup-crossing-team";
+  if (editable) {
+    team.type = "button";
+    team.classList.add("is-selectable");
+  }
+
+  if (matchData && matchData.winner) {
+    const isWinner = matchData.winner === side;
+    team.classList.toggle("is-winner", isWinner);
+    team.classList.toggle("is-loser", !isWinner);
+  }
 
   const logoPath = getCupCrossingTeamLogoPath(teamData);
   if (logoPath) {
@@ -1255,10 +1363,21 @@ function createCupCrossingTeamNode(teamData) {
   content.append(player, division);
   team.appendChild(content);
 
+  if (editable && matchData && season) {
+    team.addEventListener("click", () => {
+      matchData.winner = side;
+      ensureInterdivisionalProgression(season);
+      saveInterdivisionalState();
+      renderInterdivisionalCard();
+      updateSeasonStatus();
+    });
+  }
+
   return team;
 }
 
-function createCupCrossingCard(matchData) {
+function createCupCrossingCard(matchData, options = {}) {
+  const { editable = false, season = null } = options;
   const card = document.createElement("article");
   card.className = "cup-match-card";
 
@@ -1274,29 +1393,128 @@ function createCupCrossingCard(matchData) {
   versus.textContent = "VS";
 
   body.append(
-    createCupCrossingTeamNode(matchData.teamA),
+    createCupCrossingTeamNode(matchData.home, { editable, side: "home", matchData, season }),
     versus,
-    createCupCrossingTeamNode(matchData.teamB)
+    createCupCrossingTeamNode(matchData.away, { editable, side: "away", matchData, season })
   );
 
   card.append(label, body);
   return card;
 }
 
-function renderCupCrossings() {
-  if (!cupCrossingsList) return;
-  cupCrossingsList.replaceChildren();
+function createCupPhaseSection(phaseKey, matches, options = {}) {
+  const section = document.createElement("section");
+  section.className = "cup-round-section";
 
-  CUP_CROSSINGS_OCTAVOS.forEach((matchData) => {
-    cupCrossingsList.appendChild(createCupCrossingCard(matchData));
+  const title = document.createElement("h4");
+  title.className = "cup-round-title";
+  title.textContent = getPhaseLabel(phaseKey);
+
+  const grid = document.createElement("div");
+  grid.className = "cup-round-grid";
+
+  matches.forEach((match) => {
+    grid.appendChild(createCupCrossingCard(match, options));
   });
+
+  section.append(title, grid);
+  return section;
+}
+
+function updateCupCardHeader() {
+  const currentSeason = getCurrentInterdivisionalSeason();
+  if (!currentSeason) return;
+
+  const visiblePhases = getVisiblePhaseKeysForSeason(currentSeason);
+  const activePhase = visiblePhases[visiblePhases.length - 1] || INTERDIVISIONAL_PHASES[0].key;
+
+  if (cupCurrentSeason) cupCurrentSeason.textContent = `Temporada ${currentSeason.season}`;
+  if (cupCurrentPhase) cupCurrentPhase.textContent = `Fase: ${getPhaseLabel(activePhase)}`;
+
+  if (cupStatus) {
+    const isCompleted = currentSeason.status === "completed";
+    cupStatus.textContent = isCompleted ? "FINALIZADA" : "ACTIVA";
+    cupStatus.classList.toggle("season-badge-active", !isCompleted);
+    cupStatus.classList.toggle("season-badge-ended", isCompleted);
+  }
+}
+
+function renderCupActiveTab() {
+  if (!cupCrossingsList || !interdivisionalState) return;
+
+  cupCrossingsList.replaceChildren();
+  const currentSeason = getCurrentInterdivisionalSeason();
+  if (!currentSeason) return;
+
+  ensureInterdivisionalProgression(currentSeason);
+  const visiblePhases = getVisiblePhaseKeysForSeason(currentSeason);
+
+  visiblePhases.forEach((phaseKey) => {
+    const matches = currentSeason.phases[phaseKey] || [];
+    cupCrossingsList.appendChild(createCupPhaseSection(phaseKey, matches, {
+      editable: currentSeason.status === "active",
+      season: currentSeason
+    }));
+  });
+}
+
+function renderCupHistoryTab() {
+  if (!cupHistorySeasonSelect || !cupHistoryList || !interdivisionalState) return;
+
+  const seasons = [...interdivisionalState.seasons].sort((a, b) => b.season.localeCompare(a.season, undefined, { numeric: true }));
+  cupHistorySeasonSelect.replaceChildren();
+
+  seasons.forEach((season) => {
+    const option = document.createElement("option");
+    option.value = season.season;
+    option.textContent = season.status === "completed" && season.champion
+      ? `${season.season} — Campeón: ${season.champion}`
+      : season.season;
+    cupHistorySeasonSelect.appendChild(option);
+  });
+
+  if (!cupHistorySeasonSelect.value && seasons[0]) {
+    cupHistorySeasonSelect.value = seasons[0].season;
+  }
+
+  const selectedSeason = seasons.find((season) => season.season === cupHistorySeasonSelect.value) || seasons[0];
+  cupHistoryList.replaceChildren();
+  if (!selectedSeason) return;
+
+  INTERDIVISIONAL_PHASES.forEach((phase) => {
+    const matches = selectedSeason.phases[phase.key] || [];
+    if (matches.length === 0) return;
+    cupHistoryList.appendChild(createCupPhaseSection(phase.key, matches, { editable: false }));
+  });
+}
+
+function setCupTab(tab) {
+  cupPanelTab = tab;
+
+  const isActiveTab = tab === "active";
+  if (cupTabActive && cupTabHistory && cupTabPanelActive && cupTabPanelHistory) {
+    cupTabActive.classList.toggle("is-active", isActiveTab);
+    cupTabHistory.classList.toggle("is-active", !isActiveTab);
+    cupTabActive.setAttribute("aria-selected", String(isActiveTab));
+    cupTabHistory.setAttribute("aria-selected", String(!isActiveTab));
+    cupTabPanelActive.hidden = !isActiveTab;
+    cupTabPanelHistory.hidden = isActiveTab;
+    cupTabPanelActive.classList.toggle("is-active", isActiveTab);
+    cupTabPanelHistory.classList.toggle("is-active", !isActiveTab);
+  }
+}
+
+function renderInterdivisionalCard() {
+  renderCupActiveTab();
+  renderCupHistoryTab();
+  updateCupCardHeader();
 }
 
 function setCupCrossingsExpanded(expanded) {
   if (!cupInterdivisionalCard || !cupCrossingsPanel || !cupToggleLabel) return;
 
   cupInterdivisionalCard.setAttribute("aria-expanded", String(expanded));
-  cupToggleLabel.textContent = expanded ? "Ocultar cruces" : "Ver cruces";
+  cupToggleLabel.textContent = expanded ? "Ocultar" : "Ver cruces";
 
   if (expanded) {
     cupCrossingsPanel.hidden = false;
@@ -1319,8 +1537,6 @@ function setCupCrossingsExpanded(expanded) {
 function setupCupCrossingsAccordion() {
   if (!cupInterdivisionalCard || !cupCrossingsPanel) return;
 
-  renderCupCrossings();
-
   const toggleCrossings = () => {
     const isExpanded = cupInterdivisionalCard.getAttribute("aria-expanded") === "true";
     setCupCrossingsExpanded(!isExpanded);
@@ -1333,6 +1549,39 @@ function setupCupCrossingsAccordion() {
       toggleCrossings();
     }
   });
+
+  if (cupTabActive && cupTabHistory) {
+    cupTabActive.addEventListener("click", () => setCupTab("active"));
+    cupTabHistory.addEventListener("click", () => setCupTab("history"));
+  }
+
+  if (cupHistorySeasonSelect) {
+    cupHistorySeasonSelect.addEventListener("change", renderCupHistoryTab);
+  }
+
+  setCupTab("active");
+}
+
+async function initializeInterdivisionalState() {
+  const fromStorage = loadInterdivisionalState();
+  if (fromStorage) {
+    interdivisionalState = fromStorage;
+  } else {
+    try {
+      const response = await fetch(INTERDIVISIONAL_DATA_URL);
+      if (!response.ok) throw new Error("No se pudo cargar data/interdivisional.json");
+      const data = await response.json();
+      interdivisionalState = normalizeInterdivisionalState(data);
+      saveInterdivisionalState();
+    } catch (error) {
+      console.error("Error al inicializar Interdivisional", error);
+      interdivisionalState = { seasons: [] };
+    }
+  }
+
+  interdivisionalState.seasons.forEach((season) => ensureInterdivisionalProgression(season));
+  saveInterdivisionalState();
+  renderInterdivisionalCard();
 }
 
 function renderPes6History() {
@@ -1346,18 +1595,23 @@ function renderPes6History() {
   });
 }
 
-setupTabs();
-renderPalmares();
-renderPes6Ranking();
-renderPes6History();
-setupCupCrossingsAccordion();
-applyKofLeagueContent();
-applyWhatsAppLinks();
-updateSeasonStatus();
-updatePes6Remaining();
-updateCupRemaining();
-updateSlotsStatus();
-updateDonationGoal();
-setInterval(updateSeasonStatus, 60000);
-setInterval(updatePes6Remaining, 60000);
-setInterval(updateCupRemaining, 60000);
+async function initializeApp() {
+  setupTabs();
+  renderPalmares();
+  renderPes6Ranking();
+  renderPes6History();
+  setupCupCrossingsAccordion();
+  await initializeInterdivisionalState();
+  applyKofLeagueContent();
+  applyWhatsAppLinks();
+  updateSeasonStatus();
+  updatePes6Remaining();
+  updateCupRemaining();
+  updateSlotsStatus();
+  updateDonationGoal();
+  setInterval(updateSeasonStatus, 60000);
+  setInterval(updatePes6Remaining, 60000);
+  setInterval(updateCupRemaining, 60000);
+}
+
+initializeApp();

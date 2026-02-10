@@ -67,14 +67,29 @@
           <h3 id="cup-season-title">Copa Interdivisional SLP</h3>
           <span id="cupStatus" class="season-badge season-badge-active">ACTIVA</span>
         </div>
-        <p class="season-title">Fase: Octavos</p>
-        <p class="season-note">Finalización de octavos: 13/02/2026</p>
+        <p id="cup-current-season" class="season-title">Temporada T24</p>
+        <p id="cup-current-phase" class="season-note">Fase: Octavos Play-offs</p>
         <p class="season-countdown-label"><span class="season-end" id="cup-remaining">Calculando…</span></p>
         <p id="cup-toggle-label" class="cup-toggle-label">Ver cruces</p>
       </article>
 
       <div id="cup-crossings-panel" class="cup-crossings-panel" hidden>
-        <div id="cup-crossings-list" class="cup-round-grid" aria-live="polite"></div>
+        <div class="cup-card-tabs" role="tablist" aria-label="Contenido Copa Interdivisional">
+          <button id="cup-tab-active" class="cup-tab-btn is-active" type="button" role="tab" aria-selected="true" aria-controls="cup-tab-panel-active">Activa</button>
+          <button id="cup-tab-history" class="cup-tab-btn" type="button" role="tab" aria-selected="false" aria-controls="cup-tab-panel-history">Historial Interdivisional</button>
+        </div>
+
+        <section id="cup-tab-panel-active" class="cup-tab-panel is-active" role="tabpanel" aria-labelledby="cup-tab-active">
+          <div id="cup-crossings-list" class="cup-interdivisional-rounds" aria-live="polite"></div>
+        </section>
+
+        <section id="cup-tab-panel-history" class="cup-tab-panel" role="tabpanel" aria-labelledby="cup-tab-history" hidden>
+          <div class="cup-history-toolbar">
+            <label for="cup-history-season">Temporada</label>
+            <select id="cup-history-season"></select>
+          </div>
+          <div id="cup-history-list" class="cup-interdivisional-rounds" aria-live="polite"></div>
+        </section>
       </div>
     </section>
 
