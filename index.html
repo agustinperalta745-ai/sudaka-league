@@ -7,11 +7,22 @@
   <meta name="description" content="Sudaka League - Comunidad de juegos retro online con formato competitivo." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Orbitron:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css?v=20260210-navy-minimal" />
 </head>
 <body>
   <div class="bg-effects" aria-hidden="true"></div>
+
+  <header class="topbar" aria-label="Barra superior de Sudaka League">
+    <div class="topbar-inner">
+      <a class="topbar-brand" href="#inicio" aria-label="Ir al inicio">
+        <!-- Placeholder de escudo Sudaka League: reemplazar por asset oficial si se agrega al repo -->
+        <span class="topbar-shield" aria-hidden="true">SL</span>
+        <span class="topbar-title">Sudaka League</span>
+      </a>
+      <a class="topbar-preview-link" href="preview.html">Preview</a>
+    </div>
+  </header>
 
   <header class="hero section" id="inicio">
     <p class="hero-kicker">Liga Oficial Retro Competitiva</p>
@@ -429,7 +440,7 @@ UNA VEZ QUE TERMINES EL REGISTRO NO OLVIDES DEJARNOS TU NOMBRE DE USUARIO DE PES
 
   <button id="back-to-top" class="btn btn-primary back-to-top" type="button" aria-label="Volver arriba">Volver arriba ↑</button>
 
-  <div id="visitor-counter" style="text-align:center; padding:16px 12px 28px; font-size:0.95rem; opacity:0.9;">
+  <div id="visitor-counter" class="visitor-counter">
     Visitantes: <strong id="visitor-count">Cargando…</strong>
   </div>
 
