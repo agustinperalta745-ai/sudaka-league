@@ -185,8 +185,10 @@ const PES6_HISTORY_META = {
   ]
 };
 
-const INTERDIVISIONAL_DATA_URL = "data/interdivisional.json";
-const INTERDIVISIONAL_STORAGE_KEY = "interdivisional_progress_v1";
+const INTERDIVISIONAL_ACTIVE_SOURCE = window.INTERDIVISIONAL_ACTIVE_SEASON || null;
+const INTERDIVISIONAL_HISTORY_SOURCE = Array.isArray(window.INTERDIVISIONAL_HISTORY_SEASONS)
+  ? window.INTERDIVISIONAL_HISTORY_SEASONS
+  : [];
 
 const INTERDIVISIONAL_PHASES = [
   { key: "octavos_playoffs", label: "Octavos Play-offs" },
@@ -1207,6 +1209,103 @@ function cloneInterdivisionalData(data) {
   return JSON.parse(JSON.stringify(data));
 }
 
+function normalizeWinnerValue(value) {
+  return value === "home" || value === "away" ? value : null;
+}
+
+function normalizeActiveOctavos(data) {
+  if (!Array.isArray(data)) return [];
+
+  return data.map((match, index) => ({
+    label: match.label || `Octavos Play-offs ${index + 1}`,
+    home: match.home,
+    away: match.away,
+    winner: normalizeWinnerValue(match.winner)
+  }));
+}
+
+function createMatchesFromPreviousWinners(matches, phaseLabel, phaseWinners = []) {
+  const winners = matches
+    .map((match) => (match.winner === "away" ? match.away : match.winner === "home" ? match.home : null))
+    .filter(Boolean);
+
+  const next = [];
+  for (let index = 0; index < winners.length; index += 2) {
+    const home = winners[index];
+    const away = winners[index + 1];
+    if (!home || !away) continue;
+
+    next.push({
+      label: `${phaseLabel} ${next.length + 1}`,
+      home,
+      away,
+      winner: normalizeWinnerValue(phaseWinners[next.length])
+    });
+  }
+
+  return next;
+}
+
+function buildInterdivisionalActiveSeason(source) {
+  if (!source || !Array.isArray(source.octavos)) return null;
+
+  const season = {
+    season: source.season || "T24",
+    status: "active",
+    champion: null,
+    phases: {
+      octavos_playoffs: normalizeActiveOctavos(source.octavos),
+      cuartos_playoffs: [],
+      semifinal_playoffs: [],
+      final_playoffs: [],
+      final_copa_interdivisional: []
+    }
+  };
+
+  const winners = source.winners || {};
+  season.phases.cuartos_playoffs = createMatchesFromPreviousWinners(
+    season.phases.octavos_playoffs,
+    getPhaseLabel("cuartos_playoffs"),
+    winners.cuartos_playoffs
+  );
+  season.phases.semifinal_playoffs = createMatchesFromPreviousWinners(
+    season.phases.cuartos_playoffs,
+    getPhaseLabel("semifinal_playoffs"),
+    winners.semifinal_playoffs
+  );
+  season.phases.final_playoffs = createMatchesFromPreviousWinners(
+    season.phases.semifinal_playoffs,
+    getPhaseLabel("final_playoffs"),
+    winners.final_playoffs
+  );
+  season.phases.final_copa_interdivisional = createMatchesFromPreviousWinners(
+    season.phases.final_playoffs,
+    getPhaseLabel("final_copa_interdivisional"),
+    winners.final_copa_interdivisional
+  );
+
+  return season;
+}
+
+function buildInterdivisionalStateFromDataFiles() {
+  const seasons = [];
+  const activeSeason = buildInterdivisionalActiveSeason(INTERDIVISIONAL_ACTIVE_SOURCE);
+
+  if (activeSeason) {
+    seasons.push(activeSeason);
+  }
+
+  INTERDIVISIONAL_HISTORY_SOURCE.forEach((season) => {
+    const normalizedSeason = {
+      ...cloneInterdivisionalData(season),
+      status: "completed"
+    };
+    seasons.push(normalizedSeason);
+  });
+
+  return normalizeInterdivisionalState({ seasons });
+}
+
 function normalizeInterdivisionalState(data) {
   const cloned = cloneInterdivisionalData(data);
   cloned.seasons = Array.isArray(cloned.seasons) ? cloned.seasons : [];
@@ -1230,24 +1329,6 @@ function normalizeInterdivisionalState(data) {
   return cloned;
 }
 
-function loadInterdivisionalState() {
-  try {
-    const raw = localStorage.getItem(INTERDIVISIONAL_STORAGE_KEY);
-    if (!raw) return null;
-
-    const parsed = JSON.parse(raw);
-    return normalizeInterdivisionalState(parsed);
-  } catch (error) {
-    console.warn("No se pudo leer progreso Interdivisional desde localStorage", error);
-    return null;
-  }
-}
-
-function saveInterdivisionalState() {
-  if (!interdivisionalState) return;
-  localStorage.setItem(INTERDIVISIONAL_STORAGE_KEY, JSON.stringify(interdivisionalState));
-}
-
 function getCurrentInterdivisionalSeason() {
   if (!interdivisionalState || !Array.isArray(interdivisionalState.seasons)) return null;
 
@@ -1260,7 +1341,9 @@ function isPhaseComplete(matches = []) {
 }
 
 function createNextPhaseMatchesFromWinners(matches, phaseLabel) {
-  const winners = matches.map((match) => (match.winner === "away" ? match.away : match.home));
+  const winners = matches
+    .map((match) => (match.winner === "away" ? match.away : match.winner === "home" ? match.home : null))
+    .filter(Boolean);
   const next = [];
 
   for (let index = 0; index < winners.length; index += 2) {
@@ -1321,7 +1404,7 @@ function getVisiblePhaseKeysForSeason(season) {
 }
 
 function createCupCrossingTeamNode(teamData, context = {}) {
-  const { editable = false, side = "home", matchData = null, season = null } = context;
+  const { editable = false, side = "home", matchData = null } = context;
   const team = document.createElement(editable ? "button" : "div");
   team.className = "cup-crossing-team";
   if (editable) {
@@ -1363,16 +1446,6 @@ function createCupCrossingTeamNode(teamData, context = {}) {
   content.append(player, division);
   team.appendChild(content);
 
-  if (editable && matchData && season) {
-    team.addEventListener("click", () => {
-      matchData.winner = side;
-      ensureInterdivisionalProgression(season);
-      saveInterdivisionalState();
-      renderInterdivisionalCard();
-      updateSeasonStatus();
-    });
-  }
-
   return team;
 }
 
@@ -1393,9 +1466,9 @@ function createCupCrossingCard(matchData, options = {}) {
   versus.textContent = "VS";
 
   body.append(
-    createCupCrossingTeamNode(matchData.home, { editable, side: "home", matchData, season }),
+    createCupCrossingTeamNode(matchData.home, { editable, side: "home", matchData }),
     versus,
-    createCupCrossingTeamNode(matchData.away, { editable, side: "away", matchData, season })
+    createCupCrossingTeamNode(matchData.away, { editable, side: "away", matchData })
   );
 
   card.append(label, body);
@@ -1452,7 +1525,7 @@ function renderCupActiveTab() {
   visiblePhases.forEach((phaseKey) => {
     const matches = currentSeason.phases[phaseKey] || [];
     cupCrossingsList.appendChild(createCupPhaseSection(phaseKey, matches, {
-      editable: currentSeason.status === "active",
+      editable: false,
       season: currentSeason
     }));
   });
@@ -1563,24 +1636,14 @@ function setupCupCrossingsAccordion() {
 }
 
 async function initializeInterdivisionalState() {
-  const fromStorage = loadInterdivisionalState();
-  if (fromStorage) {
-    interdivisionalState = fromStorage;
-  } else {
-    try {
-      const response = await fetch(INTERDIVISIONAL_DATA_URL);
-      if (!response.ok) throw new Error("No se pudo cargar data/interdivisional.json");
-      const data = await response.json();
-      interdivisionalState = normalizeInterdivisionalState(data);
-      saveInterdivisionalState();
-    } catch (error) {
-      console.error("Error al inicializar Interdivisional", error);
-      interdivisionalState = { seasons: [] };
-    }
+  try {
+    interdivisionalState = buildInterdivisionalStateFromDataFiles();
+  } catch (error) {
+    console.error("Error al inicializar Interdivisional", error);
+    interdivisionalState = { seasons: [] };
   }
 
   interdivisionalState.seasons.forEach((season) => ensureInterdivisionalProgression(season));
-  saveInterdivisionalState();
   renderInterdivisionalCard();
 }
 
