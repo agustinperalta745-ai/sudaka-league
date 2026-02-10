@@ -235,19 +235,21 @@ const CUP_CROSSING_DIVISION_SHORT = {
   Cuarta: "4ta Div"
 };
 
+const ASSETS_BASE_PATH = location.pathname.includes("/sudaka-league/") ? "/sudaka-league" : "";
+
 const TEAM_LOGOS = {
-  "Lanús": "/assets/lanus.png",
-  "Argentinos": "/assets/argentinos.png",
-  "Cruzeiro": "/assets/cruzeiro.png",
-  "Santos FC": "/assets/santos.png",
-  "Colo-Colo": "/assets/colocolo.png",
-  "Estudiantes": "/assets/estudiantes.png",
-  "Huracán": "/assets/huracan.png",
-  "Nacional": "/assets/nacional.png",
-  "San Lorenzo": "/assets/sanlorenzo.png",
-  "Sao Paulo": "/assets/saopaulo.png",
-  "Internacional": "/assets/internacional_sc.png",
-  "Peñarol": "/assets/penarol (1).png"
+  "Lanús": "lanus.png",
+  "Argentinos": "argentinos.png",
+  "Cruzeiro": "cruzeiro.png",
+  "Santos FC": "santos.png",
+  "Colo-Colo": "colocolo.png",
+  "Estudiantes": "estudiantes.png",
+  "Huracán": "huracan.png",
+  "Nacional": "nacional.png",
+  "San Lorenzo": "sanlorenzo.png",
+  "Sao Paulo": "saopaulo.png",
+  "Internacional": "internacional_sc.png",
+  "Peñarol": "penarol (1).png"
 };
 
 const CUP_CROSSING_CLUB_LOGO_MAP = {
@@ -271,13 +273,20 @@ function getCupCrossingDivisionLabel(division = "") {
   return CUP_CROSSING_DIVISION_SHORT[division] || division;
 }
 
+function toAssetPath(assetPath = "") {
+  if (/^https?:\/\//i.test(assetPath)) return assetPath;
+
+  const normalizedAssetPath = assetPath.startsWith("/") ? assetPath : `/${assetPath}`;
+  return `${ASSETS_BASE_PATH}${normalizedAssetPath}`;
+}
+
 function getCupCrossingTeamLogoPath(teamData) {
   if (teamData.logo) {
-    return teamData.logo.startsWith("/") ? teamData.logo : `/${teamData.logo}`;
+    return toAssetPath(teamData.logo);
   }
 
   if (CUP_CROSSING_CLUB_LOGO_MAP[teamData.club]) {
-    return CUP_CROSSING_CLUB_LOGO_MAP[teamData.club];
+    return toAssetPath(`assets/${CUP_CROSSING_CLUB_LOGO_MAP[teamData.club]}`);
   }
 
   const normalizedClub = normalizeClubName(teamData.club);
@@ -286,13 +295,13 @@ function getCupCrossingTeamLogoPath(teamData) {
   });
 
   if (normalizedMappedClub) {
-    return normalizedMappedClub[1];
+    return toAssetPath(`assets/${normalizedMappedClub[1]}`);
   }
 
   if (!normalizedClub) return "";
 
   const assetName = normalizedClub.replace(/\s+/g, "_");
-  return `/assets/${assetName}.png`;
+  return toAssetPath(`assets/${assetName}.png`);
 }
 
 const overlay = document.getElementById("modal-overlay");
