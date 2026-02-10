@@ -638,6 +638,16 @@ summary:focus-visible,
   background: color-mix(in srgb, #27ae60 16%, var(--surface-alt));
 }
 
+.cup-crossing-team.cup-crossing--winner {
+  border-color: #2fbd6f;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, #2fbd6f 22%, var(--surface-alt)),
+    color-mix(in srgb, #0d5bcf 10%, var(--surface-alt))
+  );
+  box-shadow: 0 0 0 1px color-mix(in srgb, #2fbd6f 50%, transparent), 0 8px 24px -16px #2fbd6f;
+}
+
 .cup-crossing-team.is-winner .cup-crossing-player {
   color: #27ae60;
 }

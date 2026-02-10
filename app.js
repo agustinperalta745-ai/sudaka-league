@@ -1210,7 +1210,10 @@ function cloneInterdivisionalData(data) {
 }
 
 function normalizeWinnerValue(value) {
-  return value === "home" || value === "away" ? value : null;
+  if (value == null || typeof value !== "string") return null;
+
+  const normalizedWinner = value.trim().toLowerCase();
+  return normalizedWinner === "home" || normalizedWinner === "away" ? normalizedWinner : null;
 }
 
 function normalizeActiveOctavos(data) {
@@ -1247,14 +1250,22 @@ function createMatchesFromPreviousWinners(matches, phaseLabel, phaseWinners = []
 }
 
 function buildInterdivisionalActiveSeason(source) {
-  if (!source || !Array.isArray(source.octavos)) return null;
+  if (!source) return null;
+
+  const octavos = Array.isArray(source.octavos_playoffs)
+    ? source.octavos_playoffs
+    : Array.isArray(source.octavos)
+      ? source.octavos
+      : null;
+
+  if (!octavos) return null;
 
   const season = {
     season: source.season || "T24",
     status: "active",
     champion: null,
     phases: {
-      octavos_playoffs: normalizeActiveOctavos(source.octavos),
+      octavos_playoffs: normalizeActiveOctavos(octavos),
       cuartos_playoffs: [],
       semifinal_playoffs: [],
       final_playoffs: [],
@@ -1321,7 +1332,7 @@ function normalizeInterdivisionalState(data) {
 
       season.phases[phase.key].forEach((match, index) => {
         match.label = match.label || `${phase.label} ${index + 1}`;
-        match.winner = match.winner || null;
+        match.winner = normalizeWinnerValue(match.winner);
       });
     });
   });
@@ -1412,10 +1423,17 @@ function createCupCrossingTeamNode(teamData, context = {}) {
     team.classList.add("is-selectable");
   }
 
-  if (matchData && matchData.winner) {
-    const isWinner = matchData.winner === side;
-    team.classList.toggle("is-winner", isWinner);
-    team.classList.toggle("is-loser", !isWinner);
+  if (matchData) {
+    const winner = normalizeWinnerValue(matchData.winner);
+    const isHomeWinner = winner === "home";
+    const isAwayWinner = winner === "away";
+    const isWinner = (side === "home" && isHomeWinner) || (side === "away" && isAwayWinner);
+
+    if (winner) {
+      team.classList.toggle("is-winner", isWinner);
+      team.classList.toggle("is-loser", !isWinner);
+      team.classList.toggle("cup-crossing--winner", isWinner);
+    }
   }
 
   const logoPath = getCupCrossingTeamLogoPath(teamData);
