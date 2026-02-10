@@ -235,19 +235,26 @@ const CUP_CROSSING_DIVISION_SHORT = {
   Cuarta: "4ta Div"
 };
 
+const TEAM_LOGOS = {
+  "Lanús": "/assets/lanus.png",
+  "Argentinos": "/assets/argentinos.png",
+  "Cruzeiro": "/assets/cruzeiro.png",
+  "Santos FC": "/assets/santos.png",
+  "Colo-Colo": "/assets/colocolo.png",
+  "Estudiantes": "/assets/estudiantes.png",
+  "Huracán": "/assets/huracan.png",
+  "Nacional": "/assets/nacional.png",
+  "San Lorenzo": "/assets/sanlorenzo.png",
+  "Sao Paulo": "/assets/saopaulo.png",
+  "Internacional": "/assets/internacional_sc.png",
+  "Peñarol": "/assets/penarol (1).png"
+};
+
 const CUP_CROSSING_CLUB_LOGO_MAP = {
-  lanus: "/assets/lanus.png",
-  argentinos: "/assets/argentinos.png",
-  "argentinos jrs": "/assets/argentinos.png",
-  cruzeiro: "/assets/cruzeiro.png",
-  "santos fc": "/assets/santos.png",
-  "sao paulo": "/assets/saopaulo.png",
-  estudiantes: "/assets/estudiantes.png",
-  "internacional sc": "/assets/internacional_sc.png",
-  penarol: "/assets/penarol (1).png",
-  huracan: "/assets/huracan.png",
-  nacional: "/assets/nacional.png",
-  "colo colo": "/assets/colocolo.png"
+  ...TEAM_LOGOS,
+  "Internacional SC": TEAM_LOGOS.Internacional,
+  "Colo Colo": TEAM_LOGOS["Colo-Colo"],
+  "Argentinos JRS": TEAM_LOGOS.Argentinos
 };
 
 function normalizeClubName(value = "") {
@@ -269,9 +276,17 @@ function getCupCrossingTeamLogoPath(teamData) {
     return teamData.logo.startsWith("/") ? teamData.logo : `/${teamData.logo}`;
   }
 
+  if (CUP_CROSSING_CLUB_LOGO_MAP[teamData.club]) {
+    return CUP_CROSSING_CLUB_LOGO_MAP[teamData.club];
+  }
+
   const normalizedClub = normalizeClubName(teamData.club);
-  if (CUP_CROSSING_CLUB_LOGO_MAP[normalizedClub]) {
-    return CUP_CROSSING_CLUB_LOGO_MAP[normalizedClub];
+  const normalizedMappedClub = Object.entries(CUP_CROSSING_CLUB_LOGO_MAP).find(([clubName]) => {
+    return normalizeClubName(clubName) === normalizedClub;
+  });
+
+  if (normalizedMappedClub) {
+    return normalizedMappedClub[1];
   }
 
   if (!normalizedClub) return "";
