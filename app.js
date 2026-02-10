@@ -304,7 +304,9 @@ const copyButtons = [...document.querySelectorAll(".copy-btn")];
 const backToTopButton = document.getElementById("back-to-top");
 const pes6Status = document.getElementById("pes6Status");
 const pes6Remaining = document.getElementById("pes6-remaining");
+const cupRemaining = document.getElementById("cup-remaining");
 const pes6SeasonName = document.getElementById("pes6SeasonName");
+const cupStatus = document.getElementById("cupStatus");
 const sfStatus = document.getElementById("sfStatus");
 const sfSeasonName = document.getElementById("sfSeasonName");
 const sfSeasonNote = document.getElementById("sfSeasonNote");
@@ -344,31 +346,45 @@ let showAllTitlesRanking = false;
 // Asignación centralizada de links editables.
 
 const PES6_FINAL_TARGET = new Date(2026, 1, 22, 23, 59, 0, 0);
+const CUP_INTERDIVISIONAL_FINAL_TARGET = new Date(2026, 1, 13, 23, 59, 0, 0);
 
-function updatePes6Remaining() {
-  const el = document.getElementById("pes6-remaining");
+function updateCountdown(targetDate, el, options = {}) {
   if (!el) return;
 
   const now = new Date();
-  const ms = PES6_FINAL_TARGET.getTime() - now.getTime();
+  const ms = targetDate.getTime() - now.getTime();
+  const formatDays = options.formatDays ?? ((value) => `Finaliza en: ${value} días`);
+  const formatHours = options.formatHours ?? ((value) => `Finaliza en: ${value} horas`);
 
   if (ms <= 0) {
-    el.textContent = "Finaliza en: 0 días";
+    el.textContent = formatDays(0);
     return;
   }
 
-  if (ms < 24 * 60 * 60 * 1000) {
-    const hours = Math.max(0, Math.ceil(ms / (60 * 60 * 1000)));
-    el.textContent = `Finaliza en: ${hours} horas`;
+  if (ms < 24 * 60 * 60 * 1000 && options.showHoursOnLastDay) {
+    const hours = Math.max(1, Math.ceil(ms / (60 * 60 * 1000)));
+    el.textContent = formatHours(hours);
     return;
   }
 
-  const days = Math.max(0, Math.ceil(ms / (24 * 60 * 60 * 1000)));
-  el.textContent = `Finaliza en: ${days} días`;
+  const days = Math.max(1, Math.ceil(ms / (24 * 60 * 60 * 1000)));
+  el.textContent = formatDays(days);
+}
+
+function updatePes6Remaining() {
+  updateCountdown(PES6_FINAL_TARGET, pes6Remaining, { showHoursOnLastDay: true });
+}
+
+function updateCupRemaining() {
+  updateCountdown(CUP_INTERDIVISIONAL_FINAL_TARGET, cupRemaining, {
+    showHoursOnLastDay: true,
+    formatDays: (value) => `⏳ ${value} días restantes`,
+    formatHours: (value) => `⏳ ${value} horas restantes`
+  });
 }
 
 function updateSeasonStatus() {
-  if (!pes6Status || !pes6SeasonName || !sfStatus || !sfSeasonName || !sfSeasonNote || !pes6Remaining) {
+  if (!pes6Status || !pes6SeasonName || !sfStatus || !sfSeasonName || !sfSeasonNote || !pes6Remaining || !cupStatus) {
     return;
   }
 
@@ -382,6 +398,11 @@ function updateSeasonStatus() {
   pes6Status.textContent = seasonEnded ? "FINALIZADA" : "ACTIVA";
   pes6Status.classList.toggle("season-badge-active", !seasonEnded);
   pes6Status.classList.toggle("season-badge-ended", seasonEnded);
+
+  const cupEnded = CUP_INTERDIVISIONAL_FINAL_TARGET.getTime() - Date.now() <= 0;
+  cupStatus.textContent = cupEnded ? "FINALIZADA" : "ACTIVA";
+  cupStatus.classList.toggle("season-badge-active", !cupEnded);
+  cupStatus.classList.toggle("season-badge-ended", cupEnded);
 }
 
 function updateSlotsStatus() {
@@ -1301,7 +1322,9 @@ applyKofLeagueContent();
 applyWhatsAppLinks();
 updateSeasonStatus();
 updatePes6Remaining();
+updateCupRemaining();
 updateSlotsStatus();
 updateDonationGoal();
 setInterval(updateSeasonStatus, 60000);
 setInterval(updatePes6Remaining, 60000);
+setInterval(updateCupRemaining, 60000);
