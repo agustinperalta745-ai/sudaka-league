@@ -1,5 +1,5 @@
 :root {
-  --bg-main: #06060f;
+  --bg-main: #07122b;
   --bg-alt: #0d0b1d;
   --bg-surface: rgba(18, 16, 40, 0.88);
   --bg-surface-strong: rgba(12, 12, 29, 0.96);
@@ -27,11 +27,7 @@ body {
   font-size: 16px;
   line-height: 1.75;
   color: var(--text-main);
-  background:
-    radial-gradient(circle at 10% 0%, rgba(81, 237, 255, 0.2), transparent 38%),
-    radial-gradient(circle at 84% 6%, rgba(158, 96, 255, 0.24), transparent 42%),
-    radial-gradient(circle at 56% 86%, rgba(50, 34, 118, 0.38), transparent 46%),
-    linear-gradient(160deg, var(--bg-alt) 0%, #06070f 45%, #050509 100%);
+  background-color: var(--bg-main);
 }
 
 body.no-scroll { overflow: hidden; }
@@ -41,13 +37,7 @@ body.no-scroll { overflow: hidden; }
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  opacity: 0.8;
-  mix-blend-mode: screen;
-  background-image:
-    linear-gradient(120deg, rgba(255, 255, 255, 0.035), transparent 28%),
-    repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 0, rgba(255, 255, 255, 0.02) 1px, transparent 3px, transparent 6px),
-    radial-gradient(circle at 18% 26%, rgba(43, 214, 255, 0.18) 0 2px, transparent 2px),
-    radial-gradient(circle at 82% 72%, rgba(154, 122, 255, 0.2) 0 2px, transparent 2px);
+  display: none;
 }
 
 .section {
