@@ -20,7 +20,7 @@ window.INTERDIVISIONAL_ACTIVE_SEASON = {
       label: "Octavos Play-offs 3",
       home: { club: "Santos FC", player: "LombardoCABJ", division: "Primera" },
       away: { club: "Sao Paulo", player: "SoyLefo", division: "Segunda" },
-      winner: null
+      winner: "away"
     },
     {
       label: "Octavos Play-offs 4",
