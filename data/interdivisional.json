@@ -296,11 +296,7 @@
               "player": "Crislot26",
               "division": "Segunda"
             },
-            "winner": null,
-            "result": {
-              "home": 2,
-              "away": 3
-            }
+            "winner": null
           },
           {
             "label": "Octavos Play-offs 3",
@@ -314,12 +310,10 @@
               "player": "SoyLefo",
               "division": "Segunda"
             },
-            "winner": null,
+            "winner": "away",
             "result": {
               "home": 1,
-              "away": 1,
-              "pensHome": 3,
-              "pensAway": 4
+              "away": 2
             }
           },
           {
