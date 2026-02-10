@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sudaka League - Preview de estilos</title>
+  <meta name="description" content="Preview interno de estilos visuales de Sudaka League." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=20260210-dark-competitive" />
+</head>
+<body>
+  <div class="bg-effects" aria-hidden="true"></div>
+
+  <header class="topbar" aria-label="Barra superior de Sudaka League">
+    <div class="topbar-inner">
+      <a class="topbar-brand" href="index.html" aria-label="Volver al inicio real">
+        <!-- Placeholder de escudo Sudaka League: reemplazar por asset oficial si se agrega al repo -->
+        <span class="topbar-shield" aria-hidden="true">SL</span>
+        <span class="topbar-title">Sudaka League</span>
+      </a>
+      <a class="topbar-preview-link" href="index.html">Volver</a>
+    </div>
+  </header>
+
+  <main class="preview-main">
+    <section class="panel-section">
+      <h1>Preview de estilo global</h1>
+      <p>Vista interna para revisar componentes visuales. No afecta contenido real de la web.</p>
+    </section>
+
+    <section class="preview-grid">
+      <article class="season-card">
+        <div class="season-card-header">
+          <h3>Botones</h3>
+          <span class="season-badge">Activo</span>
+        </div>
+        <div class="hero-actions" style="margin-top:0; justify-content:flex-start;">
+          <button class="btn btn-primary" type="button">Primario</button>
+          <button class="btn btn-secondary" type="button">Secundario</button>
+          <button class="btn btn-primary" type="button" disabled>Disabled</button>
+        </div>
+      </article>
+
+      <article class="season-card">
+        <div class="season-card-header">
+          <h3>Tarjetas</h3>
+          <span class="mini-badge">Demo</span>
+        </div>
+        <p class="season-note">Tarjeta estándar con fondo oscuro, borde sutil y jerarquía de texto clara.</p>
+        <p class="season-title">División principal - Temporada 24</p>
+      </article>
+    </section>
+
+    <section class="preview-grid">
+      <article class="preview-list">
+        <h2>Lista de temporadas</h2>
+        <div class="preview-item">Temporada 22 · Campeón: Silver</div>
+        <div class="preview-item">Temporada 23 · Campeón: Mica</div>
+        <div class="preview-item">Temporada 24 · En juego</div>
+      </article>
+
+      <article class="preview-matches">
+        <h2>Cruces</h2>
+        <div class="cup-crossing-team">
+          <p class="cup-crossing-player">Pendiente · Player A vs Player B</p>
+        </div>
+        <div class="cup-crossing-team">
+          <p class="cup-crossing-player">Jugado · Player C 2 - 1 Player D</p>
+        </div>
+        <div class="cup-crossing-team cup-crossing--winner">
+          <p class="cup-crossing-player">Ganador · Player E</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="preview-modal-demo">
+      <article class="preview-modal-card">
+        <div class="season-card-header">
+          <h2 style="margin:0;">Modal / Cajón (demo abierto)</h2>
+          <button class="close-btn" type="button" aria-label="Cerrar demo">×</button>
+        </div>
+        <div class="tab-bar">
+          <button class="tab-btn is-active" type="button">Resumen</button>
+          <button class="tab-btn" type="button">Reglas</button>
+          <button class="tab-btn" type="button">Historial</button>
+        </div>
+        <p>Contenido de ejemplo para validar el tratamiento visual de overlays y paneles.</p>
+        <button class="btn btn-primary" type="button">Acción principal</button>
+      </article>
+    </section>
+  </main>
+</body>
+</html>
