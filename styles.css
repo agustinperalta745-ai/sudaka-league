@@ -518,6 +518,58 @@ summary:focus-visible,
 
 .pes6-ranking-list-wrap { display: grid; gap: 0.8rem; }
 
+
+.cup-interdivisional-section {
+  padding-top: 0;
+}
+
+.cup-interdivisional-card {
+  cursor: pointer;
+}
+
+.cup-toggle-label {
+  margin: 0;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--line);
+  font-family: "Orbitron", "Inter", sans-serif;
+  font-size: 0.82rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.cup-crossings-panel {
+  margin-top: 0.9rem;
+  padding: 0.95rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--surface-alt);
+  overflow: hidden;
+  opacity: 0;
+  max-height: 0;
+  transition: max-height 260ms ease, opacity 220ms ease;
+}
+
+.cup-crossings-panel.is-open {
+  opacity: 1;
+  max-height: 2200px;
+}
+
+.cup-crossing-body {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.cup-crossing-team {
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 0.65rem;
+  padding: 0.55rem 0.65rem;
+  background: var(--surface-alt);
+  font-size: 0.86rem;
+  line-height: 1.35;
+}
+
 .pes6-ranking-row,
 .history-row {
   border: 1px solid var(--line);

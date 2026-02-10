@@ -45,16 +45,6 @@
           </div>
         </article>
 
-        <article class="season-card" aria-labelledby="cup-season-title">
-          <div class="season-card-header">
-            <h3 id="cup-season-title">Copa Interdivisional SLP</h3>
-            <span id="cupStatus" class="season-badge season-badge-active">ACTIVA</span>
-          </div>
-          <p class="season-title">Fase: Octavos</p>
-          <p class="season-note">Finalización de octavos: 13/02/2026</p>
-          <p class="season-countdown-label"><span class="season-end" id="cup-remaining">Calculando…</span></p>
-        </article>
-
         <article class="season-card" aria-labelledby="kof-season-title">
           <div class="season-card-header">
             <h3 id="kof-season-title">🥊 —</h3>
@@ -68,6 +58,23 @@
             <span id="sf-slots-badge" class="mini-badge">—</span>
           </div>
         </article>
+      </div>
+    </section>
+
+    <section class="section hud-separator cup-interdivisional-section" aria-labelledby="cup-season-title">
+      <article id="cup-interdivisional-card" class="season-card cup-interdivisional-card" role="button" tabindex="0" aria-expanded="false" aria-controls="cup-crossings-panel">
+        <div class="season-card-header">
+          <h3 id="cup-season-title">Copa Interdivisional SLP</h3>
+          <span id="cupStatus" class="season-badge season-badge-active">ACTIVA</span>
+        </div>
+        <p class="season-title">Fase: Octavos</p>
+        <p class="season-note">Finalización de octavos: 13/02/2026</p>
+        <p class="season-countdown-label"><span class="season-end" id="cup-remaining">Calculando…</span></p>
+        <p id="cup-toggle-label" class="cup-toggle-label">Ver cruces</p>
+      </article>
+
+      <div id="cup-crossings-panel" class="cup-crossings-panel" hidden>
+        <div id="cup-crossings-list" class="cup-round-grid" aria-live="polite"></div>
       </div>
     </section>
 
@@ -300,7 +307,6 @@ UNA VEZ QUE TERMINES EL REGISTRO NO OLVIDES DEJARNOS TU NOMBRE DE USUARIO DE PES
         </section>
 
         <section class="tab-panel" role="tabpanel" id="pes6-tab-history" aria-labelledby="pes6-tab-btn-history" hidden>
-          <div id="pes6-cup-history"></div>
           <div id="pes6-history" class="history-layout"></div>
         </section>
 

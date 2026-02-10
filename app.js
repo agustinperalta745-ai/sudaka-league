@@ -185,116 +185,48 @@ const PES6_HISTORY_META = {
   ]
 };
 
-const CUP_HISTORY_T23 = {
-  title: "T23 – Copa Interdivisional SLP",
-  rounds: [
-    {
-      name: "Octavos Playoff",
-      matches: [
-        {
-          label: "Octavo 1",
-          teamA: { club: "Lanús", player: "Edug98 (Primera)", shield: "/img/escudos/lanus.png" },
-          teamB: { club: "Argentinos", player: "Facualanis (Segunda)", shield: "/img/escudos/argentinos.png" }
-        },
-        {
-          label: "Octavo 2",
-          teamA: { club: "Millonarios", player: "Fafafa (Primera)", shield: "/img/escudos/millonarios.png" },
-          teamB: { club: "Cruzeiro", player: "Crislot26 (Segunda)", shield: "/img/escudos/cruzeiro.png" }
-        },
-        {
-          label: "Octavo 3",
-          teamA: { club: "Santos FC", player: "LombardoCABJ (Primera)", shield: "/img/escudos/santos_fc.png" },
-          teamB: { club: "Sao Paulo", player: "SoyLefo (Segunda)", shield: "/img/escudos/sao_paulo.png" }
-        },
-        {
-          label: "Octavo 4",
-          teamA: { club: "Estudiantes", player: "Exeeneta (Primera)", shield: "/img/escudos/estudiantes.png" },
-          teamB: { club: "Internacional SC", player: "Joser17 (Segunda)", shield: "/img/escudos/internacional_sc.png" }
-        },
-        {
-          label: "Octavo 5",
-          teamA: { club: "Peñarol", player: "TunTun (Primera)", shield: "/img/escudos/penarol.png" },
-          teamB: { club: "Huracán", player: "Leom (Tercera)", shield: "/img/escudos/huracan.png" }
-        },
-        {
-          label: "Octavo 6",
-          teamA: { club: "Nacional", player: "Aacuis09 (Primera)", shield: "/img/escudos/nacional.png" },
-          teamB: { club: "Peñarol", player: "Cacherinhooo (Tercera)", shield: "/img/escudos/penarol.png" }
-        },
-        {
-          label: "Octavo 7",
-          teamA: { club: "Colo Colo", player: "Broko (Primera)", shield: "/img/escudos/colo_colo.png" },
-          teamB: { club: "Internacional SC", player: "Gab0211 (Tercera)", shield: "/img/escudos/internacional_sc.png" }
-        },
-        {
-          label: "Octavo 8",
-          teamA: { club: "Argentinos JRS", player: "Ivanarocela (Primera)", shield: "/img/escudos/argentinos_jrs.png" },
-          teamB: { club: "Colo Colo", player: "Joelignacho (Segunda)", shield: "/img/escudos/colo_colo.png" }
-        }
-      ]
-    },
-    {
-      name: "Cuartos Playoff",
-      matches: [
-        {
-          label: "Cuarto 1",
-          teamA: { club: "Ganador Octavo 1", player: "Por definir", shield: "/img/escudos/ganador_octavo_1.png" },
-          teamB: { club: "Ganador Octavo 2", player: "Por definir", shield: "/img/escudos/ganador_octavo_2.png" }
-        },
-        {
-          label: "Cuarto 2",
-          teamA: { club: "Ganador Octavo 3", player: "Por definir", shield: "/img/escudos/ganador_octavo_3.png" },
-          teamB: { club: "Ganador Octavo 4", player: "Por definir", shield: "/img/escudos/ganador_octavo_4.png" }
-        },
-        {
-          label: "Cuarto 3",
-          teamA: { club: "Ganador Octavo 5", player: "Por definir", shield: "/img/escudos/ganador_octavo_5.png" },
-          teamB: { club: "Ganador Octavo 6", player: "Por definir", shield: "/img/escudos/ganador_octavo_6.png" }
-        },
-        {
-          label: "Cuarto 4",
-          teamA: { club: "Ganador Octavo 7", player: "Por definir", shield: "/img/escudos/ganador_octavo_7.png" },
-          teamB: { club: "Ganador Octavo 8", player: "Por definir", shield: "/img/escudos/ganador_octavo_8.png" }
-        }
-      ]
-    },
-    {
-      name: "Semis Playoff",
-      matches: [
-        {
-          label: "Semi 1",
-          teamA: { club: "Ganador Cuarto 1", player: "Por definir", shield: "/img/escudos/ganador_cuarto_1.png" },
-          teamB: { club: "Ganador Cuarto 2", player: "Por definir", shield: "/img/escudos/ganador_cuarto_2.png" }
-        },
-        {
-          label: "Semi 2",
-          teamA: { club: "Ganador Cuarto 3", player: "Por definir", shield: "/img/escudos/ganador_cuarto_3.png" },
-          teamB: { club: "Ganador Cuarto 4", player: "Por definir", shield: "/img/escudos/ganador_cuarto_4.png" }
-        }
-      ]
-    },
-    {
-      name: "Final Playoff",
-      matches: [
-        {
-          label: "Final Playoff",
-          teamA: { club: "Ganador Semi 1", player: "Por definir", shield: "/img/escudos/ganador_semi_1.png" },
-          teamB: { club: "Ganador Semi 2", player: "Por definir", shield: "/img/escudos/ganador_semi_2.png" }
-        }
-      ]
-    },
-    {
-      name: "Final Interdivisional",
-      matches: [
-        {
-          label: "Final Interdivisional",
-          teamA: { club: "Universitario", player: "H09", shield: "/img/escudos/universitario.png" },
-          teamB: { club: "Ganador Final Playoff", player: "Por definir", shield: "/img/escudos/ganador_final_playoff.png" }
-        }
-      ]
-    }
-  ]
-};
+const CUP_CROSSINGS_OCTAVOS = [
+  {
+    label: "Octavo 1",
+    teamA: { club: "Lanús", player: "Edug98", division: "Primera" },
+    teamB: { club: "Argentinos", player: "Facualanis", division: "Segunda" }
+  },
+  {
+    label: "Octavo 2",
+    teamA: { club: "Millonarios", player: "Fafafa", division: "Primera" },
+    teamB: { club: "Cruzeiro", player: "Crislot26", division: "Segunda" }
+  },
+  {
+    label: "Octavo 3",
+    teamA: { club: "Santos FC", player: "LombardoCABJ", division: "Primera" },
+    teamB: { club: "Sao Paulo", player: "SoyLefo", division: "Segunda" }
+  },
+  {
+    label: "Octavo 4",
+    teamA: { club: "Estudiantes", player: "Exeeneta", division: "Primera" },
+    teamB: { club: "Internacional SC", player: "Joser17", division: "Segunda" }
+  },
+  {
+    label: "Octavo 5",
+    teamA: { club: "Peñarol", player: "TunTun", division: "Primera" },
+    teamB: { club: "Huracán", player: "Leom", division: "Tercera" }
+  },
+  {
+    label: "Octavo 6",
+    teamA: { club: "Nacional", player: "Aacuis09", division: "Primera" },
+    teamB: { club: "Peñarol", player: "Cacherinhooo", division: "Tercera" }
+  },
+  {
+    label: "Octavo 7",
+    teamA: { club: "Colo Colo", player: "Broko", division: "Primera" },
+    teamB: { club: "Internacional SC", player: "Gab0211", division: "Tercera" }
+  },
+  {
+    label: "Octavo 8",
+    teamA: { club: "Argentinos JRS", player: "Ivanarocela", division: "Primera" },
+    teamB: { club: "Colo Colo", player: "Joelignacho", division: "Segunda" }
+  }
+];
 
 const overlay = document.getElementById("modal-overlay");
 const modals = [...document.querySelectorAll(".league-modal")];
@@ -307,6 +239,10 @@ const pes6Remaining = document.getElementById("pes6-remaining");
 const cupRemaining = document.getElementById("cup-remaining");
 const pes6SeasonName = document.getElementById("pes6SeasonName");
 const cupStatus = document.getElementById("cupStatus");
+const cupInterdivisionalCard = document.getElementById("cup-interdivisional-card");
+const cupCrossingsPanel = document.getElementById("cup-crossings-panel");
+const cupCrossingsList = document.getElementById("cup-crossings-list");
+const cupToggleLabel = document.getElementById("cup-toggle-label");
 const sfStatus = document.getElementById("sfStatus");
 const sfSeasonName = document.getElementById("sfSeasonName");
 const sfSeasonNote = document.getElementById("sfSeasonNote");
@@ -378,8 +314,8 @@ function updatePes6Remaining() {
 function updateCupRemaining() {
   updateCountdown(CUP_INTERDIVISIONAL_FINAL_TARGET, cupRemaining, {
     showHoursOnLastDay: true,
-    formatDays: (value) => `⏳ ${value} días restantes`,
-    formatHours: (value) => `⏳ ${value} horas restantes`
+    formatDays: (value) => `${value} días restantes`,
+    formatHours: (value) => `${value} horas restantes`
   });
 }
 
@@ -1211,33 +1147,14 @@ function createHistoryAccordionItem(seasonData, index) {
   return item;
 }
 
-function createCupTeamNode(team) {
-  const teamNode = document.createElement("article");
-  teamNode.className = "cup-team";
-
-  const shield = document.createElement("img");
-  shield.className = "cup-team-shield";
-  shield.src = team.shield;
-  shield.alt = `Escudo de ${team.club}`;
-  shield.loading = "lazy";
-
-  const info = document.createElement("div");
-  info.className = "cup-team-info";
-
-  const club = document.createElement("p");
-  club.className = "cup-team-club";
-  club.textContent = team.club;
-
-  const player = document.createElement("p");
-  player.className = "cup-team-player";
-  player.textContent = team.player;
-
-  info.append(club, player);
-  teamNode.append(shield, info);
-  return teamNode;
+function createCupCrossingTeamNode(teamData) {
+  const team = document.createElement("div");
+  team.className = "cup-crossing-team";
+  team.textContent = `${teamData.club} – ${teamData.player} – ${teamData.division}`;
+  return team;
 }
 
-function createCupMatchCard(matchData) {
+function createCupCrossingCard(matchData) {
   const card = document.createElement("article");
   card.className = "cup-match-card";
 
@@ -1246,59 +1163,72 @@ function createCupMatchCard(matchData) {
   label.textContent = matchData.label;
 
   const body = document.createElement("div");
-  body.className = "cup-match-body";
+  body.className = "cup-crossing-body";
 
-  const versus = document.createElement("span");
+  const versus = document.createElement("p");
   versus.className = "cup-match-versus";
   versus.textContent = "VS";
 
-  body.append(createCupTeamNode(matchData.teamA), versus, createCupTeamNode(matchData.teamB));
+  body.append(
+    createCupCrossingTeamNode(matchData.teamA),
+    versus,
+    createCupCrossingTeamNode(matchData.teamB)
+  );
+
   card.append(label, body);
   return card;
 }
 
-function createCupRoundSection(roundData) {
-  const section = document.createElement("section");
-  section.className = "cup-round-section";
+function renderCupCrossings() {
+  if (!cupCrossingsList) return;
+  cupCrossingsList.replaceChildren();
 
-  const heading = document.createElement("h4");
-  heading.className = "cup-round-title";
-  heading.textContent = roundData.name;
-
-  const matchesGrid = document.createElement("div");
-  matchesGrid.className = "cup-round-grid";
-
-  roundData.matches.forEach((match) => {
-    matchesGrid.appendChild(createCupMatchCard(match));
+  CUP_CROSSINGS_OCTAVOS.forEach((matchData) => {
+    cupCrossingsList.appendChild(createCupCrossingCard(matchData));
   });
-
-  section.append(heading, matchesGrid);
-  return section;
 }
 
-function renderCupHistory() {
-  const container = document.getElementById("pes6-cup-history");
-  if (!container) return;
+function setCupCrossingsExpanded(expanded) {
+  if (!cupInterdivisionalCard || !cupCrossingsPanel || !cupToggleLabel) return;
 
-  container.replaceChildren();
+  cupInterdivisionalCard.setAttribute("aria-expanded", String(expanded));
+  cupToggleLabel.textContent = expanded ? "Ocultar cruces" : "Ver cruces";
 
-  const wrapper = document.createElement("section");
-  wrapper.className = "cup-history-block";
+  if (expanded) {
+    cupCrossingsPanel.hidden = false;
+    cupCrossingsPanel.classList.add("is-open");
+    return;
+  }
 
-  const heading = document.createElement("h3");
-  heading.className = "cup-history-heading";
-  heading.textContent = "Historial de Copas";
+  cupCrossingsPanel.classList.remove("is-open");
 
-  const title = document.createElement("h4");
-  title.className = "cup-history-title";
-  title.textContent = CUP_HISTORY_T23.title;
+  const onTransitionEnd = () => {
+    if (!cupCrossingsPanel.classList.contains("is-open")) {
+      cupCrossingsPanel.hidden = true;
+    }
+    cupCrossingsPanel.removeEventListener("transitionend", onTransitionEnd);
+  };
 
-  wrapper.append(heading, title);
-  CUP_HISTORY_T23.rounds.forEach((round) => {
-    wrapper.appendChild(createCupRoundSection(round));
+  cupCrossingsPanel.addEventListener("transitionend", onTransitionEnd);
+}
+
+function setupCupCrossingsAccordion() {
+  if (!cupInterdivisionalCard || !cupCrossingsPanel) return;
+
+  renderCupCrossings();
+
+  const toggleCrossings = () => {
+    const isExpanded = cupInterdivisionalCard.getAttribute("aria-expanded") === "true";
+    setCupCrossingsExpanded(!isExpanded);
+  };
+
+  cupInterdivisionalCard.addEventListener("click", toggleCrossings);
+  cupInterdivisionalCard.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      toggleCrossings();
+    }
   });
-
-  container.appendChild(wrapper);
 }
 
 function renderPes6History() {
@@ -1306,8 +1236,6 @@ function renderPes6History() {
   if (!container) return;
 
   container.replaceChildren();
-
-  renderCupHistory();
 
   PES6_HISTORY.forEach((seasonData, index) => {
     container.appendChild(createHistoryAccordionItem(seasonData, index));
@@ -1318,6 +1246,7 @@ setupTabs();
 renderPalmares();
 renderPes6Ranking();
 renderPes6History();
+setupCupCrossingsAccordion();
 applyKofLeagueContent();
 applyWhatsAppLinks();
 updateSeasonStatus();
