@@ -22,7 +22,6 @@
           alt="Logo de Sudaka League"
           onerror="this.style.display='none'; this.nextElementSibling.hidden = false;"
         />
-        <span class="topbar-shield" aria-hidden="true" hidden>SL</span>
         <span class="topbar-title">SUDAKA LEAGUE</span>
       </a>
       <nav class="topbar-actions" aria-label="Acciones de navegación"></nav>
@@ -31,26 +30,26 @@
 
   <header class="hero section" id="inicio">
     <p class="hero-kicker">Liga Oficial Retro Competitiva</p>
-    <h1>SUDAKA LEAGUE</h1>
+    <h1 class="neon-text">SUDAKA LEAGUE</h1>
     <p class="subtitle">Comunidad de juegos retro online con formato competitivo</p>
     <p class="hero-copy">
       Jugá clásicos como PES 6 y <span id="kofHeroName">King of Fighters 2002 – Fightcade</span> en ligas organizadas,
       sin horarios fijos y coordinando partidas por WhatsApp
     </p>
     <div class="hero-actions">
-      <a id="cta-comunidad" class="btn btn-primary" href="https://chat.whatsapp.com/DvRyA2bxAC67x0ulPQYvCa?mode=gi_t" target="_blank" rel="noopener noreferrer">Unirme a la comunidad</a>
-      <a class="btn btn-secondary" href="#ligas">Ver ligas</a>
+      <a id="cta-comunidad" class="btn btn-primary neon-box" href="https://chat.whatsapp.com/DvRyA2bxAC67x0ulPQYvCa?mode=gi_t" target="_blank" rel="noopener noreferrer">Unirme a la comunidad</a>
+      <a class="btn btn-secondary neon-box" href="#ligas">Ver ligas</a>
     </div>
   </header>
 
   <main>
     <section class="section hud-separator season-status" aria-labelledby="season-status-title">
-      <h2 id="season-status-title">ESTADO DE TEMPORADA</h2>
+      <h2 id="season-status-title" class="neon-text">ESTADO DE TEMPORADA</h2>
       <div class="season-grid">
-        <article class="season-card" aria-labelledby="pes6-season-title">
+        <article class="season-card neon-box neon-border" aria-labelledby="pes6-season-title">
           <div class="season-card-header">
             <h3 id="pes6-season-title">⚽ PES 6 – Infinity Patch</h3>
-            <span id="pes6Status" class="season-badge season-badge-active">ACTIVA</span>
+            <span id="pes6Status" class="season-badge season-badge-active neon-box">ACTIVA</span>
           </div>
           <p id="pes6SeasonName" class="season-title">Temporada 24</p>
           <p class="season-countdown-label"><span class="season-end" id="pes6-remaining">Calculando…</span></p>
@@ -61,10 +60,10 @@
           </div>
         </article>
 
-        <article class="season-card" aria-labelledby="kof-season-title">
+        <article class="season-card neon-box neon-border" aria-labelledby="kof-season-title">
           <div class="season-card-header">
             <h3 id="kof-season-title">🥊 —</h3>
-            <span id="sfStatus" class="season-badge season-badge-wait">EN ESPERA</span>
+            <span id="sfStatus" class="season-badge season-badge-wait neon-border">EN ESPERA</span>
           </div>
           <p id="sfSeasonName" class="season-title">Temporada 1</p>
           <p id="sfSeasonNote" class="season-note">En espera hasta completar cupos.</p>
@@ -78,10 +77,10 @@
     </section>
 
     <section class="section hud-separator cup-interdivisional-section" aria-labelledby="cup-season-title">
-      <article id="cup-interdivisional-card" class="season-card cup-interdivisional-card" role="button" tabindex="0" aria-expanded="false" aria-controls="cup-crossings-panel">
+      <article id="cup-interdivisional-card" class="season-card cup-interdivisional-card neon-box neon-border" role="button" tabindex="0" aria-expanded="false" aria-controls="cup-crossings-panel">
         <div class="season-card-header">
           <h3 id="cup-season-title">Copa Interdivisional SLP</h3>
-          <span id="cupStatus" class="season-badge season-badge-active">ACTIVA</span>
+          <span id="cupStatus" class="season-badge season-badge-active neon-box">ACTIVA</span>
         </div>
         <p id="cup-current-season" class="season-title">Temporada T23</p>
         <p id="cup-current-phase" class="season-note">Fase: Octavos Play-offs</p>
@@ -89,10 +88,10 @@
         <p id="cup-toggle-label" class="cup-toggle-label">Ver cruces</p>
       </article>
 
-      <div id="cup-crossings-panel" class="cup-crossings-panel" hidden>
+      <div id="cup-crossings-panel" class="cup-crossings-panel neon-border" hidden>
         <div class="cup-card-tabs" role="tablist" aria-label="Contenido Copa Interdivisional">
-          <button id="cup-tab-active" class="cup-tab-btn is-active" type="button" role="tab" aria-selected="true" aria-controls="cup-tab-panel-active">Activa</button>
-          <button id="cup-tab-history" class="cup-tab-btn" type="button" role="tab" aria-selected="false" aria-controls="cup-tab-panel-history">Historial Interdivisional</button>
+          <button id="cup-tab-active" class="cup-tab-btn is-active neon-box" type="button" role="tab" aria-selected="true" aria-controls="cup-tab-panel-active">Activa</button>
+          <button id="cup-tab-history" class="cup-tab-btn neon-box" type="button" role="tab" aria-selected="false" aria-controls="cup-tab-panel-history">Historial Interdivisional</button>
         </div>
 
         <section id="cup-tab-panel-active" class="cup-tab-panel is-active" role="tabpanel" aria-labelledby="cup-tab-active">
@@ -112,7 +111,7 @@
     <section id="ligas" class="section hud-separator" aria-labelledby="ligas-title">
       <h2 id="ligas-title">LIGAS</h2>
       <div class="league-grid">
-        <article class="league-card modal-trigger" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="pes6-panel" data-target="pes6-panel">
+        <article class="league-card modal-trigger neon-border" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="pes6-panel" data-target="pes6-panel">
           <img class="league-card-banner" src="assets/pes6.jpg" alt="PES 6 - Infinity Patch" />
           <div class="league-card-content">
             <h3>PES 6 – Infinity Patch</h3>
@@ -120,7 +119,7 @@
           </div>
         </article>
 
-        <article class="league-card modal-trigger" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="sf-panel" data-target="sf-panel">
+        <article class="league-card modal-trigger neon-border" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="sf-panel" data-target="sf-panel">
           <img id="kofCardImage" class="league-card-banner" src="assets/kof2002.jpg" alt="King of Fighters 2002 - Fightcade" />
           <div class="league-card-content">
             <h3 id="kofCardHeading">—</h3>
@@ -131,9 +130,9 @@
     </section>
 
     <section class="section hud-separator" aria-labelledby="sponsor-title">
-      <h2 id="sponsor-title">SPONSOR OFICIAL</h2>
+      <h2 id="sponsor-title" class="neon-text">SPONSOR OFICIAL</h2>
       <div class="league-grid">
-        <a class="league-card sponsor-card" href="https://www.instagram.com/kelokoclothing.ok?igsh=cHI3ZGV4M2x2M3Zo" target="_blank" rel="noopener noreferrer" aria-label="Ir a la tienda de KELOKO CLOTHING en Instagram">
+        <a class="league-card sponsor-card neon-border" href="https://www.instagram.com/kelokoclothing.ok?igsh=cHI3ZGV4M2x2M3Zo" target="_blank" rel="noopener noreferrer" aria-label="Ir a la tienda de KELOKO CLOTHING en Instagram">
           <img class="league-card-banner" src="assets/sponsor.jpg" alt="Banner de KELOKO CLOTHING" />
           <div class="league-card-content">
             <h3>KELOKO CLOTHING</h3>
@@ -151,7 +150,7 @@
 
     <section class="section hud-separator" aria-labelledby="sistema-liga-title">
       <article
-        class="panel-section system-panel-trigger modal-trigger"
+        class="panel-section system-panel-trigger modal-trigger neon-border"
         role="button"
         tabindex="0"
         aria-haspopup="dialog"
@@ -159,7 +158,7 @@
         data-target="sistema-panel"
       >
         <div class="system-panel-header">
-          <h2 id="sistema-liga-title">SISTEMA DE LIGA</h2>
+          <h2 id="sistema-liga-title" class="neon-text">SISTEMA DE LIGA</h2>
           <span class="system-panel-indicator" aria-hidden="true">↗</span>
         </div>
         <p class="system-panel-hint">Click para ver reglas</p>
@@ -168,7 +167,7 @@
     </section>
 
     <section class="section faq" aria-labelledby="faq-title">
-      <h2 id="faq-title">FAQ</h2>
+      <h2 id="faq-title" class="neon-text">FAQ</h2>
       <details>
         <summary>¿Hay horarios fijos?</summary>
         <p>No. Se juega cuando coinciden dos jugadores disponibles.</p>
@@ -196,7 +195,7 @@
     </section>
 
     <section class="section panel-section hud-separator about-section" aria-labelledby="que-es-title">
-      <h2 id="que-es-title">¿QUÉ ES SUDAKA LEAGUE?</h2>
+      <h2 id="que-es-title" class="neon-text">¿QUÉ ES SUDAKA LEAGUE?</h2>
       <p>
         Sudaka League es una comunidad de juegos retro online llevados a un formato competitivo. No hay horarios fijos:
         los partidos se juegan cuando coinciden dos jugadores disponibles. La coordinación se realiza por WhatsApp y los
@@ -204,8 +203,8 @@
       </p>
     </section>
 
-    <section id="donaciones" class="section panel-section hud-separator donations-section" aria-labelledby="donaciones-title">
-      <h2 id="donaciones-title">💙 Apoyá Sudaka League</h2>
+    <section id="donaciones" class="section panel-section hud-separator donations-section neon-border" aria-labelledby="donaciones-title">
+      <h2 id="donaciones-title" class="neon-text">💙 Apoyá Sudaka League</h2>
       <p class="donation-copy">Sudaka League es un proyecto independiente, sostenido a pulmón y pensado para la comunidad.
 
 Las donaciones serán destinadas a:
@@ -234,10 +233,10 @@ Más interacción y estadísticas
       </div>
 
       <div class="hero-actions donation-actions">
-        <a class="btn btn-primary" href="https://cafecito.app/sudakaleague" target="_blank" rel="noopener noreferrer">DONAR</a>
+        <a class="btn btn-primary neon-box" href="https://cafecito.app/sudakaleague" target="_blank" rel="noopener noreferrer">DONAR</a>
       </div>
 
-      <article id="donacion-transferencia" class="donation-transfer-card" aria-labelledby="donacion-transfer-title">
+      <article id="donacion-transferencia" class="donation-transfer-card neon-border" aria-labelledby="donacion-transfer-title">
         <h3 id="donacion-transfer-title">Datos para transferir</h3>
         <p class="donation-transfer-item"><strong>CVU:</strong> <span id="donation-cvu">0000003100040000000001</span></p>
         <p class="donation-transfer-item"><strong>Alias:</strong> <span id="donation-alias">sudaka.league</span></p>
@@ -390,7 +389,7 @@ UNA VEZ QUE TERMINES EL REGISTRO NO OLVIDES DEJARNOS TU NOMBRE DE USUARIO DE PES
         </section>
       </div>
 
-      <a id="wa-sf-modal" class="btn btn-primary" href="#" target="_blank" rel="noopener noreferrer">Unirme a la comunidad</a>
+      <a id="wa-sf-modal" class="btn btn-primary neon-box" href="#" target="_blank" rel="noopener noreferrer">Unirme a la comunidad</a>
     </section>
 
     <section id="sistema-panel" class="league-modal system-modal" role="dialog" aria-modal="true" aria-labelledby="sistema-panel-title" hidden>
