@@ -9,7 +9,8 @@ window.INTERDIVISIONAL_HISTORY_SEASONS = [
           label: "Octavos Play-offs 1",
           home: { club: "Lanús", player: "Edug98", division: "Primera" },
           away: { club: "Argentinos", player: "Facualanis", division: "Segunda" },
-          winner: "home"
+          winner: "home",
+          result: { home: 2, away: 0 }
         },
         {
           label: "Octavos Play-offs 2",
@@ -59,7 +60,8 @@ window.INTERDIVISIONAL_HISTORY_SEASONS = [
           label: "Cuartos de final Play-offs 1",
           home: { club: "Lanús", player: "Edug98", division: "Primera" },
           away: { club: "Cruzeiro", player: "Crislot26", division: "Segunda" },
-          winner: "away"
+          winner: "away",
+          result: { home: 1, away: 1, pensHome: 4, pensAway: 5 }
         },
         {
           label: "Cuartos de final Play-offs 2",
@@ -85,7 +87,8 @@ window.INTERDIVISIONAL_HISTORY_SEASONS = [
           label: "Semifinal Play-offs 1",
           home: { club: "Cruzeiro", player: "Crislot26", division: "Segunda" },
           away: { club: "Santos FC", player: "LombardoCABJ", division: "Primera" },
-          winner: "away"
+          winner: "away",
+          result: { home: 0, away: 2 }
         },
         {
           label: "Semifinal Play-offs 2",
@@ -99,7 +102,8 @@ window.INTERDIVISIONAL_HISTORY_SEASONS = [
           label: "Final Play-offs 1",
           home: { club: "Santos FC", player: "LombardoCABJ", division: "Primera" },
           away: { club: "Peñarol", player: "Cacherinhooo", division: "Tercera" },
-          winner: "away"
+          winner: "away",
+          result: { home: 2, away: 2, pensHome: 2, pensAway: 4 }
         }
       ],
       final_copa_interdivisional: [
@@ -107,7 +111,8 @@ window.INTERDIVISIONAL_HISTORY_SEASONS = [
           label: "Final Copa Interdivisional 1",
           home: { club: "Cruzeiro", player: "Crislot26", division: "Segunda" },
           away: { club: "Lanús", player: "Larrierismo", division: "Primera" },
-          winner: "away"
+          winner: "away",
+          result: { home: 1, away: 3 }
         }
       ]
     }
