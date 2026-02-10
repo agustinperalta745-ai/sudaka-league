@@ -1216,6 +1216,26 @@ function normalizeWinnerValue(value) {
   return normalizedWinner === "home" || normalizedWinner === "away" ? normalizedWinner : null;
 }
 
+function normalizeMatchResult(result) {
+  if (!result || typeof result !== "object") return null;
+
+  const home = Number(result.home);
+  const away = Number(result.away);
+
+  if (!Number.isFinite(home) || !Number.isFinite(away)) return null;
+
+  const hasPensHome = result.pensHome != null && Number.isFinite(Number(result.pensHome));
+  const hasPensAway = result.pensAway != null && Number.isFinite(Number(result.pensAway));
+  const hasPens = hasPensHome && hasPensAway;
+
+  return {
+    home,
+    away,
+    pensHome: hasPens ? Number(result.pensHome) : null,
+    pensAway: hasPens ? Number(result.pensAway) : null
+  };
+}
+
 function normalizeActiveOctavos(data) {
   if (!Array.isArray(data)) return [];
 
@@ -1223,7 +1243,8 @@ function normalizeActiveOctavos(data) {
     label: match.label || `Octavos Play-offs ${index + 1}`,
     home: match.home,
     away: match.away,
-    winner: normalizeWinnerValue(match.winner)
+    winner: normalizeWinnerValue(match.winner),
+    result: normalizeMatchResult(match.result)
   }));
 }
 
@@ -1242,7 +1263,8 @@ function createMatchesFromPreviousWinners(matches, phaseLabel, phaseWinners = []
       label: `${phaseLabel} ${next.length + 1}`,
       home,
       away,
-      winner: normalizeWinnerValue(phaseWinners[next.length])
+      winner: normalizeWinnerValue(phaseWinners[next.length]),
+      result: null
     });
   }
 
@@ -1333,6 +1355,7 @@ function normalizeInterdivisionalState(data) {
       season.phases[phase.key].forEach((match, index) => {
         match.label = match.label || `${phase.label} ${index + 1}`;
         match.winner = normalizeWinnerValue(match.winner);
+        match.result = normalizeMatchResult(match.result);
       });
     });
   });
@@ -1366,7 +1389,8 @@ function createNextPhaseMatchesFromWinners(matches, phaseLabel) {
       label: `${phaseLabel} ${next.length + 1}`,
       home,
       away,
-      winner: null
+      winner: null,
+      result: null
     });
   }
 
@@ -1463,6 +1487,30 @@ function createCupCrossingTeamNode(teamData, context = {}) {
 
   content.append(player, division);
   team.appendChild(content);
+
+  if (matchData?.result) {
+    const scoreBox = document.createElement("div");
+    scoreBox.className = "cup-crossing-score";
+
+    const winner = normalizeWinnerValue(matchData.winner);
+    const isWinner = (side === "home" && winner === "home") || (side === "away" && winner === "away");
+    scoreBox.classList.toggle("is-winner", isWinner);
+
+    const goals = document.createElement("span");
+    goals.className = "cup-crossing-score-main";
+    goals.textContent = String(side === "home" ? matchData.result.home : matchData.result.away);
+    scoreBox.appendChild(goals);
+
+    const pensValue = side === "home" ? matchData.result.pensHome : matchData.result.pensAway;
+    if (pensValue != null) {
+      const pens = document.createElement("span");
+      pens.className = "cup-crossing-score-pens";
+      pens.textContent = `(${pensValue}) PEN`;
+      scoreBox.appendChild(pens);
+    }
+
+    team.appendChild(scoreBox);
+  }
 
   return team;
 }
