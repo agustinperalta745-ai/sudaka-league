@@ -54,6 +54,9 @@ const PES6_HISTORY = [
 const PES6_CUPOS_LIBRES = 8; // 4ta división
 const KOF_CUPOS_LIBRES = 7;  // King of Fighters 2002
 
+const DONATION_GOAL_TOTAL_ARS = 10000;
+const DONATION_CURRENT_AMOUNT_ARS = 2500;
+
 const WHATSAPP_COMUNIDAD = "https://chat.whatsapp.com/DvRyA2bxAC67x0ulPQYvCa?mode=gi_t";
 const PES6_SEASON_NAME = "Temporada 24";
 const KOF_LEAGUE = {
@@ -198,6 +201,10 @@ const pes6SlotsValue = document.getElementById("pes6-slots");
 const pes6SlotsBadge = document.getElementById("pes6-slots-badge");
 const sfSlotsValue = document.getElementById("sf-slots");
 const sfSlotsBadge = document.getElementById("sf-slots-badge");
+const donationProgressText = document.getElementById("donation-progress-text");
+const donationProgressBar = document.getElementById("donation-progress-bar");
+const donationGoalTrack = document.querySelector(".donation-goal-track");
+
 const kofContentBindings = {
   heroName: document.getElementById("kofHeroName"),
   seasonTitle: document.getElementById("kof-season-title"),
@@ -426,6 +433,23 @@ Competir, sumar puntos y escalar posiciones.
   }
 
   renderList(kofContentBindings.systemTabList, caracteristicas);
+}
+
+function updateDonationGoal() {
+  if (!donationProgressText || !donationProgressBar || !donationGoalTrack) {
+    return;
+  }
+
+  const safeCurrentAmount = Math.max(0, DONATION_CURRENT_AMOUNT_ARS);
+  const safeGoal = Math.max(1, DONATION_GOAL_TOTAL_ARS);
+  const cappedAmount = Math.min(safeCurrentAmount, safeGoal);
+  const progressRatio = cappedAmount / safeGoal;
+  const progressPercent = Math.round(progressRatio * 100);
+
+  donationProgressText.textContent = `$${safeCurrentAmount.toLocaleString("es-AR")} / $${safeGoal.toLocaleString("es-AR")}`;
+  donationProgressBar.style.width = `${progressPercent}%`;
+  donationGoalTrack.setAttribute("aria-valuemax", String(safeGoal));
+  donationGoalTrack.setAttribute("aria-valuenow", String(cappedAmount));
 }
 
 function applyWhatsAppLinks() {
@@ -1075,5 +1099,6 @@ applyWhatsAppLinks();
 updateSeasonStatus();
 updatePes6Remaining();
 updateSlotsStatus();
+updateDonationGoal();
 setInterval(updateSeasonStatus, 60000);
 setInterval(updatePes6Remaining, 60000);
