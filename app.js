@@ -188,43 +188,43 @@ const PES6_HISTORY_META = {
 const CUP_CROSSINGS_OCTAVOS = [
   {
     label: "Octavo 1",
-    teamA: { club: "Lanús", player: "Edug98", division: "Primera" },
-    teamB: { club: "Argentinos", player: "Facualanis", division: "Segunda" }
+    teamA: { shield: "assets/lanus.png", player: "Edug98", division: "1ra div" },
+    teamB: { shield: "assets/argentinos.png", player: "Facualanis", division: "2da div" }
   },
   {
     label: "Octavo 2",
-    teamA: { club: "Millonarios", player: "Fafafa", division: "Primera" },
-    teamB: { club: "Cruzeiro", player: "Crislot26", division: "Segunda" }
+    teamA: { shield: "assets/sanlorenzo.png", player: "Fafafa", division: "1ra div" },
+    teamB: { shield: "assets/cruzeiro.png", player: "Crislot26", division: "2da div" }
   },
   {
     label: "Octavo 3",
-    teamA: { club: "Santos FC", player: "LombardoCABJ", division: "Primera" },
-    teamB: { club: "Sao Paulo", player: "SoyLefo", division: "Segunda" }
+    teamA: { shield: "assets/santos.png", player: "LombardoCABJ", division: "1ra div" },
+    teamB: { shield: "assets/saopaulo.png", player: "SoyLefo", division: "2da div" }
   },
   {
     label: "Octavo 4",
-    teamA: { club: "Estudiantes", player: "Exeeneta", division: "Primera" },
-    teamB: { club: "Internacional SC", player: "Joser17", division: "Segunda" }
+    teamA: { shield: "assets/estudiantes.png", player: "Exeeneta", division: "1ra div" },
+    teamB: { shield: "assets/internacional_sc.png", player: "Joser17", division: "2da div" }
   },
   {
     label: "Octavo 5",
-    teamA: { club: "Peñarol", player: "TunTun", division: "Primera" },
-    teamB: { club: "Huracán", player: "Leom", division: "Tercera" }
+    teamA: { shield: "assets/penarol (1).png", player: "TunTun", division: "1ra div" },
+    teamB: { shield: "assets/huracan.png", player: "Leom", division: "3ra div" }
   },
   {
     label: "Octavo 6",
-    teamA: { club: "Nacional", player: "Aacuis09", division: "Primera" },
-    teamB: { club: "Peñarol", player: "Cacherinhooo", division: "Tercera" }
+    teamA: { shield: "assets/nacional.png", player: "Aacuis09", division: "1ra div" },
+    teamB: { shield: "assets/penarol (1).png", player: "Cacherinhooo", division: "3ra div" }
   },
   {
     label: "Octavo 7",
-    teamA: { club: "Colo Colo", player: "Broko", division: "Primera" },
-    teamB: { club: "Internacional SC", player: "Gab0211", division: "Tercera" }
+    teamA: { shield: "assets/colocolo.png", player: "Broko", division: "1ra div" },
+    teamB: { shield: "assets/internacional_sc.png", player: "Gab0211", division: "3ra div" }
   },
   {
     label: "Octavo 8",
-    teamA: { club: "Argentinos JRS", player: "Ivanarocela", division: "Primera" },
-    teamB: { club: "Colo Colo", player: "Joelignacho", division: "Segunda" }
+    teamA: { shield: "assets/argentinos.png", player: "Ivanarocela", division: "1ra div" },
+    teamB: { shield: "assets/colocolo.png", player: "Joelignacho", division: "2da div" }
   }
 ];
 
@@ -312,11 +312,7 @@ function updatePes6Remaining() {
 }
 
 function updateCupRemaining() {
-  updateCountdown(CUP_INTERDIVISIONAL_FINAL_TARGET, cupRemaining, {
-    showHoursOnLastDay: true,
-    formatDays: (value) => `${value} días restantes`,
-    formatHours: (value) => `${value} horas restantes`
-  });
+  updateCountdown(CUP_INTERDIVISIONAL_FINAL_TARGET, cupRemaining, { showHoursOnLastDay: true });
 }
 
 function updateSeasonStatus() {
@@ -1149,8 +1145,27 @@ function createHistoryAccordionItem(seasonData, index) {
 
 function createCupCrossingTeamNode(teamData) {
   const team = document.createElement("div");
-  team.className = "cup-crossing-team";
-  team.textContent = `${teamData.club} – ${teamData.player} – ${teamData.division}`;
+  team.className = "cup-team";
+
+  const shield = document.createElement("img");
+  shield.className = "cup-team-shield";
+  shield.src = teamData.shield;
+  shield.alt = `Escudo de ${teamData.player}`;
+  shield.loading = "lazy";
+
+  const info = document.createElement("div");
+  info.className = "cup-team-info";
+
+  const player = document.createElement("p");
+  player.className = "cup-team-player";
+  player.textContent = teamData.player;
+
+  const division = document.createElement("p");
+  division.className = "cup-team-division";
+  division.textContent = teamData.division;
+
+  info.append(player, division);
+  team.append(shield, info);
   return team;
 }
 
@@ -1163,7 +1178,7 @@ function createCupCrossingCard(matchData) {
   label.textContent = matchData.label;
 
   const body = document.createElement("div");
-  body.className = "cup-crossing-body";
+  body.className = "cup-match-body";
 
   const versus = document.createElement("p");
   versus.className = "cup-match-versus";

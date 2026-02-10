@@ -555,21 +555,6 @@ summary:focus-visible,
   max-height: 2200px;
 }
 
-.cup-crossing-body {
-  display: grid;
-  gap: 0.55rem;
-}
-
-.cup-crossing-team {
-  margin: 0;
-  border: 1px solid var(--line);
-  border-radius: 0.65rem;
-  padding: 0.55rem 0.65rem;
-  background: var(--surface-alt);
-  font-size: 0.86rem;
-  line-height: 1.35;
-}
-
 .pes6-ranking-row,
 .history-row {
   border: 1px solid var(--line);
@@ -693,7 +678,8 @@ summary:focus-visible,
 }
 
 .cup-team-club,
-.cup-team-player {
+.cup-team-player,
+.cup-team-division {
   margin: 0;
   line-height: 1.25;
   word-break: break-word;
@@ -704,8 +690,15 @@ summary:focus-visible,
 }
 
 .cup-team-player {
-  font-size: 0.8rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.cup-team-division {
+  font-size: 0.78rem;
   color: var(--text-soft);
+  text-transform: lowercase;
 }
 
 .league-modal {
