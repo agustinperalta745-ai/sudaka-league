@@ -457,6 +457,69 @@ summary:focus-visible,
   margin: 0.9rem 0 0;
 }
 
+.donations-section h2 {
+  text-transform: none;
+}
+
+.donation-actions {
+  margin-top: 1.4rem;
+  justify-content: flex-start;
+}
+
+.donation-goal {
+  display: grid;
+  gap: 0.7rem;
+  margin-top: 1.4rem;
+}
+
+.donation-goal-text {
+  margin: 0;
+  font-family: "Orbitron", "Inter", sans-serif;
+  font-weight: 700;
+  color: #bfe9ff;
+  letter-spacing: 0.05em;
+}
+
+.donation-goal-track {
+  width: 100%;
+  border-radius: 999px;
+  border: 1px solid rgba(89, 172, 255, 0.48);
+  background: rgba(5, 11, 28, 0.88);
+  height: 14px;
+  overflow: hidden;
+}
+
+.donation-goal-fill {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #8df0ff 0%, #38d2ff 60%, #7d56ff 100%);
+  box-shadow: 0 0 0.8rem rgba(67, 212, 255, 0.5);
+}
+
+.donation-transfer-card {
+  margin-top: 1.2rem;
+  border: 1px solid rgba(103, 190, 255, 0.36);
+  border-radius: var(--radius-md);
+  background: rgba(8, 13, 33, 0.86);
+  padding: 1rem;
+}
+
+.donation-transfer-card h3 {
+  margin: 0 0 0.8rem;
+  font-size: clamp(1rem, 2.1vw, 1.15rem);
+}
+
+.donation-transfer-item {
+  margin: 0.2rem 0;
+}
+
+.donation-transfer-note {
+  margin: 0.8rem 0 0;
+  color: var(--text-muted);
+}
+
+
 .note-text {
   color: var(--text-muted);
   font-style: italic;
@@ -720,5 +783,9 @@ summary:focus-visible,
     width: 95vw;
     max-height: 95vh;
     padding: 1rem;
+  }
+
+  .donation-actions {
+    margin-top: 1rem;
   }
 }
