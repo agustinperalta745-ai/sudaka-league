@@ -46,7 +46,7 @@ const PES6_HISTORY = [
     season: "Temporada 23",
     divisions: { div1: "Alex_CABJ", div2: "H09", div3: "Leom", div4: "Jona96delgado" },
     cups: { interdiv: "POR DEFINIR", superfinal: "POR DEFINIR", interliga: "POR DEFINIR" },
-    awards: { balonOro: "NO SE DISPUTA", puskas: "POR DEFINIR" }
+    awards: { balonOro: "NO SE DISPUTA", puskas: "Tank" }
   }
 ];
 
