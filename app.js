@@ -135,8 +135,8 @@ const PES6_PALMARES = {
     {
       nombre: "Premio Puskás",
       trofeo: "assets/trofeo_puskas.png",
-      subtitulo: "Ganador (Temporada 22)",
-      ganadores: ["Naxul90"]
+      subtitulo: "Ganador (Temporada 23)",
+      ganadores: ["Tank"]
     }
   ]
 };
