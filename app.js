@@ -374,6 +374,145 @@ let interdivisionalState = null;
 let cupPanelTab = "active";
 const MAX_RANKING_TITLES_DETAIL = 6;
 
+const T24_DIVISIONS = [
+  { key: "primera", label: "Primera División" },
+  { key: "segunda", label: "Segunda División" },
+  { key: "tercera", label: "Tercera División" }
+];
+const T24_PLACEHOLDER_LOGO = toAssetPath("assets/escudos/pes6/placeholder.png");
+let t24TablesLoaded = false;
+
+function slugifyTeamName(value = "") {
+  return value
+    .trim()
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .replace(/[^a-z0-9\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+function getTeamLogoPath(team = "") {
+  const slug = slugifyTeamName(team);
+  if (!slug) return T24_PLACEHOLDER_LOGO;
+  return toAssetPath(`assets/escudos/pes6/${slug}.png`);
+}
+
+function createT24Cell(tag, text, className = "") {
+  const cell = document.createElement(tag);
+  if (className) cell.className = className;
+  cell.textContent = text;
+  return cell;
+}
+
+function createT24TableCard(divisionLabel, rows) {
+  const card = document.createElement("article");
+  card.className = "t24-card sl-card";
+
+  const title = document.createElement("h3");
+  title.className = "t24-card-title";
+  title.textContent = divisionLabel;
+
+  const scroller = document.createElement("div");
+  scroller.className = "t24-table-scroller";
+
+  const table = document.createElement("table");
+  table.className = "t24-table";
+
+  const thead = document.createElement("thead");
+  const headRow = document.createElement("tr");
+  ["Pos", "Escudo", "Jugador", "Equipo", "Pts", "PJ", "PG", "PE", "PP", "GF", "GC", "DG"].forEach((text) => {
+    headRow.appendChild(createT24Cell("th", text));
+  });
+  thead.appendChild(headRow);
+
+  const tbody = document.createElement("tbody");
+
+  rows.forEach((entry, index) => {
+    const row = document.createElement("tr");
+    if (index < 3) {
+      row.classList.add("is-top");
+    }
+
+    row.appendChild(createT24Cell("td", String(entry.pos ?? "-"), "t24-pos"));
+
+    const logoCell = document.createElement("td");
+    logoCell.className = "t24-logo-cell";
+    const logo = document.createElement("img");
+    logo.className = "t24-logo";
+    logo.src = getTeamLogoPath(entry.team || "");
+    logo.alt = `Escudo ${entry.team || "Equipo"}`;
+    logo.loading = "lazy";
+    logo.onerror = () => {
+      logo.onerror = null;
+      logo.src = T24_PLACEHOLDER_LOGO;
+    };
+    logoCell.appendChild(logo);
+    row.appendChild(logoCell);
+
+    row.appendChild(createT24Cell("td", entry.player || "-", "t24-player"));
+    row.appendChild(createT24Cell("td", entry.team || "-", "t24-team"));
+    row.appendChild(createT24Cell("td", String(entry.pts ?? "-")));
+    row.appendChild(createT24Cell("td", String(entry.pj ?? "-")));
+    row.appendChild(createT24Cell("td", String(entry.pg ?? "-")));
+    row.appendChild(createT24Cell("td", String(entry.pe ?? "-")));
+    row.appendChild(createT24Cell("td", String(entry.pp ?? "-")));
+    row.appendChild(createT24Cell("td", String(entry.gf ?? "-")));
+    row.appendChild(createT24Cell("td", String(entry.gc ?? "-")));
+    row.appendChild(createT24Cell("td", String(entry.dg ?? "-"), "t24-dg"));
+
+    tbody.appendChild(row);
+  });
+
+  table.append(thead, tbody);
+  scroller.appendChild(table);
+  card.append(title, scroller);
+  return card;
+}
+
+async function fetchT24DivisionData(key) {
+  const response = await fetch(`${ASSETS_BASE_PATH}/data/gesliga/t24/${key}.json`, { cache: "no-store" });
+  if (!response.ok) {
+    throw new Error(`No se pudo cargar ${key}.json (${response.status})`);
+  }
+
+  const payload = await response.json();
+  if (Array.isArray(payload)) return payload;
+  if (Array.isArray(payload.rows)) return payload.rows;
+  return [];
+}
+
+async function renderT24Tables() {
+  const container = document.getElementById("pes6-tablas-t24");
+  if (!container) return;
+
+  container.replaceChildren();
+  const loading = document.createElement("p");
+  loading.className = "t24-status";
+  loading.textContent = "Cargando tablas T24…";
+  container.appendChild(loading);
+
+  try {
+    const datasets = await Promise.all(T24_DIVISIONS.map((division) => fetchT24DivisionData(division.key)));
+    container.replaceChildren();
+
+    T24_DIVISIONS.forEach((division, index) => {
+      container.appendChild(createT24TableCard(division.label, datasets[index]));
+    });
+
+    t24TablesLoaded = true;
+  } catch (error) {
+    console.error("Error al cargar tablas T24", error);
+    container.replaceChildren();
+    const message = document.createElement("p");
+    message.className = "t24-status is-error";
+    message.textContent = "No se pudieron cargar las tablas T24. Intentá nuevamente en unos minutos.";
+    container.appendChild(message);
+  }
+}
+
 // Asignación centralizada de links editables.
 
 const PES6_FINAL_TARGET = new Date(2026, 1, 22, 23, 59, 0, 0);
@@ -674,6 +813,10 @@ function activateTab(modal, tabButton) {
 
     if (targetPanelId === "pes6-tab-ranking") {
       renderPes6Ranking();
+    }
+
+    if (targetPanelId === "pes6-tab-tablas-t24" && !t24TablesLoaded) {
+      renderT24Tables();
     }
   }
 }
@@ -1886,6 +2029,7 @@ async function initializeApp() {
   setupTabs();
   renderPalmares();
   renderPes6Ranking();
+  renderT24Tables();
   setupCupCrossingsAccordion();
   await initializeInterdivisionalState();
   applyKofLeagueContent();

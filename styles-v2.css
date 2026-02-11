@@ -1981,3 +1981,83 @@ summary:focus-visible,
   line-height: 1;
   cursor: pointer;
 }
+
+.t24-layout {
+  display: grid;
+  gap: 1rem;
+}
+
+.t24-card {
+  background: linear-gradient(145deg, rgba(10, 25, 40, 0.95), rgba(8, 18, 30, 0.95));
+  border: 1px solid rgba(0, 180, 255, 0.2);
+  border-radius: 14px;
+  padding: 1rem;
+}
+
+.t24-card-title {
+  margin: 0 0 0.75rem;
+  color: #8ce4ff;
+  text-shadow: 0 0 10px rgba(0, 190, 255, 0.45);
+}
+
+.t24-table-scroller {
+  overflow-x: auto;
+}
+
+.t24-table {
+  width: 100%;
+  min-width: 780px;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.t24-table th,
+.t24-table td {
+  padding: 0.5rem 0.45rem;
+  border-bottom: 1px solid rgba(0, 180, 255, 0.16);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.t24-table th {
+  color: #8ce4ff;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  background: rgba(5, 15, 28, 0.85);
+}
+
+.t24-player,
+.t24-team {
+  text-align: left !important;
+}
+
+.t24-logo-cell {
+  width: 52px;
+}
+
+.t24-logo {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid rgba(0, 180, 255, 0.35);
+  background: rgba(4, 8, 14, 0.85);
+}
+
+.t24-table tbody tr.is-top {
+  background: linear-gradient(90deg, rgba(0, 170, 255, 0.14), rgba(0, 170, 255, 0.04));
+}
+
+.t24-pos,
+.t24-dg {
+  font-weight: 700;
+}
+
+.t24-status {
+  margin: 0;
+  color: rgba(229, 245, 255, 0.9);
+}
+
+.t24-status.is-error {
+  color: #ff9cae;
+}

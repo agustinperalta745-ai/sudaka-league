@@ -1,0 +1,8 @@
+{
+  "name": "sudaka-league",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "fetch:gesliga:t24": "node scripts/fetch-gesliga-t24.mjs"
+  }
+}
