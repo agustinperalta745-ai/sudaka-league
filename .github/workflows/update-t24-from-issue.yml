@@ -1,0 +1,49 @@
+name: update-t24-from-issue
+
+on:
+  issues:
+    types: [opened, edited]
+
+permissions:
+  contents: write
+  issues: read
+
+jobs:
+  update-from-issue:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Parse issue and update JSON
+        env:
+          GITHUB_EVENT_PATH: ${{ github.event_path }}
+          GITHUB_WORKSPACE: ${{ github.workspace }}
+        run: node scripts/update-t24-from-issue.mjs
+
+      - name: Commit and push if changed
+        run: |
+          mapfile -t files < <(find public/data/gesliga/t24 data/gesliga/t24 -maxdepth 1 -type f -name '*.json' 2>/dev/null | sort)
+
+          if [ ${#files[@]} -eq 0 ]; then
+            echo "No JSON files found to track"
+            exit 0
+          fi
+
+          git add "${files[@]}"
+
+          if git diff --cached --quiet; then
+            echo "No changes detected"
+            exit 0
+          fi
+
+          git config user.name "t24-manual-bot"
+          git config user.email "t24-manual-bot@users.noreply.github.com"
+          git commit -m "chore: update T24 tables from manual issue"
+          git push

@@ -1,0 +1,59 @@
+name: Actualizar Tablas T24
+description: Pegá la tabla de una división para actualizar los JSON T24 manualmente.
+title: "[T24] Actualizar tabla"
+labels:
+  - t24
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Instrucciones
+        1. Elegí la **división** y el **formato** correcto.
+        2. Pegá la tabla completa en el campo `tabla`.
+        3. Columnas requeridas (en este orden):
+           `pos,equipo,pts,pj,pg,pe,pp,gf,gc,dg`
+
+        Ejemplo CSV:
+        ```
+        pos,equipo,pts,pj,pg,pe,pp,gf,gc,dg
+        1,Villarreal - Facu.jey,30,12,9,3,0,21,7,14
+        2,Roma - Ivan,24,12,7,3,2,19,11,8
+        ```
+
+        Ejemplo TSV:
+        ```
+        pos	equipo	pts	pj	pg	pe	pp	gf	gc	dg
+        1	Villarreal - Facu.jey	30	12	9	3	0	21	7	14
+        ```
+  - type: dropdown
+    id: division
+    attributes:
+      label: division
+      description: División a actualizar.
+      options:
+        - primera
+        - segunda
+        - tercera
+        - cuarta
+    validations:
+      required: true
+  - type: dropdown
+    id: formato
+    attributes:
+      label: formato
+      description: Separador usado en la tabla pegada.
+      options:
+        - CSV
+        - TSV
+    validations:
+      required: true
+  - type: textarea
+    id: tabla
+    attributes:
+      label: tabla
+      description: Pegá aquí la tabla (con o sin encabezado).
+      placeholder: |
+        pos,equipo,pts,pj,pg,pe,pp,gf,gc,dg
+        1,Villarreal - Facu.jey,30,12,9,3,0,21,7,14
+    validations:
+      required: true
