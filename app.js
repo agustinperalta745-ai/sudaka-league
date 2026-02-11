@@ -473,7 +473,7 @@ function createT24TableCard(divisionLabel, rows) {
 }
 
 async function fetchT24DivisionData(key) {
-  const response = await fetch(`${ASSETS_BASE_PATH}/data/gesliga/t24/${key}.json`, { cache: "no-store" });
+  const response = await fetch(`${ASSETS_BASE_PATH}/data/t24/${key}.json`, { cache: "no-store" });
   if (!response.ok) {
     throw new Error(`No se pudo cargar ${key}.json (${response.status})`);
   }

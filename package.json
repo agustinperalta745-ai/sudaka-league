@@ -4,5 +4,8 @@
   "type": "module",
   "scripts": {
     "fetch:gesliga:t24": "node scripts/fetch-gesliga-t24.mjs"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0"
   }
 }
