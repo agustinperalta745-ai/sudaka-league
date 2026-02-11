@@ -1,6 +1,19 @@
 {
-  "source": "",
-  "division": "",
-  "fetchedAt": "",
-  "rows": []
+  "source": "manual_issue",
+  "division": "tercera",
+  "fetchedAt": "2026-02-11T23:24:08.170Z",
+  "rows": [
+    {
+      "pos": 2,
+      "equipo": "H09 - Villareal",
+      "pts": 18,
+      "pj": 18,
+      "pg": 5,
+      "pe": 3,
+      "pp": 10,
+      "gf": 29,
+      "gc": 38,
+      "dg": -9
+    }
+  ]
 }
