@@ -1,4 +1,4 @@
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import * as cheerio from "cheerio";
@@ -163,6 +163,30 @@ async function saveDivision(key, rows) {
   }
 }
 
+async function loadManualFallback(key) {
+  const manualPath = path.join(repoRoot, "data", "t24", `${key}.manual.json`);
+
+  try {
+    const content = await readFile(manualPath, "utf8");
+    const parsed = JSON.parse(content);
+
+    if (!Array.isArray(parsed)) {
+      console.warn(`⚠️ ${key}: el fallback manual no es un array válido. Se guardará un array vacío.`);
+      return [];
+    }
+
+    return parsed;
+  } catch (error) {
+    if (error?.code === "ENOENT") {
+      console.warn(`⚠️ ${key}: no existe fallback manual en data/t24/${key}.manual.json. Se guardará un array vacío.`);
+      return [];
+    }
+
+    console.warn(`⚠️ ${key}: no se pudo leer fallback manual (${error.message}). Se guardará un array vacío.`);
+    return [];
+  }
+}
+
 async function main() {
   await Promise.all(SOURCES.map((source) => saveDivision(source.key, [])));
 
@@ -172,9 +196,11 @@ async function main() {
     let rows;
     try {
       rows = parseClassificationRows(html, source.key);
+      console.log(`ℹ️ Usando datos automáticos para ${source.key}`);
     } catch (error) {
-      console.warn(`⚠️ ${source.key}: ${error.message}. Se guardará un array vacío.`);
-      rows = [];
+      console.warn(`⚠️ ${source.key}: ${error.message}`);
+      rows = await loadManualFallback(source.key);
+      console.log(`ℹ️ Usando fallback manual para ${source.key}`);
     }
 
     await saveDivision(source.key, rows);
