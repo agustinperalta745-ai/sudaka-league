@@ -159,8 +159,8 @@ function parseClassificationRows(html) {
   return { rows: [], tableFound: false };
 }
 
-function buildInformeLigaUrl(ligaId) {
-  return `https://www.gesliga.com/InformeLiga.aspx?Liga=${ligaId}&Clasificacion=S&Leyenda=S`;
+function buildClasificacionUrl(ligaId) {
+  return `https://www.gesliga.com/Clasificacion.aspx?Liga=${ligaId}`;
 }
 
 async function fetchHtml(url) {
@@ -203,7 +203,7 @@ async function main() {
   await Promise.all(SOURCES.map((source) => saveDivision(source.key, buildPayload(source, [], startedAt))));
 
   for (const source of SOURCES) {
-    const url = buildInformeLigaUrl(source.ligaId);
+    const url = buildClasificacionUrl(source.ligaId);
     const html = await fetchHtml(url);
 
     const { rows, tableFound } = parseClassificationRows(html);
