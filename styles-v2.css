@@ -919,7 +919,8 @@ summary:focus-visible,
   gap: 0.6rem;
 }
 
-.pes6-ranking-header {
+.pes6-ranking-header,
+.rankingHeaderRow {
   display: grid;
   grid-template-columns: 52px minmax(0, 1fr) auto auto;
   align-items: center;
@@ -932,10 +933,12 @@ summary:focus-visible,
   white-space: nowrap;
 }
 
-.pes6-ranking-player {
+.pes6-ranking-player,
+.rankingName {
   min-width: 0;
-  overflow-wrap: anywhere;
-  word-break: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .pes6-ranking-stats {
@@ -957,6 +960,14 @@ summary:focus-visible,
 
 .pes6-ranking-breakdown {
   margin: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  line-height: 1.25;
+}
+
+.pes6-ranking-details {
+  margin-top: 10px;
   white-space: normal;
   overflow-wrap: anywhere;
   word-break: break-word;
@@ -986,29 +997,36 @@ summary:focus-visible,
 }
 
 @media (max-width: 420px) {
-  .pes6-ranking-header {
+  .pes6-ranking-header,
+  .rankingHeaderRow {
     grid-template-columns: 44px minmax(0, 1fr) auto;
     grid-template-areas:
-      "position player toggle"
-      "position stats stats";
+      "pos name btn"
+      ". meta btn";
     grid-auto-rows: auto;
     row-gap: 6px;
   }
 
-  .pes6-ranking-position {
-    grid-area: position;
+  .pes6-ranking-position,
+  .rankingPos {
+    grid-area: pos;
   }
 
-  .pes6-ranking-player {
-    grid-area: player;
+  .pes6-ranking-player,
+  .rankingName {
+    grid-area: name;
   }
 
-  .pes6-ranking-stats {
-    grid-area: stats;
+  .pes6-ranking-stats,
+  .rankingMeta {
+    grid-area: meta;
+    font-size: 12px;
+    opacity: 0.9;
   }
 
-  .pes6-ranking-toggle {
-    grid-area: toggle;
+  .pes6-ranking-toggle,
+  .rankingBtn {
+    grid-area: btn;
     justify-self: end;
   }
 }
