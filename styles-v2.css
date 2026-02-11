@@ -190,6 +190,27 @@ a {
   text-shadow: var(--neon-text-shadow);
 }
 
+.sl-section-title {
+  text-shadow: var(--neon-text-shadow);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.sl-divider {
+  position: relative;
+}
+
+.sl-divider::after {
+  content: "";
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  bottom: -0.45rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--line), transparent);
+  box-shadow: var(--divider-glow), 0 0 14px -10px rgba(88, 201, 255, 0.9);
+}
+
 @keyframes neonPulse {
   0%,
   100% {
@@ -251,6 +272,8 @@ a {
 }
 
 .btn,
+.sl-btn,
+.sl-pill,
 .sponsor-cta,
 .pes6-ranking-toggle,
 .history-accordion-trigger,
@@ -260,7 +283,9 @@ a {
   transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease, transform 180ms ease;
 }
 
-.btn {
+.btn,
+.sl-btn,
+.sl-pill {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -293,8 +318,14 @@ a {
 }
 
 .btn:hover,
+.sl-btn:hover,
+.sl-pill:hover,
 .btn:focus-visible,
+.sl-btn:focus-visible,
+.sl-pill:focus-visible,
 .btn:active,
+.sl-btn:active,
+.sl-pill:active,
 .sponsor-cta:hover,
 .sponsor-cta:focus-visible,
 .sponsor-cta:active,
@@ -315,12 +346,16 @@ a {
 }
 
 .btn:active,
+.sl-btn:active,
+.sl-pill:active,
 .tab-btn:active,
 .cup-tab-btn:active {
   transform: translateY(1px);
 }
 
 .btn[disabled],
+.sl-btn[disabled],
+.sl-pill[disabled],
 .btn:disabled {
   opacity: 0.46;
   cursor: not-allowed;
@@ -328,6 +363,8 @@ a {
 }
 
 .btn:focus-visible,
+.sl-btn:focus-visible,
+.sl-pill:focus-visible,
 .league-card:focus-visible,
 .system-panel-trigger:focus-visible,
 summary:focus-visible,
@@ -354,6 +391,21 @@ summary:focus-visible,
   box-shadow: var(--divider-glow), 0 0 14px -10px rgba(88, 201, 255, 0.9);
 }
 
+
+.sl-card {
+  border: 1px solid rgba(88, 201, 255, 0.24);
+  box-shadow: var(--neon-border-shadow);
+  border-radius: var(--radius-md);
+  background: var(--bg-card-strong);
+  padding: 0.95rem;
+}
+
+.sl-card:hover,
+.sl-card:focus-visible {
+  border-color: rgba(88, 201, 255, 0.52);
+  box-shadow: var(--neon-box-shadow-hover);
+}
+
 .panel-section,
 .faq,
 .league-card,
@@ -367,6 +419,7 @@ summary:focus-visible,
   box-shadow: var(--neon-border-shadow), var(--shadow-card);
   background: linear-gradient(180deg, rgba(22, 33, 51, 0.95), rgba(13, 22, 35, 0.95));
 }
+
 
 .panel-section,
 .faq,
@@ -693,6 +746,11 @@ summary:focus-visible,
   border-radius: 14px;
 }
 
+.pes6-ranking-row.is-top {
+  border-color: rgba(88, 201, 255, 0.72);
+  box-shadow: 0 0 0 1px rgba(88, 201, 255, 0.35), 0 0 20px -8px rgba(88, 201, 255, 0.66);
+}
+
 .palmares-trophy,
 .history-trophy {
   width: 40px;
@@ -702,6 +760,8 @@ summary:focus-visible,
 
 .palmares-subtitle,
 .pes6-ranking-subtitle,
+.history-section h4,
+.history-label,
 .cup-history-heading,
 .cup-history-title,
 .cup-round-title {
@@ -751,7 +811,8 @@ summary:focus-visible,
 }
 
 .cup-tab-btn,
-.tab-btn {
+.tab-btn,
+.sl-tab {
   border: 1px solid var(--line);
   border-radius: 0.75rem;
   background: rgba(11, 20, 33, 0.82);
@@ -763,7 +824,9 @@ summary:focus-visible,
 }
 
 .cup-tab-btn.is-active,
-.tab-btn.is-active {
+.tab-btn.is-active,
+.sl-tab.is-active,
+.sl-tab[aria-selected="true"] {
   border-color: rgba(88, 201, 255, 0.72);
   background: rgba(88, 201, 255, 0.14);
   box-shadow: var(--neon-box-shadow-hover);
@@ -986,7 +1049,9 @@ summary:focus-visible,
 }
 
 .pes6-ranking-toggle,
-.history-accordion-trigger {
+.history-accordion-trigger,
+.sl-pill,
+.sl-btn {
   border: 1px solid var(--line);
   border-radius: 0.7rem;
   background: rgba(7, 14, 25, 0.82);
