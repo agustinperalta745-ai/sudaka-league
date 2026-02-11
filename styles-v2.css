@@ -1,28 +1,32 @@
 :root {
-  --bg-main: #050b15;
-  --bg-elevated: #0a1323;
-  --bg-card: #0f1b2f;
-  --bg-card-strong: #15243a;
-  --text-main: #eef4ff;
-  --text-muted: #aebbcf;
+  --bg-main: #060d18;
+  --bg-elevated: #0b1527;
+  --bg-card: rgba(15, 30, 54, 0.8);
+  --bg-card-strong: rgba(13, 26, 46, 0.92);
+  --text-main: #eef5ff;
+  --text-muted: #aebfd7;
   --line: rgba(173, 191, 215, 0.18);
   --line-strong: rgba(173, 191, 215, 0.34);
-  --accent: #58c9ff;
-  --accent-soft: rgba(88, 201, 255, 0.22);
+  --accent: #62ceff;
+  --accent-soft: rgba(98, 206, 255, 0.2);
+  --accent-soft-strong: rgba(98, 206, 255, 0.34);
+  --card-border: rgba(98, 206, 255, 0.26);
   --danger: #ff6f6f;
   --radius-sm: 0.7rem;
   --radius-md: 1rem;
   --radius-lg: 1.3rem;
-  --shadow-soft: 0 14px 34px rgba(0, 0, 0, 0.34);
-  --shadow-card: 0 16px 26px rgba(0, 0, 0, 0.26);
-  --glow: 0 0 0 1px rgba(88, 201, 255, 0.28), 0 0 12px -6px rgba(88, 201, 255, 0.45), 0 0 22px -16px rgba(88, 201, 255, 0.35);
-  --divider-glow: 0 5px 12px -8px rgba(88, 201, 255, 0.65);
-  --neon-text-shadow: 0 0 6px rgba(88, 201, 255, 0.22), 0 0 13px rgba(88, 201, 255, 0.2), 0 0 22px rgba(88, 201, 255, 0.16);
-  --neon-text-shadow-strong: 0 0 7px rgba(88, 201, 255, 0.28), 0 0 16px rgba(88, 201, 255, 0.25), 0 0 30px rgba(88, 201, 255, 0.2);
-  --neon-border-color: rgba(88, 201, 255, 0.38);
-  --neon-box-shadow: 0 0 0 1px rgba(88, 201, 255, 0.2), 0 0 16px -8px rgba(88, 201, 255, 0.5), 0 10px 24px rgba(0, 0, 0, 0.28);
-  --neon-box-shadow-hover: 0 0 0 1px rgba(88, 201, 255, 0.38), 0 0 20px -8px rgba(88, 201, 255, 0.62), 0 12px 26px rgba(0, 0, 0, 0.32);
-  --neon-border-shadow: 0 0 0 1px rgba(88, 201, 255, 0.2), 0 0 15px -11px rgba(88, 201, 255, 0.62);
+  --shadow-soft: 0 14px 34px rgba(0, 0, 0, 0.4);
+  --shadow-card: 0 16px 30px rgba(0, 0, 0, 0.34);
+  --glow: 0 0 0 1px rgba(98, 206, 255, 0.22), 0 0 14px -8px rgba(98, 206, 255, 0.36), 0 14px 26px rgba(0, 0, 0, 0.3);
+  --divider-glow: 0 5px 12px -8px rgba(98, 206, 255, 0.5);
+  --neon-text-shadow: 0 0 5px rgba(98, 206, 255, 0.18), 0 0 10px rgba(98, 206, 255, 0.15);
+  --neon-text-shadow-strong: 0 0 7px rgba(98, 206, 255, 0.24), 0 0 14px rgba(98, 206, 255, 0.2);
+  --neon-border-color: rgba(98, 206, 255, 0.35);
+  --neon-box-shadow: 0 0 0 1px rgba(98, 206, 255, 0.18), 0 0 14px -10px rgba(98, 206, 255, 0.4), 0 12px 24px rgba(0, 0, 0, 0.32);
+  --neon-box-shadow-hover: 0 0 0 1px rgba(98, 206, 255, 0.34), 0 0 20px -10px rgba(98, 206, 255, 0.56), 0 14px 26px rgba(0, 0, 0, 0.34);
+  --neon-border-shadow: 0 0 0 1px rgba(98, 206, 255, 0.18), 0 0 14px -10px rgba(98, 206, 255, 0.46);
+  --title-font: "Orbitron", "Rajdhani", "Exo 2", "Inter", sans-serif;
+  --body-font: "Inter", "Roboto", system-ui, -apple-system, sans-serif;
   --max-width: min(1160px, 92%);
 }
 
@@ -38,11 +42,11 @@ body {
   margin: 0;
   min-height: 100vh;
   overflow-x: hidden;
-  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  font-family: var(--body-font);
   font-size: 16px;
   line-height: 1.7;
   color: var(--text-main);
-  background: linear-gradient(180deg, #040913 0%, var(--bg-main) 44%, #060d18 100%);
+  background: linear-gradient(180deg, #050a14 0%, #081224 52%, #0b1727 100%);
 }
 
 body.no-scroll {
@@ -54,10 +58,8 @@ body.no-scroll {
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background-image: linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 80px 80px;
-  mask-image: radial-gradient(circle at 20% 0%, black, transparent 62%);
-  opacity: 0.42;
+  background: radial-gradient(circle at 15% 10%, rgba(98, 206, 255, 0.07), transparent 48%), radial-gradient(circle at 84% 0%, rgba(98, 206, 255, 0.05), transparent 42%);
+  opacity: 0.68;
 }
 
 .section {
@@ -81,7 +83,7 @@ h3,
 .cup-tab-btn,
 .season-badge,
 .topbar-title {
-  font-family: "Rajdhani", "Inter", sans-serif;
+  font-family: var(--title-font);
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
@@ -112,9 +114,9 @@ a {
   position: sticky;
   top: 0;
   z-index: 30;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid rgba(173, 191, 215, 0.24);
   backdrop-filter: blur(10px);
-  background: rgba(5, 11, 21, 0.85);
+  background: rgba(6, 12, 23, 0.88);
 }
 
 .topbar-inner {
@@ -142,7 +144,7 @@ a {
   height: 43px;
   flex: 0 0 auto;
   object-fit: contain;
-  filter: drop-shadow(0 0 7px rgba(88, 201, 255, 0.33)) drop-shadow(0 0 15px rgba(88, 201, 255, 0.22));
+  filter: drop-shadow(0 0 6px rgba(98, 206, 255, 0.24)) drop-shadow(0 0 12px rgba(98, 206, 255, 0.18));
 }
 
 .topbar-title {
@@ -154,7 +156,7 @@ a {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  text-shadow: var(--neon-text-shadow);
+  text-shadow: 0 0 5px rgba(98, 206, 255, 0.2);
 }
 
 .topbar-actions {
@@ -177,7 +179,7 @@ a {
 .neon-box:focus-visible,
 .neon-box:active {
   box-shadow: var(--neon-box-shadow-hover);
-  border-color: rgba(88, 201, 255, 0.54);
+  border-color: rgba(98, 206, 255, 0.54);
 }
 
 .neon-border {
@@ -248,7 +250,7 @@ a {
   margin: 1rem 0 0.9rem;
   font-size: clamp(2.6rem, 10.8vw, 6rem);
   text-shadow: var(--neon-text-shadow-strong);
-  animation: neonPulse 8s ease-in-out infinite;
+  animation: neonPulse 10s ease-in-out infinite;
 }
 
 .subtitle,
@@ -292,29 +294,28 @@ a {
   gap: 0.4rem;
   min-height: 48px;
   padding: 0.8rem 1.3rem;
-  border-radius: 0.9rem;
-  border: 1px solid var(--line-strong);
-  background: linear-gradient(180deg, #16253a, #0f1a2c);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--card-border);
+  background: linear-gradient(180deg, rgba(23, 45, 74, 0.96), rgba(12, 24, 42, 0.94));
   color: var(--text-main);
   text-decoration: none;
   font-size: 0.82rem;
   font-weight: 700;
   letter-spacing: 0.07em;
   text-transform: uppercase;
-  box-shadow: var(--neon-box-shadow);
+  box-shadow: var(--neon-box-shadow), inset 0 0 0 1px rgba(255, 255, 255, 0.03);
   cursor: pointer;
 }
 
 .btn-primary {
-  border-color: rgba(88, 201, 255, 0.5);
-  background: linear-gradient(180deg, #173148, #11243a);
-  animation: neonPulse 10s ease-in-out infinite;
+  border-color: rgba(98, 206, 255, 0.56);
+  background: linear-gradient(180deg, rgba(27, 58, 89, 0.98), rgba(15, 34, 55, 0.96));
 }
 
 .btn-secondary {
-  background: linear-gradient(180deg, #141f31, #0f1828);
-  border-color: rgba(88, 201, 255, 0.26);
-  box-shadow: 0 0 0 1px rgba(88, 201, 255, 0.12), 0 0 12px -10px rgba(88, 201, 255, 0.52), 0 10px 20px rgba(0, 0, 0, 0.24);
+  background: linear-gradient(180deg, rgba(20, 35, 57, 0.95), rgba(12, 22, 39, 0.92));
+  border-color: rgba(98, 206, 255, 0.26);
+  box-shadow: 0 0 0 1px rgba(98, 206, 255, 0.12), 0 0 12px -10px rgba(98, 206, 255, 0.34), 0 10px 20px rgba(0, 0, 0, 0.24);
 }
 
 .btn:hover,
@@ -341,7 +342,7 @@ a {
 .history-accordion-trigger:focus-visible,
 .close-btn:hover,
 .close-btn:focus-visible {
-  border-color: rgba(88, 201, 255, 0.74);
+  border-color: rgba(98, 206, 255, 0.74);
   box-shadow: var(--neon-box-shadow-hover);
 }
 
@@ -393,10 +394,10 @@ summary:focus-visible,
 
 
 .sl-card {
-  border: 1px solid rgba(88, 201, 255, 0.24);
+  border: 1px solid var(--card-border);
   box-shadow: var(--neon-border-shadow);
   border-radius: var(--radius-md);
-  background: var(--bg-card-strong);
+  background: linear-gradient(180deg, rgba(18, 35, 58, 0.88), rgba(10, 23, 41, 0.88));
   padding: 0.95rem;
 }
 
@@ -414,10 +415,11 @@ summary:focus-visible,
 .palmares-block,
 .pes6-ranking,
 .cup-crossings-panel {
-  border: 1px solid rgba(88, 201, 255, 0.24);
+  border: 1px solid var(--card-border);
   border-radius: var(--radius-lg);
   box-shadow: var(--neon-border-shadow), var(--shadow-card);
-  background: linear-gradient(180deg, rgba(22, 33, 51, 0.95), rgba(13, 22, 35, 0.95));
+  background: linear-gradient(180deg, rgba(16, 31, 53, 0.88), rgba(10, 22, 39, 0.92));
+  backdrop-filter: blur(3px);
 }
 
 
@@ -459,7 +461,7 @@ summary:focus-visible,
 
 .season-card {
   padding: clamp(1.1rem, 3vw, 1.7rem);
-  background: linear-gradient(180deg, rgba(26, 40, 62, 0.88), rgba(14, 24, 39, 0.92));
+  background: linear-gradient(180deg, rgba(21, 40, 68, 0.86), rgba(11, 23, 40, 0.9));
 }
 
 .season-card-header {
@@ -507,7 +509,7 @@ summary:focus-visible,
   border-radius: 0.8rem;
   padding: 0.9rem;
   text-align: center;
-  font-family: "Rajdhani", sans-serif;
+  font-family: var(--title-font);
   font-size: clamp(1rem, 4.5vw, 1.45rem);
   letter-spacing: 0.05em;
   background: var(--bg-card-strong);
@@ -613,9 +615,9 @@ summary:focus-visible,
   padding: 0.6rem 1rem;
   border-radius: 0.8rem;
   border: 1px solid var(--line-strong);
-  background: linear-gradient(180deg, #16253a, #0f1a2c);
+  background: linear-gradient(180deg, rgba(23, 45, 74, 0.95), rgba(12, 24, 42, 0.92));
   color: var(--text-main);
-  font-family: "Rajdhani", sans-serif;
+  font-family: var(--title-font);
   font-size: 0.8rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -675,7 +677,7 @@ summary:focus-visible,
 
 .donation-goal-text {
   margin: 0;
-  font-family: "Rajdhani", sans-serif;
+  font-family: var(--title-font);
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
@@ -709,10 +711,10 @@ summary:focus-visible,
 .history-accordion-item,
 .cup-round-section,
 .cup-match-card {
-  border: 1px solid rgba(88, 201, 255, 0.24);
+  border: 1px solid var(--card-border);
   box-shadow: var(--neon-border-shadow);
   border-radius: var(--radius-md);
-  background: var(--bg-card-strong);
+  background: linear-gradient(180deg, rgba(18, 35, 58, 0.88), rgba(10, 23, 41, 0.9));
   padding: 0.95rem;
 }
 
@@ -733,7 +735,7 @@ summary:focus-visible,
 .history-row {
   border: 1px solid var(--line);
   border-radius: 0.75rem;
-  background: rgba(9, 16, 28, 0.7);
+  background: rgba(10, 19, 34, 0.82);
   padding: 0.75rem;
 }
 
@@ -742,13 +744,15 @@ summary:focus-visible,
   height: auto;
   max-height: none;
   overflow: hidden;
-  padding: 12px;
-  border-radius: 14px;
+  padding: 14px;
+  border-radius: 16px;
+  border-color: rgba(98, 206, 255, 0.2);
+  box-shadow: 0 0 0 1px rgba(98, 206, 255, 0.08), 0 12px 22px rgba(0, 0, 0, 0.26);
 }
 
 .pes6-ranking-row.is-top {
-  border-color: rgba(88, 201, 255, 0.72);
-  box-shadow: 0 0 0 1px rgba(88, 201, 255, 0.35), 0 0 20px -8px rgba(88, 201, 255, 0.66);
+  border-color: rgba(98, 206, 255, 0.58);
+  box-shadow: 0 0 0 1px rgba(98, 206, 255, 0.3), 0 0 18px -10px rgba(98, 206, 255, 0.55), 0 12px 22px rgba(0, 0, 0, 0.3);
 }
 
 .palmares-trophy,
@@ -996,12 +1000,29 @@ summary:focus-visible,
   white-space: nowrap;
 }
 
+.pes6-ranking-position,
+.rankingPos {
+  width: 2.3rem;
+  min-height: 2.3rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid rgba(98, 206, 255, 0.35);
+  background: rgba(98, 206, 255, 0.1);
+  font-family: var(--title-font);
+  letter-spacing: 0.06em;
+}
+
 .pes6-ranking-player,
 .rankingName {
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-size: clamp(1rem, 2.6vw, 1.2rem);
+  font-weight: 700;
+  letter-spacing: 0.03em;
 }
 
 .pes6-ranking-stats {
@@ -1014,7 +1035,7 @@ summary:focus-visible,
 .history-accordion-panel {
   margin-top: 0.65rem;
   padding-top: 0.65rem;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid rgba(98, 206, 255, 0.2);
 }
 
 .pes6-ranking-panel {
@@ -1035,6 +1056,7 @@ summary:focus-visible,
   overflow-wrap: anywhere;
   word-break: break-word;
   line-height: 1.25;
+  color: var(--text-muted);
 }
 
 .history-accordion-panel {
@@ -1052,13 +1074,32 @@ summary:focus-visible,
 .history-accordion-trigger,
 .sl-pill,
 .sl-btn {
-  border: 1px solid var(--line);
+  border: 1px solid rgba(98, 206, 255, 0.26);
   border-radius: 0.7rem;
-  background: rgba(7, 14, 25, 0.82);
+  background: rgba(12, 24, 41, 0.88);
   color: var(--text-main);
   padding: 0.4rem 0.65rem;
   font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
   cursor: pointer;
+}
+
+.pes6-ranking-toggle {
+  min-height: 38px;
+  padding-inline: 0.8rem;
+}
+
+.pes6-ranking-total,
+.rankingTotal {
+  font-size: 1.02rem;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.pes6-ranking-total-label,
+.rankingMeta {
+  color: var(--text-muted);
 }
 
 @media (max-width: 420px) {
@@ -1119,7 +1160,7 @@ summary:focus-visible,
 }
 
 .cup-match-versus {
-  font-family: "Rajdhani", sans-serif;
+  font-family: var(--title-font);
   letter-spacing: 0.08em;
   color: var(--text-muted);
 }
