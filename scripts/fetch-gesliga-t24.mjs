@@ -37,7 +37,9 @@ function normalizeText(value = "") {
 }
 
 function toNumber(value, fallback = 0) {
-  const normalized = String(value ?? "").replace(/[^\d-]/g, "");
+  const normalized = String(value ?? "")
+    .replace(/[\u200B-\u200D\uFEFF]/g, "")
+    .replace(/[^\d+-]/g, "");
   const parsed = Number.parseInt(normalized, 10);
   return Number.isNaN(parsed) ? fallback : parsed;
 }
@@ -74,19 +76,37 @@ function findHeaderIndexes(headerCells) {
   const normalizedHeaders = headerCells.map((header) => normalizeText(header));
   const indexes = {};
 
-  for (const [key, aliases] of Object.entries(REQUIRED_HEADER_GROUPS)) {
-    indexes[key] = normalizedHeaders.findIndex((header) => aliases.includes(header));
-    if (indexes[key] < 0) return null;
+  normalizedHeaders.forEach((header, index) => {
+    const normalized = header.toLowerCase();
+
+    if (indexes.pos === undefined && /^pos$/i.test(normalized)) indexes.pos = index;
+    if (indexes.pts === undefined && /^pt(s)?$/i.test(normalized)) indexes.pts = index;
+    if (indexes.pj === undefined && /^pj$/i.test(normalized)) indexes.pj = index;
+    if (indexes.pg === undefined && /^pg$/i.test(normalized)) indexes.pg = index;
+    if (indexes.pe === undefined && /^pe$/i.test(normalized)) indexes.pe = index;
+    if (indexes.pp === undefined && /^pp$/i.test(normalized)) indexes.pp = index;
+    if (indexes.gf === undefined && /^gf$/i.test(normalized)) indexes.gf = index;
+    if (indexes.gc === undefined && /^gc$/i.test(normalized)) indexes.gc = index;
+    if (indexes.dg === undefined && /^dg$/i.test(normalized)) indexes.dg = index;
+  });
+
+  for (const key of Object.keys(REQUIRED_HEADER_GROUPS)) {
+    if (indexes[key] === undefined) return null;
   }
 
-  const teamPlayerIndex = normalizedHeaders.findIndex((header) =>
+  const firstStatIndex = Math.min(indexes.pts, indexes.pj, indexes.pg, indexes.pe, indexes.pp, indexes.gf, indexes.gc, indexes.dg);
+
+  const teamPlayerByHeader = normalizedHeaders.findIndex((header) =>
     NORMALIZED_TEAM_PLAYER_HEADERS.includes(header)
   );
 
+  const pos = indexes.pos ?? 0;
+  const fallbackTeamPlayerIndex = Number.isInteger(indexes.pos) ? indexes.pos + 1 : Math.max(0, firstStatIndex - 1);
+
   return {
     ...indexes,
-    teamPlayer: teamPlayerIndex >= 0 ? teamPlayerIndex : 1,
-    pos: 0
+    pos,
+    teamPlayer: teamPlayerByHeader >= 0 ? teamPlayerByHeader : fallbackTeamPlayerIndex
   };
 }
 
@@ -94,7 +114,13 @@ function getRowCells($, row, selector = "th, td") {
   return $(row)
     .find(selector)
     .toArray()
-    .map((cell) => $(cell).text().replace(/\s+/g, " ").trim());
+    .map((cell) =>
+      $(cell)
+        .text()
+        .replace(/[\u00A0\u200B-\u200D\uFEFF]/g, " ")
+        .replace(/\s+/g, " ")
+        .trim()
+    );
 }
 
 function parseClassificationRows(html) {
@@ -111,7 +137,13 @@ function parseClassificationRows(html) {
 
     const data = [];
 
-    rows.slice(1).forEach((row) => {
+    const bodyRows = $(table)
+      .find("tbody tr")
+      .toArray()
+      .filter((row) => $(row).find("td").length > 0);
+    const rowsToParse = bodyRows.length ? bodyRows : rows.slice(1);
+
+    rowsToParse.forEach((row) => {
       const cells = getRowCells($, row, "td");
       if (!cells.length) return;
 
@@ -130,13 +162,16 @@ function parseClassificationRows(html) {
       if (cells.length <= minColumnIndex) return;
 
       const getCell = (index) => (index >= 0 ? cells[index] ?? "" : "");
-      const rawPos = getCell(0);
+      const rawPos = getCell(indexes.pos ?? 0);
       const pos = toNumber(rawPos, null);
 
       const combined = getCell(indexes.teamPlayer);
       const { team, player } = splitTeamAndPlayer(combined);
 
-      if (!team && !player) return;
+      const pts = toNumber(getCell(indexes.pts), Number.NaN);
+      const pj = toNumber(getCell(indexes.pj), Number.NaN);
+
+      if (!team || Number.isNaN(pts) || Number.isNaN(pj)) return;
 
       data.push({
         pos,
@@ -144,8 +179,8 @@ function parseClassificationRows(html) {
         jugador: player,
         team,
         player,
-        pts: toNumber(getCell(indexes.pts)),
-        pj: toNumber(getCell(indexes.pj)),
+        pts,
+        pj,
         pg: toNumber(getCell(indexes.pg)),
         pe: toNumber(getCell(indexes.pe)),
         pp: toNumber(getCell(indexes.pp)),
@@ -197,12 +232,14 @@ async function main() {
 
     if (!tableFound) {
       console.warn(`[T24] No se encontró tabla válida para ${source.key}`);
-    } else if (!rows.length) {
-      console.warn(`[T24] Tabla detectada para ${source.key} pero sin filas válidas`);
+    }
+
+    if (!rows.length) {
+      console.warn(`[gesliga] ${source.key}: 0 filas válidas (posible cambio de HTML)`);
     }
 
     await saveDivision(source.key, rows);
-    console.log(`✅ ${source.key}: ${rows.length} filas`);
+    console.log(`[gesliga] ${source.key}: ${rows.length} filas`);
   }
 }
 
