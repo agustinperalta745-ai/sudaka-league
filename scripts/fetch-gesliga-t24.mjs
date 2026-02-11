@@ -47,13 +47,17 @@ function splitTeamAndPlayer(value = "") {
   const text = String(value ?? "").trim();
   if (!text) return { team: "", player: "" };
 
-  const separatorIndex = text.indexOf(" - ");
-  if (separatorIndex === -1) {
+  const parts = text
+    .split(/\s+-\s+/)
+    .map((part) => part.trim())
+    .filter(Boolean);
+
+  if (parts.length < 2) {
     return { team: text, player: "" };
   }
 
-  const team = text.slice(0, separatorIndex).trim();
-  const player = text.slice(separatorIndex + 3).trim();
+  const [team, ...playerParts] = parts;
+  const player = playerParts.join(" - ").trim();
   return { team, player };
 }
 
@@ -82,33 +86,79 @@ function hasClassificationShape(indexes) {
   return indexes.pts >= 0 && indexes.pj >= 0 && indexes.pg >= 0 && indexes.pe >= 0 && indexes.pp >= 0;
 }
 
+function getRowCells($, row) {
+  return $(row)
+    .find("th, td")
+    .toArray()
+    .map((cell) => $(cell).text().replace(/\s+/g, " ").trim());
+}
+
+function findHeaderRowIndex($, rows) {
+  for (let i = 0; i < rows.length; i += 1) {
+    const cells = getRowCells($, rows[i]);
+    if (!cells.length) continue;
+    const indexes = resolveHeaderIndexes(cells);
+    if (hasClassificationShape(indexes)) {
+      return { rowIndex: i, indexes };
+    }
+  }
+
+  return { rowIndex: -1, indexes: null };
+}
+
+function findClassificationTables($) {
+  const tables = [];
+  const seen = new Set();
+
+  const registerTable = (table) => {
+    if (!table || seen.has(table)) return;
+    seen.add(table);
+    tables.push(table);
+  };
+
+  $("*:contains('Clasificación')").each((_, element) => {
+    const text = normalizeText($(element).text());
+    if (!text.includes("clasificacion")) return;
+
+    const nextTable = $(element).nextAll("table").first();
+    if (nextTable.length) registerTable(nextTable.get(0));
+
+    const closestTable = $(element).closest("table");
+    if (closestTable.length) registerTable(closestTable.get(0));
+
+    const parentTable = $(element).parents().find("table").first();
+    if (parentTable.length) registerTable(parentTable.get(0));
+  });
+
+  if (tables.length) return tables;
+  return $("table").toArray();
+}
+
 function parseClassificationRows(html, sourceKey) {
   const $ = cheerio.load(html);
-  const tables = $("table").toArray();
+  const tables = findClassificationTables($);
 
   for (const table of tables) {
     const rows = $(table).find("tr").toArray();
     if (rows.length < 2) continue;
 
-    const headers = $(rows[0])
-      .find("th, td")
-      .toArray()
-      .map((cell) => $(cell).text().trim());
+    const { rowIndex: headerRowIndex, indexes } = findHeaderRowIndex($, rows);
+    if (headerRowIndex === -1 || !indexes) continue;
 
-    const indexes = resolveHeaderIndexes(headers);
     if (!hasClassificationShape(indexes)) continue;
 
     const data = [];
 
-    rows.slice(1).forEach((row) => {
-      const cells = $(row)
-        .find("td")
-        .toArray()
-        .map((cell) => $(cell).text().replace(/\s+/g, " ").trim());
+    rows.slice(headerRowIndex + 1).forEach((row) => {
+      const cells = getRowCells($, row);
 
       if (!cells.length) return;
 
       const getCell = (index) => (index >= 0 ? cells[index] ?? "" : "");
+      const rawPos = getCell(indexes.pos);
+      const pos = toNumber(rawPos);
+
+      if (!pos) return;
 
       const rawCombined = getCell(indexes.equipoJugador);
       const rawTeam = getCell(indexes.equipo);
@@ -128,7 +178,7 @@ function parseClassificationRows(html, sourceKey) {
       if (!team && !player) return;
 
       data.push({
-        pos: toNumber(getCell(indexes.pos)),
+        pos,
         team,
         player,
         pts: toNumber(getCell(indexes.pts)),
