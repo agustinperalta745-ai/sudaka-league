@@ -1250,7 +1250,7 @@ function isMatchPlayed(match, seasonStatus = "active") {
     }
   }
 
-  return seasonStatus === "completed" && (!!normalizeMatchResult(match.result) || normalizeWinnerValue(match.winner) != null);
+  return !!normalizeMatchResult(match.result) || normalizeWinnerValue(match.winner) != null;
 }
 
 function normalizeMatchData(match, seasonStatus = "active") {
