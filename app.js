@@ -627,6 +627,16 @@ function activateTab(modal, tabButton) {
     panel.hidden = !isActive;
     panel.classList.toggle("is-active", isActive);
   });
+
+  if (modal.id === "pes6-panel") {
+    if (targetPanelId === "pes6-tab-history") {
+      renderPes6History();
+    }
+
+    if (targetPanelId === "pes6-tab-ranking") {
+      renderPes6Ranking();
+    }
+  }
 }
 
 function setupTabs() {
@@ -1769,7 +1779,6 @@ async function initializeApp() {
   setupTabs();
   renderPalmares();
   renderPes6Ranking();
-  renderPes6History();
   setupCupCrossingsAccordion();
   await initializeInterdivisionalState();
   applyKofLeagueContent();
