@@ -457,7 +457,8 @@ function normalizeT24Entry(entry = {}) {
 }
 
 function createT24TableCard(divisionLabel, data) {
-  const hasRows = Array.isArray(data?.rows) && data.rows.length > 0;
+  const rows = data?.rows || [];
+  const hasRows = rows.length > 0;
   const card = document.createElement("article");
   card.className = "t24-card sl-card";
 
@@ -481,7 +482,7 @@ function createT24TableCard(divisionLabel, data) {
   const tbody = document.createElement("tbody");
 
   if (hasRows) {
-    data.rows.map((rawEntry, index) => {
+    rows.map((rawEntry, index) => {
       const entry = normalizeT24Entry(rawEntry);
       const row = document.createElement("tr");
       if (index < 3) {
@@ -519,7 +520,7 @@ function createT24TableCard(divisionLabel, data) {
     });
   } else {
     const emptyRow = document.createElement("tr");
-    const emptyCell = createT24Cell("td", "Sin datos disponibles");
+    const emptyCell = createT24Cell("td", "Sin datos");
     emptyCell.colSpan = 12;
     emptyRow.appendChild(emptyCell);
     tbody.appendChild(emptyRow);
@@ -532,7 +533,9 @@ function createT24TableCard(divisionLabel, data) {
 }
 
 async function fetchT24DivisionData(key) {
-  const basePath = window.location.pathname.includes("sudaka-league") ? "/sudaka-league" : "";
+  const basePath = window.location.pathname.includes('/sudaka-league')
+    ? '/sudaka-league'
+    : '';
   const T24_FETCH_PATHS = {
     primera: `${basePath}/data/gesliga/t24/primera.json`,
     segunda: `${basePath}/data/gesliga/t24/segunda.json`,
@@ -545,10 +548,9 @@ async function fetchT24DivisionData(key) {
       throw new Error(`No se pudo cargar ${key}.json (${response.status})`);
     }
 
-    const payload = await response.json();
-    if (Array.isArray(payload?.rows)) return payload;
-    if (Array.isArray(payload)) return { rows: payload };
-    return { rows: [] };
+    const data = await response.json();
+    const rows = data.rows || [];
+    return { ...data, rows };
   } catch (error) {
     console.error(`Error en fetch de tabla T24 (${key})`, error);
     throw error;
