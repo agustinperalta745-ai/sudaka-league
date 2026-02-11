@@ -334,6 +334,7 @@ let lastFocusedElement = null;
 let showAllTitlesRanking = false;
 let interdivisionalState = null;
 let cupPanelTab = "active";
+const MAX_RANKING_TITLES_DETAIL = 6;
 
 // Asignación centralizada de links editables.
 
@@ -886,11 +887,13 @@ function buildPes6TitleMap(history) {
         if (!titleMap[player]) {
           titleMap[player] = {
             total: 0,
-            counts: { primera: 0, copas: 0, individuales: 0 }
+            counts: { primera: 0, copas: 0, individuales: 0 },
+            titles: []
           };
         }
 
         titleMap[player].total += 1;
+        titleMap[player].titles.push(`${meta.label} (${seasonData.season})`);
 
         if (groupKey === "divisions") titleMap[player].counts.primera += 1;
         if (groupKey === "cups") titleMap[player].counts.copas += 1;
@@ -900,6 +903,29 @@ function buildPes6TitleMap(history) {
   });
 
   return titleMap;
+}
+
+function createRankingTitlesList(playerData) {
+  const wrapper = document.createElement("div");
+  wrapper.className = "pes6-ranking-titles";
+
+  const heading = document.createElement("p");
+  heading.className = "pes6-ranking-titles-heading";
+  heading.textContent = "Últimos títulos:";
+
+  const list = document.createElement("ul");
+  list.className = "pes6-ranking-titles-list";
+
+  const visibleTitles = playerData.titles.slice(-MAX_RANKING_TITLES_DETAIL).reverse();
+
+  visibleTitles.forEach((title) => {
+    const item = document.createElement("li");
+    item.textContent = title;
+    list.appendChild(item);
+  });
+
+  wrapper.append(heading, list);
+  return wrapper;
 }
 
 function animateRankingPanel(panel, expand) {
@@ -990,7 +1016,7 @@ function createPes6RankingItem(player, playerData, index) {
   breakdown.className = "pes6-ranking-breakdown";
   breakdown.textContent = `Primera División: ${playerData.counts.primera} | Copas: ${playerData.counts.copas} | Individuales: ${playerData.counts.individuales}`;
 
-  panel.append(breakdown);
+  panel.append(breakdown, createRankingTitlesList(playerData));
 
   toggle.addEventListener("click", () => {
     const isOpen = toggle.getAttribute("aria-expanded") === "true";
