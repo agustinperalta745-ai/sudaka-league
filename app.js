@@ -407,6 +407,44 @@ function createT24Cell(tag, text, className = "") {
   return cell;
 }
 
+function splitT24Equipo(equipo = "") {
+  const rawValue = String(equipo || "").trim();
+  if (!rawValue) {
+    return { teamName: "", playerName: "" };
+  }
+
+  const [teamNameRaw = "", playerNameRaw = ""] = rawValue.split(" - ");
+  if (!rawValue.includes(" - ")) {
+    return { teamName: rawValue, playerName: "" };
+  }
+
+  return {
+    teamName: teamNameRaw.trim(),
+    playerName: playerNameRaw.trim()
+  };
+}
+
+function normalizeT24Entry(entry = {}) {
+  const combinedEquipo = typeof entry.equipo === "string" ? entry.equipo : "";
+  const parsedEquipo = splitT24Equipo(combinedEquipo);
+  const teamName = (entry.team || parsedEquipo.teamName || "").trim();
+  const playerName = (entry.player || parsedEquipo.playerName || "").trim();
+
+  return {
+    pos: entry.pos,
+    teamName,
+    playerName,
+    pts: entry.pts,
+    pj: entry.pj,
+    pg: entry.pg,
+    pe: entry.pe,
+    pp: entry.pp,
+    gf: entry.gf,
+    gc: entry.gc,
+    dg: entry.dg
+  };
+}
+
 function createT24TableCard(divisionLabel, rows) {
   const card = document.createElement("article");
   card.className = "t24-card sl-card";
@@ -430,7 +468,8 @@ function createT24TableCard(divisionLabel, rows) {
 
   const tbody = document.createElement("tbody");
 
-  rows.forEach((entry, index) => {
+  rows.forEach((rawEntry, index) => {
+    const entry = normalizeT24Entry(rawEntry);
     const row = document.createElement("tr");
     if (index < 3) {
       row.classList.add("is-top");
@@ -442,8 +481,8 @@ function createT24TableCard(divisionLabel, rows) {
     logoCell.className = "t24-logo-cell";
     const logo = document.createElement("img");
     logo.className = "t24-logo";
-    logo.src = getTeamLogoPath(entry.team || "");
-    logo.alt = `Escudo ${entry.team || "Equipo"}`;
+    logo.src = getTeamLogoPath(entry.teamName || "");
+    logo.alt = `Escudo ${entry.teamName || "Equipo"}`;
     logo.loading = "lazy";
     logo.onerror = () => {
       logo.onerror = null;
@@ -452,8 +491,8 @@ function createT24TableCard(divisionLabel, rows) {
     logoCell.appendChild(logo);
     row.appendChild(logoCell);
 
-    row.appendChild(createT24Cell("td", entry.player || "-", "t24-player"));
-    row.appendChild(createT24Cell("td", entry.team || "-", "t24-team"));
+    row.appendChild(createT24Cell("td", entry.playerName || "-", "t24-player"));
+    row.appendChild(createT24Cell("td", entry.teamName || "-", "t24-team"));
     row.appendChild(createT24Cell("td", String(entry.pts ?? "-")));
     row.appendChild(createT24Cell("td", String(entry.pj ?? "-")));
     row.appendChild(createT24Cell("td", String(entry.pg ?? "-")));
@@ -474,9 +513,9 @@ function createT24TableCard(divisionLabel, rows) {
 
 async function fetchT24DivisionData(key) {
   const T24_FETCH_PATHS = {
-    primera: "data/t24/primera.json",
-    segunda: "data/t24/segunda.json",
-    tercera: "data/t24/tercera.json"
+    primera: toAssetPath("data/gesliga/t24/primera.json"),
+    segunda: toAssetPath("data/gesliga/t24/segunda.json"),
+    tercera: toAssetPath("data/gesliga/t24/tercera.json")
   };
 
   const response = await fetch(T24_FETCH_PATHS[key], { cache: "no-store" });
