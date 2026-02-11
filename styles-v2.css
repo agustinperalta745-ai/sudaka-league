@@ -1586,6 +1586,33 @@ summary:focus-visible,
   padding-left: 0.62rem;
 }
 
+.pes6-start-wrapper {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.pes6-start-btn {
+  display: inline-block;
+  padding: 14px 28px;
+  border-radius: 10px;
+  border: 1px solid rgba(99, 196, 255, 0.65);
+  font-family: var(--title-font);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #00aaff, #0066ff);
+  color: #fff;
+  box-shadow: 0 0 15px rgba(0, 170, 255, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pes6-start-btn:hover,
+.pes6-start-btn:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 0 25px rgba(0, 170, 255, 0.6);
+}
+
 .back-to-top {
   position: fixed;
   right: 0.9rem;
@@ -1819,10 +1846,15 @@ summary:focus-visible,
   .tab-btn,
   .copy-btn,
   .back-to-top,
-  .cup-tab-btn {
+  .cup-tab-btn,
+  .pes6-start-btn {
     width: 100%;
     text-align: center;
     justify-content: center;
+  }
+
+  .pes6-start-wrapper {
+    margin-top: 1.2rem;
   }
 
   .league-card-content,
