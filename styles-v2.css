@@ -41,12 +41,16 @@
 
 html {
   scroll-behavior: smooth;
+  height: auto;
+  overflow-y: auto;
 }
 
 body {
   margin: 0;
+  height: auto;
   min-height: 100vh;
   overflow-x: hidden;
+  overflow-y: auto;
   font-family: var(--body-font);
   font-size: 16px;
   line-height: 1.7;
@@ -1489,6 +1493,7 @@ summary:focus-visible,
   width: min(980px, 95vw);
   max-height: 93vh;
   overflow: auto;
+  -webkit-overflow-scrolling: touch;
   isolation: isolate;
   z-index: 60;
   padding: clamp(1rem, 3vw, 1.8rem);
@@ -1499,7 +1504,9 @@ summary:focus-visible,
   background: #0b1d3a;
   border-radius: 12px;
   box-shadow: 0 0 20px rgba(0, 140, 255, 0.3);
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   backdrop-filter: none;
 }
 
@@ -1517,6 +1524,11 @@ summary:focus-visible,
   pointer-events: none;
 }
 
+.pes6-crt::before,
+.pes6-crt::after {
+  pointer-events: none;
+}
+
 .league-modal::before,
 .league-modal::after {
   z-index: 0;
@@ -1527,6 +1539,8 @@ summary:focus-visible,
   inset: 0;
   z-index: 50;
   background: rgba(2, 4, 10, 0.72);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .close-btn {
