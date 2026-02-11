@@ -393,22 +393,10 @@ const T24_DIVISIONS = [
 const T24_PLACEHOLDER_LOGO = toAssetPath("assets/escudos/pes6/placeholder.png");
 let t24TablesLoaded = false;
 
-function slugifyTeamName(value = "") {
-  return value
-    .trim()
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
-    .replace(/[^a-z0-9\s-]/g, "")
-    .replace(/\s+/g, "-")
-    .replace(/-+/g, "-")
-    .replace(/^-|-$/g, "");
-}
-
-function getTeamLogoPath(team = "") {
-  const slug = slugifyTeamName(team);
-  if (!slug) return T24_PLACEHOLDER_LOGO;
-  return toAssetPath(`assets/escudos/pes6/${slug}.png`);
+function getT24ShieldPath(rowEquipo = "") {
+  const equipo = String(rowEquipo || "").trim();
+  if (!equipo) return T24_PLACEHOLDER_LOGO;
+  return toAssetPath(`assets/escudos/${equipo}.png`);
 }
 
 function createT24Cell(tag, text, className = "") {
@@ -443,6 +431,7 @@ function normalizeT24Entry(entry = {}) {
 
   return {
     pos: entry.pos,
+    rowEquipo: combinedEquipo,
     teamName,
     playerName,
     pts: entry.pts,
@@ -495,7 +484,7 @@ function createT24TableCard(divisionLabel, data) {
       logoCell.className = "t24-logo-cell";
       const logo = document.createElement("img");
       logo.className = "t24-logo";
-      logo.src = getTeamLogoPath(entry.teamName || "");
+      logo.src = getT24ShieldPath(entry.rowEquipo);
       logo.alt = `Escudo ${entry.teamName || "Equipo"}`;
       logo.loading = "lazy";
       logo.onerror = () => {
