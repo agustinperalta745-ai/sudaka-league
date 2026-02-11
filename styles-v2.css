@@ -1,30 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@500;600;700;800&display=swap");
+
 :root {
-  --bg-main: #060d18;
-  --bg-elevated: #0b1527;
-  --bg-card: rgba(15, 30, 54, 0.8);
-  --bg-card-strong: rgba(13, 26, 46, 0.92);
-  --text-main: #eef5ff;
-  --text-muted: #aebfd7;
-  --line: rgba(173, 191, 215, 0.18);
-  --line-strong: rgba(173, 191, 215, 0.34);
-  --accent: #62ceff;
-  --accent-soft: rgba(98, 206, 255, 0.2);
-  --accent-soft-strong: rgba(98, 206, 255, 0.34);
-  --card-border: rgba(98, 206, 255, 0.26);
+  --bg-main: #050a15;
+  --bg-elevated: #0a1324;
+  --bg-card: rgba(14, 27, 46, 0.7);
+  --bg-card-strong: rgba(10, 22, 38, 0.9);
+  --text-main: #edf4ff;
+  --text-muted: #afbdd3;
+  --line: rgba(142, 180, 220, 0.22);
+  --line-strong: rgba(142, 180, 220, 0.38);
+  --accent: #63c4ff;
+  --accent-soft: rgba(99, 196, 255, 0.18);
+  --accent-soft-strong: rgba(99, 196, 255, 0.3);
+  --card-border: rgba(99, 196, 255, 0.28);
+  --panel-glass: linear-gradient(180deg, rgba(17, 35, 60, 0.78), rgba(8, 18, 33, 0.9));
+  --panel-glass-strong: linear-gradient(180deg, rgba(20, 40, 68, 0.82), rgba(10, 23, 42, 0.92));
+  --vignette: radial-gradient(circle at 50% 28%, rgba(32, 70, 117, 0.12), rgba(1, 5, 10, 0.65) 72%);
   --danger: #ff6f6f;
   --radius-sm: 0.7rem;
   --radius-md: 1rem;
   --radius-lg: 1.3rem;
   --shadow-soft: 0 14px 34px rgba(0, 0, 0, 0.4);
   --shadow-card: 0 16px 30px rgba(0, 0, 0, 0.34);
-  --glow: 0 0 0 1px rgba(98, 206, 255, 0.22), 0 0 14px -8px rgba(98, 206, 255, 0.36), 0 14px 26px rgba(0, 0, 0, 0.3);
-  --divider-glow: 0 5px 12px -8px rgba(98, 206, 255, 0.5);
-  --neon-text-shadow: 0 0 5px rgba(98, 206, 255, 0.18), 0 0 10px rgba(98, 206, 255, 0.15);
-  --neon-text-shadow-strong: 0 0 7px rgba(98, 206, 255, 0.24), 0 0 14px rgba(98, 206, 255, 0.2);
-  --neon-border-color: rgba(98, 206, 255, 0.35);
-  --neon-box-shadow: 0 0 0 1px rgba(98, 206, 255, 0.18), 0 0 14px -10px rgba(98, 206, 255, 0.4), 0 12px 24px rgba(0, 0, 0, 0.32);
-  --neon-box-shadow-hover: 0 0 0 1px rgba(98, 206, 255, 0.34), 0 0 20px -10px rgba(98, 206, 255, 0.56), 0 14px 26px rgba(0, 0, 0, 0.34);
-  --neon-border-shadow: 0 0 0 1px rgba(98, 206, 255, 0.18), 0 0 14px -10px rgba(98, 206, 255, 0.46);
+  --glow: 0 0 0 1px rgba(99, 196, 255, 0.2), 0 0 18px -11px rgba(99, 196, 255, 0.4), 0 14px 26px rgba(0, 0, 0, 0.28);
+  --divider-glow: 0 5px 12px -8px rgba(99, 196, 255, 0.4);
+  --neon-text-shadow: 0 0 6px rgba(99, 196, 255, 0.14);
+  --neon-text-shadow-strong: 0 0 10px rgba(99, 196, 255, 0.2);
+  --neon-border-color: rgba(99, 196, 255, 0.3);
+  --neon-box-shadow: 0 0 0 1px rgba(99, 196, 255, 0.16), 0 0 14px -10px rgba(99, 196, 255, 0.34), 0 12px 24px rgba(0, 0, 0, 0.3);
+  --neon-box-shadow-hover: 0 0 0 1px rgba(99, 196, 255, 0.3), 0 0 20px -10px rgba(99, 196, 255, 0.44), 0 14px 26px rgba(0, 0, 0, 0.34);
+  --neon-border-shadow: 0 0 0 1px rgba(99, 196, 255, 0.16), 0 0 15px -11px rgba(99, 196, 255, 0.36);
   --title-font: "Orbitron", "Rajdhani", "Exo 2", "Inter", sans-serif;
   --body-font: "Inter", "Roboto", system-ui, -apple-system, sans-serif;
   --max-width: min(1160px, 92%);
@@ -46,7 +51,7 @@ body {
   font-size: 16px;
   line-height: 1.7;
   color: var(--text-main);
-  background: linear-gradient(180deg, #050a14 0%, #081224 52%, #0b1727 100%);
+  background: linear-gradient(180deg, #070d1b 0%, #050a14 58%, #03070f 100%);
 }
 
 body.no-scroll {
@@ -58,8 +63,8 @@ body.no-scroll {
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background: radial-gradient(circle at 15% 10%, rgba(98, 206, 255, 0.07), transparent 48%), radial-gradient(circle at 84% 0%, rgba(98, 206, 255, 0.05), transparent 42%);
-  opacity: 0.68;
+  background: var(--vignette);
+  opacity: 0.92;
 }
 
 .section {
@@ -114,9 +119,10 @@ a {
   position: sticky;
   top: 0;
   z-index: 30;
-  border-bottom: 1px solid rgba(173, 191, 215, 0.24);
+  border-bottom: 1px solid rgba(142, 180, 220, 0.28);
   backdrop-filter: blur(10px);
-  background: rgba(6, 12, 23, 0.88);
+  background: rgba(6, 12, 23, 0.84);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.25);
 }
 
 .topbar-inner {
@@ -294,9 +300,9 @@ a {
   gap: 0.4rem;
   min-height: 48px;
   padding: 0.8rem 1.3rem;
-  border-radius: var(--radius-md);
+  border-radius: 999px;
   border: 1px solid var(--card-border);
-  background: linear-gradient(180deg, rgba(23, 45, 74, 0.96), rgba(12, 24, 42, 0.94));
+  background: linear-gradient(180deg, rgba(21, 43, 72, 0.95), rgba(12, 24, 41, 0.92));
   color: var(--text-main);
   text-decoration: none;
   font-size: 0.82rem;
@@ -308,8 +314,9 @@ a {
 }
 
 .btn-primary {
-  border-color: rgba(98, 206, 255, 0.56);
-  background: linear-gradient(180deg, rgba(27, 58, 89, 0.98), rgba(15, 34, 55, 0.96));
+  border-color: rgba(99, 196, 255, 0.68);
+  background: linear-gradient(180deg, rgba(34, 71, 108, 0.98), rgba(17, 37, 58, 0.96));
+  box-shadow: 0 0 0 1px rgba(99, 196, 255, 0.3), 0 0 24px -12px rgba(99, 196, 255, 0.58), 0 14px 28px rgba(0, 0, 0, 0.34);
 }
 
 .btn-secondary {
@@ -418,7 +425,7 @@ summary:focus-visible,
   border: 1px solid var(--card-border);
   border-radius: var(--radius-lg);
   box-shadow: var(--neon-border-shadow), var(--shadow-card);
-  background: linear-gradient(180deg, rgba(16, 31, 53, 0.88), rgba(10, 22, 39, 0.92));
+  background: var(--panel-glass);
   backdrop-filter: blur(3px);
 }
 
@@ -461,7 +468,7 @@ summary:focus-visible,
 
 .season-card {
   padding: clamp(1.1rem, 3vw, 1.7rem);
-  background: linear-gradient(180deg, rgba(21, 40, 68, 0.86), rgba(11, 23, 40, 0.9));
+  background: var(--panel-glass-strong);
 }
 
 .season-card-header {
@@ -714,7 +721,7 @@ summary:focus-visible,
   border: 1px solid var(--card-border);
   box-shadow: var(--neon-border-shadow);
   border-radius: var(--radius-md);
-  background: linear-gradient(180deg, rgba(18, 35, 58, 0.88), rgba(10, 23, 41, 0.9));
+  background: var(--panel-glass);
   padding: 0.95rem;
 }
 
@@ -745,14 +752,15 @@ summary:focus-visible,
   max-height: none;
   overflow: hidden;
   padding: 14px;
-  border-radius: 16px;
-  border-color: rgba(98, 206, 255, 0.2);
-  box-shadow: 0 0 0 1px rgba(98, 206, 255, 0.08), 0 12px 22px rgba(0, 0, 0, 0.26);
+  border-radius: 14px;
+  border-color: rgba(99, 196, 255, 0.26);
+  background: linear-gradient(180deg, rgba(13, 26, 43, 0.9), rgba(8, 17, 30, 0.9));
+  box-shadow: 0 0 0 1px rgba(99, 196, 255, 0.1), 0 14px 26px rgba(0, 0, 0, 0.28);
 }
 
 .pes6-ranking-row.is-top {
-  border-color: rgba(98, 206, 255, 0.58);
-  box-shadow: 0 0 0 1px rgba(98, 206, 255, 0.3), 0 0 18px -10px rgba(98, 206, 255, 0.55), 0 12px 22px rgba(0, 0, 0, 0.3);
+  border-color: rgba(99, 196, 255, 0.5);
+  box-shadow: 0 0 0 1px rgba(99, 196, 255, 0.26), 0 0 16px -9px rgba(99, 196, 255, 0.42), 0 12px 24px rgba(0, 0, 0, 0.3);
 }
 
 .palmares-trophy,
@@ -989,7 +997,7 @@ summary:focus-visible,
 .pes6-ranking-header,
 .rankingHeaderRow {
   display: grid;
-  grid-template-columns: 52px minmax(0, 1fr) auto auto;
+  grid-template-columns: 52px minmax(0, 1fr) auto;
   align-items: center;
   gap: 10px;
 }
@@ -1008,9 +1016,12 @@ summary:focus-visible,
   align-items: center;
   justify-content: center;
   border-radius: 999px;
-  border: 1px solid rgba(98, 206, 255, 0.35);
-  background: rgba(98, 206, 255, 0.1);
+  border: 1px solid rgba(99, 196, 255, 0.44);
+  background: linear-gradient(180deg, rgba(99, 196, 255, 0.24), rgba(99, 196, 255, 0.08));
+  box-shadow: 0 0 0 1px rgba(99, 196, 255, 0.18), 0 0 14px -10px rgba(99, 196, 255, 0.52);
   font-family: var(--title-font);
+  font-size: 0.86rem;
+  font-weight: 700;
   letter-spacing: 0.06em;
 }
 
@@ -1021,21 +1032,27 @@ summary:focus-visible,
   text-overflow: ellipsis;
   white-space: nowrap;
   font-size: clamp(1rem, 2.6vw, 1.2rem);
-  font-weight: 700;
-  letter-spacing: 0.03em;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .pes6-ranking-stats {
   display: flex;
   align-items: baseline;
   gap: 0.25rem;
+  color: var(--text-muted);
+  font-size: 0.84rem;
+  letter-spacing: 0.03em;
 }
 
 .pes6-ranking-panel,
 .history-accordion-panel {
   margin-top: 0.65rem;
-  padding-top: 0.65rem;
-  border-top: 1px solid rgba(98, 206, 255, 0.2);
+  padding: 0.75rem;
+  border-top: 1px solid rgba(99, 196, 255, 0.24);
+  border-radius: 0.8rem;
+  background: rgba(5, 12, 23, 0.76);
 }
 
 .pes6-ranking-panel {
@@ -1074,8 +1091,8 @@ summary:focus-visible,
 .history-accordion-trigger,
 .sl-pill,
 .sl-btn {
-  border: 1px solid rgba(98, 206, 255, 0.26);
-  border-radius: 0.7rem;
+  border: 1px solid rgba(99, 196, 255, 0.34);
+  border-radius: 999px;
   background: rgba(12, 24, 41, 0.88);
   color: var(--text-main);
   padding: 0.4rem 0.65rem;
@@ -1087,7 +1104,9 @@ summary:focus-visible,
 
 .pes6-ranking-toggle {
   min-height: 38px;
-  padding-inline: 0.8rem;
+  padding-inline: 1rem;
+  justify-self: end;
+  font-size: 0.7rem;
 }
 
 .pes6-ranking-total,
