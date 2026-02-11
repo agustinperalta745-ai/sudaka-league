@@ -862,11 +862,6 @@ function isValidTitleWinner(value) {
   return !invalidValues.includes(normalized.toUpperCase());
 }
 
-function getSeasonOrder(seasonLabel = "") {
-  const match = seasonLabel.match(/(\d+)/);
-  return match ? Number(match[1]) : 0;
-}
-
 function buildPes6TitleMap(history) {
   const titleMap = {};
 
@@ -891,8 +886,7 @@ function buildPes6TitleMap(history) {
         if (!titleMap[player]) {
           titleMap[player] = {
             total: 0,
-            counts: { primera: 0, copas: 0, individuales: 0 },
-            items: []
+            counts: { primera: 0, copas: 0, individuales: 0 }
           };
         }
 
@@ -901,19 +895,8 @@ function buildPes6TitleMap(history) {
         if (groupKey === "divisions") titleMap[player].counts.primera += 1;
         if (groupKey === "cups") titleMap[player].counts.copas += 1;
         if (groupKey === "awards") titleMap[player].counts.individuales += 1;
-
-        titleMap[player].items.push({
-          season: seasonData.season,
-          type: meta.type,
-          title: meta.title,
-          order: getSeasonOrder(seasonData.season)
-        });
       });
     });
-  });
-
-  Object.values(titleMap).forEach((playerData) => {
-    playerData.items.sort((a, b) => b.order - a.order || a.title.localeCompare(b.title, "es"));
   });
 
   return titleMap;
@@ -1007,12 +990,7 @@ function createPes6RankingItem(player, playerData, index) {
   breakdown.className = "pes6-ranking-breakdown";
   breakdown.textContent = `Primera División: ${playerData.counts.primera} | Copas: ${playerData.counts.copas} | Individuales: ${playerData.counts.individuales}`;
 
-  const titles = playerData.items.map((item) => `${item.season} ${item.title}`);
-  const titlesLine = document.createElement("p");
-  titlesLine.className = "pes6-ranking-titles";
-  titlesLine.textContent = `Títulos: ${titles.join(" | ")}`;
-
-  panel.append(breakdown, titlesLine);
+  panel.append(breakdown);
 
   toggle.addEventListener("click", () => {
     const isOpen = toggle.getAttribute("aria-expanded") === "true";
