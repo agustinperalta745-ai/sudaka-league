@@ -280,7 +280,8 @@ a {
 .history-accordion-trigger,
 .cup-tab-btn,
 .tab-btn,
-.close-btn {
+.close-btn,
+.close-btn-fixed {
   transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease, transform 180ms ease;
 }
 
@@ -341,7 +342,9 @@ a {
 .history-accordion-trigger:hover,
 .history-accordion-trigger:focus-visible,
 .close-btn:hover,
-.close-btn:focus-visible {
+.close-btn:focus-visible,
+.close-btn-fixed:hover,
+.close-btn-fixed:focus-visible {
   border-color: rgba(98, 206, 255, 0.74);
   box-shadow: var(--neon-box-shadow-hover);
 }
@@ -370,6 +373,7 @@ a {
 .system-panel-trigger:focus-visible,
 summary:focus-visible,
 .close-btn:focus-visible,
+.close-btn-fixed:focus-visible,
 .tab-btn:focus-visible,
 .cup-tab-btn:focus-visible,
 .topbar-preview-link:focus-visible {
@@ -1828,4 +1832,85 @@ summary:focus-visible,
   .cup-match-versus {
     align-self: center;
   }
+}
+
+
+.block-container {
+  background: linear-gradient(145deg, rgba(10, 25, 40, 0.95), rgba(8, 18, 30, 0.95));
+  border: 1px solid rgba(0, 180, 255, 0.18);
+  border-radius: 18px;
+  padding: 20px;
+  margin: 30px 0;
+  box-shadow: 0 0 20px rgba(0, 180, 255, 0.18);
+  position: relative;
+}
+
+.palmares-grid {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+}
+
+.division-item,
+.copa-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: rgba(6, 14, 24, 0.35);
+  border: 1px solid rgba(0, 180, 255, 0.1);
+  border-radius: 14px;
+  padding: 14px;
+}
+
+.palmares-item-content {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.individual-item {
+  background: rgba(6, 14, 24, 0.35);
+  border: 1px solid rgba(0, 180, 255, 0.10);
+  border-radius: 14px;
+  padding: 14px;
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.individual-item .palmares-trophy {
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+}
+
+.copa-item .palmares-trophy,
+.division-item .palmares-trophy {
+  width: 70px;
+  height: 70px;
+  flex-shrink: 0;
+}
+
+.palmares-card-title {
+  margin: 0;
+}
+
+.palmares-winner-line {
+  margin: 0;
+}
+
+.close-btn-fixed {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 9999;
+  background: rgba(10, 20, 35, 0.8);
+  border: 1px solid rgba(0, 180, 255, 0.25);
+  border-radius: 10px;
+  padding: 8px;
+  color: var(--text-main);
+  line-height: 1;
+  cursor: pointer;
 }
