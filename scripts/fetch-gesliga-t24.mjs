@@ -164,9 +164,19 @@ async function saveDivision(key, rows) {
 }
 
 async function main() {
+  await Promise.all(SOURCES.map((source) => saveDivision(source.key, [])));
+
   for (const source of SOURCES) {
     const html = await fetchHtml(source.url);
-    const rows = parseClassificationRows(html, source.key);
+
+    let rows;
+    try {
+      rows = parseClassificationRows(html, source.key);
+    } catch (error) {
+      console.warn(`⚠️ ${source.key}: ${error.message}. Se guardará un array vacío.`);
+      rows = [];
+    }
+
     await saveDivision(source.key, rows);
     console.log(`✅ ${source.key}: ${rows.length} filas`);
   }
