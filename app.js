@@ -473,7 +473,13 @@ function createT24TableCard(divisionLabel, rows) {
 }
 
 async function fetchT24DivisionData(key) {
-  const response = await fetch(`${ASSETS_BASE_PATH}/data/t24/${key}.json`, { cache: "no-store" });
+  const T24_FETCH_PATHS = {
+    primera: "data/t24/primera.json",
+    segunda: "data/t24/segunda.json",
+    tercera: "data/t24/tercera.json"
+  };
+
+  const response = await fetch(T24_FETCH_PATHS[key], { cache: "no-store" });
   if (!response.ok) {
     throw new Error(`No se pudo cargar ${key}.json (${response.status})`);
   }
