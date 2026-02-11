@@ -1082,7 +1082,9 @@ function createHistoryRow(itemMeta, value) {
   const winner = document.createElement("div");
   winner.className = "history-value";
   const safeValue = value && value.trim() !== "" ? value : "POR DEFINIR";
-  const isPending = safeValue.toUpperCase() === "POR DEFINIR";
+  const normalizedValue = safeValue.trim().toUpperCase();
+  const isPending = normalizedValue === "POR DEFINIR";
+  const isLegacy = normalizedValue === "NO EXISTIA";
   winner.textContent = safeValue;
 
   if (isPending) {
@@ -1091,6 +1093,11 @@ function createHistoryRow(itemMeta, value) {
     badge.className = "history-pending-badge";
     badge.textContent = "Pendiente";
     winner.appendChild(badge);
+  }
+
+  if (isLegacy) {
+    row.classList.add("is-legacy");
+    winner.classList.add("is-legacy");
   }
 
   row.append(left, winner);
