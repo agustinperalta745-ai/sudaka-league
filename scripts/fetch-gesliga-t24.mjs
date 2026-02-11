@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import * as cheerio from "cheerio";
@@ -14,31 +14,32 @@ const SOURCES = [
 ];
 
 const REQUIRED_HEADER_GROUPS = {
-  pts: ["pt", "pts"],
-  pj: ["pj"],
-  pg: ["pg"],
-  pe: ["pe"],
-  pp: ["pp"],
-  gf: ["gf"],
-  gc: ["gc"],
-  dg: ["dg"]
+  pts: ["PT", "PTS"],
+  pj: ["PJ"],
+  pg: ["PG"],
+  pe: ["PE"],
+  pp: ["PP"],
+  gf: ["GF"],
+  gc: ["GC"],
+  dg: ["DG"]
 };
 
 const TEAM_PLAYER_HEADERS = ["equipo - jugador", "equipo-jugador", "equipo/jugador", "equipo", "club"];
+const NORMALIZED_TEAM_PLAYER_HEADERS = TEAM_PLAYER_HEADERS.map((item) => normalizeText(item));
 
 function normalizeText(value = "") {
   return value
     .trim()
-    .toLowerCase()
+    .toUpperCase()
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
     .replace(/\s+/g, " ");
 }
 
-function toNumber(value) {
+function toNumber(value, fallback = 0) {
   const normalized = String(value ?? "").replace(/[^\d-]/g, "");
   const parsed = Number.parseInt(normalized, 10);
-  return Number.isNaN(parsed) ? 0 : parsed;
+  return Number.isNaN(parsed) ? fallback : parsed;
 }
 
 function splitTeamAndPlayer(value = "") {
@@ -51,6 +52,16 @@ function splitTeamAndPlayer(value = "") {
     .filter(Boolean);
 
   if (parts.length < 2) {
+    const fallbackParts = text
+      .split("-")
+      .map((part) => part.trim())
+      .filter(Boolean);
+
+    if (fallbackParts.length >= 2) {
+      const [team, ...playerParts] = fallbackParts;
+      return { team, player: playerParts.join(" - ").trim() };
+    }
+
     return { team: text, player: "" };
   }
 
@@ -68,7 +79,9 @@ function findHeaderIndexes(headerCells) {
     if (indexes[key] < 0) return null;
   }
 
-  const teamPlayerIndex = normalizedHeaders.findIndex((header) => TEAM_PLAYER_HEADERS.includes(header));
+  const teamPlayerIndex = normalizedHeaders.findIndex((header) =>
+    NORMALIZED_TEAM_PLAYER_HEADERS.includes(header)
+  );
 
   return {
     ...indexes,
@@ -77,14 +90,14 @@ function findHeaderIndexes(headerCells) {
   };
 }
 
-function getRowCells($, row) {
+function getRowCells($, row, selector = "th, td") {
   return $(row)
-    .find("th, td")
+    .find(selector)
     .toArray()
     .map((cell) => $(cell).text().replace(/\s+/g, " ").trim());
 }
 
-function parseClassificationRows(html, sourceKey) {
+function parseClassificationRows(html) {
   const $ = cheerio.load(html);
   const tables = $("table").toArray();
 
@@ -92,20 +105,33 @@ function parseClassificationRows(html, sourceKey) {
     const rows = $(table).find("tr").toArray();
     if (rows.length < 2) continue;
 
-    const headerCells = getRowCells($, rows[0]);
+    const headerCells = getRowCells($, rows[0], "th,td");
     const indexes = findHeaderIndexes(headerCells);
     if (!indexes) continue;
 
     const data = [];
 
     rows.slice(1).forEach((row) => {
-      const cells = getRowCells($, row);
+      const cells = getRowCells($, row, "td");
       if (!cells.length) return;
+
+      const minColumnIndex = Math.max(
+        indexes.pts,
+        indexes.pj,
+        indexes.pg,
+        indexes.pe,
+        indexes.pp,
+        indexes.gf,
+        indexes.gc,
+        indexes.dg,
+        indexes.teamPlayer
+      );
+
+      if (cells.length <= minColumnIndex) return;
 
       const getCell = (index) => (index >= 0 ? cells[index] ?? "" : "");
       const rawPos = getCell(0);
-      const pos = toNumber(rawPos);
-      if (!pos) return;
+      const pos = toNumber(rawPos, null);
 
       const combined = getCell(indexes.teamPlayer);
       const { team, player } = splitTeamAndPlayer(combined);
@@ -114,6 +140,8 @@ function parseClassificationRows(html, sourceKey) {
 
       data.push({
         pos,
+        equipo: team,
+        jugador: player,
         team,
         player,
         pts: toNumber(getCell(indexes.pts)),
@@ -127,14 +155,10 @@ function parseClassificationRows(html, sourceKey) {
       });
     });
 
-    if (!data.length) {
-      throw new Error(`La tabla detectada para ${sourceKey} no contiene filas válidas`);
-    }
-
-    return data;
+    return { rows: data, tableFound: true };
   }
 
-  throw new Error(`No se encontró una tabla de clasificación válida para ${sourceKey}`);
+  return { rows: [], tableFound: false };
 }
 
 async function fetchHtml(url) {
@@ -163,44 +187,18 @@ async function saveDivision(key, rows) {
   }
 }
 
-async function loadManualFallback(key) {
-  const manualPath = path.join(repoRoot, "data", "t24", `${key}.manual.json`);
-
-  try {
-    const content = await readFile(manualPath, "utf8");
-    const parsed = JSON.parse(content);
-
-    if (!Array.isArray(parsed)) {
-      console.warn(`⚠️ ${key}: el fallback manual no es un array válido. Se guardará un array vacío.`);
-      return [];
-    }
-
-    return parsed;
-  } catch (error) {
-    if (error?.code === "ENOENT") {
-      console.warn(`⚠️ ${key}: no existe fallback manual en data/t24/${key}.manual.json. Se guardará un array vacío.`);
-      return [];
-    }
-
-    console.warn(`⚠️ ${key}: no se pudo leer fallback manual (${error.message}). Se guardará un array vacío.`);
-    return [];
-  }
-}
-
 async function main() {
   await Promise.all(SOURCES.map((source) => saveDivision(source.key, [])));
 
   for (const source of SOURCES) {
     const html = await fetchHtml(source.url);
 
-    let rows;
-    try {
-      rows = parseClassificationRows(html, source.key);
-      console.log(`ℹ️ Usando datos automáticos para ${source.key}`);
-    } catch (error) {
-      console.warn(`⚠️ ${source.key}: ${error.message}`);
-      rows = await loadManualFallback(source.key);
-      console.log(`ℹ️ Usando fallback manual para ${source.key}`);
+    const { rows, tableFound } = parseClassificationRows(html);
+
+    if (!tableFound) {
+      console.warn(`[T24] No se encontró tabla válida para ${source.key}`);
+    } else if (!rows.length) {
+      console.warn(`[T24] Tabla detectada para ${source.key} pero sin filas válidas`);
     }
 
     await saveDivision(source.key, rows);
