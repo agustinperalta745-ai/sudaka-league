@@ -277,7 +277,7 @@ function getCupCrossingTeamLogoPath(teamData) {
 const overlay = document.getElementById("modal-overlay");
 const modals = [...document.querySelectorAll(".league-modal")];
 const triggers = [...document.querySelectorAll(".modal-trigger")];
-const closeButtons = [...document.querySelectorAll(".close-btn")];
+const closeButtons = [...document.querySelectorAll(".close-btn-fixed")];
 const copyButtons = [...document.querySelectorAll(".copy-btn")];
 const backToTopButton = document.getElementById("back-to-top");
 const pes6Status = document.getElementById("pes6Status");
@@ -762,19 +762,18 @@ backToTopButton.addEventListener("click", () => {
 function createPalmaresCard(item, winnersKey, winnerLabel, variant = "default") {
   const isCupVariant = variant === "cups";
   const isDivisionVariant = variant === "divisions";
+  const isIndividualVariant = variant === "awards";
   const card = document.createElement("article");
   card.className = isCupVariant
-    ? "palmares-card palmares-card-cup"
+    ? "copa-item"
     : isDivisionVariant
-      ? "palmares-card palmares-card-division"
-      : "palmares-card sl-card";
+      ? "division-item"
+      : isIndividualVariant
+        ? "individual-item"
+        : "palmares-card sl-card";
 
   const title = document.createElement("h4");
-  title.className = isCupVariant
-    ? "palmares-cup-title"
-    : isDivisionVariant
-      ? "palmares-division-title"
-      : "palmares-card-title";
+  title.className = "palmares-card-title";
 
   if (isDivisionVariant) {
     const divisionNames = ["PRIMERA DIVISIÓN", "SEGUNDA DIVISIÓN", "TERCERA DIVISIÓN", "CUARTA DIVISIÓN"];
@@ -795,18 +794,14 @@ function createPalmaresCard(item, winnersKey, winnerLabel, variant = "default") 
   const safeWinners = winnersList.length ? winnersList : ["A confirmar"];
 
   const winners = document.createElement(isCupVariant || isDivisionVariant ? "p" : "ul");
-  winners.className = isCupVariant
-    ? "palmares-cup-winner"
-    : isDivisionVariant
-      ? "palmares-division-winner"
-      : "palmares-winners";
+  winners.className = isCupVariant || isDivisionVariant ? "palmares-winner-line" : "palmares-winners";
 
   if (isCupVariant || isDivisionVariant) {
     const winner = safeWinners[0];
     if (isCupVariant) {
       const winnerUpper = winner.trim().toUpperCase();
       const isLegacy = winnerUpper === "NO EXISTIA" || winnerUpper === "NO EXISTÍA";
-      winners.textContent = `${winnerLabel}: ${winner}`;
+      winners.textContent = isLegacy ? "Estado: NO EXISTÍA" : `Ganador: ${winner}`;
       winners.classList.add(isLegacy ? "is-muted" : "is-highlight");
     } else {
       winners.textContent = winner;
@@ -821,9 +816,23 @@ function createPalmaresCard(item, winnersKey, winnerLabel, variant = "default") 
 
   if (isDivisionVariant) {
     const content = document.createElement("div");
-    content.className = "palmares-division-content";
+    content.className = "palmares-item-content";
     content.append(title, winners);
     card.append(content, trophy);
+  } else if (isIndividualVariant) {
+    const content = document.createElement("div");
+    content.className = "palmares-item-content";
+    content.append(title);
+
+    if (item.subtitulo) {
+      const subtitle = document.createElement("p");
+      subtitle.className = "palmares-subtitle";
+      subtitle.textContent = item.subtitulo;
+      content.appendChild(subtitle);
+    }
+
+    content.appendChild(winners);
+    card.append(trophy, content);
   } else {
     card.appendChild(title);
 
@@ -859,7 +868,7 @@ function renderPalmares() {
       subtitle: "Últimos campeones de copas (Temporada 22)",
       items: PES6_PALMARES.copas,
       winnersKey: "campeones",
-      winnerLabel: "Ganador / Estado"
+      winnerLabel: "Ganador"
     },
     {
       key: "awards",
@@ -873,14 +882,8 @@ function renderPalmares() {
   container.replaceChildren();
 
   sections.forEach((section) => {
-    const isCupsSection = section.key === "cups";
-    const isDivisionsSection = section.key === "divisions";
     const block = document.createElement("section");
-    block.className = isCupsSection
-      ? "palmares-block palmares-block-cups"
-      : isDivisionsSection
-        ? "palmares-block palmares-block-divisions"
-        : "palmares-block sl-card";
+    block.className = "block-container";
 
     const heading = document.createElement("h3");
     heading.textContent = section.title;
@@ -894,11 +897,7 @@ function renderPalmares() {
     }
 
     const grid = document.createElement("div");
-    grid.className = isCupsSection
-      ? "palmares-grid palmares-grid-cups"
-      : isDivisionsSection
-        ? "palmares-grid palmares-grid-divisions"
-        : "palmares-grid";
+    grid.className = "palmares-grid";
 
     section.items.forEach((item) => {
       grid.appendChild(createPalmaresCard(item, section.winnersKey, section.winnerLabel, section.key));
