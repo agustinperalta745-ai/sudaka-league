@@ -761,7 +761,7 @@ backToTopButton.addEventListener("click", () => {
 
 function createPalmaresCard(item, winnersKey, winnerLabel) {
   const card = document.createElement("article");
-  card.className = "palmares-card";
+  card.className = "palmares-card sl-card";
 
   const title = document.createElement("h4");
   title.textContent = item.nombre;
@@ -828,7 +828,7 @@ function renderPalmares() {
 
   sections.forEach((section) => {
     const block = document.createElement("section");
-    block.className = "palmares-block";
+    block.className = "palmares-block sl-card";
 
     const heading = document.createElement("h3");
     heading.textContent = section.title;
@@ -931,7 +931,7 @@ function createRankingTitlesList(playerData) {
 
 function createPes6RankingItem(player, playerData, index, isOpen) {
   const row = document.createElement("article");
-  row.className = "pes6-ranking-row";
+  row.className = "pes6-ranking-row sl-card";
 
   const header = document.createElement("div");
   header.className = "pes6-ranking-header rankingHeaderRow";
@@ -958,7 +958,7 @@ function createPes6RankingItem(player, playerData, index, isOpen) {
 
   const toggle = document.createElement("button");
   toggle.type = "button";
-  toggle.className = "pes6-ranking-toggle";
+  toggle.className = "pes6-ranking-toggle sl-pill";
   toggle.classList.add("rankingBtn");
   toggle.setAttribute("aria-expanded", String(isOpen));
   toggle.setAttribute("aria-controls", `pes6-ranking-panel-${index}`);
@@ -970,6 +970,10 @@ function createPes6RankingItem(player, playerData, index, isOpen) {
     openTitlesRankingId = openTitlesRankingId === player ? null : player;
     renderPes6Ranking();
   });
+
+  if (index === 0) {
+    row.classList.add("is-top");
+  }
 
   if (isOpen) {
     row.classList.add("is-open");
@@ -1010,7 +1014,7 @@ function renderPes6Ranking() {
   }
 
   const wrapper = document.createElement("section");
-  wrapper.className = "pes6-ranking";
+  wrapper.className = "pes6-ranking sl-card";
 
   const heading = document.createElement("h3");
   heading.textContent = "RANKING DE TÍTULOS";
@@ -1034,7 +1038,7 @@ function renderPes6Ranking() {
 
   const listToggle = document.createElement("button");
   listToggle.type = "button";
-  listToggle.className = "pes6-ranking-toggle";
+  listToggle.className = "pes6-ranking-toggle sl-pill";
   listToggle.textContent = showAllTitlesRanking ? "Ver top 5" : "Ver todos";
   listToggle.style.margin = "0.85rem auto 0";
   listToggle.style.display = "flex";
@@ -1051,7 +1055,7 @@ function renderPes6Ranking() {
 
 function createHistoryRow(itemMeta, value) {
   const row = document.createElement("div");
-  row.className = "history-row";
+  row.className = "history-row sl-card";
 
   const left = document.createElement("div");
   left.className = "history-row-left";
@@ -1088,7 +1092,7 @@ function createHistoryRow(itemMeta, value) {
 
 function createHistorySection(title, itemsMeta, values = {}) {
   const section = document.createElement("section");
-  section.className = "history-section";
+  section.className = "history-section sl-card";
 
   const heading = document.createElement("h4");
   heading.textContent = title;
@@ -1145,11 +1149,11 @@ function animateHistoryPanel(panel, expand) {
 
 function createHistoryAccordionItem(seasonData, index) {
   const item = document.createElement("article");
-  item.className = "history-accordion-item";
+  item.className = "history-accordion-item sl-card";
 
   const trigger = document.createElement("button");
   trigger.type = "button";
-  trigger.className = "history-accordion-trigger";
+  trigger.className = "history-accordion-trigger sl-pill";
   trigger.setAttribute("aria-expanded", "false");
   trigger.setAttribute("aria-controls", `pes6-history-panel-${index}`);
   trigger.innerHTML = `<span>${seasonData.season}</span><span class="history-chevron" aria-hidden="true">⌄</span>`;
