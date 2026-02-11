@@ -332,6 +332,7 @@ const kofContentBindings = {
 let activeModal = null;
 let lastFocusedElement = null;
 let showAllTitlesRanking = false;
+let openTitlesRankingId = null;
 let interdivisionalState = null;
 let cupPanelTab = "active";
 const MAX_RANKING_TITLES_DETAIL = 6;
@@ -928,61 +929,19 @@ function createRankingTitlesList(playerData) {
   return wrapper;
 }
 
-function animateRankingPanel(panel, expand) {
-  const isExpanded = panel.dataset.expanded === "true";
-  if (isExpanded === expand) return;
-
-  panel.dataset.expanded = String(expand);
-
-  if (expand) {
-    panel.hidden = false;
-    panel.style.maxHeight = "0px";
-
-    requestAnimationFrame(() => {
-      panel.style.maxHeight = `${panel.scrollHeight}px`;
-    });
-
-    const finishExpand = () => {
-      if (panel.dataset.expanded === "true") {
-        panel.style.maxHeight = "none";
-      }
-      panel.removeEventListener("transitionend", finishExpand);
-    };
-
-    panel.addEventListener("transitionend", finishExpand);
-    return;
-  }
-
-  const currentHeight = panel.scrollHeight;
-  panel.style.maxHeight = `${currentHeight}px`;
-
-  requestAnimationFrame(() => {
-    panel.style.maxHeight = "0px";
-  });
-
-  const finishCollapse = () => {
-    if (panel.dataset.expanded === "false") {
-      panel.hidden = true;
-    }
-    panel.removeEventListener("transitionend", finishCollapse);
-  };
-
-  panel.addEventListener("transitionend", finishCollapse);
-}
-
-function createPes6RankingItem(player, playerData, index) {
+function createPes6RankingItem(player, playerData, index, isOpen) {
   const row = document.createElement("article");
   row.className = "pes6-ranking-row";
 
   const header = document.createElement("div");
-  header.className = "pes6-ranking-header";
+  header.className = "pes6-ranking-header rankingHeaderRow";
 
   const position = document.createElement("span");
-  position.className = "pes6-ranking-position";
+  position.className = "pes6-ranking-position rankingPos";
   position.textContent = `#${index + 1}`;
 
   const name = document.createElement("span");
-  name.className = "pes6-ranking-player";
+  name.className = "pes6-ranking-player rankingName";
   name.textContent = player;
 
   const total = document.createElement("span");
@@ -994,40 +953,41 @@ function createPes6RankingItem(player, playerData, index) {
   totalLabel.textContent = playerData.total === 1 ? "título" : "títulos";
 
   const stats = document.createElement("div");
-  stats.className = "pes6-ranking-stats";
+  stats.className = "pes6-ranking-stats rankingMeta";
   stats.append(total, totalLabel);
 
   const toggle = document.createElement("button");
   toggle.type = "button";
   toggle.className = "pes6-ranking-toggle";
-  toggle.setAttribute("aria-expanded", "false");
+  toggle.classList.add("rankingBtn");
+  toggle.setAttribute("aria-expanded", String(isOpen));
   toggle.setAttribute("aria-controls", `pes6-ranking-panel-${index}`);
-  toggle.innerHTML = '<span>Ver detalle</span><span class="pes6-ranking-chevron" aria-hidden="true">⌄</span>';
+  toggle.innerHTML = `<span>${isOpen ? "Ocultar" : "Ver detalle"}</span><span class="pes6-ranking-chevron" aria-hidden="true">⌄</span>`;
 
   header.append(position, name, stats, toggle);
 
-  const panel = document.createElement("div");
-  panel.className = "pes6-ranking-panel";
-  panel.id = `pes6-ranking-panel-${index}`;
-  panel.hidden = true;
-  panel.dataset.expanded = "false";
-
-  const breakdown = document.createElement("p");
-  breakdown.className = "pes6-ranking-breakdown";
-  breakdown.textContent = `Primera División: ${playerData.counts.primera} | Copas: ${playerData.counts.copas} | Individuales: ${playerData.counts.individuales}`;
-
-  panel.append(breakdown, createRankingTitlesList(playerData));
-
   toggle.addEventListener("click", () => {
-    const isOpen = toggle.getAttribute("aria-expanded") === "true";
-    const nextOpen = !isOpen;
-
-    toggle.setAttribute("aria-expanded", String(nextOpen));
-    row.classList.toggle("is-open", nextOpen);
-    animateRankingPanel(panel, nextOpen);
+    openTitlesRankingId = openTitlesRankingId === player ? null : player;
+    renderPes6Ranking();
   });
 
-  row.append(header, panel);
+  if (isOpen) {
+    row.classList.add("is-open");
+
+    const panel = document.createElement("div");
+    panel.className = "pes6-ranking-panel pes6-ranking-details rankingDetails";
+    panel.id = `pes6-ranking-panel-${index}`;
+
+    const breakdown = document.createElement("p");
+    breakdown.className = "pes6-ranking-breakdown";
+    breakdown.textContent = `Primera División: ${playerData.counts.primera} | Copas: ${playerData.counts.copas} | Individuales: ${playerData.counts.individuales}`;
+
+    panel.append(breakdown, createRankingTitlesList(playerData));
+    row.append(header, panel);
+    return row;
+  }
+
+  row.append(header);
   return row;
 }
 
@@ -1064,8 +1024,12 @@ function renderPes6Ranking() {
 
   const visibleRanking = showAllTitlesRanking ? ranking : ranking.slice(0, 5);
 
+  if (!visibleRanking.some(([player]) => player === openTitlesRankingId)) {
+    openTitlesRankingId = null;
+  }
+
   visibleRanking.forEach(([player, data], index) => {
-    list.appendChild(createPes6RankingItem(player, data, index));
+    list.appendChild(createPes6RankingItem(player, data, index, openTitlesRankingId === player));
   });
 
   const listToggle = document.createElement("button");
@@ -1077,6 +1041,7 @@ function renderPes6Ranking() {
 
   listToggle.addEventListener("click", () => {
     showAllTitlesRanking = !showAllTitlesRanking;
+    openTitlesRankingId = null;
     renderPes6Ranking();
   });
 
