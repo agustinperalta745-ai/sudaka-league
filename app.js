@@ -517,6 +517,12 @@ function createT24TableCard(divisionLabel, data) {
 
       tbody.appendChild(row);
     });
+  } else {
+    const emptyRow = document.createElement("tr");
+    const emptyCell = createT24Cell("td", "Sin datos disponibles");
+    emptyCell.colSpan = 12;
+    emptyRow.appendChild(emptyCell);
+    tbody.appendChild(emptyRow);
   }
 
   table.append(thead, tbody);
@@ -526,21 +532,27 @@ function createT24TableCard(divisionLabel, data) {
 }
 
 async function fetchT24DivisionData(key) {
+  const basePath = window.location.pathname.includes("sudaka-league") ? "/sudaka-league" : "";
   const T24_FETCH_PATHS = {
-    primera: `${ASSETS_BASE_PATH}/data/gesliga/t24/primera.json`,
-    segunda: `${ASSETS_BASE_PATH}/data/gesliga/t24/segunda.json`,
-    tercera: `${ASSETS_BASE_PATH}/data/gesliga/t24/tercera.json`
+    primera: `${basePath}/data/gesliga/t24/primera.json`,
+    segunda: `${basePath}/data/gesliga/t24/segunda.json`,
+    tercera: `${basePath}/data/gesliga/t24/tercera.json`
   };
 
-  const response = await fetch(T24_FETCH_PATHS[key], { cache: "no-store" });
-  if (!response.ok) {
-    throw new Error(`No se pudo cargar ${key}.json (${response.status})`);
-  }
+  try {
+    const response = await fetch(T24_FETCH_PATHS[key], { cache: "no-store" });
+    if (!response.ok) {
+      throw new Error(`No se pudo cargar ${key}.json (${response.status})`);
+    }
 
-  const payload = await response.json();
-  if (Array.isArray(payload?.rows)) return payload;
-  if (Array.isArray(payload)) return { rows: payload };
-  return { rows: [] };
+    const payload = await response.json();
+    if (Array.isArray(payload?.rows)) return payload;
+    if (Array.isArray(payload)) return { rows: payload };
+    return { rows: [] };
+  } catch (error) {
+    console.error(`Error en fetch de tabla T24 (${key})`, error);
+    throw error;
+  }
 }
 
 async function renderT24Tables() {
