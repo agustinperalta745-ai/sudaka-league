@@ -8,9 +8,9 @@ const __dirname = path.dirname(__filename);
 const repoRoot = path.resolve(__dirname, "..");
 
 const SOURCES = [
-  { key: "primera", url: "https://www.gesliga.com/Clasificacion.aspx?Liga=504087" },
-  { key: "segunda", url: "https://www.gesliga.com/Clasificacion.aspx?Liga=504088" },
-  { key: "tercera", url: "https://www.gesliga.com/Clasificacion.aspx?Liga=504089" }
+  { key: "primera", ligaId: "504087" },
+  { key: "segunda", ligaId: "504088" },
+  { key: "tercera", ligaId: "504089" }
 ];
 
 const REQUIRED_HEADER_GROUPS = {
@@ -24,8 +24,8 @@ const REQUIRED_HEADER_GROUPS = {
   dg: ["DG"]
 };
 
-const TEAM_PLAYER_HEADERS = ["equipo - jugador", "equipo-jugador", "equipo/jugador", "equipo", "club"];
-const NORMALIZED_TEAM_PLAYER_HEADERS = TEAM_PLAYER_HEADERS.map((item) => normalizeText(item));
+const TEAM_HEADERS = ["equipo - jugador", "equipo-jugador", "equipo/jugador", "equipo", "club"];
+const NORMALIZED_TEAM_HEADERS = TEAM_HEADERS.map((item) => normalizeText(item));
 
 function normalizeText(value = "") {
   return value
@@ -33,6 +33,7 @@ function normalizeText(value = "") {
     .toUpperCase()
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[\u00A0\u200B-\u200D\uFEFF]/g, " ")
     .replace(/\s+/g, " ");
 }
 
@@ -42,72 +43,6 @@ function toNumber(value, fallback = 0) {
     .replace(/[^\d+-]/g, "");
   const parsed = Number.parseInt(normalized, 10);
   return Number.isNaN(parsed) ? fallback : parsed;
-}
-
-function splitTeamAndPlayer(value = "") {
-  const text = String(value ?? "").trim();
-  if (!text) return { team: "", player: "" };
-
-  const parts = text
-    .split(/\s+-\s+/)
-    .map((part) => part.trim())
-    .filter(Boolean);
-
-  if (parts.length < 2) {
-    const fallbackParts = text
-      .split("-")
-      .map((part) => part.trim())
-      .filter(Boolean);
-
-    if (fallbackParts.length >= 2) {
-      const [team, ...playerParts] = fallbackParts;
-      return { team, player: playerParts.join(" - ").trim() };
-    }
-
-    return { team: text, player: "" };
-  }
-
-  const [team, ...playerParts] = parts;
-  const player = playerParts.join(" - ").trim();
-  return { team, player };
-}
-
-function findHeaderIndexes(headerCells) {
-  const normalizedHeaders = headerCells.map((header) => normalizeText(header));
-  const indexes = {};
-
-  normalizedHeaders.forEach((header, index) => {
-    const normalized = header.toLowerCase();
-
-    if (indexes.pos === undefined && /^pos$/i.test(normalized)) indexes.pos = index;
-    if (indexes.pts === undefined && /^pt(s)?$/i.test(normalized)) indexes.pts = index;
-    if (indexes.pj === undefined && /^pj$/i.test(normalized)) indexes.pj = index;
-    if (indexes.pg === undefined && /^pg$/i.test(normalized)) indexes.pg = index;
-    if (indexes.pe === undefined && /^pe$/i.test(normalized)) indexes.pe = index;
-    if (indexes.pp === undefined && /^pp$/i.test(normalized)) indexes.pp = index;
-    if (indexes.gf === undefined && /^gf$/i.test(normalized)) indexes.gf = index;
-    if (indexes.gc === undefined && /^gc$/i.test(normalized)) indexes.gc = index;
-    if (indexes.dg === undefined && /^dg$/i.test(normalized)) indexes.dg = index;
-  });
-
-  for (const key of Object.keys(REQUIRED_HEADER_GROUPS)) {
-    if (indexes[key] === undefined) return null;
-  }
-
-  const firstStatIndex = Math.min(indexes.pts, indexes.pj, indexes.pg, indexes.pe, indexes.pp, indexes.gf, indexes.gc, indexes.dg);
-
-  const teamPlayerByHeader = normalizedHeaders.findIndex((header) =>
-    NORMALIZED_TEAM_PLAYER_HEADERS.includes(header)
-  );
-
-  const pos = indexes.pos ?? 0;
-  const fallbackTeamPlayerIndex = Number.isInteger(indexes.pos) ? indexes.pos + 1 : Math.max(0, firstStatIndex - 1);
-
-  return {
-    ...indexes,
-    pos,
-    teamPlayer: teamPlayerByHeader >= 0 ? teamPlayerByHeader : fallbackTeamPlayerIndex
-  };
 }
 
 function getRowCells($, row, selector = "th, td") {
@@ -123,6 +58,38 @@ function getRowCells($, row, selector = "th, td") {
     );
 }
 
+function findHeaderIndexes(headerCells) {
+  const normalizedHeaders = headerCells.map((header) => normalizeText(header));
+  const indexes = {};
+
+  normalizedHeaders.forEach((header, index) => {
+    const normalized = header.toLowerCase();
+
+    if (indexes.pos === undefined && /^pos(icion)?$/.test(normalized)) indexes.pos = index;
+    if (indexes.pts === undefined && /^pt(s)?$/.test(normalized)) indexes.pts = index;
+    if (indexes.pj === undefined && /^pj$/.test(normalized)) indexes.pj = index;
+    if (indexes.pg === undefined && /^pg$/.test(normalized)) indexes.pg = index;
+    if (indexes.pe === undefined && /^pe$/.test(normalized)) indexes.pe = index;
+    if (indexes.pp === undefined && /^pp$/.test(normalized)) indexes.pp = index;
+    if (indexes.gf === undefined && /^gf$/.test(normalized)) indexes.gf = index;
+    if (indexes.gc === undefined && /^gc$/.test(normalized)) indexes.gc = index;
+    if (indexes.dg === undefined && /^dg$/.test(normalized)) indexes.dg = index;
+  });
+
+  for (const key of Object.keys(REQUIRED_HEADER_GROUPS)) {
+    if (indexes[key] === undefined) return null;
+  }
+
+  const firstStatIndex = Math.min(indexes.pts, indexes.pj, indexes.pg, indexes.pe, indexes.pp, indexes.gf, indexes.gc, indexes.dg);
+  const teamByHeader = normalizedHeaders.findIndex((header) => NORMALIZED_TEAM_HEADERS.includes(header));
+
+  return {
+    ...indexes,
+    pos: indexes.pos ?? 0,
+    equipo: teamByHeader >= 0 ? teamByHeader : Math.max(0, firstStatIndex - 1)
+  };
+}
+
 function parseClassificationRows(html) {
   const $ = cheerio.load(html);
   const tables = $("table").toArray();
@@ -135,13 +102,13 @@ function parseClassificationRows(html) {
     const indexes = findHeaderIndexes(headerCells);
     if (!indexes) continue;
 
-    const data = [];
-
     const bodyRows = $(table)
       .find("tbody tr")
       .toArray()
       .filter((row) => $(row).find("td").length > 0);
     const rowsToParse = bodyRows.length ? bodyRows : rows.slice(1);
+
+    const parsedRows = [];
 
     rowsToParse.forEach((row) => {
       const cells = getRowCells($, row, "td");
@@ -156,29 +123,25 @@ function parseClassificationRows(html) {
         indexes.gf,
         indexes.gc,
         indexes.dg,
-        indexes.teamPlayer
+        indexes.equipo
       );
 
       if (cells.length <= minColumnIndex) return;
 
       const getCell = (index) => (index >= 0 ? cells[index] ?? "" : "");
-      const rawPos = getCell(indexes.pos ?? 0);
-      const pos = toNumber(rawPos, null);
-
-      const combined = getCell(indexes.teamPlayer);
-      const { team, player } = splitTeamAndPlayer(combined);
 
       const pts = toNumber(getCell(indexes.pts), Number.NaN);
       const pj = toNumber(getCell(indexes.pj), Number.NaN);
+      if (Number.isNaN(pts) || Number.isNaN(pj)) return;
 
-      if (!team || Number.isNaN(pts) || Number.isNaN(pj)) return;
+      const equipo = getCell(indexes.equipo);
+      if (!equipo) return;
 
-      data.push({
-        pos,
-        equipo: team,
-        jugador: player,
-        team,
-        player,
+      const inferredPos = parsedRows.length + 1;
+
+      parsedRows.push({
+        pos: toNumber(getCell(indexes.pos), inferredPos),
+        equipo,
         pts,
         pj,
         pg: toNumber(getCell(indexes.pg)),
@@ -190,10 +153,14 @@ function parseClassificationRows(html) {
       });
     });
 
-    return { rows: data, tableFound: true };
+    return { rows: parsedRows, tableFound: true };
   }
 
   return { rows: [], tableFound: false };
+}
+
+function buildInformeLigaUrl(ligaId) {
+  return `https://www.gesliga.com/InformeLiga.aspx?Liga=${ligaId}&Clasificacion=S&Leyenda=S`;
 }
 
 async function fetchHtml(url) {
@@ -210,7 +177,7 @@ async function fetchHtml(url) {
   return response.text();
 }
 
-async function saveDivision(key, rows) {
+async function saveDivision(key, payload) {
   const outputs = [
     path.join(repoRoot, "public", "data", "t24", `${key}.json`),
     path.join(repoRoot, "data", "t24", `${key}.json`)
@@ -218,15 +185,26 @@ async function saveDivision(key, rows) {
 
   for (const outputPath of outputs) {
     await mkdir(path.dirname(outputPath), { recursive: true });
-    await writeFile(outputPath, `${JSON.stringify(rows, null, 2)}\n`, "utf8");
+    await writeFile(outputPath, `${JSON.stringify(payload, null, 2)}\n`, "utf8");
   }
 }
 
+function buildPayload(source, rows, fetchedAt = new Date().toISOString()) {
+  return {
+    source: "gesliga",
+    division: source.key,
+    fetchedAt,
+    rows
+  };
+}
+
 async function main() {
-  await Promise.all(SOURCES.map((source) => saveDivision(source.key, [])));
+  const startedAt = new Date().toISOString();
+  await Promise.all(SOURCES.map((source) => saveDivision(source.key, buildPayload(source, [], startedAt))));
 
   for (const source of SOURCES) {
-    const html = await fetchHtml(source.url);
+    const url = buildInformeLigaUrl(source.ligaId);
+    const html = await fetchHtml(url);
 
     const { rows, tableFound } = parseClassificationRows(html);
 
@@ -238,7 +216,7 @@ async function main() {
       console.warn(`[gesliga] ${source.key}: 0 filas válidas (posible cambio de HTML)`);
     }
 
-    await saveDivision(source.key, rows);
+    await saveDivision(source.key, buildPayload(source, rows));
     console.log(`[gesliga] ${source.key}: ${rows.length} filas`);
   }
 }
