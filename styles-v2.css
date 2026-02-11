@@ -63,8 +63,8 @@ body.no-scroll {
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background: var(--vignette);
-  opacity: 0.92;
+  background: radial-gradient(circle at 50% 24%, rgba(32, 70, 117, 0.1), rgba(1, 5, 10, 0.55) 72%);
+  opacity: 0.82;
 }
 
 .section {
@@ -209,14 +209,7 @@ a {
 }
 
 .sl-divider::after {
-  content: "";
-  position: absolute;
-  left: 6%;
-  right: 6%;
-  bottom: -0.45rem;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--line), transparent);
-  box-shadow: var(--divider-glow), 0 0 14px -10px rgba(88, 201, 255, 0.9);
+  content: none;
 }
 
 @keyframes neonPulse {
@@ -389,14 +382,7 @@ summary:focus-visible,
 }
 
 .hud-separator::after {
-  content: "";
-  position: absolute;
-  left: 6%;
-  right: 6%;
-  bottom: -0.45rem;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--line), transparent);
-  box-shadow: var(--divider-glow), 0 0 14px -10px rgba(88, 201, 255, 0.9);
+  content: none;
 }
 
 
@@ -1614,6 +1600,61 @@ summary:focus-visible,
   border-radius: var(--radius-md);
   background: var(--bg-card);
   padding: 1rem;
+}
+
+
+.palmares-block-cups {
+  border: 0;
+  box-shadow: none;
+  border-radius: 0;
+  background: transparent;
+  padding: 0;
+}
+
+.palmares-grid-cups {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.9rem, 5vw, 2.8rem);
+}
+
+.palmares-card-cup {
+  width: 100%;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+  text-align: center;
+}
+
+.palmares-card-cup .palmares-trophy {
+  width: clamp(90px, 20vw, 110px);
+  height: clamp(90px, 20vw, 110px);
+  margin: 0 auto 0.75rem;
+  filter: drop-shadow(0 0 10px rgba(0, 180, 255, 0.7));
+}
+
+.palmares-cup-title {
+  margin: 0;
+  font-family: var(--title-font);
+  font-size: clamp(1.25rem, 5vw, 1.5rem);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  text-shadow: 0 0 10px rgba(0, 180, 255, 0.8);
+}
+
+.palmares-cup-winner {
+  margin: 0.55rem 0 0;
+  font-size: 0.92rem;
+  letter-spacing: 0.02em;
+}
+
+.palmares-cup-winner.is-highlight {
+  color: #f3f9ff;
+}
+
+.palmares-cup-winner.is-muted {
+  color: #8a95a8;
 }
 
 @media (min-width: 860px) {

@@ -759,11 +759,13 @@ backToTopButton.addEventListener("click", () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
-function createPalmaresCard(item, winnersKey, winnerLabel) {
+function createPalmaresCard(item, winnersKey, winnerLabel, variant = "default") {
+  const isCupVariant = variant === "cups";
   const card = document.createElement("article");
-  card.className = "palmares-card sl-card";
+  card.className = isCupVariant ? "palmares-card palmares-card-cup" : "palmares-card sl-card";
 
   const title = document.createElement("h4");
+  title.className = isCupVariant ? "palmares-cup-title" : "palmares-card-title";
   title.textContent = item.nombre;
 
   const trophy = document.createElement("img");
@@ -772,17 +774,25 @@ function createPalmaresCard(item, winnersKey, winnerLabel) {
   trophy.alt = `Trofeo ${item.nombre}`;
   trophy.loading = "lazy";
 
-  const winners = document.createElement("ul");
-  winners.className = "palmares-winners";
-
   const winnersList = item[winnersKey].filter((winner) => winner && winner.trim() !== "");
   const safeWinners = winnersList.length ? winnersList : ["A confirmar"];
 
-  safeWinners.forEach((winner) => {
-    const winnerItem = document.createElement("li");
-    winnerItem.textContent = `${winnerLabel}: ${winner}`;
-    winners.appendChild(winnerItem);
-  });
+  const winners = document.createElement(isCupVariant ? "p" : "ul");
+  winners.className = isCupVariant ? "palmares-cup-winner" : "palmares-winners";
+
+  if (isCupVariant) {
+    const winner = safeWinners[0];
+    const winnerUpper = winner.trim().toUpperCase();
+    const isLegacy = winnerUpper === "NO EXISTIA" || winnerUpper === "NO EXISTÍA";
+    winners.textContent = `${winnerLabel}: ${winner}`;
+    winners.classList.add(isLegacy ? "is-muted" : "is-highlight");
+  } else {
+    safeWinners.forEach((winner) => {
+      const winnerItem = document.createElement("li");
+      winnerItem.textContent = `${winnerLabel}: ${winner}`;
+      winners.appendChild(winnerItem);
+    });
+  }
 
   card.appendChild(title);
 
@@ -803,6 +813,7 @@ function renderPalmares() {
 
   const sections = [
     {
+      key: "divisions",
       title: "Campeones por División",
       subtitle: "Últimos campeones (Temporada 23)",
       items: PES6_PALMARES.divisiones,
@@ -810,13 +821,15 @@ function renderPalmares() {
       winnerLabel: "Último campeón"
     },
     {
+      key: "cups",
       title: "Copas",
       subtitle: "Últimos campeones de copas (Temporada 22)",
       items: PES6_PALMARES.copas,
       winnersKey: "campeones",
-      winnerLabel: "Último campeón"
+      winnerLabel: "Ganador / Estado"
     },
     {
+      key: "awards",
       title: "Premios individuales",
       items: PES6_PALMARES.individuales,
       winnersKey: "ganadores",
@@ -827,8 +840,9 @@ function renderPalmares() {
   container.replaceChildren();
 
   sections.forEach((section) => {
+    const isCupsSection = section.key === "cups";
     const block = document.createElement("section");
-    block.className = "palmares-block sl-card";
+    block.className = isCupsSection ? "palmares-block palmares-block-cups" : "palmares-block sl-card";
 
     const heading = document.createElement("h3");
     heading.textContent = section.title;
@@ -842,10 +856,10 @@ function renderPalmares() {
     }
 
     const grid = document.createElement("div");
-    grid.className = "palmares-grid";
+    grid.className = isCupsSection ? "palmares-grid palmares-grid-cups" : "palmares-grid";
 
     section.items.forEach((item) => {
-      grid.appendChild(createPalmaresCard(item, section.winnersKey, section.winnerLabel));
+      grid.appendChild(createPalmaresCard(item, section.winnersKey, section.winnerLabel, section.key));
     });
 
     block.appendChild(grid);
