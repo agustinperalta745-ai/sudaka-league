@@ -893,8 +893,15 @@ function buildPes6TitleMap(history) {
           };
         }
 
+        const titleName = meta.title ?? meta.label ?? meta.type ?? "Título";
+        const seasonLabel = seasonData.season;
+
+        if (!titleName || !seasonLabel) {
+          return;
+        }
+
         titleMap[player].total += 1;
-        titleMap[player].titles.push(`${meta.label} (${seasonData.season})`);
+        titleMap[player].titles.push(`${titleName} (${seasonLabel})`);
 
         if (groupKey === "divisions") titleMap[player].counts.primera += 1;
         if (groupKey === "cups") titleMap[player].counts.copas += 1;
