@@ -1,34 +1,34 @@
 {
   "source": "gesliga",
   "division": "segunda",
-  "fetchedAt": "2026-02-11T22:32:00.744Z",
+  "fetchedAt": "2026-02-11T22:56:53.855Z",
   "rows": [
     {
       "pos": 1,
       "equipo": "Fernet - Villareal",
-      "pts": 0,
-      "pj": 0,
+      "pts": 1,
+      "pj": 1,
       "pg": 0,
-      "pe": 0,
+      "pe": 1,
       "pp": 0,
-      "gf": 0,
-      "gc": 0,
+      "gf": 2,
+      "gc": 2,
       "dg": 0
     },
     {
       "pos": 1,
       "equipo": "Tank - Betis",
-      "pts": 0,
-      "pj": 0,
+      "pts": 1,
+      "pj": 1,
       "pg": 0,
-      "pe": 0,
+      "pe": 1,
       "pp": 0,
-      "gf": 0,
-      "gc": 0,
+      "gf": 2,
+      "gc": 2,
       "dg": 0
     },
     {
-      "pos": 1,
+      "pos": 3,
       "equipo": "TCL06 - Feeyenord",
       "pts": 0,
       "pj": 0,
@@ -40,7 +40,7 @@
       "dg": 0
     },
     {
-      "pos": 1,
+      "pos": 3,
       "equipo": "Bocajuniors12 - Fenerbache",
       "pts": 0,
       "pj": 0,
@@ -52,7 +52,7 @@
       "dg": 0
     },
     {
-      "pos": 1,
+      "pos": 3,
       "equipo": "Dabidpisi - Fiorentina",
       "pts": 0,
       "pj": 0,
@@ -64,7 +64,7 @@
       "dg": 0
     },
     {
-      "pos": 1,
+      "pos": 3,
       "equipo": "Slasher7 - Crystal Palace",
       "pts": 0,
       "pj": 0,
@@ -76,7 +76,7 @@
       "dg": 0
     },
     {
-      "pos": 1,
+      "pos": 3,
       "equipo": "Leocarp7 - Everton",
       "pts": 0,
       "pj": 0,
@@ -88,7 +88,7 @@
       "dg": 0
     },
     {
-      "pos": 1,
+      "pos": 3,
       "equipo": "Leom - Real Sociedad",
       "pts": 0,
       "pj": 0,
@@ -100,7 +100,7 @@
       "dg": 0
     },
     {
-      "pos": 1,
+      "pos": 3,
       "equipo": "Rubencho - Monaco",
       "pts": 0,
       "pj": 0,
@@ -112,7 +112,7 @@
       "dg": 0
     },
     {
-      "pos": 1,
+      "pos": 3,
       "equipo": "Joaquito12 - PSV",
       "pts": 0,
       "pj": 0,
@@ -124,7 +124,7 @@
       "dg": 0
     },
     {
-      "pos": 1,
+      "pos": 3,
       "equipo": "Sally1901 - Marsella",
       "pts": 0,
       "pj": 0,
@@ -136,7 +136,7 @@
       "dg": 0
     },
     {
-      "pos": 1,
+      "pos": 3,
       "equipo": "Diegarcho - Torino",
       "pts": 0,
       "pj": 0,
@@ -148,7 +148,7 @@
       "dg": 0
     },
     {
-      "pos": 1,
+      "pos": 3,
       "equipo": "Gab0211 - Leed United",
       "pts": 0,
       "pj": 0,
@@ -160,7 +160,7 @@
       "dg": 0
     },
     {
-      "pos": 1,
+      "pos": 3,
       "equipo": "Cacherinhooo - Fullham",
       "pts": 0,
       "pj": 0,
@@ -172,7 +172,7 @@
       "dg": 0
     },
     {
-      "pos": 1,
+      "pos": 3,
       "equipo": "Romancito - Valencia",
       "pts": 0,
       "pj": 0,
@@ -184,7 +184,7 @@
       "dg": 0
     },
     {
-      "pos": 1,
+      "pos": 3,
       "equipo": "Theohernandez - Lyom",
       "pts": 0,
       "pj": 0,
@@ -196,7 +196,7 @@
       "dg": 0
     },
     {
-      "pos": 1,
+      "pos": 3,
       "equipo": "NazaTeto - Galatasaray",
       "pts": 0,
       "pj": 0,
@@ -208,7 +208,7 @@
       "dg": 0
     },
     {
-      "pos": 1,
+      "pos": 3,
       "equipo": "Ian - Roma",
       "pts": 0,
       "pj": 0,
@@ -220,7 +220,7 @@
       "dg": 0
     },
     {
-      "pos": 1,
+      "pos": 3,
       "equipo": "TrueBlueFC - Bologna",
       "pts": 0,
       "pj": 0,
@@ -232,7 +232,7 @@
       "dg": 0
     },
     {
-      "pos": 1,
+      "pos": 3,
       "equipo": "XxFacuprogamerxX - Brighton",
       "pts": 0,
       "pj": 0,
