@@ -214,7 +214,18 @@ const CUP_CROSSING_DIVISION_SHORT = {
   Cuarta: "4ta Div"
 };
 
-const ASSETS_BASE_PATH = location.pathname.includes("/sudaka-league/") ? "/sudaka-league" : "";
+function getAssetsBasePath() {
+  const isGitHubPagesHost = /\.github\.io$/i.test(location.hostname);
+  const isSudakaLeaguePath = location.pathname === "/sudaka-league" || location.pathname.startsWith("/sudaka-league/");
+
+  if (isGitHubPagesHost || isSudakaLeaguePath) {
+    return "/sudaka-league";
+  }
+
+  return "";
+}
+
+const ASSETS_BASE_PATH = getAssetsBasePath();
 
 const TEAM_LOGOS = {
   "Lanús": "lanus.png",
@@ -445,7 +456,8 @@ function normalizeT24Entry(entry = {}) {
   };
 }
 
-function createT24TableCard(divisionLabel, rows) {
+function createT24TableCard(divisionLabel, data) {
+  const hasRows = Array.isArray(data?.rows) && data.rows.length > 0;
   const card = document.createElement("article");
   card.className = "t24-card sl-card";
 
@@ -468,42 +480,44 @@ function createT24TableCard(divisionLabel, rows) {
 
   const tbody = document.createElement("tbody");
 
-  rows.forEach((rawEntry, index) => {
-    const entry = normalizeT24Entry(rawEntry);
-    const row = document.createElement("tr");
-    if (index < 3) {
-      row.classList.add("is-top");
-    }
+  if (hasRows) {
+    data.rows.map((rawEntry, index) => {
+      const entry = normalizeT24Entry(rawEntry);
+      const row = document.createElement("tr");
+      if (index < 3) {
+        row.classList.add("is-top");
+      }
 
-    row.appendChild(createT24Cell("td", String(entry.pos ?? "-"), "t24-pos"));
+      row.appendChild(createT24Cell("td", String(entry.pos ?? "-"), "t24-pos"));
 
-    const logoCell = document.createElement("td");
-    logoCell.className = "t24-logo-cell";
-    const logo = document.createElement("img");
-    logo.className = "t24-logo";
-    logo.src = getTeamLogoPath(entry.teamName || "");
-    logo.alt = `Escudo ${entry.teamName || "Equipo"}`;
-    logo.loading = "lazy";
-    logo.onerror = () => {
-      logo.onerror = null;
-      logo.src = T24_PLACEHOLDER_LOGO;
-    };
-    logoCell.appendChild(logo);
-    row.appendChild(logoCell);
+      const logoCell = document.createElement("td");
+      logoCell.className = "t24-logo-cell";
+      const logo = document.createElement("img");
+      logo.className = "t24-logo";
+      logo.src = getTeamLogoPath(entry.teamName || "");
+      logo.alt = `Escudo ${entry.teamName || "Equipo"}`;
+      logo.loading = "lazy";
+      logo.onerror = () => {
+        logo.onerror = null;
+        logo.src = T24_PLACEHOLDER_LOGO;
+      };
+      logoCell.appendChild(logo);
+      row.appendChild(logoCell);
 
-    row.appendChild(createT24Cell("td", entry.playerName || "-", "t24-player"));
-    row.appendChild(createT24Cell("td", entry.teamName || "-", "t24-team"));
-    row.appendChild(createT24Cell("td", String(entry.pts ?? "-")));
-    row.appendChild(createT24Cell("td", String(entry.pj ?? "-")));
-    row.appendChild(createT24Cell("td", String(entry.pg ?? "-")));
-    row.appendChild(createT24Cell("td", String(entry.pe ?? "-")));
-    row.appendChild(createT24Cell("td", String(entry.pp ?? "-")));
-    row.appendChild(createT24Cell("td", String(entry.gf ?? "-")));
-    row.appendChild(createT24Cell("td", String(entry.gc ?? "-")));
-    row.appendChild(createT24Cell("td", String(entry.dg ?? "-"), "t24-dg"));
+      row.appendChild(createT24Cell("td", entry.playerName || "-", "t24-player"));
+      row.appendChild(createT24Cell("td", entry.teamName || "-", "t24-team"));
+      row.appendChild(createT24Cell("td", String(entry.pts ?? "-")));
+      row.appendChild(createT24Cell("td", String(entry.pj ?? "-")));
+      row.appendChild(createT24Cell("td", String(entry.pg ?? "-")));
+      row.appendChild(createT24Cell("td", String(entry.pe ?? "-")));
+      row.appendChild(createT24Cell("td", String(entry.pp ?? "-")));
+      row.appendChild(createT24Cell("td", String(entry.gf ?? "-")));
+      row.appendChild(createT24Cell("td", String(entry.gc ?? "-")));
+      row.appendChild(createT24Cell("td", String(entry.dg ?? "-"), "t24-dg"));
 
-    tbody.appendChild(row);
-  });
+      tbody.appendChild(row);
+    });
+  }
 
   table.append(thead, tbody);
   scroller.appendChild(table);
@@ -513,9 +527,9 @@ function createT24TableCard(divisionLabel, rows) {
 
 async function fetchT24DivisionData(key) {
   const T24_FETCH_PATHS = {
-    primera: toAssetPath("data/gesliga/t24/primera.json"),
-    segunda: toAssetPath("data/gesliga/t24/segunda.json"),
-    tercera: toAssetPath("data/gesliga/t24/tercera.json")
+    primera: `${ASSETS_BASE_PATH}/data/gesliga/t24/primera.json`,
+    segunda: `${ASSETS_BASE_PATH}/data/gesliga/t24/segunda.json`,
+    tercera: `${ASSETS_BASE_PATH}/data/gesliga/t24/tercera.json`
   };
 
   const response = await fetch(T24_FETCH_PATHS[key], { cache: "no-store" });
@@ -524,9 +538,9 @@ async function fetchT24DivisionData(key) {
   }
 
   const payload = await response.json();
-  if (Array.isArray(payload)) return payload;
-  if (Array.isArray(payload.rows)) return payload.rows;
-  return [];
+  if (Array.isArray(payload?.rows)) return payload;
+  if (Array.isArray(payload)) return { rows: payload };
+  return { rows: [] };
 }
 
 async function renderT24Tables() {
