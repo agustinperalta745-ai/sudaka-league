@@ -1,7 +1,7 @@
 {
   "source": "gesliga",
   "division": "primera",
-  "fetchedAt": "2026-02-11T23:04:28.949Z",
+  "fetchedAt": "2026-02-11T23:11:08.329Z",
   "rows": [
     {
       "pos": 1,
@@ -41,18 +41,42 @@
     },
     {
       "pos": 4,
-      "equipo": "Ivancarocela - Roma",
-      "pts": 12,
-      "pj": 13,
-      "pg": 3,
-      "pe": 3,
-      "pp": 7,
-      "gf": 15,
-      "gc": 21,
-      "dg": -6
+      "equipo": "Pelufo - Real Sociedad",
+      "pts": 15,
+      "pj": 6,
+      "pg": 5,
+      "pe": 0,
+      "pp": 1,
+      "gf": 10,
+      "gc": 4,
+      "dg": 6
     },
     {
       "pos": 5,
+      "equipo": "Alex_CABJ - Bologna",
+      "pts": 13,
+      "pj": 6,
+      "pg": 4,
+      "pe": 1,
+      "pp": 1,
+      "gf": 11,
+      "gc": 4,
+      "dg": 7
+    },
+    {
+      "pos": 6,
+      "equipo": "Ivancarocela - Roma",
+      "pts": 12,
+      "pj": 15,
+      "pg": 3,
+      "pe": 3,
+      "pp": 9,
+      "gf": 15,
+      "gc": 25,
+      "dg": -10
+    },
+    {
+      "pos": 7,
       "equipo": "Joser17 - Brighton",
       "pts": 11,
       "pj": 8,
@@ -64,19 +88,7 @@
       "dg": 1
     },
     {
-      "pos": 6,
-      "equipo": "Alex_CABJ - Bologna",
-      "pts": 10,
-      "pj": 4,
-      "pg": 3,
-      "pe": 1,
-      "pp": 0,
-      "gf": 8,
-      "gc": 2,
-      "dg": 6
-    },
-    {
-      "pos": 7,
+      "pos": 8,
       "equipo": "Soylefo - Fullham",
       "pts": 10,
       "pj": 6,
@@ -88,7 +100,7 @@
       "dg": 1
     },
     {
-      "pos": 8,
+      "pos": 9,
       "equipo": "Lombardo - Valencia",
       "pts": 9,
       "pj": 5,
@@ -100,7 +112,7 @@
       "dg": 0
     },
     {
-      "pos": 9,
+      "pos": 10,
       "equipo": "Crislort26 - Marcella",
       "pts": 8,
       "pj": 4,
@@ -109,18 +121,6 @@
       "pp": 0,
       "gf": 8,
       "gc": 5,
-      "dg": 3
-    },
-    {
-      "pos": 10,
-      "equipo": "Pelufo - Real Sociedad",
-      "pts": 6,
-      "pj": 2,
-      "pg": 2,
-      "pe": 0,
-      "pp": 0,
-      "gf": 4,
-      "gc": 1,
       "dg": 3
     },
     {
