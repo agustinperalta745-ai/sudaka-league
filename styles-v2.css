@@ -388,11 +388,16 @@ summary:focus-visible,
 .history-layout,
 .palmares-layout,
 .palmares-grid,
-.pes6-ranking-list-wrap,
 .cup-interdivisional-rounds,
 .cup-crossing-body {
   display: grid;
   gap: clamp(0.9rem, 2.8vw, 1.12rem);
+}
+
+.pes6-ranking-list-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .history-layout {
@@ -679,6 +684,15 @@ summary:focus-visible,
   padding: 0.75rem;
 }
 
+.pes6-ranking-row {
+  position: relative;
+  height: auto;
+  max-height: none;
+  overflow: hidden;
+  padding: 12px;
+  border-radius: 14px;
+}
+
 .palmares-trophy,
 .history-trophy {
   width: 40px;
@@ -905,11 +919,48 @@ summary:focus-visible,
   gap: 0.6rem;
 }
 
+.pes6-ranking-header {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 10px;
+}
+
+.pes6-ranking-position,
+.pes6-ranking-total,
+.pes6-ranking-total-label {
+  white-space: nowrap;
+}
+
+.pes6-ranking-player {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.pes6-ranking-stats {
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+}
+
 .pes6-ranking-panel,
 .history-accordion-panel {
   margin-top: 0.65rem;
   padding-top: 0.65rem;
   border-top: 1px solid var(--line);
+}
+
+.pes6-ranking-panel {
+  position: static;
+}
+
+.pes6-ranking-breakdown {
+  margin: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  line-height: 1.25;
 }
 
 .history-accordion-panel {
@@ -932,6 +983,34 @@ summary:focus-visible,
   padding: 0.4rem 0.65rem;
   font-weight: 700;
   cursor: pointer;
+}
+
+@media (max-width: 420px) {
+  .pes6-ranking-header {
+    grid-template-columns: 44px minmax(0, 1fr) auto;
+    grid-template-areas:
+      "position player toggle"
+      "position stats stats";
+    grid-auto-rows: auto;
+    row-gap: 6px;
+  }
+
+  .pes6-ranking-position {
+    grid-area: position;
+  }
+
+  .pes6-ranking-player {
+    grid-area: player;
+  }
+
+  .pes6-ranking-stats {
+    grid-area: stats;
+  }
+
+  .pes6-ranking-toggle {
+    grid-area: toggle;
+    justify-self: end;
+  }
 }
 
 .cup-history-block {
