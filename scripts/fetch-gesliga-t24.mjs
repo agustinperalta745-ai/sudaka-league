@@ -65,8 +65,8 @@ function findHeaderIndexes(headerCells) {
   normalizedHeaders.forEach((header, index) => {
     const normalized = header.toLowerCase();
 
-    if (indexes.pos === undefined && /^pos(icion)?$/.test(normalized)) indexes.pos = index;
-    if (indexes.pts === undefined && /^pt(s)?$/.test(normalized)) indexes.pts = index;
+    if (indexes.pos === undefined && /^(pos|pto|pto\.|posicion)$/.test(normalized)) indexes.pos = index;
+    if (indexes.pts === undefined && /^(pt|pts|pto?s?)$/.test(normalized)) indexes.pts = index;
     if (indexes.pj === undefined && /^pj$/.test(normalized)) indexes.pj = index;
     if (indexes.pg === undefined && /^pg$/.test(normalized)) indexes.pg = index;
     if (indexes.pe === undefined && /^pe$/.test(normalized)) indexes.pe = index;
@@ -90,23 +90,41 @@ function findHeaderIndexes(headerCells) {
   };
 }
 
+function findClassificationLayout($, table) {
+  const rows = $(table).find("tr").toArray();
+  if (rows.length < 2) return null;
+
+  const headerSearchLimit = Math.min(rows.length, 6);
+
+  for (let headerIndex = 0; headerIndex < headerSearchLimit; headerIndex += 1) {
+    const headerCells = getRowCells($, rows[headerIndex], "th,td");
+    const indexes = findHeaderIndexes(headerCells);
+    if (!indexes) continue;
+
+    const bodyRows = rows
+      .slice(headerIndex + 1)
+      .filter((row) => $(row).find("td").length > 0);
+
+    if (!bodyRows.length) continue;
+
+    return {
+      indexes,
+      rowsToParse: bodyRows
+    };
+  }
+
+  return null;
+}
+
 function parseClassificationRows(html) {
   const $ = cheerio.load(html);
   const tables = $("table").toArray();
 
   for (const table of tables) {
-    const rows = $(table).find("tr").toArray();
-    if (rows.length < 2) continue;
+    const layout = findClassificationLayout($, table);
+    if (!layout) continue;
 
-    const headerCells = getRowCells($, rows[0], "th,td");
-    const indexes = findHeaderIndexes(headerCells);
-    if (!indexes) continue;
-
-    const bodyRows = $(table)
-      .find("tbody tr")
-      .toArray()
-      .filter((row) => $(row).find("td").length > 0);
-    const rowsToParse = bodyRows.length ? bodyRows : rows.slice(1);
+    const { indexes, rowsToParse } = layout;
 
     const parsedRows = [];
 
