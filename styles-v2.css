@@ -395,6 +395,10 @@ summary:focus-visible,
   gap: clamp(0.9rem, 2.8vw, 1.12rem);
 }
 
+.history-layout {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 .season-card {
   padding: clamp(1.1rem, 3vw, 1.7rem);
   background: linear-gradient(180deg, rgba(26, 40, 62, 0.88), rgba(14, 24, 39, 0.92));
@@ -908,6 +912,17 @@ summary:focus-visible,
   border-top: 1px solid var(--line);
 }
 
+.history-accordion-panel {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 280ms ease, opacity 220ms ease;
+}
+
+.history-accordion-panel[data-expanded="true"] {
+  opacity: 1;
+}
+
 .pes6-ranking-toggle,
 .history-accordion-trigger {
   border: 1px solid var(--line);
@@ -1099,7 +1114,6 @@ summary:focus-visible,
 @media (min-width: 860px) {
   .season-grid,
   .league-grid,
-  .history-layout,
   .palmares-layout,
   .preview-grid,
   .cup-round-grid {
