@@ -1603,6 +1603,68 @@ summary:focus-visible,
 }
 
 
+
+.palmares-block-divisions {
+  border: 0;
+  box-shadow: none;
+  border-radius: 0;
+  background: transparent;
+  padding: 0;
+}
+
+.palmares-grid-divisions {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.palmares-card-division {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(0.9rem, 3vw, 1.8rem);
+  margin: 40px 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+}
+
+.palmares-division-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  min-width: 0;
+}
+
+.palmares-division-title {
+  margin: 0;
+  font-family: var(--title-font);
+  font-size: clamp(1.38rem, 6vw, 1.62rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #f5faff;
+  text-shadow: 0 0 10px rgba(0, 180, 255, 0.7);
+}
+
+.palmares-division-winner {
+  margin: 0;
+  font-size: clamp(0.98rem, 3.6vw, 1.08rem);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #f1f7ff;
+}
+
+.palmares-card-division .palmares-trophy {
+  width: clamp(80px, 20vw, 100px);
+  height: clamp(80px, 20vw, 100px);
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 12px rgba(0, 180, 255, 0.6));
+}
+
+
 .palmares-block-cups {
   border: 0;
   box-shadow: none;
