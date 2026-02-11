@@ -1485,8 +1485,14 @@ summary:focus-visible,
   width: min(980px, 95vw);
   max-height: 93vh;
   overflow: auto;
+  isolation: isolate;
   z-index: 60;
   padding: clamp(1rem, 3vw, 1.8rem);
+}
+
+.league-modal::before,
+.league-modal::after {
+  z-index: 0;
 }
 
 .modal-overlay {
@@ -1498,14 +1504,16 @@ summary:focus-visible,
 }
 
 .close-btn {
-  position: sticky;
-  top: 0;
-  float: right;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 9999;
   width: 2.05rem;
   height: 2.05rem;
   border-radius: 0.7rem;
-  border: 1px solid var(--line);
-  background: rgba(7, 14, 25, 0.92);
+  border: 1px solid rgba(0, 180, 255, 0.25);
+  background: rgba(10, 20, 35, 0.7);
+  backdrop-filter: blur(6px);
   color: var(--text-main);
   font-size: 1.22rem;
   line-height: 1;
