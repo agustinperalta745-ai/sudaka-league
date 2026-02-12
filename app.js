@@ -385,9 +385,7 @@ let showAllTitlesRanking = false;
 let openTitlesRankingId = null;
 let interdivisionalState = null;
 let cupPanelTab = "active";
-let showQF = false;
-let showSF = false;
-let showF = false;
+let activePhase = 1;
 const MAX_RANKING_TITLES_DETAIL = 6;
 
 const T24_DIVISIONS = [
@@ -1962,13 +1960,18 @@ function updateCupCardHeader() {
   const currentSeason = getCurrentInterdivisionalSeason();
   if (!currentSeason) return;
 
-  const visiblePhases = getVisiblePhaseKeysForSeason(currentSeason);
-  const activePhase = visiblePhases[visiblePhases.length - 1] || INTERDIVISIONAL_PHASES[0].key;
+  const activePhaseKeyByStep = {
+    1: "octavos_playoffs",
+    2: "cuartos_playoffs",
+    3: "semifinal_playoffs",
+    4: "final_copa_interdivisional"
+  };
+  const activePhaseKey = activePhaseKeyByStep[activePhase] || "octavos_playoffs";
 
   const displaySeason = currentSeason.season;
 
   if (cupCurrentSeason) cupCurrentSeason.textContent = `Temporada ${displaySeason}`;
-  if (cupCurrentPhase) cupCurrentPhase.textContent = `Fase: ${getPhaseLabel(activePhase)}`;
+  if (cupCurrentPhase) cupCurrentPhase.textContent = `Fase: ${getPhaseLabel(activePhaseKey)}`;
 
   if (cupStatus) {
     const isCompleted = currentSeason.status === "completed";
@@ -1990,57 +1993,44 @@ function renderCupActiveTab() {
   const phaseControls = document.createElement("div");
   phaseControls.className = "cup-card-tabs";
 
-  const createPhaseButton = (label, onClick) => {
+  const createPhaseButton = (label, phaseStep) => {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "cup-tab-btn sl-tab neon-box";
+    button.classList.toggle("is-active", activePhase === phaseStep);
+    button.setAttribute("aria-selected", String(activePhase === phaseStep));
     button.textContent = label;
-    button.addEventListener("click", onClick);
+    button.addEventListener("click", () => {
+      activePhase = phaseStep;
+      renderCupActiveTab();
+      updateCupCardHeader();
+    });
     return button;
   };
 
-  phaseControls.appendChild(createPhaseButton("2da fase", () => {
-    showQF = true;
-    renderCupActiveTab();
-    updateCupCardHeader();
-  }));
-
-  if (showQF) {
-    phaseControls.appendChild(createPhaseButton("3ra fase", () => {
-      showSF = true;
-      renderCupActiveTab();
-      updateCupCardHeader();
-    }));
-  }
-
-  if (showSF) {
-    phaseControls.appendChild(createPhaseButton("4ta fase", () => {
-      showF = true;
-      renderCupActiveTab();
-      updateCupCardHeader();
-    }));
-  }
+  phaseControls.appendChild(createPhaseButton("1ra fase", 1));
+  phaseControls.appendChild(createPhaseButton("2da fase", 2));
+  phaseControls.appendChild(createPhaseButton("3ra fase", 3));
+  phaseControls.appendChild(createPhaseButton("4ta fase", 4));
 
   cupCrossingsList.appendChild(phaseControls);
 
-  [
-    { key: "octavos_playoffs", isVisible: true },
-    { key: "cuartos_playoffs", isVisible: showQF },
-    { key: "semifinal_playoffs", isVisible: showSF },
-    { key: "final_copa_interdivisional", isVisible: showF }
-  ].forEach(({ key, isVisible }) => {
-    if (!isVisible) return;
-
-    const matches = currentSeason.phases[key] || [];
-    const section = createCupPhaseSection(key, matches, {
-      editable: false,
-      season: currentSeason
-    });
-
-    if (section) {
-      cupCrossingsList.appendChild(section);
-    }
+  const activePhaseKeyByStep = {
+    1: "octavos_playoffs",
+    2: "cuartos_playoffs",
+    3: "semifinal_playoffs",
+    4: "final_copa_interdivisional"
+  };
+  const activePhaseKey = activePhaseKeyByStep[activePhase] || "octavos_playoffs";
+  const matches = currentSeason.phases[activePhaseKey] || [];
+  const section = createCupPhaseSection(activePhaseKey, matches, {
+    editable: false,
+    season: currentSeason
   });
+
+  if (section) {
+    cupCrossingsList.appendChild(section);
+  }
 }
 
 function renderCupHistoryTab() {
