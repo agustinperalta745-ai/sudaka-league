@@ -1,0 +1,29 @@
+{
+  "updatedAt": "2026-02-12",
+  "leaders": [
+    {
+      "divisionKey": "primera",
+      "divisionLabel": "1ª División",
+      "usuario": "PELUFO",
+      "pj": 8,
+      "pg": 6,
+      "escudoFile": "universitario.png"
+    },
+    {
+      "divisionKey": "segunda",
+      "divisionLabel": "2ª División",
+      "usuario": "FACU.JEY",
+      "pj": 8,
+      "pg": 5,
+      "escudoFile": "boca.png"
+    },
+    {
+      "divisionKey": "tercera",
+      "divisionLabel": "3ª División",
+      "usuario": "LOMBARDO",
+      "pj": 8,
+      "pg": 4,
+      "escudoFile": "racing.png"
+    }
+  ]
+}
