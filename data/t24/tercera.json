@@ -1,20 +1,20 @@
 {
   "source": "gesliga",
   "division": "tercera",
-  "fetchedAt": "2026-02-12T20:31:27.070Z",
+  "fetchedAt": "2026-02-12T21:43:28.373Z",
   "rows": [
     {
       "pos": 1,
       "equipo": "Crystal Palace - Broko",
       "escudoFile": "crystal-palace.png",
-      "pts": 10,
-      "pj": 5,
-      "pg": 3,
+      "pts": 16,
+      "pj": 7,
+      "pg": 5,
       "pe": 1,
       "pp": 1,
-      "gf": 15,
-      "gc": 10,
-      "dg": 5
+      "gf": 23,
+      "gc": 11,
+      "dg": 12
     },
     {
       "pos": 2,
@@ -111,19 +111,6 @@
       "pos": 4,
       "equipo": "Lyon - tio",
       "escudoFile": "lyon.png",
-      "pts": 0,
-      "pj": 0,
-      "pg": 0,
-      "pe": 0,
-      "pp": 0,
-      "gf": 0,
-      "gc": 0,
-      "dg": 0
-    },
-    {
-      "pos": 4,
-      "equipo": "Feeyenord - SantisimonFC",
-      "escudoFile": "feeyenord.png",
       "pts": 0,
       "pj": 0,
       "pg": 0,
@@ -249,6 +236,19 @@
       "gf": 0,
       "gc": 0,
       "dg": 0
+    },
+    {
+      "pos": 19,
+      "equipo": "Feeyenord - SantisimonFC",
+      "escudoFile": "feeyenord.png",
+      "pts": 0,
+      "pj": 2,
+      "pg": 0,
+      "pe": 0,
+      "pp": 2,
+      "gf": 1,
+      "gc": 8,
+      "dg": -7
     },
     {
       "pos": 20,
