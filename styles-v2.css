@@ -788,6 +788,37 @@ summary:focus-visible,
   cursor: pointer;
 }
 
+.interdivisional-card-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.interdivisional-card-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("/assets/interdivisional-bg.png");
+  background-size: cover;
+  background-position: center;
+  filter: blur(12px);
+  opacity: 0.35;
+  transform: scale(1.1);
+  z-index: 0;
+}
+
+.interdivisional-card-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 10, 20, 0.75);
+  z-index: 1;
+}
+
+.interdivisional-card-bg > * {
+  position: relative;
+  z-index: 2;
+}
+
 .cup-toggle-label {
   margin: 0;
   padding-top: 0.7rem;
