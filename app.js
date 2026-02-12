@@ -299,6 +299,10 @@ function toAssetPath(assetPath = "") {
 }
 
 function getCupCrossingTeamLogoPath(teamData) {
+  if (teamData.shield) {
+    return toAssetPath(teamData.shield);
+  }
+
   if (teamData.logo) {
     return toAssetPath(teamData.logo);
   }
@@ -1789,7 +1793,7 @@ function buildInterdivisionalActiveSeason(source) {
     club: "Universitario",
     player: "H09",
     division: "2da Div",
-    shield: "./assets/escudos/universitario.png"
+    shield: "assets/escudos/universitario.png"
   };
 
   const rival = finalPlayoffsMatch?.winner === "home"
@@ -1890,7 +1894,7 @@ function getFinalCopaInterdivisionalMatch(season) {
     club: "Universitario",
     player: "H09",
     division: "2da Div",
-    shield: "./assets/escudos/universitario.png"
+    shield: "assets/escudos/universitario.png"
   };
 
   const rival = finalPlayoffsMatch?.winner === "home"
