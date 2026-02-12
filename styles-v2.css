@@ -2002,13 +2002,20 @@ summary:focus-visible,
 
 .t24-table-scroller {
   width: 100%;
+}
+
+.table-scroll {
   overflow-x: auto;
+  overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
+  width: 100%;
 }
 
 .t24-table {
   width: 100%;
   min-width: 900px;
+  table-layout: auto;
   border-collapse: collapse;
   font-size: 0.9rem;
 }
@@ -2036,41 +2043,40 @@ summary:focus-visible,
 }
 
 .t24-logo-cell {
-  width: 68px;
+  width: 74px;
+  text-align: center;
+  vertical-align: middle;
 }
 
-.t24-logo {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 1px solid rgba(0, 180, 255, 0.35);
-  background: rgba(4, 8, 14, 0.85);
+.t24-logo-cell > * {
+  margin-inline: auto;
+}
+
+.team-crest {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
   display: block;
-  margin: 0 auto;
-  filter: drop-shadow(0 0 6px rgba(0, 180, 255, 0.42));
-  transition: transform 180ms ease, filter 180ms ease;
+  filter: drop-shadow(0 0 6px rgba(70, 180, 255, 0.35));
+  transition: transform .15s ease, filter .15s ease;
 }
 
 .t24-table tbody tr {
-  min-height: 58px;
+  min-height: 62px;
 }
 
-.t24-table tbody tr:hover .t24-logo {
+.t24-table tbody tr:hover .team-crest {
   transform: scale(1.08);
-  filter: drop-shadow(0 0 8px rgba(0, 190, 255, 0.5));
-}
-
-.team-badge {
-  width: 22px;
-  height: 22px;
-  object-fit: contain;
-  display: block;
-  margin: 0 auto;
+  filter: drop-shadow(0 0 10px rgba(70, 180, 255, 0.5));
 }
 
 .badge-missing {
   opacity: .6;
+  display: inline-flex;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
 }
 
 .t24-table tbody tr.is-top {
@@ -2092,18 +2098,23 @@ summary:focus-visible,
 }
 
 @media (max-width: 768px) {
-  .t24-logo-cell {
-    width: 58px;
+  #pes6-tab-tablas-t24 {
+    overflow-x: visible;
   }
 
-  .t24-logo {
-    width: 34px;
-    height: 34px;
+  .t24-logo-cell {
+    width: 66px;
+  }
+
+  .team-crest,
+  .badge-missing {
+    width: 36px;
+    height: 36px;
   }
 
   .t24-table th,
   .t24-table td,
   .t24-table tbody tr {
-    min-height: 52px;
+    min-height: 56px;
   }
 }
