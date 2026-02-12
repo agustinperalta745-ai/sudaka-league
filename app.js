@@ -390,13 +390,20 @@ const T24_DIVISIONS = [
   { key: "segunda", label: "Segunda División" },
   { key: "tercera", label: "Tercera División" }
 ];
-const T24_PLACEHOLDER_LOGO = toAssetPath("assets/escudos/pes6/placeholder.png");
+
+function getEscudoUrl(teamName = "") {
+  const normalizedTeamName = String(teamName || "").trim();
+  if (!normalizedTeamName) return "";
+  return toAssetPath(`assets/escudos/${normalizedTeamName}.png`);
+}
+
+const T24_PLACEHOLDER_LOGO = getEscudoUrl("pes6/placeholder");
 let t24TablesLoaded = false;
 
 function getT24ShieldPath(rowEquipo = "") {
   const equipo = String(rowEquipo || "").trim();
   if (!equipo) return T24_PLACEHOLDER_LOGO;
-  return toAssetPath(`assets/escudos/${equipo}.png`);
+  return getEscudoUrl(equipo);
 }
 
 function createT24Cell(tag, text, className = "") {
