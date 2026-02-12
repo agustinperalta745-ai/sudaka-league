@@ -2045,9 +2045,15 @@ summary:focus-visible,
 }
 
 .team-badge {
-  width: 28px;
-  height: 28px;
+  width: 22px;
+  height: 22px;
   object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+.badge-missing {
+  opacity: .6;
 }
 
 .t24-table tbody tr.is-top {

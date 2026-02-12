@@ -391,12 +391,6 @@ const T24_DIVISIONS = [
   { key: "tercera", label: "Tercera División" }
 ];
 
-function getEscudoUrl(escudoFile = "") {
-  const normalizedEscudoFile = String(escudoFile || "").trim();
-  if (!normalizedEscudoFile) return "";
-  return toAssetPath(`assets/escudos/${normalizedEscudoFile}`);
-}
-
 const T24_ESCUDO_PLACEHOLDER = "-";
 let t24TablesLoaded = false;
 
@@ -407,35 +401,51 @@ function createT24Cell(tag, text, className = "") {
   return cell;
 }
 
-function splitT24Equipo(equipo = "") {
-  const rawValue = String(equipo || "").trim();
+function splitEquipo(raw = "") {
+  const rawValue = String(raw || "").trim();
   if (!rawValue) {
-    return { teamName: "", playerName: "" };
+    return { jugador: "", equipo: "" };
   }
 
-  const [teamNameRaw = "", playerNameRaw = ""] = rawValue.split(" - ");
   if (!rawValue.includes(" - ")) {
-    return { teamName: rawValue, playerName: "" };
+    return { jugador: "", equipo: rawValue };
   }
 
+  const [jugadorRaw = "", equipoRaw = ""] = rawValue.split(" - ");
   return {
-    teamName: teamNameRaw.trim(),
-    playerName: playerNameRaw.trim()
+    jugador: jugadorRaw.trim(),
+    equipo: equipoRaw.trim()
   };
+}
+
+function slugifyTeamName(name = "") {
+  return String(name || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/[^a-z0-9-]/g, "");
+}
+
+function getT24BadgeSrc(teamName = "") {
+  const slug = slugifyTeamName(teamName);
+  if (!slug) return "";
+  const base = window.location.pathname.includes('/sudaka-league/') ? '/sudaka-league/' : '/';
+  return `${base}assets/escudos/${slug}.png`;
 }
 
 function normalizeT24Entry(entry = {}) {
   const combinedEquipo = typeof entry.equipo === "string" ? entry.equipo : "";
-  const parsedEquipo = splitT24Equipo(combinedEquipo);
-  const teamName = (entry.team || parsedEquipo.teamName || "").trim();
-  const playerName = (entry.player || parsedEquipo.playerName || "").trim();
+  const parsedEquipo = splitEquipo(combinedEquipo);
+  const teamName = (entry.team || parsedEquipo.equipo || "").trim();
+  const playerName = (entry.player || parsedEquipo.jugador || "").trim();
 
   return {
     pos: entry.pos,
     rowEquipo: combinedEquipo,
     teamName,
     playerName,
-    escudoFile: typeof entry.escudoFile === "string" ? entry.escudoFile.trim() : "",
+    escudoSrc: getT24BadgeSrc(teamName),
     pts: entry.pts,
     pj: entry.pj,
     pg: entry.pg,
@@ -484,18 +494,24 @@ function createT24TableCard(divisionLabel, data) {
 
       const logoCell = document.createElement("td");
       logoCell.className = "t24-logo-cell";
-      if (entry.escudoFile) {
+      if (entry.escudoSrc) {
         const logo = document.createElement("img");
         logo.className = "team-badge";
-        logo.src = getEscudoUrl(entry.escudoFile);
+        logo.src = entry.escudoSrc;
         logo.alt = entry.teamName || "Equipo";
         logo.loading = "lazy";
         logo.onerror = () => {
-          logo.replaceWith(document.createTextNode(T24_ESCUDO_PLACEHOLDER));
+          const fallback = document.createElement("span");
+          fallback.className = "badge-missing";
+          fallback.textContent = T24_ESCUDO_PLACEHOLDER;
+          logo.replaceWith(fallback);
         };
         logoCell.appendChild(logo);
       } else {
-        logoCell.textContent = T24_ESCUDO_PLACEHOLDER;
+        const fallback = document.createElement("span");
+        fallback.className = "badge-missing";
+        fallback.textContent = T24_ESCUDO_PLACEHOLDER;
+        logoCell.appendChild(fallback);
       }
       row.appendChild(logoCell);
 
