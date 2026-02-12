@@ -355,6 +355,8 @@ const sfSlotsBadge = document.getElementById("sf-slots-badge");
 const donationProgressText = document.getElementById("donation-progress-text");
 const donationProgressBar = document.getElementById("donation-progress-bar");
 const donationGoalTrack = document.querySelector(".donation-goal-track");
+const pes6Panel = document.getElementById("pes6-panel");
+const pes6MaintenanceGoHistoryButton = document.getElementById("pes6-t24-maintenance-go-history");
 
 const kofContentBindings = {
   heroName: document.getElementById("kofHeroName"),
@@ -393,6 +395,13 @@ const T24_DIVISIONS = [
 
 const T24_ESCUDO_PLACEHOLDER = "-";
 let t24TablesLoaded = false;
+
+const T24_MAINTENANCE_HASH_ALIASES = new Set([
+  "#pes6-tab-tablas-t24",
+  "#tablas-t24",
+  "#pes6-tablas-t24"
+]);
+
 
 function createT24Cell(tag, text, className = "") {
   const cell = document.createElement(tag);
@@ -872,13 +881,23 @@ function trapFocus(event) {
   }
 }
 
-function activateTab(modal, tabButton) {
+function onPes6TabActivated(targetPanelId) {
+  if (targetPanelId === "pes6-tab-history") {
+    renderPes6History();
+  }
+
+  if (targetPanelId === "pes6-tab-ranking") {
+    renderPes6Ranking();
+  }
+
+}
+
+function activateTabById(modal, targetPanelId) {
   const tabButtons = [...modal.querySelectorAll(".tab-btn")];
   const tabPanels = [...modal.querySelectorAll(".tab-panel")];
-  const targetPanelId = tabButton.dataset.tab;
 
   tabButtons.forEach((button) => {
-    const isActive = button === tabButton;
+    const isActive = button.dataset.tab === targetPanelId;
     button.classList.toggle("is-active", isActive);
     button.setAttribute("aria-selected", String(isActive));
   });
@@ -890,18 +909,12 @@ function activateTab(modal, tabButton) {
   });
 
   if (modal.id === "pes6-panel") {
-    if (targetPanelId === "pes6-tab-history") {
-      renderPes6History();
-    }
-
-    if (targetPanelId === "pes6-tab-ranking") {
-      renderPes6Ranking();
-    }
-
-    if (targetPanelId === "pes6-tab-tablas-t24" && !t24TablesLoaded) {
-      renderT24Tables();
-    }
+    onPes6TabActivated(targetPanelId);
   }
+}
+
+function activateTab(modal, tabButton) {
+  activateTabById(modal, tabButton.dataset.tab);
 }
 
 function setupTabs() {
@@ -951,6 +964,21 @@ function closeModal() {
   }
 }
 
+function openPes6InTab(tabId) {
+  openModal("pes6-panel");
+
+  if (!pes6Panel) return;
+
+  activateTabById(pes6Panel, tabId);
+}
+
+function handlePes6HashRoute() {
+  const hash = window.location.hash.toLowerCase();
+  if (!T24_MAINTENANCE_HASH_ALIASES.has(hash)) return;
+
+  openPes6InTab("pes6-tab-tablas-t24");
+}
+
 triggers.forEach((trigger) => {
   trigger.addEventListener("click", () => openModal(trigger.dataset.target));
   trigger.addEventListener("keydown", (event) => {
@@ -973,6 +1001,14 @@ window.addEventListener("keydown", (event) => {
   if (event.key === "Escape") closeModal();
   trapFocus(event);
 });
+
+if (pes6MaintenanceGoHistoryButton) {
+  pes6MaintenanceGoHistoryButton.addEventListener("click", () => {
+    openPes6InTab("pes6-tab-history");
+  });
+}
+
+window.addEventListener("hashchange", handlePes6HashRoute);
 
 async function copyText(text) {
   if (navigator.clipboard && window.isSecureContext) {
@@ -2112,7 +2148,6 @@ async function initializeApp() {
   setupTabs();
   renderPalmares();
   renderPes6Ranking();
-  renderT24Tables();
   setupCupCrossingsAccordion();
   await initializeInterdivisionalState();
   applyKofLeagueContent();
@@ -2122,6 +2157,7 @@ async function initializeApp() {
   updateCupRemaining();
   updateSlotsStatus();
   updateDonationGoal();
+  handlePes6HashRoute();
   setInterval(updateSeasonStatus, 60000);
   setInterval(updatePes6Remaining, 60000);
   setInterval(updateCupRemaining, 60000);
