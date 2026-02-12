@@ -63,6 +63,11 @@ const KOF_LEAGUE = {
   nombre: "King of Fighters 2002 – Fightcade",
   nombreCorto: "KOF 2002",
   logo: "assets/kof2002.jpg",
+  top3: [
+    { name: "TSK CAPIBARA", glove: "negro", wins: 0 },
+    { name: "Facu.jey", glove: "rojo", wins: 0 },
+    { name: "Vikings play", glove: "amarillo", wins: 0 }
+  ],
   temporada: {
     nombre: "Temporada 1",
     estado: "EN ESPERA",
@@ -397,6 +402,8 @@ const pes6SlotsValue = document.getElementById("pes6-slots");
 const pes6SlotsBadge = document.getElementById("pes6-slots-badge");
 const pes6LeadersList = document.getElementById("pes6-leaders");
 const pes6Updated = document.getElementById("pes6-updated");
+const kofTop3Section = document.getElementById("kof-top3-section");
+const kofTop3List = document.getElementById("kof-top3");
 const sfSlotsValue = document.getElementById("sf-slots");
 const sfSlotsBadge = document.getElementById("sf-slots-badge");
 const donationProgressText = document.getElementById("donation-progress-text");
@@ -854,6 +861,79 @@ function createPes6LeaderItem(leader = {}) {
 
   item.append(left, division);
   return item;
+}
+
+const KOF_TOP3_GLOVE_COLORS = new Set(["amarillo", "rojo", "verde", "violeta", "blanco", "negro"]);
+
+function getKofTop3GlovePath(color) {
+  const normalizedColor = String(color || "").trim().toLowerCase();
+  const safeColor = KOF_TOP3_GLOVE_COLORS.has(normalizedColor) ? normalizedColor : "blanco";
+  return `assets/guantes/${safeColor}.png`;
+}
+
+function createKofTop3Item(player = {}) {
+  const item = document.createElement("article");
+  item.className = "pes6-leader-card kof-top3-card";
+
+  const left = document.createElement("div");
+  left.className = "pes6-leader-main";
+
+  const gloveWrap = document.createElement("span");
+  gloveWrap.className = "pes6-leader-shield kof-top3-glove";
+
+  const gloveImg = document.createElement("img");
+  gloveImg.src = getKofTop3GlovePath(player.glove);
+  gloveImg.alt = `Guante ${String(player.glove || "blanco")}`;
+  gloveImg.loading = "lazy";
+
+  gloveImg.onerror = () => {
+    gloveImg.remove();
+    const fallback = document.createElement("span");
+    fallback.className = "kof-top3-fallback";
+    fallback.setAttribute("aria-hidden", "true");
+    fallback.textContent = "🥊";
+    gloveWrap.appendChild(fallback);
+  };
+
+  gloveWrap.appendChild(gloveImg);
+
+  const info = document.createElement("div");
+  info.className = "pes6-leader-info";
+
+  const name = document.createElement("p");
+  name.className = "pes6-leader-user";
+  name.textContent = String(player.name || "—");
+
+  info.appendChild(name);
+  left.append(gloveWrap, info);
+
+  const wins = document.createElement("span");
+  wins.className = "mini-badge";
+  const winsValue = Number.isFinite(Number(player.wins)) ? Number(player.wins) : 0;
+  wins.textContent = `Wins: ${winsValue}`;
+
+  item.append(left, wins);
+  return item;
+}
+
+function renderKofTop3() {
+  if (!kofTop3Section || !kofTop3List) return;
+
+  const top3 = Array.isArray(KOF_LEAGUE.top3) ? KOF_LEAGUE.top3 : [];
+
+  if (!top3.length) {
+    kofTop3Section.hidden = true;
+    kofTop3List.replaceChildren();
+    return;
+  }
+
+  const fragment = document.createDocumentFragment();
+  top3.forEach((player) => {
+    fragment.appendChild(createKofTop3Item(player));
+  });
+
+  kofTop3List.replaceChildren(fragment);
+  kofTop3Section.hidden = false;
 }
 
 function timeAgo(dateStr) {
@@ -2652,6 +2732,7 @@ async function initializeApp() {
   setupCupCrossingsAccordion();
   await initializeInterdivisionalState();
   await loadPes6Leaders();
+  renderKofTop3();
   applyKofLeagueContent();
   applyWhatsAppLinks();
   updateSeasonStatus();
