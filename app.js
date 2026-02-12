@@ -1784,8 +1784,31 @@ function buildInterdivisionalActiveSeason(source) {
   const winnersSemis = season.phases.semifinal_playoffs.map((match, index) => getWinner(match, `Ganador Semi ${index + 1}`));
   season.phases.final_playoffs = buildPhaseMatches(sourceFinalPlayoffs, winnersSemis, "final_playoffs");
 
-  const winnersFinal = season.phases.final_playoffs.map((match, index) => getWinner(match, `Ganador Final ${index + 1}`));
-  season.phases.final_copa_interdivisional = buildPhaseMatches(sourceFinalCopa, winnersFinal, "final_copa_interdivisional");
+  const finalPlayoffsMatch = season.phases.final_playoffs[0] || null;
+  const directQualified = {
+    club: "Universitario",
+    player: "H09",
+    division: "2da Div",
+    shield: "./assets/escudos/universitario.png"
+  };
+
+  const rival = finalPlayoffsMatch?.winner === "home"
+    ? formatSide(finalPlayoffsMatch.home, "Ganador Final Play-offs")
+    : finalPlayoffsMatch?.winner === "away"
+      ? formatSide(finalPlayoffsMatch.away, "Ganador Final Play-offs")
+      : createPlaceholderSide("Ganador Final Play-offs");
+
+  const finalCopaSourceMatch = Array.isArray(sourceFinalCopa) ? sourceFinalCopa[0] : null;
+  const finalCopaMatch = {
+    label: finalCopaSourceMatch?.label || "Final Copa Interdivisional",
+    home: directQualified,
+    away: rival,
+    winner: null,
+    result: null,
+    pens: null
+  };
+
+  season.phases.final_copa_interdivisional = [normalizeMatchData(finalCopaMatch, "active")];
 
   return season;
 }
