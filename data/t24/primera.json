@@ -1,7 +1,7 @@
 {
   "source": "gesliga",
   "division": "primera",
-  "fetchedAt": "2026-02-12T17:28:47.481Z",
+  "fetchedAt": "2026-02-12T17:32:38.076Z",
   "rows": [
     {
       "pos": 1,
@@ -31,6 +31,19 @@
     },
     {
       "pos": 3,
+      "equipo": "Ivancarocela - Roma",
+      "escudoFile": "ivancarocela.png",
+      "pts": 20,
+      "pj": 20,
+      "pg": 5,
+      "pe": 5,
+      "pp": 10,
+      "gf": 23,
+      "gc": 28,
+      "dg": -5
+    },
+    {
+      "pos": 4,
       "equipo": "Facualanis - Crystal Palace",
       "escudoFile": "facualanis.png",
       "pts": 19,
@@ -41,19 +54,6 @@
       "gf": 21,
       "gc": 12,
       "dg": 9
-    },
-    {
-      "pos": 4,
-      "equipo": "Ivancarocela - Roma",
-      "escudoFile": "ivancarocela.png",
-      "pts": 19,
-      "pj": 19,
-      "pg": 5,
-      "pe": 4,
-      "pp": 10,
-      "gf": 23,
-      "gc": 28,
-      "dg": -5
     },
     {
       "pos": 5,
@@ -85,10 +85,10 @@
       "pos": 7,
       "equipo": "Larrierismo - Lyom",
       "escudoFile": "larrierismo.png",
-      "pts": 11,
-      "pj": 5,
+      "pts": 12,
+      "pj": 6,
       "pg": 3,
-      "pe": 2,
+      "pe": 3,
       "pp": 0,
       "gf": 11,
       "gc": 7,
