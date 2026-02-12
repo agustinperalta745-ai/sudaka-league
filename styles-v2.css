@@ -822,37 +822,72 @@ summary:focus-visible,
   z-index: 2;
 }
 
-#interdivisional-season-card {
+.inter-card-bg {
   position: relative;
   overflow: hidden;
 }
 
-#interdivisional-season-card::before {
+.inter-card-bg::before {
   content: "";
   position: absolute;
   inset: 0;
   background-image: url("./assets/interdivisional-bg.png");
   background-size: cover;
   background-position: center;
-  filter: blur(8px);
-  opacity: 0.55;
+  filter: blur(10px);
+  opacity: 0.45;
   transform: scale(1.08);
   z-index: 0;
 }
 
-#interdivisional-season-card::after {
+.inter-card-bg::after {
   content: "";
   position: absolute;
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(5,10,20,0.45) 0%,
-    rgba(5,10,20,0.65) 100%
+    rgba(5,10,20,0.6),
+    rgba(5,10,20,0.8)
   );
   z-index: 1;
 }
 
-#interdivisional-season-card > * {
+.inter-card-bg > * {
+  position: relative;
+  z-index: 2;
+}
+
+.inter-panel-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.inter-panel-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("./assets/interdivisional-bg.png");
+  background-size: cover;
+  background-position: center;
+  filter: blur(7px);
+  opacity: 0.3;
+  transform: scale(1.08);
+  z-index: 0;
+}
+
+.inter-panel-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(5,10,20,0.7),
+    rgba(5,10,20,0.9)
+  );
+  z-index: 1;
+}
+
+.inter-panel-bg > * {
   position: relative;
   z-index: 2;
 }
