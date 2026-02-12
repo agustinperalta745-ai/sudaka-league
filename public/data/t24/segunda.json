@@ -1,7 +1,7 @@
 {
   "source": "gesliga",
   "division": "segunda",
-  "fetchedAt": "2026-02-12T17:02:49.031Z",
+  "fetchedAt": "2026-02-12T17:28:48.142Z",
   "rows": [
     {
       "pos": 1,
@@ -47,16 +47,29 @@
       "equipo": "Theohernandez - Lyom",
       "escudoFile": "theohernandez.png",
       "pts": 7,
-      "pj": 7,
+      "pj": 8,
       "pg": 2,
       "pe": 1,
-      "pp": 4,
+      "pp": 5,
       "gf": 5,
-      "gc": 19,
-      "dg": -14
+      "gc": 21,
+      "dg": -16
     },
     {
       "pos": 5,
+      "equipo": "Diegarcho - Torino",
+      "escudoFile": "diegarcho.png",
+      "pts": 3,
+      "pj": 4,
+      "pg": 1,
+      "pe": 0,
+      "pp": 3,
+      "gf": 4,
+      "gc": 10,
+      "dg": -6
+    },
+    {
+      "pos": 6,
       "equipo": "Tank - Betis",
       "escudoFile": "tank.png",
       "pts": 2,
@@ -69,7 +82,7 @@
       "dg": 0
     },
     {
-      "pos": 6,
+      "pos": 7,
       "equipo": "Fernet - Villareal",
       "escudoFile": "fernet.png",
       "pts": 2,
@@ -82,7 +95,7 @@
       "dg": -5
     },
     {
-      "pos": 7,
+      "pos": 8,
       "equipo": "Leocarp7 - Everton",
       "escudoFile": "leocarp7.png",
       "pts": 1,
@@ -95,7 +108,7 @@
       "dg": -15
     },
     {
-      "pos": 8,
+      "pos": 9,
       "equipo": "TCL06 - Feeyenord",
       "escudoFile": "tcl06.png",
       "pts": 0,
@@ -108,7 +121,7 @@
       "dg": 0
     },
     {
-      "pos": 8,
+      "pos": 9,
       "equipo": "Bocajuniors12 - Fenerbache",
       "escudoFile": "bocajuniors12.png",
       "pts": 0,
@@ -121,7 +134,7 @@
       "dg": 0
     },
     {
-      "pos": 8,
+      "pos": 9,
       "equipo": "Slasher7 - Crystal Palace",
       "escudoFile": "slasher7.png",
       "pts": 0,
@@ -134,7 +147,7 @@
       "dg": 0
     },
     {
-      "pos": 8,
+      "pos": 9,
       "equipo": "Leom - Real Sociedad",
       "escudoFile": "leom.png",
       "pts": 0,
@@ -147,7 +160,7 @@
       "dg": 0
     },
     {
-      "pos": 8,
+      "pos": 9,
       "equipo": "Rubencho - Monaco",
       "escudoFile": "rubencho.png",
       "pts": 0,
@@ -160,7 +173,7 @@
       "dg": 0
     },
     {
-      "pos": 8,
+      "pos": 9,
       "equipo": "Joaquito12 - PSV",
       "escudoFile": "joaquito12.png",
       "pts": 0,
@@ -173,7 +186,7 @@
       "dg": 0
     },
     {
-      "pos": 8,
+      "pos": 9,
       "equipo": "Gab0211 - Leed United",
       "escudoFile": "gab0211.png",
       "pts": 0,
@@ -186,7 +199,7 @@
       "dg": 0
     },
     {
-      "pos": 8,
+      "pos": 9,
       "equipo": "NazaTeto - Galatasaray",
       "escudoFile": "nazateto.png",
       "pts": 0,
@@ -199,7 +212,7 @@
       "dg": 0
     },
     {
-      "pos": 8,
+      "pos": 9,
       "equipo": "Ian - Roma",
       "escudoFile": "ian.png",
       "pts": 0,
@@ -212,7 +225,7 @@
       "dg": 0
     },
     {
-      "pos": 8,
+      "pos": 9,
       "equipo": "TrueBlueFC - Bologna",
       "escudoFile": "truebluefc.png",
       "pts": 0,
@@ -225,7 +238,7 @@
       "dg": 0
     },
     {
-      "pos": 8,
+      "pos": 9,
       "equipo": "XxFacuprogamerxX - Brighton",
       "escudoFile": "xxfacuprogamerxx.png",
       "pts": 0,
@@ -238,7 +251,7 @@
       "dg": 0
     },
     {
-      "pos": 19,
+      "pos": 20,
       "equipo": "Romancito - Valencia",
       "escudoFile": "romancito.png",
       "pts": 0,
@@ -249,19 +262,6 @@
       "gf": 2,
       "gc": 7,
       "dg": -5
-    },
-    {
-      "pos": 20,
-      "equipo": "Diegarcho - Torino",
-      "escudoFile": "diegarcho.png",
-      "pts": 0,
-      "pj": 3,
-      "pg": 0,
-      "pe": 0,
-      "pp": 3,
-      "gf": 2,
-      "gc": 10,
-      "dg": -8
     }
   ]
 }
