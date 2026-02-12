@@ -468,7 +468,7 @@ function createT24TableCard(divisionLabel, data) {
   title.textContent = divisionLabel;
 
   const scroller = document.createElement("div");
-  scroller.className = "t24-table-scroller";
+  scroller.className = "t24-table-scroller table-scroll";
 
   const table = document.createElement("table");
   table.className = "t24-table";
@@ -496,7 +496,7 @@ function createT24TableCard(divisionLabel, data) {
       logoCell.className = "t24-logo-cell";
       if (entry.escudoSrc) {
         const logo = document.createElement("img");
-        logo.className = "team-badge";
+        logo.className = "team-crest";
         logo.src = entry.escudoSrc;
         logo.alt = entry.teamName || "Equipo";
         logo.loading = "lazy";
