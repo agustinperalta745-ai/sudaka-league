@@ -127,12 +127,14 @@ const PES6_PALMARES = {
   ],
   individuales: [
     {
+      key: "balonOro",
       nombre: "Balón de Oro",
       trofeo: "assets/trofeo_balon_oro.png",
       subtitulo: "Ganador (últimas 3 temporadas)",
       ganadores: ["Pelufo"]
     },
     {
+      key: "puskas",
       nombre: "Premio Puskás",
       trofeo: "assets/trofeo_puskas.png",
       subtitulo: "Ganador (Temporada 23)",
@@ -226,6 +228,44 @@ function getAssetsBasePath() {
 }
 
 const ASSETS_BASE_PATH = getAssetsBasePath();
+
+const AWARD_GLOVE_TROPHIES = {
+  balonOro: "assets/guantes/balon-oro.png",
+  puskas: "assets/guantes/puskas.png"
+};
+
+const AWARD_TROPHY_FALLBACKS = {
+  balonOro: "assets/trofeo_balon_oro.png",
+  puskas: "assets/trofeo_puskas.png"
+};
+
+function withAssetBasePath(assetPath = "") {
+  if (!assetPath) return "";
+  if (/^(?:https?:)?\/\//i.test(assetPath)) return assetPath;
+  if (assetPath.startsWith("/")) {
+    return `${ASSETS_BASE_PATH}${assetPath}`;
+  }
+  return `${ASSETS_BASE_PATH}/${assetPath}`;
+}
+
+function setImageFallback(imageNode, fallbackPath) {
+  if (!imageNode || !fallbackPath) return;
+
+  imageNode.addEventListener(
+    "error",
+    () => {
+      const fallbackSrc = withAssetBasePath(fallbackPath);
+      if (!fallbackSrc || imageNode.dataset.fallbackApplied === "true") return;
+      imageNode.dataset.fallbackApplied = "true";
+      imageNode.src = fallbackSrc;
+    },
+    { once: true }
+  );
+}
+
+function resolveAwardTrophy(key, fallbackTrophy) {
+  return AWARD_GLOVE_TROPHIES[key] || fallbackTrophy;
+}
 
 const TEAM_LOGOS = {
   "Lanús": "lanus.png",
@@ -1321,9 +1361,14 @@ function createPalmaresCard(item, winnersKey, winnerLabel, variant = "default") 
 
   const trophy = document.createElement("img");
   trophy.className = "palmares-trophy";
-  trophy.src = item.trofeo;
+  const isAwardCard = isIndividualVariant && Object.prototype.hasOwnProperty.call(AWARD_GLOVE_TROPHIES, item.key);
+  const trophySource = isAwardCard ? resolveAwardTrophy(item.key, item.trofeo) : item.trofeo;
+  const fallbackTrophy = isAwardCard ? AWARD_TROPHY_FALLBACKS[item.key] : "";
+
+  trophy.src = withAssetBasePath(trophySource);
   trophy.alt = `Trofeo ${item.nombre}`;
   trophy.loading = "lazy";
+  setImageFallback(trophy, fallbackTrophy);
 
   const winnersList = item[winnersKey].filter((winner) => winner && winner.trim() !== "");
   const safeWinners = winnersList.length ? winnersList : ["A confirmar"];
@@ -1659,9 +1704,14 @@ function createHistoryRow(itemMeta, value) {
 
   const trophy = document.createElement("img");
   trophy.className = "history-trophy";
-  trophy.src = itemMeta.trophy;
+  const isAwardHistory = Object.prototype.hasOwnProperty.call(AWARD_GLOVE_TROPHIES, itemMeta.key);
+  const historyTrophySource = isAwardHistory ? resolveAwardTrophy(itemMeta.key, itemMeta.trophy) : itemMeta.trophy;
+  const historyFallbackTrophy = isAwardHistory ? AWARD_TROPHY_FALLBACKS[itemMeta.key] : "";
+
+  trophy.src = withAssetBasePath(historyTrophySource);
   trophy.alt = `Trofeo ${itemMeta.label}`;
   trophy.loading = "lazy";
+  setImageFallback(trophy, historyFallbackTrophy);
 
   const label = document.createElement("span");
   label.className = "history-label";
