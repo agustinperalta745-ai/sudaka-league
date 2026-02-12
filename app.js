@@ -869,6 +869,24 @@ function getKofTop3IconPath(positionIndex = 0) {
   return KOF_TOP3_ICON_BY_POSITION[positionIndex] || KOF_TOP3_ICON_BY_POSITION[KOF_TOP3_ICON_BY_POSITION.length - 1];
 }
 
+function getKofGlowColorBySrc(src = "") {
+  const normalizedSrc = String(src).toLowerCase();
+
+  if (normalizedSrc.includes("rojo")) {
+    return "rgba(255,0,0,0.7)";
+  }
+
+  if (normalizedSrc.includes("azul")) {
+    return "rgba(0,120,255,0.7)";
+  }
+
+  if (normalizedSrc.includes("negro")) {
+    return "rgba(90,90,90,0.6)";
+  }
+
+  return "rgba(0,120,255,0.7)";
+}
+
 function createKofTop3Item(player = {}, positionIndex = 0) {
   const item = document.createElement("article");
   item.className = "pes6-leader-card kof-top3-card";
@@ -884,6 +902,8 @@ function createKofTop3Item(player = {}, positionIndex = 0) {
   gloveImg.alt = `Ícono puesto ${positionIndex + 1}`;
   gloveImg.loading = "lazy";
   gloveImg.decoding = "async";
+
+  item.style.setProperty("--glow-color", getKofGlowColorBySrc(gloveImg.src));
 
   gloveImg.onerror = () => {
     gloveImg.remove();

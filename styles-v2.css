@@ -589,6 +589,24 @@ summary:focus-visible,
 
 .kof-top3-card {
   flex-wrap: nowrap;
+  --glow-color: rgba(0, 120, 255, 0.7);
+  position: relative;
+  overflow: hidden;
+}
+
+.kof-top3-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, var(--glow-color), transparent 70%);
+  filter: blur(30px);
+  opacity: 0.95;
+  z-index: 0;
+}
+
+.kof-top3-card > * {
+  position: relative;
+  z-index: 1;
 }
 
 .kof-top3-glove {
@@ -980,6 +998,42 @@ summary:focus-visible,
 }
 
 #pes6-season-card > * {
+  position: relative;
+  z-index: 2;
+}
+
+
+#kof-season-card {
+  position: relative;
+  overflow: hidden;
+}
+
+#kof-season-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("assets/kof_bg.png");
+  background-size: cover;
+  background-position: center;
+  filter: blur(24px);
+  opacity: 0.38;
+  transform: scale(1.1);
+  z-index: 0;
+}
+
+#kof-season-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(5, 10, 20, 0.66) 0%,
+    rgba(5, 10, 20, 0.84) 100%
+  );
+  z-index: 1;
+}
+
+#kof-season-card > * {
   position: relative;
   z-index: 2;
 }
