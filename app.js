@@ -1604,23 +1604,61 @@ function normalizeActiveOctavos(data) {
   }));
 }
 
-function createMatchesFromPreviousWinners(matches, phaseLabel, phaseWinners = []) {
-  const winners = matches
-    .map((match) => (match.winner === "away" ? match.away : match.winner === "home" ? match.home : null))
-    .filter(Boolean);
+function createPlaceholderSide(label) {
+  return {
+    player: label,
+    club: "",
+    division: "Primera"
+  };
+}
 
+function formatSide(side, fallbackLabel = "") {
+  if (!side) {
+    return createPlaceholderSide(fallbackLabel || "Por definir");
+  }
+
+  if (typeof side === "string") {
+    return createPlaceholderSide(side);
+  }
+
+  return {
+    ...side,
+    player: side.player || fallbackLabel || side.club || "Por definir"
+  };
+}
+
+function getWinner(match, fallbackLabel) {
+  const normalizedWinner = normalizeWinnerValue(match?.winner);
+
+  if (normalizedWinner === "home") {
+    return formatSide(match?.home, fallbackLabel);
+  }
+
+  if (normalizedWinner === "away") {
+    return formatSide(match?.away, fallbackLabel);
+  }
+
+  return createPlaceholderSide(fallbackLabel);
+}
+
+function buildPhaseMatches(sourceMatches, sourceWinners, phaseKey) {
   const next = [];
-  for (let index = 0; index < winners.length; index += 2) {
-    const home = winners[index];
-    const away = winners[index + 1];
-    if (!home || !away) continue;
+  const totalMatches = Math.ceil((sourceWinners?.length || 0) / 2);
+  const phaseLabel = getPhaseLabel(phaseKey);
+  const matches = Array.isArray(sourceMatches) ? sourceMatches : [];
+
+  for (let index = 0; index < totalMatches; index += 1) {
+    const sourceMatch = matches[index] || null;
+    const sourceHome = sourceWinners[index * 2];
+    const sourceAway = sourceWinners[index * 2 + 1];
+
+    const normalizedSourceMatch = normalizeMatchData(sourceMatch || {}, "active");
 
     next.push({
-      label: `${phaseLabel} ${next.length + 1}`,
-      home,
-      away,
-      winner: normalizeWinnerValue(phaseWinners[next.length]),
-      result: null
+      ...normalizedSourceMatch,
+      label: sourceMatch?.label || `${phaseLabel} ${index + 1}`,
+      home: formatSide(sourceMatch?.home || sourceHome, sourceHome?.player || `Ganador ${phaseLabel} ${index * 2 + 1}`),
+      away: formatSide(sourceMatch?.away || sourceAway, sourceAway?.player || `Ganador ${phaseLabel} ${index * 2 + 2}`)
     });
   }
 
@@ -1651,27 +1689,23 @@ function buildInterdivisionalActiveSeason(source) {
     }
   };
 
-  const winners = source.winners || {};
-  season.phases.cuartos_playoffs = createMatchesFromPreviousWinners(
-    season.phases.octavos_playoffs,
-    getPhaseLabel("cuartos_playoffs"),
-    winners.cuartos_playoffs
-  );
-  season.phases.semifinal_playoffs = createMatchesFromPreviousWinners(
-    season.phases.cuartos_playoffs,
-    getPhaseLabel("semifinal_playoffs"),
-    winners.semifinal_playoffs
-  );
-  season.phases.final_playoffs = createMatchesFromPreviousWinners(
-    season.phases.semifinal_playoffs,
-    getPhaseLabel("final_playoffs"),
-    winners.final_playoffs
-  );
-  season.phases.final_copa_interdivisional = createMatchesFromPreviousWinners(
-    season.phases.final_playoffs,
-    getPhaseLabel("final_copa_interdivisional"),
-    winners.final_copa_interdivisional
-  );
+  const sourcePhases = source.phases || {};
+  const sourceCuartos = Array.isArray(source.cuartos_playoffs) ? source.cuartos_playoffs : sourcePhases.cuartos_playoffs;
+  const sourceSemis = Array.isArray(source.semifinal_playoffs) ? source.semifinal_playoffs : sourcePhases.semifinal_playoffs;
+  const sourceFinalPlayoffs = Array.isArray(source.final_playoffs) ? source.final_playoffs : sourcePhases.final_playoffs;
+  const sourceFinalCopa = Array.isArray(source.final_copa_interdivisional) ? source.final_copa_interdivisional : sourcePhases.final_copa_interdivisional;
+
+  const winnersOctavos = season.phases.octavos_playoffs.map((match, index) => getWinner(match, `Ganador Octavos ${index + 1}`));
+  season.phases.cuartos_playoffs = buildPhaseMatches(sourceCuartos, winnersOctavos, "cuartos_playoffs");
+
+  const winnersCuartos = season.phases.cuartos_playoffs.map((match, index) => getWinner(match, `Ganador Cuartos ${index + 1}`));
+  season.phases.semifinal_playoffs = buildPhaseMatches(sourceSemis, winnersCuartos, "semifinal_playoffs");
+
+  const winnersSemis = season.phases.semifinal_playoffs.map((match, index) => getWinner(match, `Ganador Semi ${index + 1}`));
+  season.phases.final_playoffs = buildPhaseMatches(sourceFinalPlayoffs, winnersSemis, "final_playoffs");
+
+  const winnersFinal = season.phases.final_playoffs.map((match, index) => getWinner(match, `Ganador Final ${index + 1}`));
+  season.phases.final_copa_interdivisional = buildPhaseMatches(sourceFinalCopa, winnersFinal, "final_copa_interdivisional");
 
   return season;
 }
@@ -1730,44 +1764,8 @@ function isPhaseComplete(matches = []) {
   return Array.isArray(matches) && matches.length > 0 && matches.every((match) => !!match.winner);
 }
 
-function createNextPhaseMatchesFromWinners(matches, phaseLabel) {
-  const winners = matches
-    .map((match) => (match.winner === "away" ? match.away : match.winner === "home" ? match.home : null))
-    .filter(Boolean);
-  const next = [];
-
-  for (let index = 0; index < winners.length; index += 2) {
-    const home = winners[index];
-    const away = winners[index + 1];
-    if (!home || !away) continue;
-
-    next.push({
-      label: `${phaseLabel} ${next.length + 1}`,
-      home,
-      away,
-      winner: null,
-      result: null
-    });
-  }
-
-  return next;
-}
-
 function ensureInterdivisionalProgression(season) {
   if (!season || !season.phases) return;
-
-  for (let index = 0; index < INTERDIVISIONAL_PHASES.length - 1; index += 1) {
-    const currentKey = INTERDIVISIONAL_PHASES[index].key;
-    const nextKey = INTERDIVISIONAL_PHASES[index + 1].key;
-    const currentMatches = season.phases[currentKey] || [];
-
-    if (!isPhaseComplete(currentMatches)) break;
-
-    const nextMatches = season.phases[nextKey] || [];
-    if (nextMatches.length === 0) {
-      season.phases[nextKey] = createNextPhaseMatchesFromWinners(currentMatches, getPhaseLabel(nextKey));
-    }
-  }
 
   const finalMatches = season.phases.final_copa_interdivisional || [];
   if (isPhaseComplete(finalMatches)) {
@@ -1778,20 +1776,9 @@ function ensureInterdivisionalProgression(season) {
 }
 
 function getVisiblePhaseKeysForSeason(season) {
-  const visible = [];
-
-  for (let index = 0; index < INTERDIVISIONAL_PHASES.length; index += 1) {
-    const phaseKey = INTERDIVISIONAL_PHASES[index].key;
-    const matches = season.phases[phaseKey] || [];
-
-    if (matches.length === 0) break;
-
-    visible.push(phaseKey);
-
-    if (!isPhaseComplete(matches)) break;
-  }
-
-  return visible;
+  return INTERDIVISIONAL_PHASES
+    .map((phase) => phase.key)
+    .filter((phaseKey) => (season.phases[phaseKey] || []).length > 0);
 }
 
 function createCupCrossingTeamNode(teamData, context = {}) {
@@ -1903,6 +1890,8 @@ function createCupPhaseSection(phaseKey, matches, options = {}) {
   const filteredMatches = matches.filter((match) => {
     const homeDivision = match?.home?.division;
     const awayDivision = match?.away?.division;
+
+    if (!homeDivision || !awayDivision) return true;
 
     return isDivisionEnabledForSeason(homeDivision, seasonNumber)
       && isDivisionEnabledForSeason(awayDivision, seasonNumber);
