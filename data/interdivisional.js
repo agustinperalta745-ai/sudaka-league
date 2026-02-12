@@ -58,6 +58,18 @@ window.INTERDIVISIONAL_ACTIVE_SEASON = {
   ],
 
   // Solo cargá winners por fase. Los cruces se generan automáticamente.
+  final_copa_interdivisional: [
+    {
+      label: "Final Copa Interdivisional 1",
+      away: {
+        club: "Universitario",
+        player: "H09",
+        division: "1ra Div",
+        shield: "universitario.png"
+      }
+    }
+  ],
+
   winners: {
     cuartos_playoffs: [],
     semifinal_playoffs: [],
