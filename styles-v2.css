@@ -788,6 +788,40 @@ summary:focus-visible,
   cursor: pointer;
 }
 
+#pes6-season-card {
+  position: relative;
+  overflow: hidden;
+}
+
+#pes6-season-card .rot-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: blur(8px);
+  opacity: 0;
+  transform: scale(1.08);
+  transition: opacity 800ms ease;
+  z-index: 0;
+}
+
+#pes6-season-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(5,10,20,0.45) 0%,
+    rgba(5,10,20,0.70) 100%
+  );
+  z-index: 1;
+}
+
+#pes6-season-card > * {
+  position: relative;
+  z-index: 2;
+}
+
 #interdivisional-season-card {
   position: relative;
   overflow: hidden;

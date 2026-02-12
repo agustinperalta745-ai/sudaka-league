@@ -2237,6 +2237,41 @@ async function initializeInterdivisionalState() {
   renderInterdivisionalCard();
 }
 
+function initPes6RotatingBg() {
+  const card = document.getElementById("pes6-season-card");
+  if (!card) return;
+
+  const a = card.querySelector(".rot-bg-a");
+  const b = card.querySelector(".rot-bg-b");
+  if (!a || !b) return;
+
+  const urls = [
+    "./assets/pes6-bg-1.png",
+    "./assets/pes6-bg-2.png",
+    "./assets/pes6-bg-3.png"
+  ];
+
+  let idx = 0;
+  let showingA = true;
+
+  a.style.backgroundImage = `url("${urls[idx]}")`;
+  a.style.opacity = "0.55";
+
+  setInterval(() => {
+    idx = (idx + 1) % urls.length;
+    const nextUrl = urls[idx];
+
+    const show = showingA ? b : a;
+    const hide = showingA ? a : b;
+
+    show.style.backgroundImage = `url("${nextUrl}")`;
+    show.style.opacity = "0.55";
+    hide.style.opacity = "0";
+
+    showingA = !showingA;
+  }, 6000);
+}
+
 function renderPes6History() {
   const container = document.getElementById("pes6-history");
   if (!container) return;
@@ -2261,6 +2296,7 @@ async function initializeApp() {
   updateCupRemaining();
   updateSlotsStatus();
   updateDonationGoal();
+  initPes6RotatingBg();
   handlePes6HashRoute();
   setInterval(updateSeasonStatus, 60000);
   setInterval(updatePes6Remaining, 60000);
