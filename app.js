@@ -334,6 +334,7 @@ const copyButtons = [...document.querySelectorAll(".copy-btn")];
 const backToTopButton = document.getElementById("back-to-top");
 const pes6Status = document.getElementById("pes6Status");
 const pes6Remaining = document.getElementById("pes6-remaining");
+const kofRemaining = document.getElementById("kof-remaining");
 const cupRemaining = document.getElementById("cup-remaining");
 const pes6SeasonName = document.getElementById("pes6SeasonName");
 const cupStatus = document.getElementById("cupStatus");
@@ -622,25 +623,29 @@ async function renderT24Tables() {
 
 // Asignación centralizada de links editables.
 
-const PES6_FINAL_TARGET = new Date(2026, 1, 22, 23, 59, 0, 0);
-const CUP_INTERDIVISIONAL_FINAL_TARGET = new Date(2026, 1, 13, 23, 59, 0, 0);
+const PES6_FINAL_TARGET = new Date("2026-02-22T23:59:00-03:00");
+const KOF_FINAL_TARGET = new Date("2026-02-27T23:59:00-03:00");
+const CUP_INTERDIVISIONAL_FINAL_TARGET = new Date("2026-02-13T23:59:00-03:00");
 
 function updateCountdown(targetDate, el, options = {}) {
   if (!el) return;
 
   const now = new Date();
   const ms = targetDate.getTime() - now.getTime();
-  const formatDays = options.formatDays ?? ((value) => `Finaliza en: ${value} días`);
-  const formatHours = options.formatHours ?? ((value) => `Finaliza en: ${value} horas`);
+  const formatDays = options.formatDays ?? ((value) => `${value} días restantes`);
+  const formatHours = options.formatHours ?? ((hours, minutes) => `${hours} horas ${minutes} min`);
+  const formatEnded = options.formatEnded ?? (() => "FINALIZADA");
 
   if (ms <= 0) {
-    el.textContent = formatDays(0);
+    el.textContent = formatEnded();
     return;
   }
 
   if (ms < 24 * 60 * 60 * 1000 && options.showHoursOnLastDay) {
-    const hours = Math.max(1, Math.ceil(ms / (60 * 60 * 1000)));
-    el.textContent = formatHours(hours);
+    const totalMinutes = Math.max(1, Math.floor(ms / (60 * 1000)));
+    const hours = Math.floor(totalMinutes / 60);
+    const minutes = totalMinutes % 60;
+    el.textContent = formatHours(hours, minutes);
     return;
   }
 
@@ -650,6 +655,10 @@ function updateCountdown(targetDate, el, options = {}) {
 
 function updatePes6Remaining() {
   updateCountdown(PES6_FINAL_TARGET, pes6Remaining, { showHoursOnLastDay: true });
+}
+
+function updateKofRemaining() {
+  updateCountdown(KOF_FINAL_TARGET, kofRemaining, { showHoursOnLastDay: true });
 }
 
 function updateCupRemaining() {
@@ -667,14 +676,19 @@ function updateSeasonStatus() {
 
   pes6SeasonName.textContent = PES6_SEASON_NAME;
   sfSeasonName.textContent = KOF_LEAGUE.temporada.nombre;
-  sfStatus.textContent = KOF_LEAGUE.temporada.estado;
-  sfSeasonNote.textContent = KOF_LEAGUE.temporada.nota;
+  sfSeasonNote.textContent = "Finaliza el viernes 27 de febrero – 23:59 hs";
 
   const seasonEnded = PES6_FINAL_TARGET.getTime() - Date.now() <= 0;
+  const kofEnded = KOF_FINAL_TARGET.getTime() - Date.now() <= 0;
 
   pes6Status.textContent = seasonEnded ? "FINALIZADA" : "ACTIVA";
   pes6Status.classList.toggle("season-badge-active", !seasonEnded);
   pes6Status.classList.toggle("season-badge-ended", seasonEnded);
+
+  sfStatus.textContent = kofEnded ? "FINALIZADA" : "ACTIVA";
+  sfStatus.classList.toggle("season-badge-active", !kofEnded);
+  sfStatus.classList.toggle("season-badge-ended", kofEnded);
+  sfStatus.classList.toggle("season-badge-wait", false);
 
   updateCupCardHeader();
 }
@@ -2592,6 +2606,7 @@ async function initializeApp() {
   applyWhatsAppLinks();
   updateSeasonStatus();
   updatePes6Remaining();
+  updateKofRemaining();
   updateCupRemaining();
   updateSlotsStatus();
   updateDonationGoal();
@@ -2599,6 +2614,7 @@ async function initializeApp() {
   handlePes6HashRoute();
   setInterval(updateSeasonStatus, 60000);
   setInterval(updatePes6Remaining, 60000);
+  setInterval(updateKofRemaining, 60000);
   setInterval(updateCupRemaining, 60000);
 }
 
