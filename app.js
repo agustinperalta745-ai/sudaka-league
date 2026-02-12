@@ -1913,9 +1913,18 @@ function createCupCrossingTeamNode(teamData, context = {}) {
   team.appendChild(content);
 
   const hasResult = hasMatchResult(matchData);
+  const hasPens =
+    matchData?.pens
+    && typeof matchData.pens.home === "number"
+    && typeof matchData.pens.away === "number";
+
   if (matchData?.played && hasResult) {
     const scoreBox = document.createElement("div");
     scoreBox.className = "cup-crossing-score";
+    scoreBox.style.display = "flex";
+    scoreBox.style.flexDirection = "column";
+    scoreBox.style.alignItems = "center";
+    scoreBox.style.gap = "0.3rem";
 
     const winner = normalizeWinnerValue(matchData.winner);
     const isWinner = (side === "home" && winner === "home") || (side === "away" && winner === "away");
@@ -1925,6 +1934,45 @@ function createCupCrossingTeamNode(teamData, context = {}) {
     goals.className = "cup-crossing-score-main";
     goals.textContent = side === "home" ? String(matchData.result.home) : String(matchData.result.away);
     scoreBox.appendChild(goals);
+
+    if (hasPens) {
+      const penWrapper = document.createElement("div");
+      penWrapper.className = "pen-wrapper";
+      penWrapper.style.display = "flex";
+      penWrapper.style.flexDirection = "column";
+      penWrapper.style.alignItems = "center";
+      penWrapper.style.gap = "0.12rem";
+      penWrapper.style.width = "100%";
+
+      const penLabel = document.createElement("span");
+      penLabel.className = "pen-label";
+      penLabel.textContent = "Pen";
+      penLabel.style.fontSize = "0.62rem";
+      penLabel.style.lineHeight = "1";
+      penLabel.style.letterSpacing = "0.08em";
+      penLabel.style.textTransform = "uppercase";
+      penLabel.style.color = "rgba(240, 255, 255, 0.85)";
+
+      const penScore = document.createElement("span");
+      penScore.className = "pen-score";
+      penScore.textContent = side === "home" ? String(matchData.pens.home) : String(matchData.pens.away);
+      penScore.style.minWidth = "1.75rem";
+      penScore.style.height = "1.35rem";
+      penScore.style.padding = "0 0.45rem";
+      penScore.style.borderRadius = "0.45rem";
+      penScore.style.display = "inline-flex";
+      penScore.style.alignItems = "center";
+      penScore.style.justifyContent = "center";
+      penScore.style.fontSize = "0.82rem";
+      penScore.style.fontWeight = "700";
+      penScore.style.color = "#f3ffff";
+      penScore.style.border = "1px solid rgba(168, 239, 255, 0.55)";
+      penScore.style.background = "linear-gradient(180deg, rgba(20, 48, 66, 0.92), rgba(10, 27, 39, 0.9))";
+      penScore.style.boxShadow = "0 0 8px rgba(102, 220, 255, 0.3), inset 0 0 8px rgba(130, 225, 255, 0.15)";
+
+      penWrapper.append(penLabel, penScore);
+      scoreBox.appendChild(penWrapper);
+    }
 
     team.appendChild(scoreBox);
   }
@@ -1955,17 +2003,6 @@ function createCupCrossingCard(matchData, options = {}) {
   );
 
   card.append(label, body);
-
-  if (matchData?.played && hasMatchPens(matchData)) {
-    const pens = matchData.pens ?? matchData.penalties;
-    const pensChip = document.createElement("p");
-    pensChip.className = "cup-match-versus";
-    pensChip.style.marginTop = "0.35rem";
-    pensChip.style.fontSize = "0.72rem";
-    pensChip.style.opacity = "0.9";
-    pensChip.textContent = `Pen: ${pens.home}-${pens.away}`;
-    card.appendChild(pensChip);
-  }
 
   return card;
 }
