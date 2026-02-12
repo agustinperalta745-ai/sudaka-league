@@ -1619,6 +1619,18 @@ function formatScore(match) {
   return `${r.home}-${r.away}${hasPens ? ` (Pen ${p.home}-${p.away})` : ""}`;
 }
 
+function hasMatchResult(match) {
+  return !!match?.result
+    && typeof match.result.home === "number"
+    && typeof match.result.away === "number";
+}
+
+function hasMatchPens(match) {
+  return !!(match?.pens ?? match?.penalties)
+    && typeof (match.pens ?? match.penalties).home === "number"
+    && typeof (match.pens ?? match.penalties).away === "number";
+}
+
 function isMatchPlayed(match, seasonStatus = "active") {
   if (!match || typeof match !== "object") return false;
 
@@ -1900,8 +1912,8 @@ function createCupCrossingTeamNode(teamData, context = {}) {
   content.append(player, division);
   team.appendChild(content);
 
-  const scoreText = formatScore(matchData);
-  if (matchData?.played && scoreText && side === "home") {
+  const hasResult = hasMatchResult(matchData);
+  if (matchData?.played && hasResult) {
     const scoreBox = document.createElement("div");
     scoreBox.className = "cup-crossing-score";
 
@@ -1911,7 +1923,7 @@ function createCupCrossingTeamNode(teamData, context = {}) {
 
     const goals = document.createElement("span");
     goals.className = "cup-crossing-score-main";
-    goals.textContent = scoreText;
+    goals.textContent = side === "home" ? String(matchData.result.home) : String(matchData.result.away);
     scoreBox.appendChild(goals);
 
     team.appendChild(scoreBox);
@@ -1943,6 +1955,18 @@ function createCupCrossingCard(matchData, options = {}) {
   );
 
   card.append(label, body);
+
+  if (matchData?.played && hasMatchPens(matchData)) {
+    const pens = matchData.pens ?? matchData.penalties;
+    const pensChip = document.createElement("p");
+    pensChip.className = "cup-match-versus";
+    pensChip.style.marginTop = "0.35rem";
+    pensChip.style.fontSize = "0.72rem";
+    pensChip.style.opacity = "0.9";
+    pensChip.textContent = `Pen: ${pens.home}-${pens.away}`;
+    card.appendChild(pensChip);
+  }
+
   return card;
 }
 
