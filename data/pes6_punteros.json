@@ -4,26 +4,26 @@
     {
       "divisionKey": "primera",
       "divisionLabel": "1ª División",
-      "usuario": "PELUFO",
-      "pj": 8,
-      "pg": 6,
-      "escudoFile": "universitario.png"
+      "usuario": "Alex_CABJ",
+      "pj": 10,
+      "pg": 8,
+      "escudoFile": "bologna.png"
     },
     {
       "divisionKey": "segunda",
       "divisionLabel": "2ª División",
-      "usuario": "FACU.JEY",
-      "pj": 8,
-      "pg": 5,
-      "escudoFile": "boca.png"
+      "usuario": "Sally1901",
+      "pj": 10,
+      "pg": 10,
+      "escudoFile": "marsella.png"
     },
     {
       "divisionKey": "tercera",
       "divisionLabel": "3ª División",
-      "usuario": "LOMBARDO",
-      "pj": 8,
-      "pg": 4,
-      "escudoFile": "racing.png"
+      "usuario": "jona96delgado",
+      "pj": 2,
+      "pg": 2,
+      "escudoFile": "fenerbache.png"
     }
   ]
 }
