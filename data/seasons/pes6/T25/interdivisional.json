@@ -1,0 +1,15 @@
+{
+  "seasons": [
+    {
+      "season": "T25",
+      "status": "active",
+      "phases": {
+        "octavos_playoffs": [],
+        "cuartos_playoffs": [],
+        "semifinal_playoffs": [],
+        "final_playoffs": [],
+        "final_copa_interdivisional": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "leaders": [
+    {
+      "divisionKey": "primera",
+      "divisionLabel": "1ª División",
+      "usuario": "H09",
+      "pj": 24,
+      "pg": 8,
+      "escudoFile": "villareal.png"
+    },
+    {
+      "divisionKey": "segunda",
+      "divisionLabel": "2ª División",
+      "usuario": "Sally1901",
+      "pj": 10,
+      "pg": 10,
+      "escudoFile": "marsella.png"
+    },
+    {
+      "divisionKey": "tercera",
+      "divisionLabel": "3ª División",
+      "usuario": "Jona96delgado",
+      "pj": 2,
+      "pg": 2,
+      "escudoFile": "fenerbahce.png"
+    }
+  ],
+  "updatedAt": "2026-02-12T14:32:00"
+}
