@@ -1,7 +1,7 @@
 {
   "source": "gesliga",
   "division": "primera",
-  "fetchedAt": "2026-02-12T20:02:48.597Z",
+  "fetchedAt": "2026-02-12T20:31:25.838Z",
   "rows": [
     {
       "pos": 1,
@@ -20,14 +20,14 @@
       "pos": 2,
       "equipo": "Alex_CABJ - Bologna",
       "escudoFile": "alexcabj.png",
-      "pts": 25,
-      "pj": 10,
+      "pts": 26,
+      "pj": 12,
       "pg": 8,
-      "pe": 1,
-      "pp": 1,
-      "gf": 21,
-      "gc": 8,
-      "dg": 13
+      "pe": 2,
+      "pp": 2,
+      "gf": 22,
+      "gc": 11,
+      "dg": 11
     },
     {
       "pos": 3,
@@ -161,6 +161,19 @@
     },
     {
       "pos": 13,
+      "equipo": "Patry - Feeyenord",
+      "escudoFile": "patry.png",
+      "pts": 6,
+      "pj": 6,
+      "pg": 1,
+      "pe": 3,
+      "pp": 2,
+      "gf": 7,
+      "gc": 8,
+      "dg": -1
+    },
+    {
+      "pos": 14,
       "equipo": "HernanZayas - Nottingham Forest",
       "escudoFile": "hernanzayas.png",
       "pts": 4,
@@ -171,19 +184,6 @@
       "gf": 10,
       "gc": 17,
       "dg": -7
-    },
-    {
-      "pos": 14,
-      "equipo": "Patry - Feeyenord",
-      "escudoFile": "patry.png",
-      "pts": 2,
-      "pj": 4,
-      "pg": 0,
-      "pe": 2,
-      "pp": 2,
-      "gf": 4,
-      "gc": 7,
-      "dg": -3
     },
     {
       "pos": 15,
