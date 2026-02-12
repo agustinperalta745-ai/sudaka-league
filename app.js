@@ -863,15 +863,13 @@ function createPes6LeaderItem(leader = {}) {
   return item;
 }
 
-const KOF_TOP3_GLOVE_COLORS = new Set(["amarillo", "rojo", "verde", "violeta", "blanco", "negro"]);
+const KOF_TOP3_ICON_BY_POSITION = ["assets/azul.png", "assets/rojo.png", "assets/negro.png"];
 
-function getKofTop3GlovePath(color) {
-  const normalizedColor = String(color || "").trim().toLowerCase();
-  const safeColor = KOF_TOP3_GLOVE_COLORS.has(normalizedColor) ? normalizedColor : "blanco";
-  return `assets/guantes/${safeColor}.png`;
+function getKofTop3IconPath(positionIndex = 0) {
+  return KOF_TOP3_ICON_BY_POSITION[positionIndex] || KOF_TOP3_ICON_BY_POSITION[KOF_TOP3_ICON_BY_POSITION.length - 1];
 }
 
-function createKofTop3Item(player = {}) {
+function createKofTop3Item(player = {}, positionIndex = 0) {
   const item = document.createElement("article");
   item.className = "pes6-leader-card kof-top3-card";
 
@@ -882,9 +880,10 @@ function createKofTop3Item(player = {}) {
   gloveWrap.className = "pes6-leader-shield kof-top3-glove";
 
   const gloveImg = document.createElement("img");
-  gloveImg.src = getKofTop3GlovePath(player.glove);
-  gloveImg.alt = `Guante ${String(player.glove || "blanco")}`;
+  gloveImg.src = toAssetPath(getKofTop3IconPath(positionIndex));
+  gloveImg.alt = `Ícono puesto ${positionIndex + 1}`;
   gloveImg.loading = "lazy";
+  gloveImg.decoding = "async";
 
   gloveImg.onerror = () => {
     gloveImg.remove();
@@ -928,8 +927,8 @@ function renderKofTop3() {
   }
 
   const fragment = document.createDocumentFragment();
-  top3.forEach((player) => {
-    fragment.appendChild(createKofTop3Item(player));
+  top3.forEach((player, index) => {
+    fragment.appendChild(createKofTop3Item(player, index));
   });
 
   kofTop3List.replaceChildren(fragment);

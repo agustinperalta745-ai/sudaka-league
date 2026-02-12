@@ -592,7 +592,18 @@ summary:focus-visible,
 }
 
 .kof-top3-glove {
-  border-radius: 10px;
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  border-radius: 0;
+  border: 0;
+  background: transparent;
+  overflow: visible;
+}
+
+.kof-top3-glove img {
+  object-fit: contain;
+  filter: drop-shadow(0 0 5px rgba(120, 210, 255, 0.45));
 }
 
 .kof-top3-fallback {
@@ -602,6 +613,14 @@ summary:focus-visible,
   width: 100%;
   height: 100%;
   font-size: 1rem;
+}
+
+@media (min-width: 768px) {
+  .kof-top3-glove {
+    width: 26px;
+    height: 26px;
+    flex-basis: 26px;
+  }
 }
 
 .pes6-leader-card {
