@@ -1,10 +1,22 @@
 {
   "source": "gesliga",
   "division": "primera",
-  "fetchedAt": "2026-02-12T00:03:21.572Z",
+  "fetchedAt": "2026-02-12T00:14:56.862Z",
   "rows": [
     {
       "pos": 1,
+      "equipo": "Alex_CABJ - Bologna",
+      "pts": 19,
+      "pj": 8,
+      "pg": 6,
+      "pe": 1,
+      "pp": 1,
+      "gf": 15,
+      "gc": 5,
+      "dg": 10
+    },
+    {
+      "pos": 2,
       "equipo": "Facualanis - Crystal Palace",
       "pts": 19,
       "pj": 8,
@@ -16,7 +28,7 @@
       "dg": 9
     },
     {
-      "pos": 2,
+      "pos": 3,
       "equipo": "H09 - Villareal",
       "pts": 18,
       "pj": 18,
@@ -28,7 +40,7 @@
       "dg": -9
     },
     {
-      "pos": 3,
+      "pos": 4,
       "equipo": "Joelignacho - Betis",
       "pts": 17,
       "pj": 12,
@@ -40,7 +52,7 @@
       "dg": -2
     },
     {
-      "pos": 4,
+      "pos": 5,
       "equipo": "Pelufo - Real Sociedad",
       "pts": 15,
       "pj": 6,
@@ -50,18 +62,6 @@
       "gf": 10,
       "gc": 4,
       "dg": 6
-    },
-    {
-      "pos": 5,
-      "equipo": "Alex_CABJ - Bologna",
-      "pts": 13,
-      "pj": 6,
-      "pg": 4,
-      "pe": 1,
-      "pp": 1,
-      "gf": 11,
-      "gc": 4,
-      "dg": 7
     },
     {
       "pos": 6,
@@ -103,13 +103,13 @@
       "pos": 9,
       "equipo": "Lombardo - Valencia",
       "pts": 9,
-      "pj": 5,
+      "pj": 7,
       "pg": 3,
       "pe": 0,
-      "pp": 2,
-      "gf": 8,
-      "gc": 8,
-      "dg": 0
+      "pp": 4,
+      "gf": 9,
+      "gc": 12,
+      "dg": -3
     },
     {
       "pos": 10,
@@ -209,7 +209,7 @@
     },
     {
       "pos": 14,
-      "equipo": "HernanZayas - Leed United",
+      "equipo": "HernanZayas - Nottingham Forest",
       "pts": 0,
       "pj": 0,
       "pg": 0,
