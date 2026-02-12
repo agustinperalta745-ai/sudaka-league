@@ -354,7 +354,7 @@ const sfSeasonName = document.getElementById("sfSeasonName");
 const sfSeasonNote = document.getElementById("sfSeasonNote");
 const pes6SlotsValue = document.getElementById("pes6-slots");
 const pes6SlotsBadge = document.getElementById("pes6-slots-badge");
-const pes6LeadersList = document.getElementById("pes6-leaders-list");
+const pes6LeadersList = document.getElementById("pes6-leaders");
 const sfSlotsValue = document.getElementById("sf-slots");
 const sfSlotsBadge = document.getElementById("sf-slots-badge");
 const donationProgressText = document.getElementById("donation-progress-text");
@@ -724,14 +724,6 @@ function renderList(target, items) {
   });
 }
 
-function getPes6LeadersDataPath() {
-  const basePath = window.location.pathname.includes('/sudaka-league')
-    ? '/sudaka-league'
-    : '';
-
-  return `${basePath}/data/pes6_punteros.json`;
-}
-
 function getPes6LeaderShieldSrc(escudoFile = "") {
   const cleanFile = String(escudoFile || "").trim();
   if (!cleanFile) return "";
@@ -740,7 +732,12 @@ function getPes6LeaderShieldSrc(escudoFile = "") {
 
 function createPes6LeaderItem(leader = {}) {
   const item = document.createElement("article");
-  item.className = "pes6-leader-item";
+  item.className = "pes6-leader-card";
+
+  const divisionKey = String(leader.divisionKey || "").trim().toLowerCase();
+  if (divisionKey) {
+    item.dataset.division = divisionKey;
+  }
 
   const left = document.createElement("div");
   left.className = "pes6-leader-main";
@@ -785,11 +782,11 @@ function createPes6LeaderItem(leader = {}) {
   badges.className = "pes6-leader-badges";
 
   const pj = document.createElement("span");
-  pj.className = "pes6-leader-pill";
+  pj.className = "mini-badge";
   pj.textContent = `PJ ${Number.isFinite(Number(leader.pj)) ? Number(leader.pj) : 0}`;
 
   const pg = document.createElement("span");
-  pg.className = "pes6-leader-pill";
+  pg.className = "mini-badge";
   pg.textContent = `PG ${Number.isFinite(Number(leader.pg)) ? Number(leader.pg) : 0}`;
 
   badges.append(pj, pg);
@@ -804,13 +801,13 @@ function createPes6LeaderItem(leader = {}) {
   return item;
 }
 
-async function renderPes6Leaders() {
+async function loadPes6Leaders() {
   if (!pes6LeadersList) return;
 
   pes6LeadersList.replaceChildren();
 
   try {
-    const response = await fetch(getPes6LeadersDataPath(), { cache: "no-store" });
+    const response = await fetch("data/pes6_punteros.json", { cache: "no-store" });
     if (!response.ok) {
       throw new Error(`No se pudo cargar punteros (${response.status})`);
     }
@@ -2495,7 +2492,7 @@ async function initializeApp() {
   renderPes6Ranking();
   setupCupCrossingsAccordion();
   await initializeInterdivisionalState();
-  await renderPes6Leaders();
+  await loadPes6Leaders();
   applyKofLeagueContent();
   applyWhatsAppLinks();
   updateSeasonStatus();
