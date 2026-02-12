@@ -581,6 +581,29 @@ summary:focus-visible,
   gap: 0.6rem;
 }
 
+#kof-top3 {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.kof-top3-card {
+  flex-wrap: nowrap;
+}
+
+.kof-top3-glove {
+  border-radius: 10px;
+}
+
+.kof-top3-fallback {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-size: 1rem;
+}
+
 .pes6-leader-card {
   position: relative;
   display: flex;
