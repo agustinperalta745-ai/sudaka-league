@@ -52,7 +52,7 @@ window.INTERDIVISIONAL_ACTIVE_SEASON = {
       label: "Octavos Play-offs 8",
       home: { club: "Argentinos JRS", player: "Ivanarocela", division: "Primera" },
       away: { club: "Colo Colo", player: "Joelignacho", division: "Segunda" },
-      winner: "away"
+      winner: "away",
       result: { home: 1, away: 2 }
     }
   ],
