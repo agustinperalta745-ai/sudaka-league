@@ -1,36 +1,62 @@
 {
   "source": "gesliga",
   "division": "segunda",
-  "fetchedAt": "2026-02-12T01:30:58.749Z",
+  "fetchedAt": "2026-02-12T02:13:30.379Z",
   "rows": [
     {
       "pos": 1,
-      "equipo": "Fernet - Villareal",
-      "escudoFile": "fernet.png",
-      "pts": 1,
-      "pj": 1,
-      "pg": 0,
-      "pe": 1,
+      "equipo": "Sally1901 - Marsella",
+      "escudoFile": "sally1901.png",
+      "pts": 30,
+      "pj": 10,
+      "pg": 10,
+      "pe": 0,
       "pp": 0,
-      "gf": 2,
-      "gc": 2,
-      "dg": 0
+      "gf": 31,
+      "gc": 8,
+      "dg": 23
     },
     {
-      "pos": 1,
-      "equipo": "Tank - Betis",
-      "escudoFile": "tank.png",
-      "pts": 1,
-      "pj": 1,
-      "pg": 0,
-      "pe": 1,
-      "pp": 0,
-      "gf": 2,
-      "gc": 2,
-      "dg": 0
+      "pos": 2,
+      "equipo": "Dabidpisi - Fiorentina",
+      "escudoFile": "dabidpisi.png",
+      "pts": 6,
+      "pj": 4,
+      "pg": 2,
+      "pe": 0,
+      "pp": 2,
+      "gf": 10,
+      "gc": 6,
+      "dg": 4
     },
     {
       "pos": 3,
+      "equipo": "Tank - Betis",
+      "escudoFile": "tank.png",
+      "pts": 2,
+      "pj": 2,
+      "pg": 0,
+      "pe": 2,
+      "pp": 0,
+      "gf": 4,
+      "gc": 4,
+      "dg": 0
+    },
+    {
+      "pos": 4,
+      "equipo": "Fernet - Villareal",
+      "escudoFile": "fernet.png",
+      "pts": 2,
+      "pj": 4,
+      "pg": 0,
+      "pe": 2,
+      "pp": 2,
+      "gf": 5,
+      "gc": 10,
+      "dg": -5
+    },
+    {
+      "pos": 5,
       "equipo": "TCL06 - Feeyenord",
       "escudoFile": "tcl06.png",
       "pts": 0,
@@ -43,7 +69,7 @@
       "dg": 0
     },
     {
-      "pos": 3,
+      "pos": 5,
       "equipo": "Bocajuniors12 - Fenerbache",
       "escudoFile": "bocajuniors12.png",
       "pts": 0,
@@ -56,20 +82,7 @@
       "dg": 0
     },
     {
-      "pos": 3,
-      "equipo": "Dabidpisi - Fiorentina",
-      "escudoFile": "dabidpisi.png",
-      "pts": 0,
-      "pj": 0,
-      "pg": 0,
-      "pe": 0,
-      "pp": 0,
-      "gf": 0,
-      "gc": 0,
-      "dg": 0
-    },
-    {
-      "pos": 3,
+      "pos": 5,
       "equipo": "Slasher7 - Crystal Palace",
       "escudoFile": "slasher7.png",
       "pts": 0,
@@ -82,20 +95,7 @@
       "dg": 0
     },
     {
-      "pos": 3,
-      "equipo": "Leocarp7 - Everton",
-      "escudoFile": "leocarp7.png",
-      "pts": 0,
-      "pj": 0,
-      "pg": 0,
-      "pe": 0,
-      "pp": 0,
-      "gf": 0,
-      "gc": 0,
-      "dg": 0
-    },
-    {
-      "pos": 3,
+      "pos": 5,
       "equipo": "Leom - Real Sociedad",
       "escudoFile": "leom.png",
       "pts": 0,
@@ -108,7 +108,7 @@
       "dg": 0
     },
     {
-      "pos": 3,
+      "pos": 5,
       "equipo": "Rubencho - Monaco",
       "escudoFile": "rubencho.png",
       "pts": 0,
@@ -121,7 +121,7 @@
       "dg": 0
     },
     {
-      "pos": 3,
+      "pos": 5,
       "equipo": "Joaquito12 - PSV",
       "escudoFile": "joaquito12.png",
       "pts": 0,
@@ -134,33 +134,7 @@
       "dg": 0
     },
     {
-      "pos": 3,
-      "equipo": "Sally1901 - Marsella",
-      "escudoFile": "sally1901.png",
-      "pts": 0,
-      "pj": 0,
-      "pg": 0,
-      "pe": 0,
-      "pp": 0,
-      "gf": 0,
-      "gc": 0,
-      "dg": 0
-    },
-    {
-      "pos": 3,
-      "equipo": "Diegarcho - Torino",
-      "escudoFile": "diegarcho.png",
-      "pts": 0,
-      "pj": 0,
-      "pg": 0,
-      "pe": 0,
-      "pp": 0,
-      "gf": 0,
-      "gc": 0,
-      "dg": 0
-    },
-    {
-      "pos": 3,
+      "pos": 5,
       "equipo": "Gab0211 - Leed United",
       "escudoFile": "gab0211.png",
       "pts": 0,
@@ -173,7 +147,7 @@
       "dg": 0
     },
     {
-      "pos": 3,
+      "pos": 5,
       "equipo": "Cacherinhooo - Fullham",
       "escudoFile": "cacherinhooo.png",
       "pts": 0,
@@ -186,33 +160,7 @@
       "dg": 0
     },
     {
-      "pos": 3,
-      "equipo": "Romancito - Valencia",
-      "escudoFile": "romancito.png",
-      "pts": 0,
-      "pj": 0,
-      "pg": 0,
-      "pe": 0,
-      "pp": 0,
-      "gf": 0,
-      "gc": 0,
-      "dg": 0
-    },
-    {
-      "pos": 3,
-      "equipo": "Theohernandez - Lyom",
-      "escudoFile": "theohernandez.png",
-      "pts": 0,
-      "pj": 0,
-      "pg": 0,
-      "pe": 0,
-      "pp": 0,
-      "gf": 0,
-      "gc": 0,
-      "dg": 0
-    },
-    {
-      "pos": 3,
+      "pos": 5,
       "equipo": "NazaTeto - Galatasaray",
       "escudoFile": "nazateto.png",
       "pts": 0,
@@ -225,7 +173,7 @@
       "dg": 0
     },
     {
-      "pos": 3,
+      "pos": 5,
       "equipo": "Ian - Roma",
       "escudoFile": "ian.png",
       "pts": 0,
@@ -238,7 +186,7 @@
       "dg": 0
     },
     {
-      "pos": 3,
+      "pos": 5,
       "equipo": "TrueBlueFC - Bologna",
       "escudoFile": "truebluefc.png",
       "pts": 0,
@@ -251,7 +199,7 @@
       "dg": 0
     },
     {
-      "pos": 3,
+      "pos": 5,
       "equipo": "XxFacuprogamerxX - Brighton",
       "escudoFile": "xxfacuprogamerxx.png",
       "pts": 0,
@@ -262,6 +210,58 @@
       "gf": 0,
       "gc": 0,
       "dg": 0
+    },
+    {
+      "pos": 17,
+      "equipo": "Leocarp7 - Everton",
+      "escudoFile": "leocarp7.png",
+      "pts": 0,
+      "pj": 2,
+      "pg": 0,
+      "pe": 0,
+      "pp": 2,
+      "gf": 4,
+      "gc": 7,
+      "dg": -3
+    },
+    {
+      "pos": 18,
+      "equipo": "Romancito - Valencia",
+      "escudoFile": "romancito.png",
+      "pts": 0,
+      "pj": 2,
+      "pg": 0,
+      "pe": 0,
+      "pp": 2,
+      "gf": 2,
+      "gc": 7,
+      "dg": -5
+    },
+    {
+      "pos": 19,
+      "equipo": "Diegarcho - Torino",
+      "escudoFile": "diegarcho.png",
+      "pts": 0,
+      "pj": 2,
+      "pg": 0,
+      "pe": 0,
+      "pp": 2,
+      "gf": 2,
+      "gc": 9,
+      "dg": -7
+    },
+    {
+      "pos": 20,
+      "equipo": "Theohernandez - Lyom",
+      "escudoFile": "theohernandez.png",
+      "pts": 0,
+      "pj": 2,
+      "pg": 0,
+      "pe": 0,
+      "pp": 2,
+      "gf": 0,
+      "gc": 7,
+      "dg": -7
     }
   ]
 }

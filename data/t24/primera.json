@@ -1,23 +1,36 @@
 {
   "source": "gesliga",
   "division": "primera",
-  "fetchedAt": "2026-02-12T01:30:58.395Z",
+  "fetchedAt": "2026-02-12T02:13:29.947Z",
   "rows": [
     {
       "pos": 1,
       "equipo": "Alex_CABJ - Bologna",
       "escudoFile": "alexcabj.png",
-      "pts": 19,
-      "pj": 8,
-      "pg": 6,
+      "pts": 25,
+      "pj": 10,
+      "pg": 8,
       "pe": 1,
       "pp": 1,
-      "gf": 15,
-      "gc": 5,
-      "dg": 10
+      "gf": 21,
+      "gc": 8,
+      "dg": 13
     },
     {
       "pos": 2,
+      "equipo": "H09 - Villareal",
+      "escudoFile": "h09.png",
+      "pts": 22,
+      "pj": 20,
+      "pg": 6,
+      "pe": 4,
+      "pp": 10,
+      "gf": 34,
+      "gc": 42,
+      "dg": -8
+    },
+    {
+      "pos": 3,
       "equipo": "Facualanis - Crystal Palace",
       "escudoFile": "facualanis.png",
       "pts": 19,
@@ -28,19 +41,6 @@
       "gf": 21,
       "gc": 12,
       "dg": 9
-    },
-    {
-      "pos": 3,
-      "equipo": "H09 - Villareal",
-      "escudoFile": "h09.png",
-      "pts": 18,
-      "pj": 18,
-      "pg": 5,
-      "pe": 3,
-      "pp": 10,
-      "gf": 29,
-      "gc": 38,
-      "dg": -9
     },
     {
       "pos": 4,
@@ -138,13 +138,13 @@
       "equipo": "Naxul90 - Everton",
       "escudoFile": "naxul90.png",
       "pts": 6,
-      "pj": 3,
+      "pj": 5,
       "pg": 2,
       "pe": 0,
-      "pp": 1,
-      "gf": 7,
-      "gc": 5,
-      "dg": 2
+      "pp": 3,
+      "gf": 10,
+      "gc": 11,
+      "dg": -1
     },
     {
       "pos": 12,
@@ -161,6 +161,19 @@
     },
     {
       "pos": 13,
+      "equipo": "HernanZayas - Nottingham Forest",
+      "escudoFile": "hernanzayas.png",
+      "pts": 1,
+      "pj": 2,
+      "pg": 0,
+      "pe": 1,
+      "pp": 1,
+      "gf": 4,
+      "gc": 5,
+      "dg": -1
+    },
+    {
+      "pos": 14,
       "equipo": "Aacuis09 - PSV",
       "escudoFile": "aacuis09.png",
       "pts": 1,
@@ -173,7 +186,7 @@
       "dg": -4
     },
     {
-      "pos": 14,
+      "pos": 15,
       "equipo": "Edug98 - Fenerbache",
       "escudoFile": "edug98.png",
       "pts": 0,
@@ -186,7 +199,7 @@
       "dg": 0
     },
     {
-      "pos": 14,
+      "pos": 15,
       "equipo": "Exeeneta - Fiorentina",
       "escudoFile": "exeeneta.png",
       "pts": 0,
@@ -199,7 +212,7 @@
       "dg": 0
     },
     {
-      "pos": 14,
+      "pos": 15,
       "equipo": "TinchoRamirez - Monaco",
       "escudoFile": "tinchoramirez.png",
       "pts": 0,
@@ -212,7 +225,7 @@
       "dg": 0
     },
     {
-      "pos": 14,
+      "pos": 15,
       "equipo": "FAFAFA - Torino",
       "escudoFile": "fafafa.png",
       "pts": 0,
@@ -225,20 +238,7 @@
       "dg": 0
     },
     {
-      "pos": 14,
-      "equipo": "HernanZayas - Nottingham Forest",
-      "escudoFile": "hernanzayas.png",
-      "pts": 0,
-      "pj": 0,
-      "pg": 0,
-      "pe": 0,
-      "pp": 0,
-      "gf": 0,
-      "gc": 0,
-      "dg": 0
-    },
-    {
-      "pos": 14,
+      "pos": 15,
       "equipo": "Larrierismo - Lyom",
       "escudoFile": "larrierismo.png",
       "pts": 0,
@@ -251,7 +251,7 @@
       "dg": 0
     },
     {
-      "pos": 14,
+      "pos": 15,
       "equipo": "Tumtum - Galatasaray",
       "escudoFile": "tumtum.png",
       "pts": 0,
