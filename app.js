@@ -194,8 +194,10 @@ const PES6_HISTORY_META = {
   ]
 };
 
-let pes6CurrentSeason = "T24";
-let pes6SeasonBasePath = null;
+const INTERDIVISIONAL_ACTIVE_SOURCE = window.INTERDIVISIONAL_ACTIVE_SEASON || null;
+const INTERDIVISIONAL_HISTORY_SOURCE = Array.isArray(window.INTERDIVISIONAL_HISTORY_SEASONS)
+  ? window.INTERDIVISIONAL_HISTORY_SEASONS
+  : [];
 
 const INTERDIVISIONAL_PHASES = [
   { key: "octavos_playoffs", label: "Octavos Play-offs" },
@@ -565,14 +567,21 @@ function createT24TableCard(divisionLabel, data) {
 }
 
 async function fetchT24DivisionData(key) {
+  const basePath = window.location.pathname.includes('/sudaka-league')
+    ? '/sudaka-league'
+    : '';
   const T24_FETCH_PATHS = {
-    primera: "primera.json",
-    segunda: "segunda.json",
-    tercera: "tercera.json"
+    primera: `${basePath}/data/gesliga/t24/primera.json`,
+    segunda: `${basePath}/data/gesliga/t24/segunda.json`,
+    tercera: `${basePath}/data/gesliga/t24/tercera.json`
   };
 
   try {
-    const response = await fetchPes6SeasonFile(T24_FETCH_PATHS[key], [`data/t24/${key}.json`, `data/gesliga/t24/${key}.json`]);
+    const response = await fetch(T24_FETCH_PATHS[key], { cache: "no-store" });
+    if (!response.ok) {
+      throw new Error(`No se pudo cargar ${key}.json (${response.status})`);
+    }
+
     const data = await response.json();
     const rows = data.rows || [];
     return { ...data, rows };
@@ -656,7 +665,7 @@ function updateSeasonStatus() {
     return;
   }
 
-  pes6SeasonName.textContent = `Temporada ${pes6CurrentSeason.replace(/^T/i, "")}`;
+  pes6SeasonName.textContent = PES6_SEASON_NAME;
   sfSeasonName.textContent = KOF_LEAGUE.temporada.nombre;
   sfStatus.textContent = KOF_LEAGUE.temporada.estado;
   sfSeasonNote.textContent = KOF_LEAGUE.temporada.nota;
@@ -816,7 +825,10 @@ async function loadPes6Leaders() {
   pes6LeadersList.replaceChildren();
 
   try {
-    const response = await fetchPes6SeasonFile("pes6_punteros.json", ["data/pes6_punteros.json"]);
+    const response = await fetch("data/pes6_punteros.json", { cache: "no-store" });
+    if (!response.ok) {
+      throw new Error(`No se pudo cargar punteros (${response.status})`);
+    }
 
     const data = await response.json();
     const leaders = Array.isArray(data?.leaders) ? data.leaders : [];
@@ -1954,7 +1966,22 @@ function buildInterdivisionalActiveSeason(source) {
 }
 
 function buildInterdivisionalStateFromDataFiles() {
-  return normalizeInterdivisionalState({ seasons: [] });
+  const seasons = [];
+  const activeSeason = buildInterdivisionalActiveSeason(INTERDIVISIONAL_ACTIVE_SOURCE);
+
+  if (activeSeason) {
+    seasons.push(activeSeason);
+  }
+
+  INTERDIVISIONAL_HISTORY_SOURCE.forEach((season) => {
+    const normalizedSeason = {
+      ...cloneInterdivisionalData(season),
+      status: "completed"
+    };
+    seasons.push(normalizedSeason);
+  });
+
+  return normalizeInterdivisionalState({ seasons });
 }
 
 function normalizeInterdivisionalState(data) {
@@ -2436,9 +2463,7 @@ function setupCupCrossingsAccordion() {
 
 async function initializeInterdivisionalState() {
   try {
-    const response = await fetchPes6SeasonFile("interdivisional.json", ["data/interdivisional.json"]);
-    const interdivisionalData = await response.json();
-    interdivisionalState = normalizeInterdivisionalState(interdivisionalData);
+    interdivisionalState = buildInterdivisionalStateFromDataFiles();
   } catch (error) {
     console.error("Error al inicializar Interdivisional", error);
     interdivisionalState = { seasons: [] };
@@ -2446,67 +2471,6 @@ async function initializeInterdivisionalState() {
 
   interdivisionalState.seasons.forEach((season) => ensureInterdivisionalProgression(season));
   renderInterdivisionalCard();
-}
-
-function getDataPath(path) {
-  const clean = String(path || "").replace(/^\/+/, "");
-  return `${ASSETS_BASE_PATH}/${clean}`.replace(/\/+/g, "/");
-}
-
-async function initializePes6SeasonContext() {
-  const fallbackContext = { activeSeason: "T24" };
-  const candidatePaths = [
-    getDataPath("data/current/pes6.json"),
-    "data/current/pes6.json"
-  ];
-
-  for (const path of candidatePaths) {
-    try {
-      const response = await fetch(path, { cache: "no-store" });
-      if (!response.ok) continue;
-      const context = await response.json();
-      if (context?.activeSeason) {
-        pes6CurrentSeason = String(context.activeSeason).trim() || fallbackContext.activeSeason;
-        pes6SeasonBasePath = getDataPath(`data/seasons/pes6/${pes6CurrentSeason}`);
-        if (pes6SeasonName) {
-          pes6SeasonName.textContent = `Temporada ${pes6CurrentSeason.replace(/^T/i, "")}`;
-        }
-        return;
-      }
-    } catch (error) {
-      console.warn("No se pudo cargar el contexto de temporada PES6 desde", path, error);
-    }
-  }
-
-  pes6CurrentSeason = fallbackContext.activeSeason;
-  pes6SeasonBasePath = getDataPath(`data/seasons/pes6/${pes6CurrentSeason}`);
-}
-
-async function fetchPes6SeasonFile(fileName, legacyPaths = []) {
-  const attempts = [];
-
-  if (pes6SeasonBasePath) {
-    attempts.push(`${pes6SeasonBasePath}/${fileName}`);
-  }
-
-  legacyPaths.forEach((legacyPath) => {
-    attempts.push(getDataPath(legacyPath));
-    attempts.push(legacyPath);
-  });
-
-  let lastError = null;
-
-  for (const path of attempts) {
-    try {
-      const response = await fetch(path, { cache: "no-store" });
-      if (response.ok) return response;
-      lastError = new Error(`No se pudo cargar ${path} (${response.status})`);
-    } catch (error) {
-      lastError = error;
-    }
-  }
-
-  throw lastError || new Error(`No se pudo cargar ${fileName}`);
 }
 
 function initPes6RotatingBg() {
@@ -2556,7 +2520,6 @@ function renderPes6History() {
 }
 
 async function initializeApp() {
-  await initializePes6SeasonContext();
   setupTabs();
   renderPalmares();
   renderPes6Ranking();
