@@ -79,6 +79,10 @@ window.INTERDIVISIONAL_ACTIVE_SEASON = {
 };
 
 (function attachInterdivisionalPhaseStatus() {
+  let lastRenderSignature = "";
+  let renderScheduled = false;
+  let isApplyingRender = false;
+
   function normalizeWinner(winner) {
     if (typeof winner !== "string") return null;
     const normalized = winner.trim().toLowerCase();
@@ -183,7 +187,10 @@ window.INTERDIVISIONAL_ACTIVE_SEASON = {
 
   function renderPhaseStatuses() {
     const tabContainer = document.querySelector(".cup-card-tabs");
-    if (!tabContainer) return;
+    if (!tabContainer) {
+      lastRenderSignature = "";
+      return;
+    }
 
     const statuses = computePhaseStatuses().reduce((acc, item) => {
       acc[item.phase] = item.status;
@@ -191,13 +198,27 @@ window.INTERDIVISIONAL_ACTIVE_SEASON = {
     }, {});
 
     const buttons = tabContainer.querySelectorAll(".cup-tab-btn");
+    const signature = Array.from(buttons).map((button, index) => {
+      const phase = index + 1;
+      const status = statuses[phase] || "EN ESPERA";
+      const baseLabel = button.getAttribute("data-phase-label") || button.textContent.trim();
+      return `${phase}:${status}:${baseLabel}`;
+    }).join("|");
+
+    if (signature === lastRenderSignature) {
+      return;
+    }
+    lastRenderSignature = signature;
+
+    isApplyingRender = true;
     buttons.forEach((button, index) => {
       const phase = index + 1;
       const status = statuses[phase] || "EN ESPERA";
       const style = getStatusStyle(status);
-
       const baseLabel = button.getAttribute("data-phase-label") || button.textContent.trim();
+
       button.setAttribute("data-phase-label", baseLabel);
+      button.setAttribute("data-phase-status", status);
       button.innerHTML = "";
 
       const label = document.createElement("span");
@@ -214,10 +235,22 @@ window.INTERDIVISIONAL_ACTIVE_SEASON = {
       button.style.borderColor = style.borderColor;
       button.append(label, badge);
     });
+    isApplyingRender = false;
+  }
+
+  function scheduleRender() {
+    if (renderScheduled) return;
+    renderScheduled = true;
+
+    requestAnimationFrame(() => {
+      renderScheduled = false;
+      renderPhaseStatuses();
+    });
   }
 
   const observer = new MutationObserver(() => {
-    renderPhaseStatuses();
+    if (isApplyingRender) return;
+    scheduleRender();
   });
 
   function startObserver() {
@@ -225,7 +258,7 @@ window.INTERDIVISIONAL_ACTIVE_SEASON = {
       childList: true,
       subtree: true
     });
-    renderPhaseStatuses();
+    scheduleRender();
   }
 
   if (document.readyState === "loading") {
