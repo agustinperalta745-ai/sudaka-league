@@ -385,6 +385,9 @@ let showAllTitlesRanking = false;
 let openTitlesRankingId = null;
 let interdivisionalState = null;
 let cupPanelTab = "active";
+let showQF = false;
+let showSF = false;
+let showF = false;
 const MAX_RANKING_TITLES_DETAIL = 6;
 
 const T24_DIVISIONS = [
@@ -1983,11 +1986,53 @@ function renderCupActiveTab() {
   if (!currentSeason) return;
 
   ensureInterdivisionalProgression(currentSeason);
-  const visiblePhases = getVisiblePhaseKeysForSeason(currentSeason);
 
-  visiblePhases.forEach((phaseKey) => {
-    const matches = currentSeason.phases[phaseKey] || [];
-    const section = createCupPhaseSection(phaseKey, matches, {
+  const phaseControls = document.createElement("div");
+  phaseControls.className = "cup-card-tabs";
+
+  const createPhaseButton = (label, onClick) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "cup-tab-btn sl-tab neon-box";
+    button.textContent = label;
+    button.addEventListener("click", onClick);
+    return button;
+  };
+
+  phaseControls.appendChild(createPhaseButton("2da fase", () => {
+    showQF = true;
+    renderCupActiveTab();
+    updateCupCardHeader();
+  }));
+
+  if (showQF) {
+    phaseControls.appendChild(createPhaseButton("3ra fase", () => {
+      showSF = true;
+      renderCupActiveTab();
+      updateCupCardHeader();
+    }));
+  }
+
+  if (showSF) {
+    phaseControls.appendChild(createPhaseButton("4ta fase", () => {
+      showF = true;
+      renderCupActiveTab();
+      updateCupCardHeader();
+    }));
+  }
+
+  cupCrossingsList.appendChild(phaseControls);
+
+  [
+    { key: "octavos_playoffs", isVisible: true },
+    { key: "cuartos_playoffs", isVisible: showQF },
+    { key: "semifinal_playoffs", isVisible: showSF },
+    { key: "final_copa_interdivisional", isVisible: showF }
+  ].forEach(({ key, isVisible }) => {
+    if (!isVisible) return;
+
+    const matches = currentSeason.phases[key] || [];
+    const section = createCupPhaseSection(key, matches, {
       editable: false,
       season: currentSeason
     });
