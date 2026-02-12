@@ -391,20 +391,14 @@ const T24_DIVISIONS = [
   { key: "tercera", label: "Tercera División" }
 ];
 
-function getEscudoUrl(teamName = "") {
-  const normalizedTeamName = String(teamName || "").trim();
-  if (!normalizedTeamName) return "";
-  return toAssetPath(`assets/escudos/${normalizedTeamName}.png`);
+function getEscudoUrl(escudoFile = "") {
+  const normalizedEscudoFile = String(escudoFile || "").trim();
+  if (!normalizedEscudoFile) return "";
+  return toAssetPath(`assets/escudos/${normalizedEscudoFile}`);
 }
 
-const T24_PLACEHOLDER_LOGO = getEscudoUrl("pes6/placeholder");
+const T24_ESCUDO_PLACEHOLDER = "-";
 let t24TablesLoaded = false;
-
-function getT24ShieldPath(rowEquipo = "") {
-  const equipo = String(rowEquipo || "").trim();
-  if (!equipo) return T24_PLACEHOLDER_LOGO;
-  return getEscudoUrl(equipo);
-}
 
 function createT24Cell(tag, text, className = "") {
   const cell = document.createElement(tag);
@@ -441,6 +435,7 @@ function normalizeT24Entry(entry = {}) {
     rowEquipo: combinedEquipo,
     teamName,
     playerName,
+    escudoFile: typeof entry.escudoFile === "string" ? entry.escudoFile.trim() : "",
     pts: entry.pts,
     pj: entry.pj,
     pg: entry.pg,
@@ -489,16 +484,19 @@ function createT24TableCard(divisionLabel, data) {
 
       const logoCell = document.createElement("td");
       logoCell.className = "t24-logo-cell";
-      const logo = document.createElement("img");
-      logo.className = "t24-logo";
-      logo.src = getT24ShieldPath(entry.rowEquipo);
-      logo.alt = `Escudo ${entry.teamName || "Equipo"}`;
-      logo.loading = "lazy";
-      logo.onerror = () => {
-        logo.onerror = null;
-        logo.src = T24_PLACEHOLDER_LOGO;
-      };
-      logoCell.appendChild(logo);
+      if (entry.escudoFile) {
+        const logo = document.createElement("img");
+        logo.className = "team-badge";
+        logo.src = getEscudoUrl(entry.escudoFile);
+        logo.alt = entry.teamName || "Equipo";
+        logo.loading = "lazy";
+        logo.onerror = () => {
+          logo.replaceWith(document.createTextNode(T24_ESCUDO_PLACEHOLDER));
+        };
+        logoCell.appendChild(logo);
+      } else {
+        logoCell.textContent = T24_ESCUDO_PLACEHOLDER;
+      }
       row.appendChild(logoCell);
 
       row.appendChild(createT24Cell("td", entry.playerName || "-", "t24-player"));

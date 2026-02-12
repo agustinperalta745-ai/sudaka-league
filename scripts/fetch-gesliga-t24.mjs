@@ -116,6 +116,34 @@ function findClassificationLayout($, table) {
   return null;
 }
 
+
+function splitEquipoJugador(rawEquipo = "") {
+  const normalizedEquipo = String(rawEquipo || "").trim();
+  if (!normalizedEquipo) return { equipo: "", jugador: "" };
+
+  const parts = normalizedEquipo.split(" - ");
+  if (parts.length < 2) return { equipo: normalizedEquipo, jugador: "" };
+
+  return {
+    equipo: (parts.shift() || "").trim(),
+    jugador: parts.join(" - ").trim()
+  };
+}
+
+function buildEscudoFile(teamName = "") {
+  const baseName = String(teamName || "")
+    .trim()
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .replace(/[^a-z0-9\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
+
+  return `${baseName || "equipo"}.png`;
+}
+
 function parseClassificationRows(html) {
   const $ = cheerio.load(html);
   const tables = $("table").toArray();
@@ -157,9 +185,12 @@ function parseClassificationRows(html) {
 
       const inferredPos = parsedRows.length + 1;
 
+      const { equipo: equipoNombre } = splitEquipoJugador(equipo);
+
       parsedRows.push({
         pos: toNumber(getCell(indexes.pos), inferredPos),
         equipo,
+        escudoFile: buildEscudoFile(equipoNombre),
         pts,
         pj,
         pg: toNumber(getCell(indexes.pg)),
