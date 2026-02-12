@@ -385,15 +385,15 @@ let showAllTitlesRanking = false;
 let openTitlesRankingId = null;
 let interdivisionalState = null;
 let cupPanelTab = "active";
-let cupActivePhase = 1;
+let cupActivePhase = "1";
 const MAX_RANKING_TITLES_DETAIL = 6;
 
 const CUP_PHASE_BUTTONS = [
-  { index: 1, key: "octavos_playoffs", label: "1RA FASE" },
-  { index: 2, key: "cuartos_playoffs", label: "2DA FASE" },
-  { index: 3, key: "semifinal_playoffs", label: "3RA FASE" },
-  { index: 4, key: "final_playoffs", label: "4TA FASE" },
-  { index: 5, key: "final_copa_interdivisional", label: "5TA FASE" }
+  { id: "1", key: "octavos_playoffs", label: "1RA FASE" },
+  { id: "2", key: "cuartos_playoffs", label: "2DA FASE" },
+  { id: "3", key: "semifinal_playoffs", label: "3RA FASE" },
+  { id: "4", key: "final_playoffs", label: "4TA FASE" },
+  { id: "5", key: "final_copa_interdivisional", label: "5TA FASE" }
 ];
 
 const T24_DIVISIONS = [
@@ -2057,8 +2057,14 @@ function createCupCrossingCard(matchData, options = {}) {
 }
 
 function createCupPhaseSection(phaseKey, matches, options = {}) {
+  const {
+    skipDivisionFilter = false,
+    emptyMessage = ""
+  } = options;
   const seasonNumber = parseSeasonNumber(options.season?.season);
-  const filteredMatches = matches.filter((match) => {
+  const filteredMatches = (matches || []).filter((match) => {
+    if (skipDivisionFilter) return true;
+
     const homeDivision = match?.home?.division;
     const awayDivision = match?.away?.division;
 
@@ -2069,7 +2075,21 @@ function createCupPhaseSection(phaseKey, matches, options = {}) {
   });
 
   if (!filteredMatches.length) {
-    return null;
+    if (!emptyMessage) return null;
+
+    const emptySection = document.createElement("section");
+    emptySection.className = "cup-round-section";
+
+    const title = document.createElement("h4");
+    title.className = "cup-round-title";
+    title.textContent = getPhaseLabel(phaseKey);
+
+    const message = document.createElement("p");
+    message.className = "cup-round-empty-note";
+    message.textContent = emptyMessage;
+
+    emptySection.append(title, message);
+    return emptySection;
   }
 
   const section = document.createElement("section");
@@ -2095,7 +2115,7 @@ function updateCupCardHeader() {
   if (!currentSeason) return;
 
   const visiblePhases = getVisiblePhaseKeysForSeason(currentSeason);
-  const selectedPhase = CUP_PHASE_BUTTONS.find((phase) => phase.index === cupActivePhase)?.key;
+  const selectedPhase = CUP_PHASE_BUTTONS.find((phase) => phase.id === cupActivePhase)?.key;
   const activePhase = selectedPhase || visiblePhases[visiblePhases.length - 1] || INTERDIVISIONAL_PHASES[0].key;
 
   const displaySeason = currentSeason.season;
@@ -2108,9 +2128,8 @@ function updateCupCardHeader() {
   }
 }
 
-function setCupActivePhase(phaseIndex) {
-  if (cupActivePhase === phaseIndex) return;
-  cupActivePhase = phaseIndex;
+function setCupActivePhase(phaseId) {
+  cupActivePhase = phaseId;
   renderCupActiveTab();
   updateCupCardHeader();
 }
@@ -2126,10 +2145,11 @@ function createCupPhaseTabs() {
     button.type = "button";
     button.className = "cup-tab-btn sl-tab neon-box";
     button.textContent = phase.label;
-    button.classList.toggle("is-active", cupActivePhase === phase.index);
-    button.setAttribute("aria-selected", String(cupActivePhase === phase.index));
+    button.dataset.phase = phase.id;
+    button.classList.toggle("is-active", cupActivePhase === phase.id);
+    button.setAttribute("aria-selected", String(cupActivePhase === phase.id));
     button.addEventListener("click", () => {
-      setCupActivePhase(phase.index);
+      setCupActivePhase(button.dataset.phase || phase.id);
     });
 
     tabs.appendChild(button);
@@ -2146,7 +2166,7 @@ function renderCupActiveTab() {
   if (!currentSeason) return;
 
   ensureInterdivisionalProgression(currentSeason);
-  const selectedPhase = CUP_PHASE_BUTTONS.find((phase) => phase.index === cupActivePhase)?.key;
+  const selectedPhase = CUP_PHASE_BUTTONS.find((phase) => phase.id === cupActivePhase)?.key;
   const visiblePhases = getVisiblePhaseKeysForSeason(currentSeason);
   const phaseToRender = selectedPhase || visiblePhases[visiblePhases.length - 1] || INTERDIVISIONAL_PHASES[0].key;
 
@@ -2155,7 +2175,9 @@ function renderCupActiveTab() {
   if (phaseToRender === "final_copa_interdivisional") {
     const section = createCupPhaseSection(phaseToRender, [getFinalCopaInterdivisionalMatch(currentSeason)], {
       editable: false,
-      season: currentSeason
+      season: currentSeason,
+      skipDivisionFilter: true,
+      emptyMessage: "FASE 5: todavía no hay datos cargados para esta fase."
     });
 
     if (section) {
