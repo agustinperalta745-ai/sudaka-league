@@ -14,8 +14,9 @@ window.INTERDIVISIONAL_ACTIVE_SEASON = {
       label: "Octavos Play-offs 2",
       home: { club: "Millonarios", player: "Fafafa", division: "Primera" },
       away: { club: "Cruzeiro", player: "Crislot26", division: "Segunda" },
-      winner: null
-    },
+      winner: "away",
+      result: { home: 0, away: 0 }
+    },pens: { home: 1, away: 3 },
     {
       label: "Octavos Play-offs 3",
       home: { club: "Santos FC", player: "LombardoCABJ", division: "Primera" },
