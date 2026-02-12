@@ -355,6 +355,7 @@ const sfSeasonNote = document.getElementById("sfSeasonNote");
 const pes6SlotsValue = document.getElementById("pes6-slots");
 const pes6SlotsBadge = document.getElementById("pes6-slots-badge");
 const pes6LeadersList = document.getElementById("pes6-leaders");
+const pes6Updated = document.getElementById("pes6-updated");
 const sfSlotsValue = document.getElementById("sf-slots");
 const sfSlotsBadge = document.getElementById("sf-slots-badge");
 const donationProgressText = document.getElementById("donation-progress-text");
@@ -801,6 +802,23 @@ function createPes6LeaderItem(leader = {}) {
   return item;
 }
 
+function timeAgo(dateStr) {
+  const now = new Date();
+  const past = new Date(dateStr);
+
+  if (Number.isNaN(past.getTime())) {
+    return "fecha desconocida";
+  }
+
+  const diffHours = Math.floor((now - past) / (1000 * 60 * 60));
+
+  if (diffHours < 1) return "hace menos de 1 hora";
+  if (diffHours < 24) return `hace ${diffHours} hs`;
+
+  const days = Math.floor(diffHours / 24);
+  return `hace ${days} días`;
+}
+
 async function loadPes6Leaders() {
   if (!pes6LeadersList) return;
 
@@ -814,6 +832,16 @@ async function loadPes6Leaders() {
 
     const data = await response.json();
     const leaders = Array.isArray(data?.leaders) ? data.leaders : [];
+
+    if (pes6Updated) {
+      if (data?.updatedAt) {
+        pes6Updated.textContent = `Última actualización: ${timeAgo(data.updatedAt)}`;
+        pes6Updated.hidden = false;
+      } else {
+        pes6Updated.hidden = true;
+        pes6Updated.textContent = "";
+      }
+    }
 
     if (!leaders.length) {
       const empty = document.createElement("p");
@@ -830,6 +858,11 @@ async function loadPes6Leaders() {
 
     pes6LeadersList.appendChild(fragment);
   } catch (error) {
+    if (pes6Updated) {
+      pes6Updated.hidden = true;
+      pes6Updated.textContent = "";
+    }
+
     console.error("Error al cargar punteros PES6", error);
     const errorText = document.createElement("p");
     errorText.className = "pes6-leaders-empty";
