@@ -1741,7 +1741,7 @@ function buildInterdivisionalActiveSeason(source) {
   const winnersSemis = season.phases.semifinal_playoffs.map((match, index) => getWinner(match, `Ganador Semi ${index + 1}`));
   season.phases.final_playoffs = buildPhaseMatches(sourceFinalPlayoffs, winnersSemis, "final_playoffs");
 
-  const winnersFinal = season.phases.final_playoffs.map((match, index) => getWinner(match, `Ganador Final ${index + 1}`));
+  const winnersFinal = season.phases.final_playoffs.map((match) => getWinner(match, "Ganador Final Play-offs"));
   season.phases.final_copa_interdivisional = buildPhaseMatches(sourceFinalCopa, winnersFinal, "final_copa_interdivisional");
 
   return season;
@@ -1964,7 +1964,8 @@ function updateCupCardHeader() {
     1: "octavos_playoffs",
     2: "cuartos_playoffs",
     3: "semifinal_playoffs",
-    4: "final_copa_interdivisional"
+    4: "final_playoffs",
+    5: "final_copa_interdivisional"
   };
   const activePhaseKey = activePhaseKeyByStep[activePhase] || "octavos_playoffs";
 
@@ -2012,6 +2013,7 @@ function renderCupActiveTab() {
   phaseControls.appendChild(createPhaseButton("2da fase", 2));
   phaseControls.appendChild(createPhaseButton("3ra fase", 3));
   phaseControls.appendChild(createPhaseButton("4ta fase", 4));
+  phaseControls.appendChild(createPhaseButton("5ta fase", 5));
 
   cupCrossingsList.appendChild(phaseControls);
 
@@ -2019,7 +2021,8 @@ function renderCupActiveTab() {
     1: "octavos_playoffs",
     2: "cuartos_playoffs",
     3: "semifinal_playoffs",
-    4: "final_copa_interdivisional"
+    4: "final_playoffs",
+    5: "final_copa_interdivisional"
   };
   const activePhaseKey = activePhaseKeyByStep[activePhase] || "octavos_playoffs";
   const matches = currentSeason.phases[activePhaseKey] || [];
