@@ -1089,9 +1089,70 @@ function setupTabs() {
   });
 }
 
+function setAccordionState(item, shouldOpen) {
+  const trigger = item.querySelector(".system-accordion-trigger");
+  const panel = item.querySelector(".system-accordion-panel");
+  if (!trigger || !panel) return;
+
+  trigger.setAttribute("aria-expanded", String(shouldOpen));
+  panel.hidden = !shouldOpen;
+  panel.classList.toggle("is-open", shouldOpen);
+  panel.style.maxHeight = shouldOpen ? `${panel.scrollHeight}px` : "0px";
+}
+
+function resetAccordionGroup(group) {
+  const items = [...group.querySelectorAll(".system-accordion-item")];
+  items.forEach((item) => {
+    const isDefaultOpen = item.dataset.defaultOpen === "true";
+    setAccordionState(item, isDefaultOpen);
+  });
+}
+
+function setupAccordionGroups() {
+  const groups = [...document.querySelectorAll("[data-accordion-group]")];
+
+  groups.forEach((group) => {
+    const items = [...group.querySelectorAll(".system-accordion-item")];
+
+    items.forEach((item) => {
+      const trigger = item.querySelector(".system-accordion-trigger");
+      if (!trigger) return;
+
+      trigger.addEventListener("click", () => {
+        const isExpanded = trigger.getAttribute("aria-expanded") === "true";
+
+        items.forEach((entry) => {
+          if (entry !== item) setAccordionState(entry, false);
+        });
+
+        setAccordionState(item, !isExpanded);
+      });
+    });
+
+    resetAccordionGroup(group);
+  });
+
+  window.addEventListener("resize", () => {
+    groups.forEach((group) => {
+      const items = [...group.querySelectorAll(".system-accordion-item")];
+      items.forEach((item) => {
+        const panel = item.querySelector(".system-accordion-panel");
+        const trigger = item.querySelector(".system-accordion-trigger");
+        if (!panel || !trigger) return;
+        if (trigger.getAttribute("aria-expanded") === "true") {
+          panel.style.maxHeight = `${panel.scrollHeight}px`;
+        }
+      });
+    });
+  });
+}
+
 function resetModalToDefaultTab(modal) {
   const defaultTabButton = modal.querySelector(".tab-btn");
   if (defaultTabButton) activateTab(modal, defaultTabButton);
+
+  const accordionGroups = [...modal.querySelectorAll("[data-accordion-group]")];
+  accordionGroups.forEach((group) => resetAccordionGroup(group));
 }
 
 function openModal(modalId) {
@@ -2521,6 +2582,7 @@ function renderPes6History() {
 
 async function initializeApp() {
   setupTabs();
+  setupAccordionGroups();
   renderPalmares();
   renderPes6Ranking();
   setupCupCrossingsAccordion();

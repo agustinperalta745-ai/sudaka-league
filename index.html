@@ -175,6 +175,24 @@
       </article>
     </section>
 
+    <section class="section hud-separator" aria-labelledby="sistema-copas-title">
+      <article
+        class="panel-section sl-card system-panel-trigger modal-trigger neon-border"
+        role="button"
+        tabindex="0"
+        aria-haspopup="dialog"
+        aria-controls="copas-panel"
+        data-target="copas-panel"
+      >
+        <div class="system-panel-header">
+          <h2 id="sistema-copas-title" class="neon-text sl-section-title">SISTEMA DE COPAS</h2>
+          <span class="system-panel-indicator" aria-hidden="true">↗</span>
+        </div>
+        <p class="system-panel-hint">Click para ver reglas</p>
+        <p>Revisá formatos y reglamentos de copas en un panel separado por pestañas.</p>
+      </article>
+    </section>
+
     <section class="section faq sl-card" aria-labelledby="faq-title">
       <h2 id="faq-title" class="neon-text sl-section-title">FAQ</h2>
       <details>
@@ -469,113 +487,279 @@ Más interacción y estadísticas
             <p class="pes6-system-subtitle">"En Sudaka League no se juega por participar. Se juega por mérito, respeto y gloria."</p>
           </header>
 
-          <article class="pes6-system-block">
-            <h4>1) FORMATO GENERAL</h4>
-            <ul>
-              <li>Liga regular con modalidad ida y vuelta.</li>
-              <li>Participación variable según temporada.</li>
-              <li>Duración estimada: 14 días.</li>
-              <li>Sistema de puntos:</li>
-            </ul>
-            <ul class="pes6-system-sublist">
-              <li>Victoria: 3 puntos</li>
-              <li>Empate: 1 punto</li>
-              <li>Derrota: 0 puntos</li>
-            </ul>
-            <p class="pes6-system-quote">"Cada partido cuenta. Cada punto pesa."</p>
-          </article>
+          <div class="system-accordion" data-accordion-group="sistema-liga">
+            <article class="pes6-system-block system-accordion-item" data-default-open="true">
+              <h4>
+                <button class="system-accordion-trigger" type="button" aria-expanded="true" aria-controls="sistema-liga-panel-1" id="sistema-liga-trigger-1">
+                  <span>1) FORMATO GENERAL</span>
+                  <span class="system-accordion-chevron" aria-hidden="true">▾</span>
+                </button>
+              </h4>
+              <div class="system-accordion-panel" id="sistema-liga-panel-1" role="region" aria-labelledby="sistema-liga-trigger-1">
+                <ul>
+                  <li>Liga regular con modalidad ida y vuelta.</li>
+                  <li>Participación variable según temporada.</li>
+                  <li>Duración estimada: 14 días.</li>
+                  <li>Sistema de puntos:</li>
+                </ul>
+                <ul class="pes6-system-sublist">
+                  <li>Victoria: 3 puntos</li>
+                  <li>Empate: 1 punto</li>
+                  <li>Derrota: 0 puntos</li>
+                </ul>
+                <p class="pes6-system-quote">"Cada partido cuenta. Cada punto pesa."</p>
+              </div>
+            </article>
 
-          <article class="pes6-system-block">
-            <h4>2) CRITERIOS DE DESEMPATE</h4>
-            <p>En caso de igualdad de puntos:</p>
-            <ol>
-              <li>Diferencia de gol</li>
-              <li>Mayor cantidad de goles a favor</li>
-              <li>Si la igualdad es en el primer puesto → partido desempate (tiempo extra y penales)</li>
-            </ol>
-            <p class="pes6-system-quote">"El campeonato se define en la cancha."</p>
-          </article>
+            <article class="pes6-system-block system-accordion-item" data-default-open="false">
+              <h4>
+                <button class="system-accordion-trigger" type="button" aria-expanded="false" aria-controls="sistema-liga-panel-2" id="sistema-liga-trigger-2">
+                  <span>2) CRITERIOS DE DESEMPATE</span>
+                  <span class="system-accordion-chevron" aria-hidden="true">▾</span>
+                </button>
+              </h4>
+              <div class="system-accordion-panel" id="sistema-liga-panel-2" role="region" aria-labelledby="sistema-liga-trigger-2" hidden>
+                <p>En caso de igualdad de puntos:</p>
+                <ol>
+                  <li>Diferencia de gol</li>
+                  <li>Mayor cantidad de goles a favor</li>
+                  <li>Si la igualdad es en el primer puesto → partido desempate (tiempo extra y penales)</li>
+                </ol>
+                <p class="pes6-system-quote">"El campeonato se define en la cancha."</p>
+              </div>
+            </article>
 
-          <article class="pes6-system-block">
-            <h4>3) CAMPEÓN</h4>
-            <ul>
-              <li>El 1° lugar se consagra Campeón de División.</li>
-              <li>Clasifica automáticamente a la Super Final.</li>
-              <li>En caso de empate en puntos por el campeonato:</li>
-            </ul>
-            <ul class="pes6-system-sublist">
-              <li>Partido único</li>
-              <li>Tiempo extra</li>
-              <li>Penales</li>
-            </ul>
-          </article>
+            <article class="pes6-system-block system-accordion-item" data-default-open="false">
+              <h4>
+                <button class="system-accordion-trigger" type="button" aria-expanded="false" aria-controls="sistema-liga-panel-3" id="sistema-liga-trigger-3">
+                  <span>3) CAMPEÓN</span>
+                  <span class="system-accordion-chevron" aria-hidden="true">▾</span>
+                </button>
+              </h4>
+              <div class="system-accordion-panel" id="sistema-liga-panel-3" role="region" aria-labelledby="sistema-liga-trigger-3" hidden>
+                <ul>
+                  <li>El 1° lugar se consagra Campeón de División.</li>
+                  <li>Clasifica automáticamente a la Super Final.</li>
+                  <li>En caso de empate en puntos por el campeonato:</li>
+                </ul>
+                <ul class="pes6-system-sublist">
+                  <li>Partido único</li>
+                  <li>Tiempo extra</li>
+                  <li>Penales</li>
+                </ul>
+              </div>
+            </article>
 
-          <article class="pes6-system-block">
-            <h4>4) CLASIFICACIÓN A COMPETENCIAS</h4>
-            <ul>
-              <li>Los mejores ubicados clasifican a la Copa Interdivisional.</li>
-              <li>Los cupos pueden variar según la cantidad de participantes.</li>
-              <li>La distribución se informa al inicio de cada temporada.</li>
-            </ul>
-            <p class="pes6-system-quote">"La regularidad premia. La constancia clasifica."</p>
-          </article>
+            <article class="pes6-system-block system-accordion-item" data-default-open="false">
+              <h4>
+                <button class="system-accordion-trigger" type="button" aria-expanded="false" aria-controls="sistema-liga-panel-4" id="sistema-liga-trigger-4">
+                  <span>4) CLASIFICACIÓN A COMPETENCIAS</span>
+                  <span class="system-accordion-chevron" aria-hidden="true">▾</span>
+                </button>
+              </h4>
+              <div class="system-accordion-panel" id="sistema-liga-panel-4" role="region" aria-labelledby="sistema-liga-trigger-4" hidden>
+                <ul>
+                  <li>Los mejores ubicados clasifican a la Copa Interdivisional.</li>
+                  <li>Los cupos pueden variar según la cantidad de participantes.</li>
+                  <li>La distribución se informa al inicio de cada temporada.</li>
+                </ul>
+                <p class="pes6-system-quote">"La regularidad premia. La constancia clasifica."</p>
+              </div>
+            </article>
 
-          <article class="pes6-system-block">
-            <h4>5) ASCENSOS</h4>
-            <ul>
-              <li>Se garantizan 3 ascensos deportivos directos por temporada.</li>
-              <li>Podrán otorgarse ascensos adicionales en caso de bajas o reestructuración.</li>
-              <li>La organización puede reorganizar divisiones para mantener equilibrio competitivo.</li>
-            </ul>
-            <p class="pes6-system-quote">"El ascenso se gana."</p>
-          </article>
+            <article class="pes6-system-block system-accordion-item" data-default-open="false">
+              <h4>
+                <button class="system-accordion-trigger" type="button" aria-expanded="false" aria-controls="sistema-liga-panel-5" id="sistema-liga-trigger-5">
+                  <span>5) ASCENSOS</span>
+                  <span class="system-accordion-chevron" aria-hidden="true">▾</span>
+                </button>
+              </h4>
+              <div class="system-accordion-panel" id="sistema-liga-panel-5" role="region" aria-labelledby="sistema-liga-trigger-5" hidden>
+                <ul>
+                  <li>Se garantizan 3 ascensos deportivos directos por temporada.</li>
+                  <li>Podrán otorgarse ascensos adicionales en caso de bajas o reestructuración.</li>
+                  <li>La organización puede reorganizar divisiones para mantener equilibrio competitivo.</li>
+                </ul>
+                <p class="pes6-system-quote">"El ascenso se gana."</p>
+              </div>
+            </article>
 
-          <article class="pes6-system-block">
-            <h4>6) DESCENSOS</h4>
-            <ul>
-              <li>Los últimos ubicados descienden de categoría.</li>
-              <li>La cantidad puede variar según la composición de la temporada siguiente.</li>
-            </ul>
-            <p class="pes6-system-quote">"La permanencia también se defiende."</p>
-          </article>
+            <article class="pes6-system-block system-accordion-item" data-default-open="false">
+              <h4>
+                <button class="system-accordion-trigger" type="button" aria-expanded="false" aria-controls="sistema-liga-panel-6" id="sistema-liga-trigger-6">
+                  <span>6) DESCENSOS</span>
+                  <span class="system-accordion-chevron" aria-hidden="true">▾</span>
+                </button>
+              </h4>
+              <div class="system-accordion-panel" id="sistema-liga-panel-6" role="region" aria-labelledby="sistema-liga-trigger-6" hidden>
+                <ul>
+                  <li>Los últimos ubicados descienden de categoría.</li>
+                  <li>La cantidad puede variar según la composición de la temporada siguiente.</li>
+                </ul>
+                <p class="pes6-system-quote">"La permanencia también se defiende."</p>
+              </div>
+            </article>
 
-          <article class="pes6-system-block">
-            <h4>7) REGLAS DE PARTIDO</h4>
-            <ul>
-              <li>Duración: 10 minutos.</li>
-              <li>Sin tiempo extra ni penales en fase de liga.</li>
-              <li>Clima siempre despejado.</li>
-              <li>El primero en el fixture hostea.</li>
-              <li>Vale todo (CUT y CUTBACK permitidos).</li>
-              <li>En caso de cierre inesperado: Se reanuda en condición predefinida y se juega solo el tiempo restante.</li>
-            </ul>
-            <p class="pes6-system-quote">"Se juega fuerte. Se juega limpio."</p>
-          </article>
+            <article class="pes6-system-block system-accordion-item" data-default-open="false">
+              <h4>
+                <button class="system-accordion-trigger" type="button" aria-expanded="false" aria-controls="sistema-liga-panel-7" id="sistema-liga-trigger-7">
+                  <span>7) REGLAS DE PARTIDO</span>
+                  <span class="system-accordion-chevron" aria-hidden="true">▾</span>
+                </button>
+              </h4>
+              <div class="system-accordion-panel" id="sistema-liga-panel-7" role="region" aria-labelledby="sistema-liga-trigger-7" hidden>
+                <ul>
+                  <li>Duración: 10 minutos.</li>
+                  <li>Sin tiempo extra ni penales en fase de liga.</li>
+                  <li>Clima siempre despejado.</li>
+                  <li>El primero en el fixture hostea.</li>
+                  <li>Vale todo (CUT y CUTBACK permitidos).</li>
+                  <li>En caso de cierre inesperado: Se reanuda en condición predefinida y se juega solo el tiempo restante.</li>
+                </ul>
+                <p class="pes6-system-quote">"Se juega fuerte. Se juega limpio."</p>
+              </div>
+            </article>
 
-          <article class="pes6-system-block">
-            <h4>8) REGISTRO DE RESULTADOS</h4>
-            <ul>
-              <li>El local envía captura del resultado.</li>
-              <li>Los resultados oficiales se cargan en la plataforma correspondiente.</li>
-            </ul>
-            <p class="pes6-system-quote">"Transparencia ante todo."</p>
-          </article>
+            <article class="pes6-system-block system-accordion-item" data-default-open="false">
+              <h4>
+                <button class="system-accordion-trigger" type="button" aria-expanded="false" aria-controls="sistema-liga-panel-8" id="sistema-liga-trigger-8">
+                  <span>8) REGISTRO DE RESULTADOS</span>
+                  <span class="system-accordion-chevron" aria-hidden="true">▾</span>
+                </button>
+              </h4>
+              <div class="system-accordion-panel" id="sistema-liga-panel-8" role="region" aria-labelledby="sistema-liga-trigger-8" hidden>
+                <ul>
+                  <li>El local envía captura del resultado.</li>
+                  <li>Los resultados oficiales se cargan en la plataforma correspondiente.</li>
+                </ul>
+                <p class="pes6-system-quote">"Transparencia ante todo."</p>
+              </div>
+            </article>
 
-          <article class="pes6-system-block">
-            <h4>9) INACTIVIDAD Y COMPROMISO</h4>
-            <ul>
-              <li>Jugadores que no completen la temporada podrán considerarse inactivos.</li>
-              <li>La organización podrá anular partidos para evitar ventajas o desventajas.</li>
-              <li>Se exige compromiso y respeto competitivo.</li>
-            </ul>
-            <p class="pes6-system-quote">"Sudaka League no es solo una liga. Es competencia real."</p>
-          </article>
+            <article class="pes6-system-block system-accordion-item" data-default-open="false">
+              <h4>
+                <button class="system-accordion-trigger" type="button" aria-expanded="false" aria-controls="sistema-liga-panel-9" id="sistema-liga-trigger-9">
+                  <span>9) INACTIVIDAD Y COMPROMISO</span>
+                  <span class="system-accordion-chevron" aria-hidden="true">▾</span>
+                </button>
+              </h4>
+              <div class="system-accordion-panel" id="sistema-liga-panel-9" role="region" aria-labelledby="sistema-liga-trigger-9" hidden>
+                <ul>
+                  <li>Jugadores que no completen la temporada podrán considerarse inactivos.</li>
+                  <li>La organización podrá anular partidos para evitar ventajas o desventajas.</li>
+                  <li>Se exige compromiso y respeto competitivo.</li>
+                </ul>
+                <p class="pes6-system-quote">"Sudaka League no es solo una liga. Es competencia real."</p>
+              </div>
+            </article>
+          </div>
         </section>
 
         <section class="tab-panel" role="tabpanel" id="sistema-tab-sfii" aria-labelledby="sistema-tab-btn-sfii" hidden>
           <article class="system-card">
             <h3>SECCIÓN: CARACTERÍSTICAS</h3>
             <ul id="kofSystemPanelList"></ul>
+          </article>
+        </section>
+      </div>
+    </section>
+
+    <section id="copas-panel" class="league-modal sl-card system-modal" role="dialog" aria-modal="true" aria-labelledby="copas-panel-title" hidden>
+      <button class="close-btn-fixed" type="button" aria-label="Cerrar panel">×</button>
+      <h2 id="copas-panel-title">SISTEMA DE COPAS</h2>
+
+      <div class="tab-bar system-tab-bar" role="tablist" aria-label="Copas por liga">
+        <button class="tab-btn sl-tab system-tab-btn is-active" type="button" role="tab" aria-selected="true" aria-controls="copas-tab-pes6" id="copas-tab-btn-pes6" data-tab="copas-tab-pes6">PES 6 – Infinity Patch</button>
+        <button class="tab-btn sl-tab system-tab-btn" type="button" role="tab" aria-selected="false" aria-controls="copas-tab-kof" id="copas-tab-btn-kof" data-tab="copas-tab-kof">KOF</button>
+      </div>
+
+      <div class="tab-content">
+        <section class="tab-panel is-active" role="tabpanel" id="copas-tab-pes6" aria-labelledby="copas-tab-btn-pes6">
+          <div class="system-accordion" data-accordion-group="sistema-copas-pes6">
+            <article class="pes6-system-block system-accordion-item" data-default-open="true">
+              <h4>
+                <button class="system-accordion-trigger" type="button" aria-expanded="true" aria-controls="copas-pes6-panel-1" id="copas-pes6-trigger-1">
+                  <span>🏅 Copa Interdivisional</span>
+                  <span class="system-accordion-chevron" aria-hidden="true">▾</span>
+                </button>
+              </h4>
+              <div class="system-accordion-panel" id="copas-pes6-panel-1" role="region" aria-labelledby="copas-pes6-trigger-1">
+                <p class="pes6-system-subtitle">Acá no alcanza con ser regular. En copas se sobrevive, se elimina… y se consagra.</p>
+                <p><strong>FORMATO</strong></p>
+                <ul>
+                  <li>Clasifican a Playoffs según la división y la cantidad de participantes de la temporada vigente.</li>
+                  <li>Los cupos se informan al inicio de cada temporada.</li>
+                  <li>Referencia habitual de cupos (puede variar):</li>
+                </ul>
+                <ul class="pes6-system-sublist">
+                  <li>Primera: del 2° al 9°</li>
+                  <li>Segunda: del 2° al 5°</li>
+                  <li>Tercera: del 2° al 4°</li>
+                </ul>
+
+                <p><strong>ACCESOS DIRECTOS</strong></p>
+                <ul>
+                  <li>El campeón de 2ª división clasifica directo a la final.</li>
+                  <li>Enfrenta al Ganador de los Playoffs.</li>
+                </ul>
+
+                <p><strong>FORMATO DE PARTIDO</strong></p>
+                <ul>
+                  <li>Playoffs: partido único, sin tiempo extra, penales directos.</li>
+                  <li>Excepción: Final de Playoffs y Final de Copa Interdivisional con Tiempo Extra y penales si persiste empate.</li>
+                </ul>
+
+                <p><strong>REGLAS DE LA COPA</strong></p>
+                <ul>
+                  <li>Respetar localía de Gesliga (quien figura primero hostea).</li>
+                  <li>Vale todo (CUT, CUTBACK permitidos).</li>
+                  <li>Prohibido desempate / evitar rivales.</li>
+                  <li>Cierre inesperado: recrear con condición predefinida y jugar solo el tiempo restante.</li>
+                  <li>Ajustes del local: cambios, pausas y tiempo de espera (condición / lesión).</li>
+                  <li>Ajustes fijos: partidos de 10 minutos.</li>
+                  <li>Clima siempre despejado (sin lluvia ni nieve para evitar lag).</li>
+                  <li>Registro: el local envía captura del resultado final.</li>
+                </ul>
+
+                <p><strong>AVISOS</strong></p>
+                <ul>
+                  <li>Avisar si no se va a poder completar.</li>
+                  <li>Si no se completa en tiempo, avanza el rival.</li>
+                </ul>
+                <p class="pes6-system-quote">En copa no hay margen: se juega o se queda afuera.</p>
+              </div>
+            </article>
+
+            <article class="pes6-system-block system-accordion-item" data-default-open="false">
+              <h4>
+                <button class="system-accordion-trigger" type="button" aria-expanded="false" aria-controls="copas-pes6-panel-2" id="copas-pes6-trigger-2">
+                  <span>👑 Súper Final</span>
+                  <span class="system-accordion-chevron" aria-hidden="true">▾</span>
+                </button>
+              </h4>
+              <div class="system-accordion-panel" id="copas-pes6-panel-2" role="region" aria-labelledby="copas-pes6-trigger-2" hidden>
+                <p>Próximamente / por definir. Se informará el formato oficial al inicio de temporada.</p>
+              </div>
+            </article>
+
+            <article class="pes6-system-block system-accordion-item" data-default-open="false">
+              <h4>
+                <button class="system-accordion-trigger" type="button" aria-expanded="false" aria-controls="copas-pes6-panel-3" id="copas-pes6-trigger-3">
+                  <span>🌍 Final Interliga</span>
+                  <span class="system-accordion-chevron" aria-hidden="true">▾</span>
+                </button>
+              </h4>
+              <div class="system-accordion-panel" id="copas-pes6-panel-3" role="region" aria-labelledby="copas-pes6-trigger-3" hidden>
+                <p>Próximamente / por definir. Se informará el formato oficial al inicio de temporada.</p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="tab-panel" role="tabpanel" id="copas-tab-kof" aria-labelledby="copas-tab-btn-kof" hidden>
+          <article class="system-card">
+            <h3>KOF</h3>
+            <p>Próximamente.</p>
           </article>
         </section>
       </div>

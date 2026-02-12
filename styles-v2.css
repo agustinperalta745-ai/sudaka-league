@@ -2362,6 +2362,60 @@ summary:focus-visible,
   margin-bottom: 1.15rem;
 }
 
+
+.system-accordion-item h4 {
+  margin: 0;
+}
+
+.system-accordion-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: rgba(153, 224, 255, 0.98);
+  font: inherit;
+  font-family: var(--title-font);
+  font-size: 1rem;
+  letter-spacing: 0.03em;
+  text-align: left;
+  cursor: pointer;
+  text-shadow: 0 0 10px rgba(87, 197, 255, 0.26);
+}
+
+.system-accordion-trigger:focus-visible {
+  outline: 2px solid rgba(126, 221, 255, 0.75);
+  outline-offset: 4px;
+  border-radius: 6px;
+}
+
+.system-accordion-chevron {
+  display: inline-flex;
+  transition: transform 0.25s ease;
+}
+
+.system-accordion-trigger[aria-expanded="true"] .system-accordion-chevron {
+  transform: rotate(180deg);
+}
+
+.system-accordion-panel {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.25s ease;
+}
+
+.system-accordion-panel.is-open {
+  opacity: 1;
+}
+
+.system-accordion-panel > :first-child {
+  margin-top: 0.5rem;
+}
+
 .pes6-system-header h3 {
   margin: 0;
   font-size: clamp(1.1rem, 1.6vw, 1.35rem);
