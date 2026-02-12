@@ -788,37 +788,37 @@ summary:focus-visible,
   cursor: pointer;
 }
 
-.interdivisional-card-bg {
+#interdivisional-season-card {
   position: relative;
   overflow: hidden;
 }
 
-.interdivisional-card-bg::before {
+#interdivisional-season-card::before {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url("/assets/interdivisional-bg.png");
+  background-image: url("./assets/interdivisional-bg.png");
   background-size: cover;
   background-position: center;
   filter: blur(8px);
   opacity: 0.55;
-  transform: scale(1.1);
+  transform: scale(1.08);
   z-index: 0;
 }
 
-.interdivisional-card-bg::after {
+#interdivisional-season-card::after {
   content: "";
   position: absolute;
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(5, 10, 20, 0.45) 0%,
-    rgba(5, 10, 20, 0.65) 100%
+    rgba(5,10,20,0.45) 0%,
+    rgba(5,10,20,0.65) 100%
   );
   z-index: 1;
 }
 
-.interdivisional-card-bg > * {
+#interdivisional-season-card > * {
   position: relative;
   z-index: 2;
 }
