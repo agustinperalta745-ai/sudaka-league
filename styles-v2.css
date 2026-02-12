@@ -2019,6 +2019,8 @@ summary:focus-visible,
   border-bottom: 1px solid rgba(0, 180, 255, 0.16);
   text-align: center;
   white-space: nowrap;
+  vertical-align: middle;
+  min-height: 58px;
 }
 
 .t24-table th {
@@ -2034,16 +2036,29 @@ summary:focus-visible,
 }
 
 .t24-logo-cell {
-  width: 52px;
+  width: 68px;
 }
 
 .t24-logo {
-  width: 28px;
-  height: 28px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   object-fit: cover;
   border: 1px solid rgba(0, 180, 255, 0.35);
   background: rgba(4, 8, 14, 0.85);
+  display: block;
+  margin: 0 auto;
+  filter: drop-shadow(0 0 6px rgba(0, 180, 255, 0.42));
+  transition: transform 180ms ease, filter 180ms ease;
+}
+
+.t24-table tbody tr {
+  min-height: 58px;
+}
+
+.t24-table tbody tr:hover .t24-logo {
+  transform: scale(1.08);
+  filter: drop-shadow(0 0 8px rgba(0, 190, 255, 0.5));
 }
 
 .team-badge {
@@ -2074,4 +2089,21 @@ summary:focus-visible,
 
 .t24-status.is-error {
   color: #ff9cae;
+}
+
+@media (max-width: 768px) {
+  .t24-logo-cell {
+    width: 58px;
+  }
+
+  .t24-logo {
+    width: 34px;
+    height: 34px;
+  }
+
+  .t24-table th,
+  .t24-table td,
+  .t24-table tbody tr {
+    min-height: 52px;
+  }
 }
