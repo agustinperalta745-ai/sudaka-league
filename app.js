@@ -1884,6 +1884,32 @@ function getVisiblePhaseKeysForSeason(season) {
     .filter((phaseKey) => (season.phases[phaseKey] || []).length > 0);
 }
 
+function getFinalCopaInterdivisionalMatch(season) {
+  const finalPlayoffsMatch = season?.phases?.final_playoffs?.[0] || null;
+  const directQualified = {
+    club: "Universitario",
+    player: "H09",
+    division: "2da Div",
+    shield: "./assets/escudos/universitario.png"
+  };
+
+  const rival = finalPlayoffsMatch?.winner === "home"
+    ? formatSide(finalPlayoffsMatch.home, "Ganador Final Play-offs")
+    : finalPlayoffsMatch?.winner === "away"
+      ? formatSide(finalPlayoffsMatch.away, "Ganador Final Play-offs")
+      : createPlaceholderSide("Ganador Final Play-offs");
+
+  const sourceMatch = season?.phases?.final_copa_interdivisional?.[0] || null;
+  return normalizeMatchData({
+    label: sourceMatch?.label || "Final Copa Interdivisional",
+    home: directQualified,
+    away: rival,
+    winner: null,
+    result: null,
+    pens: null
+  }, "active");
+}
+
 function createCupCrossingTeamNode(teamData, context = {}) {
   const { editable = false, side = "home", matchData = null } = context;
   const team = document.createElement(editable ? "button" : "div");
@@ -2078,11 +2104,15 @@ function updateCupCardHeader() {
   if (cupCurrentPhase) cupCurrentPhase.textContent = `Fase: ${getPhaseLabel(activePhase)}`;
 
   if (cupStatus) {
-    const isCompleted = currentSeason.status === "completed";
-    cupStatus.textContent = isCompleted ? "FINALIZADA" : "ACTIVA";
-    cupStatus.classList.toggle("season-badge-active", !isCompleted);
-    cupStatus.classList.toggle("season-badge-ended", isCompleted);
+    cupStatus.textContent = "COPA";
   }
+}
+
+function setCupActivePhase(phaseIndex) {
+  if (cupActivePhase === phaseIndex) return;
+  cupActivePhase = phaseIndex;
+  renderCupActiveTab();
+  updateCupCardHeader();
 }
 
 function createCupPhaseTabs() {
@@ -2099,10 +2129,7 @@ function createCupPhaseTabs() {
     button.classList.toggle("is-active", cupActivePhase === phase.index);
     button.setAttribute("aria-selected", String(cupActivePhase === phase.index));
     button.addEventListener("click", () => {
-      if (cupActivePhase === phase.index) return;
-      cupActivePhase = phase.index;
-      renderCupActiveTab();
-      updateCupCardHeader();
+      setCupActivePhase(phase.index);
     });
 
     tabs.appendChild(button);
@@ -2124,6 +2151,18 @@ function renderCupActiveTab() {
   const phaseToRender = selectedPhase || visiblePhases[visiblePhases.length - 1] || INTERDIVISIONAL_PHASES[0].key;
 
   cupCrossingsList.appendChild(createCupPhaseTabs());
+
+  if (phaseToRender === "final_copa_interdivisional") {
+    const section = createCupPhaseSection(phaseToRender, [getFinalCopaInterdivisionalMatch(currentSeason)], {
+      editable: false,
+      season: currentSeason
+    });
+
+    if (section) {
+      cupCrossingsList.appendChild(section);
+    }
+    return;
+  }
 
   const matches = currentSeason.phases[phaseToRender] || [];
   const section = createCupPhaseSection(phaseToRender, matches, {
