@@ -1,4 +1,20 @@
 window.INTERDIVISIONAL_ACTIVE_SEASON = {
+  // === Formato estándar por partido (copiar/pegar) ===
+  // No jugado:
+  // winner: null,
+  // result: null,
+  // pens: null
+  //
+  // Jugado sin penales:
+  // winner: "home", // o "away"
+  // result: { home: 2, away: 1 },
+  // pens: null
+  //
+  // Jugado por penales:
+  // winner: "away", // quien avanzó
+  // result: { home: 0, away: 0 },
+  // pens: { home: 1, away: 3 }
+
   // Cambiá acá la temporada activa
   season: "T24",
 
@@ -8,7 +24,9 @@ window.INTERDIVISIONAL_ACTIVE_SEASON = {
       label: "Octavos Play-offs 1",
       home: { club: "Lanús", player: "Edug98", division: "Primera" },
       away: { club: "Argentinos", player: "Facualanis", division: "Segunda" },
-      winner: null
+      winner: null,
+      result: null,
+      pens: null
     },
     {
       label: "Octavos Play-offs 2",
@@ -23,39 +41,48 @@ window.INTERDIVISIONAL_ACTIVE_SEASON = {
       home: { club: "Santos FC", player: "LombardoCABJ", division: "Primera" },
       away: { club: "Sao Paulo", player: "SoyLefo", division: "Segunda" },
       winner: "away",
-      result: { home: 1, away: 2 }
+      result: { home: 1, away: 2 },
+      pens: null
     },
     {
       label: "Octavos Play-offs 4",
       home: { club: "Estudiantes", player: "Exeeneta", division: "Primera" },
       away: { club: "Internacional SC", player: "Joser17", division: "Segunda" },
-      winner: null
+      winner: null,
+      result: null,
+      pens: null
     },
     {
       label: "Octavos Play-offs 5",
       home: { club: "Peñarol", player: "TunTun", division: "Primera" },
       away: { club: "Huracán", player: "Leom", division: "Tercera" },
-      winner: null
+      winner: null,
+      result: null,
+      pens: null
     },
     {
       label: "Octavos Play-offs 6",
       home: { club: "Nacional", player: "Aacuis09", division: "Primera" },
       away: { club: "Peñarol", player: "Cacherinhooo", division: "Tercera" },
       winner: "away",
-      result: { home: 0, away: 2 }
+      result: { home: 0, away: 2 },
+      pens: null
     },
     {
       label: "Octavos Play-offs 7",
       home: { club: "Colo Colo", player: "Broko", division: "Primera" },
       away: { club: "Internacional SC", player: "Gab0211", division: "Tercera" },
-      winner: null
+      winner: null,
+      result: null,
+      pens: null
     },
     {
       label: "Octavos Play-offs 8",
       home: { club: "Argentinos JRS", player: "Ivanarocela", division: "Primera" },
       away: { club: "Colo Colo", player: "Joelignacho", division: "Segunda" },
       winner: "away",
-      result: { home: 1, away: 2 }
+      result: { home: 1, away: 2 },
+      pens: null
     }
   ],
 
@@ -68,7 +95,10 @@ window.INTERDIVISIONAL_ACTIVE_SEASON = {
         player: "H09",
         division: "1ra Div",
         shield: "universitario.png"
-      }
+      },
+      winner: null,
+      result: null,
+      pens: null
     }
   ],
 
