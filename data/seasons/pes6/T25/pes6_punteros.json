@@ -1,0 +1,32 @@
+{
+  "updatedAt": null,
+  "leaders": [
+    {
+      "divisionKey": "div1",
+      "divisionLabel": "División 1",
+      "usuario": "—",
+      "equipo": "—",
+      "escudoFile": "",
+      "pj": 0,
+      "pg": 0
+    },
+    {
+      "divisionKey": "div2",
+      "divisionLabel": "División 2",
+      "usuario": "—",
+      "equipo": "—",
+      "escudoFile": "",
+      "pj": 0,
+      "pg": 0
+    },
+    {
+      "divisionKey": "div3",
+      "divisionLabel": "División 3",
+      "usuario": "—",
+      "equipo": "—",
+      "escudoFile": "",
+      "pj": 0,
+      "pg": 0
+    }
+  ]
+}
