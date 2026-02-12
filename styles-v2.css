@@ -521,9 +521,11 @@ summary:focus-visible,
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  font-size: 11px;
+  padding: 2px 8px;
   border-radius: 999px;
-  border: 1px solid var(--line-strong);
-  font-size: 0.72rem;
+  border: 1px solid rgba(255,255,255,.25);
+  background: rgba(255,255,255,.08);
   line-height: 1;
   white-space: nowrap;
 }
@@ -559,13 +561,13 @@ summary:focus-visible,
   background: var(--bg-card-strong);
 }
 
-.pes6-leaders {
+.pes6-leaders-section {
   margin-top: 1rem;
   padding-top: 0.9rem;
   border-top: 1px solid var(--line);
 }
 
-.pes6-leaders-title {
+.pes6-leaders-section h3 {
   margin: 0 0 0.7rem;
   font-size: 0.9rem;
   font-family: var(--title-font);
@@ -573,22 +575,51 @@ summary:focus-visible,
   color: var(--text-main);
 }
 
-.pes6-leaders-list {
+#pes6-leaders {
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
 }
 
-.pes6-leader-item {
+.pes6-leader-card {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.7rem;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 14px;
+  overflow: hidden;
   flex-wrap: wrap;
-  padding: 0.55rem 0.65rem;
   border: 1px solid var(--line);
-  border-radius: 0.75rem;
-  background: var(--bg-card-strong);
+}
+
+.pes6-leader-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: blur(12px);
+  opacity: 0.25;
+  z-index: 0;
+}
+
+[data-division="primera"]::before {
+  background-image: url("assets/pes6-bg-1.png");
+}
+
+[data-division="segunda"]::before {
+  background-image: url("assets/pes6-bg-2.png");
+}
+
+[data-division="tercera"]::before {
+  background-image: url("assets/pes6-bg-3.png");
+}
+
+.pes6-leader-card * {
+  position: relative;
+  z-index: 1;
 }
 
 .pes6-leader-main {
@@ -633,20 +664,7 @@ summary:focus-visible,
   margin-top: 0.28rem;
   display: flex;
   gap: 0.35rem;
-}
-
-.pes6-leader-pill {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 999px;
-  border: 1px solid var(--line-strong);
-  padding: 0.18rem 0.44rem;
-  font-size: 0.66rem;
-  line-height: 1;
-  color: var(--text-main);
-  background: rgba(88, 201, 255, 0.11);
-  white-space: nowrap;
+  flex-wrap: wrap;
 }
 
 .pes6-leader-division {
@@ -2324,3 +2342,10 @@ summary:focus-visible,
     min-height: 56px;
   }
 }
+
+@media (max-width: 640px) {
+  .pes6-leader-division {
+    width: 100%;
+  }
+}
+
