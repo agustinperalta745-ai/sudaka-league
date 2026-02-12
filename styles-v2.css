@@ -2001,12 +2001,14 @@ summary:focus-visible,
 }
 
 .t24-table-scroller {
+  width: 100%;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .t24-table {
   width: 100%;
-  min-width: 780px;
+  min-width: 900px;
   border-collapse: collapse;
   font-size: 0.9rem;
 }
