@@ -16,7 +16,7 @@ window.INTERDIVISIONAL_ACTIVE_SEASON = {
       away: { club: "Cruzeiro", player: "Crislot26", division: "Segunda" },
       winner: "away",
       result: { home: 0, away: 0 }
-    },pens: { home: 1, away: 3 },
+      pens: { home: 1, away: 3 },
     {
       label: "Octavos Play-offs 3",
       home: { club: "Santos FC", player: "LombardoCABJ", division: "Primera" },
