@@ -24,8 +24,8 @@ window.INTERDIVISIONAL_ACTIVE_SEASON = {
       label: "Octavos Play-offs 1",
       home: { club: "Lanús", player: "Edug98", division: "Primera" },
       away: { club: "Argentinos", player: "Facualanis", division: "Segunda" },
-      winner: null,
-      result: null,
+      winner: "home",
+      result: { home: 3, away: 0 },
       pens: null
     },
     {
