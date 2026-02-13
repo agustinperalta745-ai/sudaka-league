@@ -1,7 +1,7 @@
 {
   "source": "gesliga",
   "division": "primera",
-  "fetchedAt": "2026-02-13T21:54:09.595Z",
+  "fetchedAt": "2026-02-13T23:05:25.557Z",
   "rows": [
     {
       "pos": 1,
@@ -44,6 +44,19 @@
     },
     {
       "pos": 4,
+      "equipo": "Joser17 - Brighton",
+      "escudoFile": "joser17.png",
+      "pts": 21,
+      "pj": 14,
+      "pg": 6,
+      "pe": 3,
+      "pp": 5,
+      "gf": 23,
+      "gc": 20,
+      "dg": 3
+    },
+    {
+      "pos": 5,
       "equipo": "Joelignacho - Betis",
       "escudoFile": "joelignacho.png",
       "pts": 21,
@@ -56,7 +69,7 @@
       "dg": -6
     },
     {
-      "pos": 5,
+      "pos": 6,
       "equipo": "Ivancarocela - Roma",
       "escudoFile": "ivancarocela.png",
       "pts": 20,
@@ -69,7 +82,7 @@
       "dg": -5
     },
     {
-      "pos": 6,
+      "pos": 7,
       "equipo": "Facualanis - Crystal Palace",
       "escudoFile": "facualanis.png",
       "pts": 19,
@@ -80,19 +93,6 @@
       "gf": 21,
       "gc": 16,
       "dg": 5
-    },
-    {
-      "pos": 7,
-      "equipo": "Joser17 - Brighton",
-      "escudoFile": "joser17.png",
-      "pts": 18,
-      "pj": 12,
-      "pg": 5,
-      "pe": 3,
-      "pp": 4,
-      "gf": 21,
-      "gc": 17,
-      "dg": 4
     },
     {
       "pos": 8,
@@ -163,14 +163,14 @@
       "pos": 13,
       "equipo": "Patry - Feeyenord",
       "escudoFile": "patry.png",
-      "pts": 6,
-      "pj": 8,
-      "pg": 1,
+      "pts": 9,
+      "pj": 10,
+      "pg": 2,
       "pe": 3,
-      "pp": 4,
-      "gf": 8,
-      "gc": 17,
-      "dg": -9
+      "pp": 5,
+      "gf": 11,
+      "gc": 19,
+      "dg": -8
     },
     {
       "pos": 14,
