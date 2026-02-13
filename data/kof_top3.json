@@ -1,26 +1,26 @@
 {
-  "updatedAt": "2026-02-12T00:00:00Z",
+  "updatedAt": "2026-02-13T05:40:00Z",
   "top3": [
     {
       "pos": 1,
+      "user": "TSC Capibara",
+      "wins": 2,
+      "gloveImage": "Negro.png",
+      "glowColor": "#000000"
+    },
+    {
+      "pos": 2,
       "user": "Rulitox17",
       "wins": 1,
       "gloveImage": "violeta.png",
       "glowColor": "#8A2BE2"
     },
     {
-      "pos": 2,
+      "pos": 3,
       "user": "SoyLefo",
       "wins": 1,
-      "gloveImage": "negro.png",
+      "gloveImage": "naranja.png",
       "glowColor": "#FF6A00"
-    },
-    {
-      "pos": 3,
-      "user": "TSC Capibara",
-      "wins": 0,
-      "gloveImage": "negro.png",
-      "glowColor": "#000000"
     }
   ]
 }
