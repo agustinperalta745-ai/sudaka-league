@@ -72,8 +72,8 @@ window.INTERDIVISIONAL_ACTIVE_SEASON = {
       label: "Octavos Play-offs 7",
       home: { club: "Colo Colo", player: "Broko", division: "Primera" },
       away: { club: "Internacional SC", player: "Gab0211", division: "Tercera" },
-      winner: null,
-      result: null,
+      winner: "home",
+      result: { home: 3, away: 0 },
       pens: null
     },
     {
