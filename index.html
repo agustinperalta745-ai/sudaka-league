@@ -122,6 +122,40 @@
       </div>
     </section>
 
+    <section class="section hud-separator cup-interdivisional-section" aria-labelledby="premier-season-title">
+      <div class="season-card sl-card cup-interdivisional-card neon-box neon-border inter-card-bg">
+        <article id="cup-premier-card" role="button" tabindex="0" aria-expanded="false" aria-controls="cup-premier-panel">
+          <div class="season-card-header">
+            <h3 id="premier-season-title">🏆 COPA PREMIER</h3>
+            <span id="cupPremierStatus" class="season-badge season-badge-active neon-box">ACTIVA</span>
+          </div>
+          <p id="cup-premier-current-season" class="season-title">Temporada T24</p>
+          <p id="cup-premier-current-phase" class="season-note">Fase: Cuartos</p>
+          <p class="season-countdown-label"><span class="season-end" id="cup-premier-remaining">Calculando…</span></p>
+          <p id="cup-premier-toggle-label" class="cup-toggle-label">Ver cruces</p>
+        </article>
+      </div>
+
+      <div id="cup-premier-panel" class="cup-crossings-panel neon-border inter-panel-bg" hidden>
+        <div class="cup-card-tabs" role="tablist" aria-label="Contenido Copa Premier">
+          <button id="cup-premier-tab-active" class="cup-tab-btn sl-tab is-active neon-box" type="button" role="tab" aria-selected="true" aria-controls="cup-premier-tab-panel-active">Activa</button>
+          <button id="cup-premier-tab-history" class="cup-tab-btn sl-tab neon-box" type="button" role="tab" aria-selected="false" aria-controls="cup-premier-tab-panel-history">Historial Copa Premier</button>
+        </div>
+
+        <section id="cup-premier-tab-panel-active" class="cup-tab-panel is-active" role="tabpanel" aria-labelledby="cup-premier-tab-active">
+          <div id="cup-premier-list" class="cup-interdivisional-rounds" aria-live="polite"></div>
+        </section>
+
+        <section id="cup-premier-tab-panel-history" class="cup-tab-panel" role="tabpanel" aria-labelledby="cup-premier-tab-history" hidden>
+          <div class="cup-history-toolbar">
+            <label for="cup-premier-history-season">Temporada</label>
+            <select id="cup-premier-history-season"></select>
+          </div>
+          <div id="cup-premier-history-list" class="cup-interdivisional-rounds" aria-live="polite"></div>
+        </section>
+      </div>
+    </section>
+
     <section id="ligas" class="section hud-separator" aria-labelledby="ligas-title">
       <h2 id="ligas-title">LIGAS</h2>
       <div class="league-grid">
@@ -848,6 +882,7 @@ Más interacción y estadísticas
 
   <script src="data/interdivisional.js?v=20260212-01"></script>
   <script src="data/interdivisional_history.js?v=20260212-01"></script>
+  <script src="data/copa-premier.js?v=20260212-01"></script>
   <script src="app.js?v=20260212-01"></script>
   <script>
     (function () {

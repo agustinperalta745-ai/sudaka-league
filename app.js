@@ -204,12 +204,23 @@ const INTERDIVISIONAL_HISTORY_SOURCE = Array.isArray(window.INTERDIVISIONAL_HIST
   ? window.INTERDIVISIONAL_HISTORY_SEASONS
   : [];
 
+const COPA_PREMIER_ACTIVE_SOURCE = window.COPA_PREMIER_ACTIVE_SEASON || null;
+const COPA_PREMIER_HISTORY_SOURCE = Array.isArray(window.COPA_PREMIER_HISTORY_SEASONS)
+  ? window.COPA_PREMIER_HISTORY_SEASONS
+  : [];
+
 const INTERDIVISIONAL_PHASES = [
   { key: "octavos_playoffs", label: "Octavos Play-offs" },
   { key: "cuartos_playoffs", label: "Cuartos de final Play-offs" },
   { key: "semifinal_playoffs", label: "Semifinal Play-offs" },
   { key: "final_playoffs", label: "Final Play-offs" },
   { key: "final_copa_interdivisional", label: "Final Copa Interdivisional" }
+];
+
+const COPA_PREMIER_PHASES = [
+  { key: "cuartos", label: "🔥 CUARTOS (BO3)" },
+  { key: "semifinales", label: "🥊 SEMIFINALES (BO3)" },
+  { key: "final", label: "👑 FINAL (1 pelea)" }
 ];
 
 const CUP_CROSSING_DIVISION_SHORT = {
@@ -393,6 +404,20 @@ const cupTabHistory = document.getElementById("cup-tab-history");
 const cupTabPanelActive = document.getElementById("cup-tab-panel-active");
 const cupTabPanelHistory = document.getElementById("cup-tab-panel-history");
 const cupHistorySeasonSelect = document.getElementById("cup-history-season");
+const cupPremierCard = document.getElementById("cup-premier-card");
+const cupPremierPanel = document.getElementById("cup-premier-panel");
+const cupPremierList = document.getElementById("cup-premier-list");
+const cupPremierHistoryList = document.getElementById("cup-premier-history-list");
+const cupPremierToggleLabel = document.getElementById("cup-premier-toggle-label");
+const cupPremierCurrentSeason = document.getElementById("cup-premier-current-season");
+const cupPremierCurrentPhase = document.getElementById("cup-premier-current-phase");
+const cupPremierStatus = document.getElementById("cupPremierStatus");
+const cupPremierRemaining = document.getElementById("cup-premier-remaining");
+const cupPremierTabActive = document.getElementById("cup-premier-tab-active");
+const cupPremierTabHistory = document.getElementById("cup-premier-tab-history");
+const cupPremierTabPanelActive = document.getElementById("cup-premier-tab-panel-active");
+const cupPremierTabPanelHistory = document.getElementById("cup-premier-tab-panel-history");
+const cupPremierHistorySeasonSelect = document.getElementById("cup-premier-history-season");
 const sfStatus = document.getElementById("sfStatus");
 const sfSeasonName = document.getElementById("sfSeasonName");
 const pes6SlotsValue = document.getElementById("pes6-slots");
@@ -438,6 +463,9 @@ let openTitlesRankingId = null;
 let interdivisionalState = null;
 let cupPanelTab = "active";
 let cupActivePhase = "1";
+let copaPremierState = null;
+let cupPremierPanelTab = "active";
+let cupPremierActivePhase = "cuartos";
 const MAX_RANKING_TITLES_DETAIL = 6;
 
 const CUP_PHASE_BUTTONS = [
@@ -708,6 +736,12 @@ function updateMainSeasonCountdowns() {
 
 function updateCupRemaining() {
   updateCountdown(CUP_INTERDIVISIONAL_FINAL_TARGET, cupRemaining, {
+    showHoursOnLastDay: true,
+    formatDays: (value) => `${value} días restantes`,
+    formatHours: (value) => `${value} horas restantes`
+  });
+
+  updateCountdown(CUP_INTERDIVISIONAL_FINAL_TARGET, cupPremierRemaining, {
     showHoursOnLastDay: true,
     formatDays: (value) => `${value} días restantes`,
     formatHours: (value) => `${value} horas restantes`
@@ -2712,6 +2746,377 @@ async function initializeInterdivisionalState() {
   renderInterdivisionalCard();
 }
 
+function cloneCopaPremierData(data) {
+  return JSON.parse(JSON.stringify(data));
+}
+
+function normalizeCopaPremierSide(side, fallbackLabel = "Por definir") {
+  if (!side || typeof side !== "object") {
+    return { pos: "-", glove: "", user: fallbackLabel, division: "Primera" };
+  }
+
+  return {
+    pos: side.pos ?? "-",
+    glove: side.glove || "",
+    user: side.user || fallbackLabel,
+    division: side.division || "Primera"
+  };
+}
+
+function normalizeCopaPremierMatch(match, labelFallback) {
+  return {
+    ...match,
+    label: match?.label || labelFallback,
+    home: normalizeCopaPremierSide(match?.home, "Ganador por definir"),
+    away: normalizeCopaPremierSide(match?.away, "Ganador por definir"),
+    ...normalizeMatchData(match || {}, "active")
+  };
+}
+
+function getCopaPremierWinner(match) {
+  const winner = normalizeWinnerValue(match?.winner);
+  if (winner === "home") return match?.home || null;
+  if (winner === "away") return match?.away || null;
+  return null;
+}
+
+function buildCopaPremierFromActiveSource(source) {
+  const base = {
+    season: source?.season || "T24",
+    status: source?.status || "active",
+    champion: source?.champion || null,
+    currentPhase: source?.currentPhase || "cuartos",
+    phases: {
+      cuartos: [],
+      semifinales: [],
+      final: []
+    }
+  };
+
+  const cuartos = Array.isArray(source?.phases?.cuartos) ? source.phases.cuartos : [];
+  base.phases.cuartos = cuartos.map((m, i) => normalizeCopaPremierMatch(m, `Cuartos ${i + 1}`));
+
+  const sfSource = Array.isArray(source?.phases?.semifinales) ? source.phases.semifinales : [];
+  const qfWinners = base.phases.cuartos.map(getCopaPremierWinner);
+
+  base.phases.semifinales = [
+    normalizeCopaPremierMatch({
+      ...sfSource[0],
+      label: sfSource[0]?.label || "Semifinal 1 (Ganador QF1 vs Ganador QF4)",
+      home: normalizeCopaPremierSide(sfSource[0]?.home || qfWinners[0], "Ganador QF1"),
+      away: normalizeCopaPremierSide(sfSource[0]?.away || qfWinners[3], "Ganador QF4")
+    }, "Semifinal 1"),
+    normalizeCopaPremierMatch({
+      ...sfSource[1],
+      label: sfSource[1]?.label || "Semifinal 2 (Ganador QF2 vs Ganador QF3)",
+      home: normalizeCopaPremierSide(sfSource[1]?.home || qfWinners[1], "Ganador QF2"),
+      away: normalizeCopaPremierSide(sfSource[1]?.away || qfWinners[2], "Ganador QF3")
+    }, "Semifinal 2")
+  ];
+
+  const finalSource = Array.isArray(source?.phases?.final) ? source.phases.final : [];
+  const sfWinners = base.phases.semifinales.map(getCopaPremierWinner);
+  base.phases.final = [
+    normalizeCopaPremierMatch({
+      ...finalSource[0],
+      label: finalSource[0]?.label || "Final (Ganador SF1 vs Ganador SF2)",
+      home: normalizeCopaPremierSide(finalSource[0]?.home || sfWinners[0], "Ganador SF1"),
+      away: normalizeCopaPremierSide(finalSource[0]?.away || sfWinners[1], "Ganador SF2"),
+      banSystem: finalSource[0]?.banSystem || "Sistema de baneos (informativo)"
+    }, "Final")
+  ];
+
+  return base;
+}
+
+function buildCopaPremierStateFromDataFiles() {
+  const activeSeason = buildCopaPremierFromActiveSource(COPA_PREMIER_ACTIVE_SOURCE || {});
+  const historySeasons = COPA_PREMIER_HISTORY_SOURCE.map((season) => cloneCopaPremierData(season));
+
+  return {
+    seasons: [...historySeasons, activeSeason].map((season) => ({
+      ...season,
+      phases: {
+        cuartos: Array.isArray(season?.phases?.cuartos) ? season.phases.cuartos.map((m, i) => normalizeCopaPremierMatch(m, `Cuartos ${i + 1}`)) : [],
+        semifinales: Array.isArray(season?.phases?.semifinales) ? season.phases.semifinales.map((m, i) => normalizeCopaPremierMatch(m, `Semifinal ${i + 1}`)) : [],
+        final: Array.isArray(season?.phases?.final) ? season.phases.final.map((m, i) => normalizeCopaPremierMatch(m, `Final ${i + 1}`)) : []
+      }
+    }))
+  };
+}
+
+function getCurrentCopaPremierSeason() {
+  if (!copaPremierState?.seasons?.length) return null;
+  return copaPremierState.seasons.find((season) => season.status === "active")
+    || copaPremierState.seasons[copaPremierState.seasons.length - 1];
+}
+
+function getCopaPremierGlovePath(glove = "") {
+  if (!glove) return "";
+  return getKofGloveImagePath(glove.startsWith("assets/") ? glove : `assets/${glove}`);
+}
+
+function createCopaPremierTeamNode(teamData, side, matchData) {
+  const team = document.createElement("div");
+  team.className = "cup-crossing-team";
+
+  const winner = normalizeWinnerValue(matchData?.winner);
+  if (matchData?.played && winner) {
+    const isWinner = (side === "home" && winner === "home") || (side === "away" && winner === "away");
+    team.classList.toggle("is-winner", isWinner);
+    team.classList.toggle("is-loser", !isWinner);
+    team.classList.toggle("cup-crossing--winner", isWinner);
+  }
+
+  const shield = document.createElement("img");
+  shield.className = "cup-crossing-shield";
+  shield.src = getCopaPremierGlovePath(teamData.glove);
+  shield.alt = `Guante ${teamData.user}`;
+  shield.loading = "lazy";
+  shield.decoding = "async";
+  shield.addEventListener("error", () => { shield.style.display = "none"; });
+  team.appendChild(shield);
+
+  const content = document.createElement("div");
+  content.className = "cup-crossing-content";
+
+  const player = document.createElement("p");
+  player.className = "cup-crossing-player";
+  player.textContent = `(${teamData.pos}) ${teamData.user}`;
+
+  const division = document.createElement("span");
+  division.className = "cup-crossing-division";
+  division.textContent = teamData.division;
+
+  content.append(player, division);
+  team.appendChild(content);
+
+  if (matchData?.played && hasMatchResult(matchData)) {
+    const score = document.createElement("div");
+    score.className = "cup-crossing-score";
+    score.textContent = side === "home" ? String(matchData.result.home) : String(matchData.result.away);
+    const isWinner = (side === "home" && winner === "home") || (side === "away" && winner === "away");
+    score.classList.toggle("is-winner", isWinner);
+
+    if (hasMatchPens(matchData)) {
+      const pen = document.createElement("span");
+      pen.className = "mini-badge";
+      const pens = side === "home" ? matchData.pens.home : matchData.pens.away;
+      pen.textContent = `Pen ${pens}`;
+      score.appendChild(document.createElement("br"));
+      score.appendChild(pen);
+    }
+
+    team.appendChild(score);
+  }
+
+  return team;
+}
+
+function createCopaPremierCard(matchData) {
+  const card = document.createElement("article");
+  card.className = "cup-crossing-item sl-card";
+
+  const label = document.createElement("p");
+  label.className = "cup-crossing-label";
+  label.textContent = matchData.label;
+
+  const body = document.createElement("div");
+  body.className = "cup-crossing-body";
+
+  const versus = document.createElement("p");
+  versus.className = "cup-match-versus";
+  versus.textContent = "VS";
+
+  body.append(
+    createCopaPremierTeamNode(matchData.home, "home", matchData),
+    versus,
+    createCopaPremierTeamNode(matchData.away, "away", matchData)
+  );
+
+  card.append(label, body);
+
+  if (matchData?.banSystem) {
+    const note = document.createElement("p");
+    note.className = "cup-round-empty-note";
+    note.textContent = matchData.banSystem;
+    card.appendChild(note);
+  }
+
+  return card;
+}
+
+function createCopaPremierSection(phaseKey, matches) {
+  if (!Array.isArray(matches) || matches.length === 0) return null;
+
+  const section = document.createElement("section");
+  section.className = "cup-round-section";
+
+  const title = document.createElement("h4");
+  title.className = "cup-round-title";
+  title.textContent = COPA_PREMIER_PHASES.find((p) => p.key === phaseKey)?.label || phaseKey;
+
+  const grid = document.createElement("div");
+  grid.className = "cup-round-grid";
+  matches.forEach((match) => grid.appendChild(createCopaPremierCard(match)));
+
+  section.append(title, grid);
+  return section;
+}
+
+function renderCopaPremierActiveTab() {
+  if (!cupPremierList || !copaPremierState) return;
+  cupPremierList.replaceChildren();
+
+  const season = getCurrentCopaPremierSeason();
+  if (!season) return;
+
+  const tabs = document.createElement("div");
+  tabs.className = "cup-card-tabs";
+  tabs.setAttribute("role", "tablist");
+  tabs.setAttribute("aria-label", "Fases Copa Premier");
+
+  COPA_PREMIER_PHASES.forEach((phase) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "cup-tab-btn sl-tab neon-box";
+    button.classList.toggle("is-active", cupPremierActivePhase === phase.key);
+    button.setAttribute("aria-selected", String(cupPremierActivePhase === phase.key));
+    button.textContent = phase.label.split(" (")[0];
+    button.addEventListener("click", () => {
+      cupPremierActivePhase = phase.key;
+      renderCopaPremierCard();
+    });
+    tabs.appendChild(button);
+  });
+
+  cupPremierList.appendChild(tabs);
+  const section = createCopaPremierSection(cupPremierActivePhase, season.phases[cupPremierActivePhase]);
+  if (section) cupPremierList.appendChild(section);
+}
+
+function renderCopaPremierHistoryTab() {
+  if (!cupPremierHistorySeasonSelect || !cupPremierHistoryList || !copaPremierState) return;
+
+  const seasons = [...copaPremierState.seasons].sort((a, b) => b.season.localeCompare(a.season, undefined, { numeric: true }));
+  cupPremierHistorySeasonSelect.replaceChildren();
+
+  seasons.forEach((season) => {
+    const option = document.createElement("option");
+    option.value = season.season;
+    option.textContent = season.status === "completed" && season.champion
+      ? `${season.season} — Campeón: ${season.champion}`
+      : season.season;
+    cupPremierHistorySeasonSelect.appendChild(option);
+  });
+
+  if (!cupPremierHistorySeasonSelect.value && seasons[0]) {
+    cupPremierHistorySeasonSelect.value = seasons[0].season;
+  }
+
+  const selectedSeason = seasons.find((season) => season.season === cupPremierHistorySeasonSelect.value) || seasons[0];
+  cupPremierHistoryList.replaceChildren();
+  if (!selectedSeason) return;
+
+  COPA_PREMIER_PHASES.forEach((phase) => {
+    const section = createCopaPremierSection(phase.key, selectedSeason.phases[phase.key]);
+    if (section) cupPremierHistoryList.appendChild(section);
+  });
+}
+
+function setCopaPremierTab(tab) {
+  cupPremierPanelTab = tab;
+  const isActiveTab = tab === "active";
+
+  if (cupPremierTabActive && cupPremierTabHistory && cupPremierTabPanelActive && cupPremierTabPanelHistory) {
+    cupPremierTabActive.classList.toggle("is-active", isActiveTab);
+    cupPremierTabHistory.classList.toggle("is-active", !isActiveTab);
+    cupPremierTabActive.setAttribute("aria-selected", String(isActiveTab));
+    cupPremierTabHistory.setAttribute("aria-selected", String(!isActiveTab));
+    cupPremierTabPanelActive.hidden = !isActiveTab;
+    cupPremierTabPanelHistory.hidden = isActiveTab;
+    cupPremierTabPanelActive.classList.toggle("is-active", isActiveTab);
+    cupPremierTabPanelHistory.classList.toggle("is-active", !isActiveTab);
+  }
+}
+
+function updateCopaPremierHeader() {
+  const season = getCurrentCopaPremierSeason();
+  if (!season) return;
+
+  if (cupPremierCurrentSeason) cupPremierCurrentSeason.textContent = `Temporada ${season.season}`;
+  if (cupPremierCurrentPhase) {
+    const phaseLabel = COPA_PREMIER_PHASES.find((p) => p.key === cupPremierActivePhase)?.label || "Cuartos";
+    cupPremierCurrentPhase.textContent = `Fase: ${phaseLabel.split(" (")[0].replace("🔥 ", "").replace("🥊 ", "").replace("👑 ", "")}`;
+  }
+  if (cupPremierStatus) cupPremierStatus.textContent = "ACTIVA";
+}
+
+function renderCopaPremierCard() {
+  renderCopaPremierActiveTab();
+  renderCopaPremierHistoryTab();
+  updateCopaPremierHeader();
+}
+
+function setCupPremierExpanded(expanded) {
+  if (!cupPremierCard || !cupPremierPanel || !cupPremierToggleLabel) return;
+
+  cupPremierCard.setAttribute("aria-expanded", String(expanded));
+  cupPremierToggleLabel.textContent = expanded ? "Ocultar" : "Ver cruces";
+
+  if (expanded) {
+    cupPremierPanel.hidden = false;
+    cupPremierPanel.classList.add("is-open");
+    return;
+  }
+
+  cupPremierPanel.classList.remove("is-open");
+  const onTransitionEnd = () => {
+    if (!cupPremierPanel.classList.contains("is-open")) cupPremierPanel.hidden = true;
+    cupPremierPanel.removeEventListener("transitionend", onTransitionEnd);
+  };
+  cupPremierPanel.addEventListener("transitionend", onTransitionEnd);
+}
+
+function setupCopaPremierAccordion() {
+  if (!cupPremierCard || !cupPremierPanel) return;
+
+  const toggle = () => {
+    const isExpanded = cupPremierCard.getAttribute("aria-expanded") === "true";
+    setCupPremierExpanded(!isExpanded);
+  };
+
+  cupPremierCard.addEventListener("click", toggle);
+  cupPremierCard.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      toggle();
+    }
+  });
+
+  if (cupPremierTabActive && cupPremierTabHistory) {
+    cupPremierTabActive.addEventListener("click", () => setCopaPremierTab("active"));
+    cupPremierTabHistory.addEventListener("click", () => setCopaPremierTab("history"));
+  }
+
+  if (cupPremierHistorySeasonSelect) {
+    cupPremierHistorySeasonSelect.addEventListener("change", renderCopaPremierHistoryTab);
+  }
+
+  setCopaPremierTab("active");
+}
+
+async function initializeCopaPremierState() {
+  try {
+    copaPremierState = buildCopaPremierStateFromDataFiles();
+  } catch (error) {
+    console.error("Error al inicializar Copa Premier", error);
+    copaPremierState = { seasons: [] };
+  }
+
+  renderCopaPremierCard();
+}
+
 function initPes6RotatingBg() {
   const card = document.getElementById("pes6-season-card");
   if (!card) return;
@@ -2764,7 +3169,9 @@ async function initializeApp() {
   renderPalmares();
   renderPes6Ranking();
   setupCupCrossingsAccordion();
+  setupCopaPremierAccordion();
   await initializeInterdivisionalState();
+  await initializeCopaPremierState();
   await loadPes6Leaders();
   await renderKofTop3();
   applyKofLeagueContent();
