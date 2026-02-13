@@ -1075,7 +1075,7 @@ summary:focus-visible,
 
 .card-copa-premier::before {
   background:
-    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+    linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
     url("/sudaka-league/assets/copa-premier-bg.png") center/cover no-repeat;
 }
 
@@ -1112,6 +1112,13 @@ summary:focus-visible,
 .inter-panel-bg > * {
   position: relative;
   z-index: 2;
+}
+
+
+.cup-premier-panel-bg::before {
+  background:
+    linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+    url("/sudaka-league/assets/copa-premier-bg.png") center/cover no-repeat;
 }
 
 .cup-toggle-label {
