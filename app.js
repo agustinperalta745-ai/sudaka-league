@@ -742,11 +742,9 @@ function updateCupRemaining() {
     formatHours: (value) => `${value} horas restantes`
   });
 
-  updateCountdown(CUP_INTERDIVISIONAL_FINAL_TARGET, cupPremierRemaining, {
-    showHoursOnLastDay: true,
-    formatDays: (value) => `${value} días restantes`,
-    formatHours: (value) => `${value} horas restantes`
-  });
+  if (cupPremierRemaining) {
+    cupPremierRemaining.textContent = "INACTIVA";
+  }
 }
 
 function updateSeasonStatus() {
