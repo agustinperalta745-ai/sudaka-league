@@ -1,7 +1,7 @@
 {
   "source": "gesliga",
   "division": "segunda",
-  "fetchedAt": "2026-02-13T17:12:25.324Z",
+  "fetchedAt": "2026-02-13T17:14:48.741Z",
   "rows": [
     {
       "pos": 1,
@@ -59,10 +59,10 @@
       "pos": 5,
       "equipo": "Diegarcho - Torino",
       "escudoFile": "diegarcho.png",
-      "pts": 4,
-      "pj": 5,
+      "pts": 5,
+      "pj": 6,
       "pg": 1,
-      "pe": 1,
+      "pe": 2,
       "pp": 3,
       "gf": 4,
       "gc": 10,
@@ -83,6 +83,19 @@
     },
     {
       "pos": 7,
+      "equipo": "Rubencho - Monaco",
+      "escudoFile": "rubencho.png",
+      "pts": 2,
+      "pj": 2,
+      "pg": 0,
+      "pe": 2,
+      "pp": 0,
+      "gf": 0,
+      "gc": 0,
+      "dg": 0
+    },
+    {
+      "pos": 8,
       "equipo": "Fernet - Villareal",
       "escudoFile": "fernet.png",
       "pts": 2,
@@ -93,19 +106,6 @@
       "gf": 5,
       "gc": 10,
       "dg": -5
-    },
-    {
-      "pos": 8,
-      "equipo": "Rubencho - Monaco",
-      "escudoFile": "rubencho.png",
-      "pts": 1,
-      "pj": 1,
-      "pg": 0,
-      "pe": 1,
-      "pp": 0,
-      "gf": 0,
-      "gc": 0,
-      "dg": 0
     },
     {
       "pos": 9,
