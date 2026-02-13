@@ -1073,6 +1073,10 @@ summary:focus-visible,
   z-index: 2;
 }
 
+.card-copa-premier::before {
+  background-image: url("/assets/copa-premier-bg.png");
+}
+
 .inter-panel-bg {
   position: relative;
   overflow: hidden;
