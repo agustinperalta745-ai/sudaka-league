@@ -1,20 +1,20 @@
 {
   "source": "gesliga",
   "division": "primera",
-  "fetchedAt": "2026-02-13T01:35:19.384Z",
+  "fetchedAt": "2026-02-13T02:35:16.690Z",
   "rows": [
     {
       "pos": 1,
       "equipo": "Alex_CABJ - Bologna",
       "escudoFile": "alexcabj.png",
-      "pts": 29,
-      "pj": 13,
-      "pg": 9,
+      "pts": 35,
+      "pj": 15,
+      "pg": 11,
       "pe": 2,
       "pp": 2,
-      "gf": 26,
-      "gc": 11,
-      "dg": 15
+      "gf": 34,
+      "gc": 14,
+      "dg": 20
     },
     {
       "pos": 2,
@@ -73,13 +73,13 @@
       "equipo": "Joelignacho - Betis",
       "escudoFile": "joelignacho.png",
       "pts": 18,
-      "pj": 14,
+      "pj": 16,
       "pg": 5,
       "pe": 3,
-      "pp": 6,
-      "gf": 21,
-      "gc": 24,
-      "dg": -3
+      "pp": 8,
+      "gf": 24,
+      "gc": 32,
+      "dg": -8
     },
     {
       "pos": 7,
