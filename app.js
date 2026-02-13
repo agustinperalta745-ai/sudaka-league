@@ -700,12 +700,13 @@ function updateCountdown(targetDate, el, options = {}) {
   el.textContent = formatDays(days);
 }
 
-function updatePes6Remaining() {
-  updateCountdown(PES6_FINAL_TARGET, pes6Remaining, { showHoursOnLastDay: true });
+function updateLeagueRemaining(targetDate, el) {
+  updateCountdown(targetDate, el, { showHoursOnLastDay: true });
 }
 
-function updateKofRemaining() {
-  updateCountdown(PES6_FINAL_TARGET, kofRemaining, { showHoursOnLastDay: true });
+function updateMainSeasonCountdowns() {
+  updateLeagueRemaining(PES6_FINAL_TARGET, pes6Remaining);
+  updateLeagueRemaining(PES6_FINAL_TARGET, kofRemaining);
 }
 
 function updateCupRemaining() {
@@ -725,7 +726,7 @@ function updateSeasonStatus() {
   sfSeasonName.textContent = KOF_LEAGUE.temporada.nombre;
 
   const seasonEnded = PES6_FINAL_TARGET.getTime() - Date.now() <= 0;
-  const kofEnded = PES6_FINAL_TARGET.getTime() - Date.now() <= 0;
+  const kofEnded = seasonEnded;
 
   pes6Status.textContent = seasonEnded ? "FINALIZADA" : "ACTIVA";
   pes6Status.classList.toggle("season-badge-active", !seasonEnded);
@@ -2764,16 +2765,14 @@ async function initializeApp() {
   applyKofLeagueContent();
   applyWhatsAppLinks();
   updateSeasonStatus();
-  updatePes6Remaining();
-  updateKofRemaining();
+  updateMainSeasonCountdowns();
   updateCupRemaining();
   updateSlotsStatus();
   updateDonationGoal();
   initPes6RotatingBg();
   handlePes6HashRoute();
   setInterval(updateSeasonStatus, 60000);
-  setInterval(updatePes6Remaining, 60000);
-  setInterval(updateKofRemaining, 60000);
+  setInterval(updateMainSeasonCountdowns, 60000);
   setInterval(updateCupRemaining, 60000);
 }
 
