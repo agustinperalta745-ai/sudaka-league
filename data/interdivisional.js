@@ -56,7 +56,7 @@ window.INTERDIVISIONAL_ACTIVE_SEASON = {
       label: "Octavos Play-offs 5",
       home: { club: "Peñarol", player: "TunTun", division: "Primera" },
       away: { club: "Huracán", player: "Leom", division: "Tercera" },
-      winner: away,
+      winner: "away",
       result: { home: 0, away: 3 },
       pens: null
     },
