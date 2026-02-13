@@ -16,7 +16,7 @@ window.COPA_PREMIER_ACTIVE_SEASON = {
   // pens: { home: 3, away: 4 }
 
   season: "T24",
-  status: "active",
+  status: "inactive",
   currentPhase: "cuartos",
 
   phases: {
