@@ -3,24 +3,24 @@
   "top3": [
     {
       "pos": 1,
-      "user": "SoyLefo",
+      "user": "Rulitox17",
       "wins": 1,
-      "gloveImage": "naranja.png",
-      "glowColor": "#FF6A00"
+      "gloveImage": "violeta.png",
+      "glowColor": "#8A2BE2"
     },
     {
       "pos": 2,
-      "user": "TSK Capibara",
-      "wins": 0,
+      "user": "SoyLefo",
+      "wins": 1,
       "gloveImage": "negro.png",
-      "glowColor": "#000000"
+      "glowColor": "#FF6A00"
     },
     {
       "pos": 3,
-      "user": "Facu.jey",
+      "user": "TSC Capibara",
       "wins": 0,
-      "gloveImage": "rojo.png",
-      "glowColor": "#FF0000"
+      "gloveImage": "negro.png",
+      "glowColor": "#000000"
     }
   ]
 }
