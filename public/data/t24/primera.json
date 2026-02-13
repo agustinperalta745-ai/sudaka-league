@@ -1,10 +1,23 @@
 {
   "source": "gesliga",
   "division": "primera",
-  "fetchedAt": "2026-02-13T00:58:51.873Z",
+  "fetchedAt": "2026-02-13T01:07:35.800Z",
   "rows": [
     {
       "pos": 1,
+      "equipo": "Alex_CABJ - Bologna",
+      "escudoFile": "alexcabj.png",
+      "pts": 29,
+      "pj": 13,
+      "pg": 9,
+      "pe": 2,
+      "pp": 2,
+      "gf": 26,
+      "gc": 11,
+      "dg": 15
+    },
+    {
+      "pos": 2,
       "equipo": "H09 - Villareal",
       "escudoFile": "h09.png",
       "pts": 28,
@@ -15,19 +28,6 @@
       "gf": 42,
       "gc": 51,
       "dg": -9
-    },
-    {
-      "pos": 2,
-      "equipo": "Alex_CABJ - Bologna",
-      "escudoFile": "alexcabj.png",
-      "pts": 26,
-      "pj": 12,
-      "pg": 8,
-      "pe": 2,
-      "pp": 2,
-      "gf": 22,
-      "gc": 11,
-      "dg": 11
     },
     {
       "pos": 3,
@@ -60,13 +60,13 @@
       "equipo": "Facualanis - Crystal Palace",
       "escudoFile": "facualanis.png",
       "pts": 19,
-      "pj": 8,
+      "pj": 9,
       "pg": 6,
       "pe": 1,
-      "pp": 1,
+      "pp": 2,
       "gf": 21,
-      "gc": 12,
-      "dg": 9
+      "gc": 16,
+      "dg": 5
     },
     {
       "pos": 6,
