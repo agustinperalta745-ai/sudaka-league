@@ -1,7 +1,7 @@
 {
   "source": "gesliga",
   "division": "primera",
-  "fetchedAt": "2026-02-13T10:09:27.109Z",
+  "fetchedAt": "2026-02-13T11:50:38.003Z",
   "rows": [
     {
       "pos": 1,
@@ -20,14 +20,14 @@
       "pos": 2,
       "equipo": "H09 - Villareal",
       "escudoFile": "h09.png",
-      "pts": 28,
-      "pj": 24,
-      "pg": 8,
+      "pts": 31,
+      "pj": 26,
+      "pg": 9,
       "pe": 4,
-      "pp": 12,
-      "gf": 42,
-      "gc": 51,
-      "dg": -9
+      "pp": 13,
+      "gf": 45,
+      "gc": 56,
+      "dg": -11
     },
     {
       "pos": 3,
@@ -44,6 +44,19 @@
     },
     {
       "pos": 4,
+      "equipo": "Joelignacho - Betis",
+      "escudoFile": "joelignacho.png",
+      "pts": 21,
+      "pj": 18,
+      "pg": 6,
+      "pe": 3,
+      "pp": 9,
+      "gf": 29,
+      "gc": 35,
+      "dg": -6
+    },
+    {
+      "pos": 5,
       "equipo": "Ivancarocela - Roma",
       "escudoFile": "ivancarocela.png",
       "pts": 20,
@@ -56,7 +69,7 @@
       "dg": -5
     },
     {
-      "pos": 5,
+      "pos": 6,
       "equipo": "Facualanis - Crystal Palace",
       "escudoFile": "facualanis.png",
       "pts": 19,
@@ -69,20 +82,20 @@
       "dg": 5
     },
     {
-      "pos": 6,
-      "equipo": "Joelignacho - Betis",
-      "escudoFile": "joelignacho.png",
+      "pos": 7,
+      "equipo": "Joser17 - Brighton",
+      "escudoFile": "joser17.png",
       "pts": 18,
-      "pj": 16,
+      "pj": 12,
       "pg": 5,
       "pe": 3,
-      "pp": 8,
-      "gf": 24,
-      "gc": 32,
-      "dg": -8
+      "pp": 4,
+      "gf": 21,
+      "gc": 17,
+      "dg": 4
     },
     {
-      "pos": 7,
+      "pos": 8,
       "equipo": "Larrierismo - Lyom",
       "escudoFile": "larrierismo.png",
       "pts": 12,
@@ -95,7 +108,7 @@
       "dg": 4
     },
     {
-      "pos": 8,
+      "pos": 9,
       "equipo": "Naxul90 - Everton",
       "escudoFile": "naxul90.png",
       "pts": 12,
@@ -108,20 +121,20 @@
       "dg": 0
     },
     {
-      "pos": 9,
-      "equipo": "Joser17 - Brighton",
-      "escudoFile": "joser17.png",
-      "pts": 11,
+      "pos": 10,
+      "equipo": "Crislort26 - Marcella",
+      "escudoFile": "crislort26.png",
+      "pts": 12,
       "pj": 8,
       "pg": 3,
-      "pe": 2,
-      "pp": 3,
-      "gf": 11,
-      "gc": 10,
-      "dg": 1
+      "pe": 3,
+      "pp": 2,
+      "gf": 15,
+      "gc": 15,
+      "dg": 0
     },
     {
-      "pos": 10,
+      "pos": 11,
       "equipo": "Soylefo - Fullham",
       "escudoFile": "soylefo.png",
       "pts": 10,
@@ -134,7 +147,7 @@
       "dg": -1
     },
     {
-      "pos": 11,
+      "pos": 12,
       "equipo": "Lombardo - Valencia",
       "escudoFile": "lombardo.png",
       "pts": 9,
@@ -145,19 +158,6 @@
       "gf": 9,
       "gc": 12,
       "dg": -3
-    },
-    {
-      "pos": 12,
-      "equipo": "Crislort26 - Marcella",
-      "escudoFile": "crislort26.png",
-      "pts": 8,
-      "pj": 4,
-      "pg": 2,
-      "pe": 2,
-      "pp": 0,
-      "gf": 8,
-      "gc": 5,
-      "dg": 3
     },
     {
       "pos": 13,
