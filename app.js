@@ -63,6 +63,7 @@ const KOF_LEAGUE = {
   nombre: "King of Fighters 2002 – Fightcade",
   nombreCorto: "KOF 2002",
   logo: "assets/kof2002.jpg",
+  updatedAt: "2026-02-12T20:00:00-03:00",
   top3: [
     { name: "TSK CAPIBARA", glove: "negro", wins: 0 },
     { name: "Facu.jey", glove: "rojo", wins: 0 },
@@ -671,7 +672,6 @@ async function renderT24Tables() {
 // Asignación centralizada de links editables.
 
 const PES6_FINAL_TARGET = new Date("2026-02-22T23:59:00-03:00");
-const KOF_FINAL_TARGET = new Date("2026-02-22T23:59:00");
 const CUP_INTERDIVISIONAL_FINAL_TARGET = new Date("2026-02-13T23:59:00-03:00");
 
 function updateCountdown(targetDate, el, options = {}) {
@@ -705,24 +705,7 @@ function updatePes6Remaining() {
 }
 
 function updateKofRemaining() {
-  if (!kofRemaining) return;
-
-  const now = new Date();
-  const diff = KOF_FINAL_TARGET.getTime() - now.getTime();
-
-  if (diff <= 0) {
-    kofRemaining.textContent = "Temporada finalizada";
-    return;
-  }
-
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const hours = Math.floor(diff / (1000 * 60 * 60));
-
-  if (days > 0) {
-    kofRemaining.textContent = `${days} días restantes`;
-  } else {
-    kofRemaining.textContent = `${hours} horas restantes`;
-  }
+  updateCountdown(PES6_FINAL_TARGET, kofRemaining, { showHoursOnLastDay: true });
 }
 
 function updateCupRemaining() {
@@ -742,7 +725,7 @@ function updateSeasonStatus() {
   sfSeasonName.textContent = KOF_LEAGUE.temporada.nombre;
 
   const seasonEnded = PES6_FINAL_TARGET.getTime() - Date.now() <= 0;
-  const kofEnded = KOF_FINAL_TARGET.getTime() - Date.now() <= 0;
+  const kofEnded = PES6_FINAL_TARGET.getTime() - Date.now() <= 0;
 
   pes6Status.textContent = seasonEnded ? "FINALIZADA" : "ACTIVA";
   pes6Status.classList.toggle("season-badge-active", !seasonEnded);
@@ -955,8 +938,13 @@ function renderKofTop3() {
   if (!kofTop3Section || !kofTop3List) return;
 
   if (kofUpdated) {
-    kofUpdated.textContent = `Última actualización: ${timeAgo(new Date().toISOString())}`;
-    kofUpdated.hidden = false;
+    if (KOF_LEAGUE.updatedAt) {
+      kofUpdated.textContent = `Última actualización: ${timeAgo(KOF_LEAGUE.updatedAt)}`;
+      kofUpdated.hidden = false;
+    } else {
+      kofUpdated.hidden = true;
+      kofUpdated.textContent = "";
+    }
   }
 
   const top3 = Array.isArray(KOF_LEAGUE.top3) ? KOF_LEAGUE.top3 : [];
