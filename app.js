@@ -52,7 +52,7 @@ const PES6_HISTORY = [
 
 // === CONFIGURACIÓN DE CUPOS (EDITAR SOLO ESTO) ===
 const PES6_CUPOS_LIBRES = 19; // 4ta división
-const KOF_CUPOS_LIBRES = 4;  // King of Fighters 2002
+const KOF_CUPOS_LIBRES = 2;  // King of Fighters 2002
 
 const DONATION_GOAL_TOTAL_ARS = 10000;
 const DONATION_CURRENT_AMOUNT_ARS = 2500;
@@ -397,13 +397,13 @@ const cupTabPanelHistory = document.getElementById("cup-tab-panel-history");
 const cupHistorySeasonSelect = document.getElementById("cup-history-season");
 const sfStatus = document.getElementById("sfStatus");
 const sfSeasonName = document.getElementById("sfSeasonName");
-const sfSeasonNote = document.getElementById("sfSeasonNote");
 const pes6SlotsValue = document.getElementById("pes6-slots");
 const pes6SlotsBadge = document.getElementById("pes6-slots-badge");
 const pes6LeadersList = document.getElementById("pes6-leaders");
 const pes6Updated = document.getElementById("pes6-updated");
 const kofTop3Section = document.getElementById("kof-top3-section");
 const kofTop3List = document.getElementById("kof-top3");
+const kofUpdated = document.getElementById("kof-updated");
 const sfSlotsValue = document.getElementById("sf-slots");
 const sfSlotsBadge = document.getElementById("sf-slots-badge");
 const donationProgressText = document.getElementById("donation-progress-text");
@@ -671,7 +671,7 @@ async function renderT24Tables() {
 // Asignación centralizada de links editables.
 
 const PES6_FINAL_TARGET = new Date("2026-02-22T23:59:00-03:00");
-const KOF_FINAL_TARGET = new Date("2026-02-27T23:59:00-03:00");
+const KOF_FINAL_TARGET = new Date("2026-02-22T23:59:00");
 const CUP_INTERDIVISIONAL_FINAL_TARGET = new Date("2026-02-13T23:59:00-03:00");
 
 function updateCountdown(targetDate, el, options = {}) {
@@ -705,7 +705,24 @@ function updatePes6Remaining() {
 }
 
 function updateKofRemaining() {
-  updateCountdown(KOF_FINAL_TARGET, kofRemaining, { showHoursOnLastDay: true });
+  if (!kofRemaining) return;
+
+  const now = new Date();
+  const diff = KOF_FINAL_TARGET.getTime() - now.getTime();
+
+  if (diff <= 0) {
+    kofRemaining.textContent = "Temporada finalizada";
+    return;
+  }
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor(diff / (1000 * 60 * 60));
+
+  if (days > 0) {
+    kofRemaining.textContent = `${days} días restantes`;
+  } else {
+    kofRemaining.textContent = `${hours} horas restantes`;
+  }
 }
 
 function updateCupRemaining() {
@@ -717,13 +734,12 @@ function updateCupRemaining() {
 }
 
 function updateSeasonStatus() {
-  if (!pes6Status || !pes6SeasonName || !sfStatus || !sfSeasonName || !sfSeasonNote || !pes6Remaining) {
+  if (!pes6Status || !pes6SeasonName || !sfStatus || !sfSeasonName || !pes6Remaining) {
     return;
   }
 
   pes6SeasonName.textContent = PES6_SEASON_NAME;
   sfSeasonName.textContent = KOF_LEAGUE.temporada.nombre;
-  sfSeasonNote.textContent = "Finaliza el viernes 27 de febrero – 23:59 hs";
 
   const seasonEnded = PES6_FINAL_TARGET.getTime() - Date.now() <= 0;
   const kofEnded = KOF_FINAL_TARGET.getTime() - Date.now() <= 0;
@@ -937,6 +953,11 @@ function createKofTop3Item(player = {}, positionIndex = 0) {
 
 function renderKofTop3() {
   if (!kofTop3Section || !kofTop3List) return;
+
+  if (kofUpdated) {
+    kofUpdated.textContent = `Última actualización: ${timeAgo(new Date().toISOString())}`;
+    kofUpdated.hidden = false;
+  }
 
   const top3 = Array.isArray(KOF_LEAGUE.top3) ? KOF_LEAGUE.top3 : [];
 
