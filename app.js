@@ -406,6 +406,7 @@ const cupTabPanelHistory = document.getElementById("cup-tab-panel-history");
 const cupHistorySeasonSelect = document.getElementById("cup-history-season");
 const cupPremierCard = document.getElementById("cup-premier-card");
 const cupPremierPanel = document.getElementById("cup-premier-panel");
+const cupPremierSeasonCard = document.getElementById("cup-premier-season-card");
 const cupPremierList = document.getElementById("cup-premier-list");
 const cupPremierHistoryList = document.getElementById("cup-premier-history-list");
 const cupPremierToggleLabel = document.getElementById("cup-premier-toggle-label");
@@ -3044,12 +3045,26 @@ function updateCopaPremierHeader() {
   const season = getCurrentCopaPremierSeason();
   if (!season) return;
 
+  const isActiveSeason = season.status === "active";
+
   if (cupPremierCurrentSeason) cupPremierCurrentSeason.textContent = `Temporada ${season.season}`;
   if (cupPremierCurrentPhase) {
     const phaseLabel = COPA_PREMIER_PHASES.find((p) => p.key === cupPremierActivePhase)?.label || "Cuartos";
     cupPremierCurrentPhase.textContent = `Fase: ${phaseLabel.split(" (")[0].replace("🔥 ", "").replace("🥊 ", "").replace("👑 ", "")}`;
   }
-  if (cupPremierStatus) cupPremierStatus.textContent = "ACTIVA";
+
+  if (cupPremierStatus) {
+    cupPremierStatus.textContent = isActiveSeason ? "ACTIVA" : "INACTIVA";
+    cupPremierStatus.classList.toggle("season-badge-active", isActiveSeason);
+    cupPremierStatus.classList.toggle("season-badge-wait", !isActiveSeason);
+    cupPremierStatus.classList.toggle("neon-box", isActiveSeason);
+    cupPremierStatus.classList.toggle("neon-border", !isActiveSeason);
+  }
+
+  if (cupPremierSeasonCard) {
+    cupPremierSeasonCard.classList.toggle("inactive-card", !isActiveSeason);
+    cupPremierSeasonCard.classList.toggle("neon-box", isActiveSeason);
+  }
 }
 
 function renderCopaPremierCard() {

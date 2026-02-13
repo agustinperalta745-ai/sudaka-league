@@ -1073,6 +1073,32 @@ summary:focus-visible,
   z-index: 2;
 }
 
+
+.card-copa-premier.inactive-card,
+.card-copa-premier.inactive-card.neon-box {
+  box-shadow: none;
+  border-color: var(--line-strong);
+}
+
+.card-copa-premier.inactive-card.neon-box:hover,
+.card-copa-premier.inactive-card.neon-box:focus-visible,
+.card-copa-premier.inactive-card.neon-box:active {
+  box-shadow: none;
+  border-color: var(--line-strong);
+}
+
+.card-copa-premier.inactive-card .neon-box {
+  box-shadow: none;
+  border-color: var(--line-strong);
+}
+
+.card-copa-premier.inactive-card .sl-tab.is-active,
+.card-copa-premier.inactive-card .cup-tab-btn.is-active,
+.card-copa-premier.inactive-card .sl-tab[aria-selected="true"] {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--line-strong);
+  box-shadow: none;
+}
 .card-copa-premier::before {
   background:
     linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
