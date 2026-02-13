@@ -63,12 +63,6 @@ const KOF_LEAGUE = {
   nombre: "King of Fighters 2002 – Fightcade",
   nombreCorto: "KOF 2002",
   logo: "assets/kof2002.jpg",
-  updatedAt: "2026-02-12T20:00:00-03:00",
-  top3: [
-    { name: "TSK CAPIBARA", glove: "negro", wins: 0 },
-    { name: "Facu.jey", glove: "rojo", wins: 0 },
-    { name: "Vikings play", glove: "amarillo", wins: 0 }
-  ],
   temporada: {
     nombre: "Temporada 1",
     estado: "EN ESPERA",
@@ -90,6 +84,9 @@ const KOF_LEAGUE = {
   salaFightcade: "#THE KING OF FIGHTERS 2002",
   videoInstalacion: "https://www.youtube.com/watch?v=tM5yVYoY-7w&t=126s"
 };
+
+const KOF_TOP3_DATA_PATH = "./data/kof_top3.json";
+const KOF_GLOVES_ASSET_DIR = "assets";
 
 const PES6_PALMARES = {
   divisiones: [
@@ -863,28 +860,11 @@ function createPes6LeaderItem(leader = {}) {
   return item;
 }
 
-const KOF_TOP3_ICON_BY_POSITION = ["assets/azul.png", "assets/rojo.png", "assets/negro.png"];
-
-function getKofTop3IconPath(positionIndex = 0) {
-  return KOF_TOP3_ICON_BY_POSITION[positionIndex] || KOF_TOP3_ICON_BY_POSITION[KOF_TOP3_ICON_BY_POSITION.length - 1];
-}
-
-function getKofGlowColorBySrc(src = "") {
-  const normalizedSrc = String(src).toLowerCase();
-
-  if (normalizedSrc.includes("rojo")) {
-    return "rgba(255,0,0,0.7)";
-  }
-
-  if (normalizedSrc.includes("azul")) {
-    return "rgba(0,120,255,0.7)";
-  }
-
-  if (normalizedSrc.includes("negro")) {
-    return "rgba(90,90,90,0.6)";
-  }
-
-  return "rgba(0,120,255,0.7)";
+function getKofGloveImagePath(gloveImage = "") {
+  if (!gloveImage) return "";
+  if (/^(?:https?:)?\/\//i.test(gloveImage)) return gloveImage;
+  if (gloveImage.startsWith("assets/")) return toAssetPath(gloveImage);
+  return toAssetPath(`${KOF_GLOVES_ASSET_DIR}/${gloveImage}`);
 }
 
 function createKofTop3Item(player = {}, positionIndex = 0) {
@@ -898,12 +878,13 @@ function createKofTop3Item(player = {}, positionIndex = 0) {
   gloveWrap.className = "pes6-leader-shield kof-top3-glove";
 
   const gloveImg = document.createElement("img");
-  gloveImg.src = toAssetPath(getKofTop3IconPath(positionIndex));
-  gloveImg.alt = `Ícono puesto ${positionIndex + 1}`;
+  gloveImg.src = getKofGloveImagePath(player.gloveImage);
+  gloveImg.alt = `Guante puesto ${player.pos || positionIndex + 1}`;
   gloveImg.loading = "lazy";
   gloveImg.decoding = "async";
 
-  item.style.setProperty("--glow-color", getKofGlowColorBySrc(gloveImg.src));
+  const glowColor = typeof player.glowColor === "string" && player.glowColor.trim() ? player.glowColor.trim() : "rgba(0,120,255,0.7)";
+  item.style.setProperty("--glow-color", glowColor);
 
   gloveImg.onerror = () => {
     gloveImg.remove();
@@ -921,7 +902,8 @@ function createKofTop3Item(player = {}, positionIndex = 0) {
 
   const name = document.createElement("p");
   name.className = "pes6-leader-user";
-  name.textContent = String(player.name || "—");
+  const playerPos = Number.isFinite(Number(player.pos)) ? Number(player.pos) : positionIndex + 1;
+  name.textContent = `#${playerPos} ${String(player.user || "—")}`;
 
   info.appendChild(name);
   left.append(gloveWrap, info);
@@ -935,34 +917,57 @@ function createKofTop3Item(player = {}, positionIndex = 0) {
   return item;
 }
 
-function renderKofTop3() {
+async function renderKofTop3() {
   if (!kofTop3Section || !kofTop3List) return;
 
-  if (kofUpdated) {
-    if (KOF_LEAGUE.updatedAt) {
-      kofUpdated.textContent = `Última actualización: ${timeAgo(KOF_LEAGUE.updatedAt)}`;
-      kofUpdated.hidden = false;
-    } else {
+  const showTop3Unavailable = () => {
+    kofTop3List.replaceChildren();
+    const empty = document.createElement("p");
+    empty.className = "pes6-leaders-empty";
+    empty.textContent = "Top 3 no disponible";
+    kofTop3List.appendChild(empty);
+    kofTop3Section.hidden = false;
+
+    if (kofUpdated) {
       kofUpdated.hidden = true;
       kofUpdated.textContent = "";
     }
+  };
+
+  try {
+    const response = await fetch(KOF_TOP3_DATA_PATH, { cache: "no-store" });
+    if (!response.ok) {
+      throw new Error(`No se pudo cargar Top 3 KOF (${response.status})`);
+    }
+
+    const data = await response.json();
+    const top3 = Array.isArray(data?.top3) ? data.top3 : [];
+
+    if (kofUpdated) {
+      if (data?.updatedAt) {
+        kofUpdated.textContent = `Última actualización: ${timeAgo(data.updatedAt)}`;
+        kofUpdated.hidden = false;
+      } else {
+        kofUpdated.hidden = true;
+        kofUpdated.textContent = "";
+      }
+    }
+
+    if (!top3.length) {
+      showTop3Unavailable();
+      return;
+    }
+
+    const fragment = document.createDocumentFragment();
+    top3.forEach((player, index) => {
+      fragment.appendChild(createKofTop3Item(player, index));
+    });
+
+    kofTop3List.replaceChildren(fragment);
+    kofTop3Section.hidden = false;
+  } catch (_error) {
+    showTop3Unavailable();
   }
-
-  const top3 = Array.isArray(KOF_LEAGUE.top3) ? KOF_LEAGUE.top3 : [];
-
-  if (!top3.length) {
-    kofTop3Section.hidden = true;
-    kofTop3List.replaceChildren();
-    return;
-  }
-
-  const fragment = document.createDocumentFragment();
-  top3.forEach((player, index) => {
-    fragment.appendChild(createKofTop3Item(player, index));
-  });
-
-  kofTop3List.replaceChildren(fragment);
-  kofTop3Section.hidden = false;
 }
 
 function timeAgo(dateStr) {
@@ -2761,7 +2766,7 @@ async function initializeApp() {
   setupCupCrossingsAccordion();
   await initializeInterdivisionalState();
   await loadPes6Leaders();
-  renderKofTop3();
+  await renderKofTop3();
   applyKofLeagueContent();
   applyWhatsAppLinks();
   updateSeasonStatus();

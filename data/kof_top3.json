@@ -1,0 +1,26 @@
+{
+  "updatedAt": "2026-02-12T00:00:00Z",
+  "top3": [
+    {
+      "pos": 1,
+      "user": "TSK CAPIBARA",
+      "wins": 0,
+      "gloveImage": "negro.png",
+      "glowColor": "#000000"
+    },
+    {
+      "pos": 2,
+      "user": "Facu.jey",
+      "wins": 0,
+      "gloveImage": "rojo.png",
+      "glowColor": "#ff0000"
+    },
+    {
+      "pos": 3,
+      "user": "Vikings play",
+      "wins": 0,
+      "gloveImage": "amarillo.png",
+      "glowColor": "#ffd400"
+    }
+  ]
+}
