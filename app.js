@@ -51,8 +51,13 @@ const PES6_HISTORY = [
 ];
 
 // === CONFIGURACIÓN DE CUPOS (EDITAR SOLO ESTO) ===
-const PES6_CUPOS_LIBRES = 19; // 4ta división
-const KOF_CUPOS_LIBRES = 2;  // King of Fighters 2002
+const SITE_DATA = window.SUDAKA_SITE_DATA || {};
+const PES6_CUPOS_LIBRES = Number.isFinite(Number(SITE_DATA.pes6CuposLibres))
+  ? Number(SITE_DATA.pes6CuposLibres)
+  : 2;
+const KOF_CUPOS_LIBRES = Number.isFinite(Number(SITE_DATA.kofCuposLibres))
+  ? Number(SITE_DATA.kofCuposLibres)
+  : 2;
 
 const DONATION_GOAL_TOTAL_ARS = 10000;
 const DONATION_CURRENT_AMOUNT_ARS = 2500;
