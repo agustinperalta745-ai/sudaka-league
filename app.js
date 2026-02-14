@@ -903,13 +903,18 @@ function createPes6LeaderItem(leader = {}) {
 
   const pj = document.createElement("span");
   pj.className = "mini-badge";
-  pj.textContent = `PJ ${Number.isFinite(Number(leader.pj)) ? Number(leader.pj) : 0}`;
+  pj.textContent = `PJ: ${Number.isFinite(Number(leader.pj)) ? Number(leader.pj) : 0}`;
 
   const pg = document.createElement("span");
   pg.className = "mini-badge";
-  pg.textContent = `PG ${Number.isFinite(Number(leader.pg)) ? Number(leader.pg) : 0}`;
+  pg.textContent = `PG: ${Number.isFinite(Number(leader.pg)) ? Number(leader.pg) : 0}`;
 
-  badges.append(pj, pg);
+  const pts = document.createElement("span");
+  pts.className = "mini-badge";
+  const leaderPoints = leader.pts ?? leader.points;
+  pts.textContent = `PTS: ${Number.isFinite(Number(leaderPoints)) ? Number(leaderPoints) : 0}`;
+
+  badges.append(pj, pg, pts);
   info.append(user, badges);
   left.append(shieldWrap, info);
 
