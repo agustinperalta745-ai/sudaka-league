@@ -208,6 +208,10 @@ const INTERDIVISIONAL_ACTIVE_SOURCE = window.INTERDIVISIONAL_ACTIVE_SEASON || nu
 const INTERDIVISIONAL_CUARTOS_SOURCE = Array.isArray(window.INTERDIVISIONAL_CUARTOS_PLAYOFFS)
   ? window.INTERDIVISIONAL_CUARTOS_PLAYOFFS
   : [];
+const INTERDIVISIONAL_RESULTS_SOURCE = window.INTERDIVISIONAL_RESULTS
+  && typeof window.INTERDIVISIONAL_RESULTS === "object"
+  ? window.INTERDIVISIONAL_RESULTS
+  : {};
 const INTERDIVISIONAL_HISTORY_SOURCE = Array.isArray(window.INTERDIVISIONAL_HISTORY_SEASONS)
   ? window.INTERDIVISIONAL_HISTORY_SEASONS
   : [];
@@ -2174,6 +2178,27 @@ function normalizeCuartosResult(result) {
   return { home, away };
 }
 
+function getInterdivisionalResultPhaseKey(phaseKey) {
+  if (phaseKey === "octavos_playoffs") return "octavos";
+  if (phaseKey === "cuartos_playoffs") return "cuartos";
+  if (phaseKey === "semifinal_playoffs") return "semifinal";
+  if (phaseKey === "final_playoffs") return "final";
+  return phaseKey;
+}
+
+function getInterdivisionalMatchResult(phaseKey, matchId) {
+  const phaseResultKey = getInterdivisionalResultPhaseKey(phaseKey);
+  const resultKey = `${phaseResultKey}-${matchId}`;
+  const sourceResult = INTERDIVISIONAL_RESULTS_SOURCE?.[resultKey];
+  if (!sourceResult || typeof sourceResult !== "object") return null;
+
+  return {
+    winner: normalizeWinnerValue(sourceResult.winner),
+    result: normalizeCuartosResult(sourceResult.score),
+    pens: normalizeCuartosResult(sourceResult.pens)
+  };
+}
+
 function normalizeCuartosMatches(matches) {
   if (!Array.isArray(matches)) return [];
 
@@ -2242,13 +2267,16 @@ function buildPhaseMatches(sourceMatches, sourceWinners, phaseKey) {
 
   for (let index = 0; index < totalMatches; index += 1) {
     const sourceMatch = matches[index] || null;
+    const matchId = sourceMatch?.id || `${index + 1}`;
     const sourceHome = sourceWinners[index * 2];
     const sourceAway = sourceWinners[index * 2 + 1];
 
-    const normalizedSourceMatch = normalizeMatchData(sourceMatch || {}, "active");
+    const sourceResult = getInterdivisionalMatchResult(phaseKey, matchId);
+    const normalizedSourceMatch = normalizeMatchData(sourceResult || sourceMatch || {}, "active");
 
     next.push({
       ...normalizedSourceMatch,
+      id: matchId,
       label: sourceMatch?.label || `${phaseLabel} ${index + 1}`,
       home: formatSide(sourceMatch?.home || sourceHome, sourceHome?.player || `Ganador ${phaseLabel} ${index * 2 + 1}`),
       away: formatSide(sourceMatch?.away || sourceAway, sourceAway?.player || `Ganador ${phaseLabel} ${index * 2 + 2}`)
@@ -2274,23 +2302,31 @@ function buildInterdivisionalActiveSeason(source) {
     status: "active",
     champion: null,
     phases: {
-      octavos_playoffs: normalizeActiveOctavos(octavos),
+      octavos_playoffs: normalizeActiveOctavos(octavos).map((match, index) => {
+        const matchId = match.id || `${index + 1}`;
+        const sourceResult = getInterdivisionalMatchResult("octavos", matchId);
+        const normalizedMatch = normalizeMatchData(sourceResult || match, "active");
+
+        return {
+          ...match,
+          ...normalizedMatch,
+          id: matchId
+        };
+      }),
       cuartos_playoffs: [],
       semifinal_playoffs: [],
       final_playoffs: [],
       final_copa_interdivisional: []
     },
     metadata: {
-      cuartosLoaded: hasLoadedCuartosData(INTERDIVISIONAL_CUARTOS_SOURCE)
+      cuartosLoaded: true
     }
   };
 
   const sourcePhases = source.phases || {};
-  const sourceCuartos = INTERDIVISIONAL_CUARTOS_SOURCE.length > 0
-    ? normalizeCuartosMatches(INTERDIVISIONAL_CUARTOS_SOURCE)
-    : Array.isArray(source.cuartos_playoffs)
-      ? source.cuartos_playoffs
-      : sourcePhases.cuartos_playoffs;
+  const sourceCuartos = Array.isArray(source.cuartos_playoffs)
+    ? source.cuartos_playoffs
+    : sourcePhases.cuartos_playoffs;
   const sourceSemis = Array.isArray(source.semifinal_playoffs) ? source.semifinal_playoffs : sourcePhases.semifinal_playoffs;
   const sourceFinalPlayoffs = Array.isArray(source.final_playoffs) ? source.final_playoffs : sourcePhases.final_playoffs;
   const sourceFinalCopa = Array.isArray(source.final_copa_interdivisional) ? source.final_copa_interdivisional : sourcePhases.final_copa_interdivisional;
