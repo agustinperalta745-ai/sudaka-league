@@ -391,7 +391,60 @@
             "winner": null
           }
         ],
-        "cuartos_playoffs": [],
+        "cuartos_playoffs": [
+          {
+            "home": {
+              "name": "GANADOR 1",
+              "escudo": "equipo1.png",
+              "division": "1ra"
+            },
+            "away": {
+              "name": "GANADOR 2",
+              "escudo": "equipo2.png",
+              "division": "2da"
+            },
+            "winner": ""
+          },
+          {
+            "home": {
+              "name": "GANADOR 3",
+              "escudo": "equipo3.png",
+              "division": "1ra"
+            },
+            "away": {
+              "name": "GANADOR 4",
+              "escudo": "equipo4.png",
+              "division": "3ra"
+            },
+            "winner": ""
+          },
+          {
+            "home": {
+              "name": "GANADOR 5",
+              "escudo": "equipo5.png",
+              "division": "1ra"
+            },
+            "away": {
+              "name": "GANADOR 6",
+              "escudo": "equipo6.png",
+              "division": "2da"
+            },
+            "winner": ""
+          },
+          {
+            "home": {
+              "name": "GANADOR 7",
+              "escudo": "equipo7.png",
+              "division": "3ra"
+            },
+            "away": {
+              "name": "GANADOR 8",
+              "escudo": "equipo8.png",
+              "division": "1ra"
+            },
+            "winner": ""
+          }
+        ],
         "semifinal_playoffs": [],
         "final_playoffs": [],
         "final_copa_interdivisional": []
