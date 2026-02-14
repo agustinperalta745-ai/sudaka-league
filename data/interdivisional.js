@@ -48,8 +48,8 @@ window.INTERDIVISIONAL_ACTIVE_SEASON = {
       label: "Octavos Play-offs 4",
       home: { club: "Estudiantes", player: "Exeeneta", division: "Primera" },
       away: { club: "Internacional SC", player: "Joser17", division: "Segunda" },
-      winner: null,
-      result: null,
+      winner: "home",
+      result: { home: 3, away: 1 },
       pens: null
     },
     {
