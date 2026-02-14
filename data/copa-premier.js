@@ -39,7 +39,7 @@ window.COPA_PREMIER_ACTIVE_SEASON = {
       },
       {
         label: "Cuartos 3 (3° vs 6°)",
-        home: { pos: 3, glove: "verde.png", user: "Jugador_3", division: "Primera" },
+        home: { pos: 3, glove: "lima.png", user: "Jugador_3", division: "Primera" },
         away: { pos: 6, glove: "violeta.png", user: "Jugador_6", division: "Primera" },
         winner: null,
         result: null,
