@@ -91,7 +91,17 @@ const KOF_LEAGUE = {
 };
 
 const KOF_TOP3_DATA_PATH = "./data/kof_top3.json";
-const KOF_GLOVES_ASSET_DIR = "assets";
+
+const KOF_GLOVES_UTILS = window.KOF_GLOVES_UTILS || {};
+const normalizeKofGloveColor = typeof KOF_GLOVES_UTILS.normalizeColorName === "function"
+  ? KOF_GLOVES_UTILS.normalizeColorName
+  : (value = "") => String(value || "").trim().toLowerCase();
+const getKofGloveImage = typeof KOF_GLOVES_UTILS.getGloveImage === "function"
+  ? KOF_GLOVES_UTILS.getGloveImage
+  : () => "assets/blanco.png";
+const getKofGlowColor = typeof KOF_GLOVES_UTILS.getGlowColor === "function"
+  ? KOF_GLOVES_UTILS.getGlowColor
+  : () => "#7fb3ff";
 
 const PES6_PALMARES = {
   divisiones: [
@@ -909,11 +919,9 @@ function createPes6LeaderItem(leader = {}) {
   return item;
 }
 
-function getKofGloveImagePath(gloveImage = "") {
-  if (!gloveImage) return "";
-  if (/^(?:https?:)?\/\//i.test(gloveImage)) return gloveImage;
-  if (gloveImage.startsWith("assets/")) return toAssetPath(gloveImage);
-  return toAssetPath(`${KOF_GLOVES_ASSET_DIR}/${gloveImage}`);
+function getKofGloveImagePath(gloveColor = "") {
+  if (/^(?:https?:)?\/\//i.test(gloveColor)) return gloveColor;
+  return toAssetPath(getKofGloveImage(gloveColor));
 }
 
 function createKofTop3Item(player = {}, positionIndex = 0) {
@@ -926,22 +934,31 @@ function createKofTop3Item(player = {}, positionIndex = 0) {
   const gloveWrap = document.createElement("span");
   gloveWrap.className = "pes6-leader-shield kof-top3-glove";
 
+  const rawGloveColor = player.gloveColor || player.glove || player.color || player.gloveImage || "";
+  const gloveColorSlug = normalizeKofGloveColor(rawGloveColor);
+
   const gloveImg = document.createElement("img");
-  gloveImg.src = getKofGloveImagePath(player.gloveImage);
-  gloveImg.alt = `Guante puesto ${player.pos || positionIndex + 1}`;
+  gloveImg.src = getKofGloveImagePath(gloveColorSlug || rawGloveColor);
+  gloveImg.alt = `Guante ${gloveColorSlug || "blanco"} puesto ${player.pos || positionIndex + 1}`;
   gloveImg.loading = "lazy";
   gloveImg.decoding = "async";
 
-  const glowColor = typeof player.glowColor === "string" && player.glowColor.trim() ? player.glowColor.trim() : "rgba(0,120,255,0.7)";
+  const glowColor = getKofGlowColor(gloveColorSlug || rawGloveColor);
   item.style.setProperty("--glow-color", glowColor);
 
   gloveImg.onerror = () => {
-    gloveImg.remove();
-    const fallback = document.createElement("span");
-    fallback.className = "kof-top3-fallback";
-    fallback.setAttribute("aria-hidden", "true");
-    fallback.textContent = "🥊";
-    gloveWrap.appendChild(fallback);
+    if (gloveImg.dataset.fallbackApplied === "1") {
+      gloveImg.remove();
+      const fallback = document.createElement("span");
+      fallback.className = "kof-top3-fallback";
+      fallback.setAttribute("aria-hidden", "true");
+      fallback.textContent = "🥊";
+      gloveWrap.appendChild(fallback);
+      return;
+    }
+
+    gloveImg.dataset.fallbackApplied = "1";
+    gloveImg.src = toAssetPath("assets/blanco.png");
   };
 
   gloveWrap.appendChild(gloveImg);

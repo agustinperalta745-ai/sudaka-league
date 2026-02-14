@@ -589,7 +589,7 @@ summary:focus-visible,
 
 .kof-top3-card {
   flex-wrap: nowrap;
-  --glow-color: rgba(0, 120, 255, 0.7);
+  --glow-color: #2a6cff;
   position: relative;
   overflow: hidden;
 }
@@ -600,7 +600,8 @@ summary:focus-visible,
   inset: 0;
   background: radial-gradient(circle at center, var(--glow-color), transparent 70%);
   filter: blur(30px);
-  opacity: 0.95;
+  opacity: 1;
+  box-shadow: 0 0 24px var(--glow-color);
   z-index: 0;
 }
 
@@ -621,7 +622,7 @@ summary:focus-visible,
 
 .kof-top3-glove img {
   object-fit: contain;
-  filter: drop-shadow(0 0 5px rgba(120, 210, 255, 0.45));
+  filter: drop-shadow(0 0 8px var(--glow-color));
 }
 
 .kof-top3-fallback {
