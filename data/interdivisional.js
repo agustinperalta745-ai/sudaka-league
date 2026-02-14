@@ -1,5 +1,7 @@
+const { cupSeason = 23 } = window.SUDAKA_SITE_DATA || {};
+
 window.INTERDIVISIONAL_ACTIVE_SEASON = {
-  season: "T24",
+  season: `T${cupSeason}`,
 
   octavos: [
     {
