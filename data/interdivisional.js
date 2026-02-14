@@ -79,15 +79,41 @@ window.INTERDIVISIONAL_ACTIVE_SEASON = {
     }
   ],
 
+  semifinal_playoffs: [
+    {
+      id: "1",
+      label: "Semifinal Play-offs 1",
+      home: { winnerOf: "cuartos-1", placeholder: "Ganador Cuartos 1" },
+      away: { winnerOf: "cuartos-2", placeholder: "Ganador Cuartos 2" }
+    },
+    {
+      id: "2",
+      label: "Semifinal Play-offs 2",
+      home: { winnerOf: "cuartos-3", placeholder: "Ganador Cuartos 3" },
+      away: { winnerOf: "cuartos-4", placeholder: "Ganador Cuartos 4" }
+    }
+  ],
+
+  final_playoffs: [
+    {
+      id: "1",
+      label: "Final Play-offs",
+      home: { winnerOf: "semis-1", placeholder: "Ganador Semi 1" },
+      away: { winnerOf: "semis-2", placeholder: "Ganador Semi 2" }
+    }
+  ],
+
   final_copa_interdivisional: [
     {
-      label: "Final Copa Interdivisional 1",
-      away: {
+      id: "1",
+      label: "Final Copa Interdivisional",
+      home: {
         club: "Universitario",
         player: "H09",
-        division: "1ra Div",
-        shield: "universitario.png"
-      }
+        division: "2da Div",
+        shield: "assets/escudos/universitario.png"
+      },
+      away: { winnerOf: "finalpo-1", placeholder: "Ganador Final Play-offs" }
     }
   ],
 
