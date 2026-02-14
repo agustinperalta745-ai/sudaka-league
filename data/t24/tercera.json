@@ -1,7 +1,7 @@
 {
   "source": "gesliga",
   "division": "tercera",
-  "fetchedAt": "2026-02-14T18:36:35.957Z",
+  "fetchedAt": "2026-02-14T19:05:10.590Z",
   "rows": [
     {
       "pos": 1,
@@ -44,29 +44,29 @@
     },
     {
       "pos": 4,
-      "equipo": "Brighton - Lichacrack",
-      "escudoFile": "brighton.png",
-      "pts": 3,
-      "pj": 6,
+      "equipo": "Bologna - JUN Smash",
+      "escudoFile": "bologna.png",
+      "pts": 4,
+      "pj": 4,
       "pg": 1,
-      "pe": 0,
-      "pp": 5,
+      "pe": 1,
+      "pp": 2,
       "gf": 7,
-      "gc": 24,
-      "dg": -17
+      "gc": 6,
+      "dg": 1
     },
     {
       "pos": 5,
-      "equipo": "Bologna - JUN Smash",
-      "escudoFile": "bologna.png",
-      "pts": 1,
-      "pj": 3,
-      "pg": 0,
-      "pe": 1,
-      "pp": 2,
-      "gf": 3,
-      "gc": 6,
-      "dg": -3
+      "equipo": "Brighton - Lichacrack",
+      "escudoFile": "brighton.png",
+      "pts": 3,
+      "pj": 7,
+      "pg": 1,
+      "pe": 0,
+      "pp": 6,
+      "gf": 7,
+      "gc": 28,
+      "dg": -21
     },
     {
       "pos": 6,
