@@ -1,7 +1,7 @@
 {
   "source": "gesliga",
   "division": "primera",
-  "fetchedAt": "2026-02-14T01:07:21.906Z",
+  "fetchedAt": "2026-02-14T01:22:58.291Z",
   "rows": [
     {
       "pos": 1,
@@ -164,16 +164,29 @@
       "equipo": "Patry - Feeyenord",
       "escudoFile": "patry.png",
       "pts": 9,
-      "pj": 10,
+      "pj": 12,
       "pg": 2,
       "pe": 3,
-      "pp": 5,
-      "gf": 11,
-      "gc": 19,
-      "dg": -8
+      "pp": 7,
+      "gf": 12,
+      "gc": 23,
+      "dg": -11
     },
     {
       "pos": 14,
+      "equipo": "TinchoRamirez - Monaco",
+      "escudoFile": "tinchoramirez.png",
+      "pts": 6,
+      "pj": 2,
+      "pg": 2,
+      "pe": 0,
+      "pp": 0,
+      "gf": 4,
+      "gc": 1,
+      "dg": 3
+    },
+    {
+      "pos": 15,
       "equipo": "HernanZayas - Nottingham Forest",
       "escudoFile": "hernanzayas.png",
       "pts": 4,
@@ -186,7 +199,7 @@
       "dg": -7
     },
     {
-      "pos": 15,
+      "pos": 16,
       "equipo": "Exeeneta - Fiorentina",
       "escudoFile": "exeeneta.png",
       "pts": 1,
@@ -199,7 +212,7 @@
       "dg": -3
     },
     {
-      "pos": 16,
+      "pos": 17,
       "equipo": "Aacuis09 - PSV",
       "escudoFile": "aacuis09.png",
       "pts": 1,
@@ -212,7 +225,7 @@
       "dg": -4
     },
     {
-      "pos": 17,
+      "pos": 18,
       "equipo": "Edug98 - Fenerbache",
       "escudoFile": "edug98.png",
       "pts": 0,
@@ -225,20 +238,7 @@
       "dg": 0
     },
     {
-      "pos": 17,
-      "equipo": "TinchoRamirez - Monaco",
-      "escudoFile": "tinchoramirez.png",
-      "pts": 0,
-      "pj": 0,
-      "pg": 0,
-      "pe": 0,
-      "pp": 0,
-      "gf": 0,
-      "gc": 0,
-      "dg": 0
-    },
-    {
-      "pos": 17,
+      "pos": 18,
       "equipo": "FAFAFA - Torino",
       "escudoFile": "fafafa.png",
       "pts": 0,
@@ -251,7 +251,7 @@
       "dg": 0
     },
     {
-      "pos": 17,
+      "pos": 18,
       "equipo": "Tumtum - Galatasaray",
       "escudoFile": "tumtum.png",
       "pts": 0,
