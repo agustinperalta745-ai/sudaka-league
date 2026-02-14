@@ -492,7 +492,6 @@ let openTitlesRankingId = null;
 let interdivisionalState = null;
 let cupPanelTab = "active";
 let cupActivePhase = "2";
-let cupHistoryExpandedSeason = "";
 const cupHistoryExpandedPhasesBySeason = new Map();
 let copaPremierState = null;
 let cupPremierPanelTab = "active";
@@ -505,6 +504,13 @@ const CUP_PHASE_BUTTONS = [
   { id: "3", key: "semifinal_playoffs", label: "3RA FASE" },
   { id: "4", key: "final_playoffs", label: "4TA FASE" },
   { id: "5", key: "final_copa_interdivisional", label: "5TA FASE" }
+];
+
+const CUP_HISTORY_PHASES = [
+  { key: "octavos_playoffs", label: "Octavos" },
+  { key: "cuartos_playoffs", label: "Cuartos" },
+  { key: "semifinal_playoffs", label: "Semifinal" },
+  { key: "final_playoffs", label: "Final" }
 ];
 
 const T24_DIVISIONS = [
@@ -2850,35 +2856,49 @@ function renderCupHistoryTab() {
     cupHistorySeasonSelect.value = seasons[0].season;
   }
 
-  const selectedSeason = seasons.find((season) => season.season === cupHistorySeasonSelect.value) || seasons[0];
-  const selectedSeasonKey = selectedSeason?.season || seasons[0]?.season || "";
-
-  if (!cupHistoryExpandedSeason || !seasons.some((season) => season.season === cupHistoryExpandedSeason)) {
-    cupHistoryExpandedSeason = selectedSeasonKey;
-  }
-
   cupHistoryList.replaceChildren();
   if (!seasons.length) return;
 
-  seasons.forEach((season, seasonIndex) => {
-    ensureInterdivisionalProgression(season);
-    const seasonItem = createCupHistorySeasonAccordionItem(season, seasonIndex, {
-      isOpen: season.season === cupHistoryExpandedSeason
-    });
-    cupHistoryList.appendChild(seasonItem);
-  });
-}
+  const selectedSeason = seasons.find((season) => season.season === cupHistorySeasonSelect.value) || seasons[0];
+  if (!selectedSeason) return;
 
-function getDefaultCupHistoryPhaseKey(season) {
-  const visiblePhases = getVisiblePhaseKeysForSeason(season);
+  cupHistorySeasonSelect.value = selectedSeason.season;
+  ensureInterdivisionalProgression(selectedSeason);
 
-  return [...visiblePhases].reverse().find((phaseKey) => {
-    if (phaseKey === "final_copa_interdivisional") {
-      return Boolean(getFinalCopaInterdivisionalMatch(season));
+  const phaseList = document.createElement("div");
+  phaseList.className = "cup-history-phase-list";
+
+  const rememberedState = cupHistoryExpandedPhasesBySeason.get(selectedSeason.season) || {};
+  const phaseItemsWithData = CUP_HISTORY_PHASES.filter(({ key }) => getCupHistoryMatchesByPhase(selectedSeason, key).length > 0);
+
+  if (!phaseItemsWithData.length) {
+    const emptyNote = document.createElement("p");
+    emptyNote.className = "cup-round-empty-note";
+    emptyNote.textContent = "Sin datos aún";
+    cupHistoryList.appendChild(emptyNote);
+    return;
+  }
+
+  const defaultPhase = rememberedState.openPhase
+    && phaseItemsWithData.some((phase) => phase.key === rememberedState.openPhase)
+    ? rememberedState.openPhase
+    : (phaseItemsWithData.find((phase) => phase.key === "final_playoffs")?.key || phaseItemsWithData[0].key);
+
+  phaseItemsWithData.forEach((phase, phaseIndex) => {
+    const phaseItem = createCupHistoryPhaseAccordionItem(
+      selectedSeason,
+      phase.key,
+      `cup-history-${selectedSeason.season}-phase-panel-${phaseIndex}`,
+      phase.key === defaultPhase,
+      phase.label
+    );
+
+    if (phaseItem) {
+      phaseList.appendChild(phaseItem);
     }
+  });
 
-    return (season?.phases?.[phaseKey] || []).length > 0;
-  }) || visiblePhases[visiblePhases.length - 1] || INTERDIVISIONAL_PHASES[0].key;
+  cupHistoryList.appendChild(phaseList);
 }
 
 function getCupHistoryMatchesByPhase(season, phaseKey) {
@@ -2890,7 +2910,7 @@ function getCupHistoryMatchesByPhase(season, phaseKey) {
   return season?.phases?.[phaseKey] || [];
 }
 
-function createCupHistoryPhaseAccordionItem(season, phaseKey, itemId, isOpen) {
+function createCupHistoryPhaseAccordionItem(season, phaseKey, itemId, isOpen, phaseLabel = null) {
   const matches = getCupHistoryMatchesByPhase(season, phaseKey);
   const section = createCupPhaseSection(phaseKey, matches, {
     editable: false,
@@ -2913,7 +2933,7 @@ function createCupHistoryPhaseAccordionItem(season, phaseKey, itemId, isOpen) {
   trigger.setAttribute("aria-controls", itemId);
 
   const title = document.createElement("span");
-  title.textContent = `${getPhaseLabel(phaseKey)} (${matches.length})`;
+  title.textContent = `${phaseLabel || getPhaseLabel(phaseKey)} (${matches.length})`;
 
   const chevron = document.createElement("span");
   chevron.className = "history-chevron";
@@ -2955,87 +2975,6 @@ function createCupHistoryPhaseAccordionItem(season, phaseKey, itemId, isOpen) {
       animateHistoryPanel(panel, true);
       phaseState.openPhase = phaseKey;
       cupHistoryExpandedPhasesBySeason.set(season.season, phaseState);
-    }
-  });
-
-  return item;
-}
-
-function createCupHistorySeasonAccordionItem(season, seasonIndex, options = {}) {
-  const { isOpen = false } = options;
-  const item = document.createElement("article");
-  item.className = "cup-history-season-item history-accordion-item sl-card";
-
-  const trigger = document.createElement("button");
-  trigger.type = "button";
-  trigger.className = "cup-history-season-trigger history-accordion-trigger sl-pill";
-  trigger.setAttribute("aria-expanded", String(isOpen));
-  trigger.setAttribute("aria-controls", `cup-history-season-panel-${seasonIndex}`);
-
-  const title = document.createElement("span");
-  title.textContent = season.status === "completed" && season.champion
-    ? `${season.season} — Campeón: ${season.champion}`
-    : season.season;
-
-  const chevron = document.createElement("span");
-  chevron.className = "history-chevron";
-  chevron.setAttribute("aria-hidden", "true");
-  chevron.textContent = "⌄";
-  trigger.append(title, chevron);
-
-  const panel = document.createElement("div");
-  panel.className = "cup-history-season-panel history-accordion-panel";
-  panel.id = `cup-history-season-panel-${seasonIndex}`;
-  panel.hidden = !isOpen;
-  panel.dataset.expanded = String(isOpen);
-
-  const phaseList = document.createElement("div");
-  phaseList.className = "cup-history-phase-list";
-
-  const visiblePhases = getVisiblePhaseKeysForSeason(season);
-  const rememberedState = cupHistoryExpandedPhasesBySeason.get(season.season) || {};
-  const defaultPhase = rememberedState.openPhase || getDefaultCupHistoryPhaseKey(season);
-
-  visiblePhases.forEach((phaseKey, phaseIndex) => {
-    const phaseItem = createCupHistoryPhaseAccordionItem(
-      season,
-      phaseKey,
-      `cup-history-${season.season}-phase-panel-${phaseIndex}`,
-      phaseKey === defaultPhase
-    );
-
-    if (phaseItem) {
-      phaseList.appendChild(phaseItem);
-    }
-  });
-
-  panel.appendChild(phaseList);
-
-  if (isOpen) {
-    panel.style.maxHeight = "none";
-    item.classList.add("is-open");
-  }
-
-  trigger.addEventListener("click", () => {
-    const isExpanded = trigger.getAttribute("aria-expanded") === "true";
-    const nextOpen = !isExpanded;
-
-    item.parentElement?.querySelectorAll(".cup-history-season-item").forEach((entry) => {
-      const entryTrigger = entry.querySelector(".cup-history-season-trigger");
-      const entryPanel = entry.querySelector(".cup-history-season-panel");
-      if (!entryTrigger || !entryPanel) return;
-
-      entryTrigger.setAttribute("aria-expanded", "false");
-      entry.classList.remove("is-open");
-      animateHistoryPanel(entryPanel, false);
-    });
-
-    if (nextOpen) {
-      trigger.setAttribute("aria-expanded", "true");
-      item.classList.add("is-open");
-      animateHistoryPanel(panel, true);
-      cupHistoryExpandedSeason = season.season;
-      cupHistorySeasonSelect.value = season.season;
     }
   });
 
@@ -3111,7 +3050,6 @@ function setupCupCrossingsAccordion() {
 
   if (cupHistorySeasonSelect) {
     cupHistorySeasonSelect.addEventListener("change", () => {
-      cupHistoryExpandedSeason = cupHistorySeasonSelect.value;
       renderCupHistoryTab();
     });
   }
