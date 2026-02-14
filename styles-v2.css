@@ -1975,6 +1975,43 @@ summary:focus-visible,
   padding-left: 0.62rem;
 }
 
+
+.kof-open-layout {
+  display: grid;
+  gap: 1rem;
+}
+
+.kof-open-callout {
+  padding: clamp(0.85rem, 2.5vw, 1.1rem);
+  border: 1px solid rgba(255, 120, 120, 0.55);
+  box-shadow: 0 0 24px rgba(255, 90, 120, 0.35);
+  background: linear-gradient(160deg, rgba(40, 12, 26, 0.9), rgba(16, 22, 42, 0.9));
+}
+
+.kof-open-section {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.kof-open-callout h3,
+.kof-open-section h3 {
+  margin: 0;
+}
+
+.kof-open-callout p,
+.kof-open-section p {
+  margin: 0;
+}
+
+.kof-open-callout ul,
+.kof-open-section ul,
+.kof-open-section ol {
+  margin: 0;
+  padding-left: 1.15rem;
+  display: grid;
+  gap: 0.35rem;
+}
+
 .pes6-start-wrapper {
   margin-top: 30px;
   text-align: center;
