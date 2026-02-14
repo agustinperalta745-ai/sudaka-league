@@ -205,6 +205,9 @@ const PES6_HISTORY_META = {
 };
 
 const INTERDIVISIONAL_ACTIVE_SOURCE = window.INTERDIVISIONAL_ACTIVE_SEASON || null;
+const INTERDIVISIONAL_CUARTOS_SOURCE = Array.isArray(window.INTERDIVISIONAL_CUARTOS_PLAYOFFS)
+  ? window.INTERDIVISIONAL_CUARTOS_PLAYOFFS
+  : [];
 const INTERDIVISIONAL_HISTORY_SOURCE = Array.isArray(window.INTERDIVISIONAL_HISTORY_SEASONS)
   ? window.INTERDIVISIONAL_HISTORY_SEASONS
   : [];
@@ -2125,6 +2128,81 @@ function createPlaceholderSide(label) {
   };
 }
 
+function normalizeDivisionName(value = "") {
+  const normalized = String(value || "").trim().toLowerCase();
+
+  if (["1ra", "1ra div", "primera", "primera div", "1ra division"].includes(normalized)) {
+    return "Primera";
+  }
+
+  if (["2da", "2da div", "segunda", "segunda div", "2da division"].includes(normalized)) {
+    return "Segunda";
+  }
+
+  if (["3ra", "3ra div", "tercera", "tercera div", "3ra division"].includes(normalized)) {
+    return "Tercera";
+  }
+
+  if (["4ta", "4ta div", "cuarta", "cuarta div", "4ta division"].includes(normalized)) {
+    return "Cuarta";
+  }
+
+  return value || "Primera";
+}
+
+function normalizeCuartosSide(side) {
+  if (!side || typeof side !== "object") {
+    return createPlaceholderSide("Por definir");
+  }
+
+  return {
+    club: side.teamKey || side.club || side.name || "",
+    player: side.user || side.player || side.name || "Por definir",
+    division: normalizeDivisionName(side.division),
+    shield: side.shield || ""
+  };
+}
+
+function normalizeCuartosResult(result) {
+  if (!result || typeof result !== "object") return null;
+
+  const home = Number(result.home);
+  const away = Number(result.away);
+
+  if (!Number.isFinite(home) || !Number.isFinite(away)) return null;
+
+  return { home, away };
+}
+
+function normalizeCuartosMatches(matches) {
+  if (!Array.isArray(matches)) return [];
+
+  return matches.map((match, index) => ({
+    id: match?.id || `cuartos-${index + 1}`,
+    label: match?.label || `Cuartos Play-offs ${index + 1}`,
+    home: normalizeCuartosSide(match?.home),
+    away: normalizeCuartosSide(match?.away),
+    winner: normalizeWinnerValue(match?.winner),
+    result: normalizeCuartosResult(match?.score ?? match?.result),
+    pens: normalizeCuartosResult(match?.pens)
+  }));
+}
+
+function hasLoadedCuartosData(matches) {
+  if (!Array.isArray(matches) || matches.length === 0) return false;
+
+  return matches.some((match) => {
+    const winner = normalizeWinnerValue(match?.winner);
+    const result = normalizeCuartosResult(match?.score ?? match?.result);
+    const homeUser = typeof match?.home?.user === "string" ? match.home.user.trim() : "";
+    const awayUser = typeof match?.away?.user === "string" ? match.away.user.trim() : "";
+    const homeTeam = typeof match?.home?.teamKey === "string" ? match.home.teamKey.trim() : "";
+    const awayTeam = typeof match?.away?.teamKey === "string" ? match.away.teamKey.trim() : "";
+
+    return !!winner || !!result || !!homeUser || !!awayUser || !!homeTeam || !!awayTeam;
+  });
+}
+
 function formatSide(side, fallbackLabel = "") {
   if (!side) {
     return createPlaceholderSide(fallbackLabel || "Por definir");
@@ -2201,11 +2279,18 @@ function buildInterdivisionalActiveSeason(source) {
       semifinal_playoffs: [],
       final_playoffs: [],
       final_copa_interdivisional: []
+    },
+    metadata: {
+      cuartosLoaded: hasLoadedCuartosData(INTERDIVISIONAL_CUARTOS_SOURCE)
     }
   };
 
   const sourcePhases = source.phases || {};
-  const sourceCuartos = Array.isArray(source.cuartos_playoffs) ? source.cuartos_playoffs : sourcePhases.cuartos_playoffs;
+  const sourceCuartos = INTERDIVISIONAL_CUARTOS_SOURCE.length > 0
+    ? normalizeCuartosMatches(INTERDIVISIONAL_CUARTOS_SOURCE)
+    : Array.isArray(source.cuartos_playoffs)
+      ? source.cuartos_playoffs
+      : sourcePhases.cuartos_playoffs;
   const sourceSemis = Array.isArray(source.semifinal_playoffs) ? source.semifinal_playoffs : sourcePhases.semifinal_playoffs;
   const sourceFinalPlayoffs = Array.isArray(source.final_playoffs) ? source.final_playoffs : sourcePhases.final_playoffs;
   const sourceFinalCopa = Array.isArray(source.final_copa_interdivisional) ? source.final_copa_interdivisional : sourcePhases.final_copa_interdivisional;
@@ -2622,10 +2707,15 @@ function renderCupActiveTab() {
   }
 
   const matches = currentSeason.phases[phaseToRender] || [];
+  const isCuartosPhase = phaseToRender === "cuartos_playoffs";
+  const emptyMessage = isCuartosPhase && currentSeason?.metadata?.cuartosLoaded === false
+    ? "Cuartos aún no cargados"
+    : "No hay cruces cargados para esta fase";
+
   const section = createCupPhaseSection(phaseToRender, matches, {
     editable: false,
     season: currentSeason,
-    emptyMessage: "No hay cruces cargados para esta fase"
+    emptyMessage
   });
 
   if (section) {
