@@ -1,7 +1,7 @@
 {
   "source": "gesliga",
   "division": "tercera",
-  "fetchedAt": "2026-02-14T11:46:17.363Z",
+  "fetchedAt": "2026-02-14T13:56:45.531Z",
   "rows": [
     {
       "pos": 1,
@@ -20,26 +20,26 @@
       "pos": 2,
       "equipo": "Fenerbache - jona96delgado",
       "escudoFile": "fenerbache.png",
-      "pts": 6,
-      "pj": 2,
+      "pts": 7,
+      "pj": 3,
       "pg": 2,
-      "pe": 0,
+      "pe": 1,
       "pp": 0,
-      "gf": 15,
-      "gc": 3,
+      "gf": 18,
+      "gc": 6,
       "dg": 12
     },
     {
       "pos": 3,
       "equipo": "PSV - Eduard9419",
       "escudoFile": "psv.png",
-      "pts": 6,
-      "pj": 2,
+      "pts": 7,
+      "pj": 3,
       "pg": 2,
-      "pe": 0,
+      "pe": 1,
       "pp": 0,
-      "gf": 7,
-      "gc": 4,
+      "gf": 10,
+      "gc": 7,
       "dg": 3
     },
     {
