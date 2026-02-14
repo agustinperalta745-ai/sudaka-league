@@ -95,8 +95,17 @@ window.INTERDIVISIONAL_ACTIVE_SEASON = {
       winner: ""
     },
     {
-      home: { name: "GANADOR 3", escudo: "equipo3.png", division: "1ra" },
-      away: { name: "GANADOR 4", escudo: "equipo4.png", division: "3ra" },
+      home: {
+        type: "team",
+        user: "SoyLefo",
+        division: "2da Div"
+      },
+      away: {
+        type: "team",
+        teamKey: "estudiantes.png",
+        user: "Exeeneta",
+        division: "1ra Div"
+      },
       winner: ""
     },
     {
