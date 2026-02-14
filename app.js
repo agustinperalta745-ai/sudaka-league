@@ -362,6 +362,10 @@ function getCupCrossingTeamLogoPath(teamData) {
     return toAssetPath(teamData.shield);
   }
 
+  if (teamData.escudo) {
+    return toAssetPath(teamData.escudo);
+  }
+
   if (teamData.logo) {
     return toAssetPath(teamData.logo);
   }
@@ -468,7 +472,7 @@ let showAllTitlesRanking = false;
 let openTitlesRankingId = null;
 let interdivisionalState = null;
 let cupPanelTab = "active";
-let cupActivePhase = "1";
+let cupActivePhase = "2";
 let copaPremierState = null;
 let cupPremierPanelTab = "active";
 let cupPremierActivePhase = "cuartos";
@@ -703,7 +707,7 @@ async function renderT24Tables() {
 // Asignación centralizada de links editables.
 
 const PES6_FINAL_TARGET = new Date("2026-02-22T23:59:00-03:00");
-const CUP_INTERDIVISIONAL_FINAL_TARGET = new Date("2026-02-13T23:59:00-03:00");
+const CUP_INTERDIVISIONAL_FINAL_TARGET = new Date("2026-02-16T23:59:00-03:00");
 
 function updateCountdown(targetDate, el, options = {}) {
   if (!el) return;
@@ -2132,7 +2136,9 @@ function formatSide(side, fallbackLabel = "") {
 
   return {
     ...side,
-    player: side.player || fallbackLabel || side.club || "Por definir"
+    club: side.club || side.name || "",
+    player: side.player || side.name || fallbackLabel || side.club || "Por definir",
+    shield: side.shield || side.escudo || ""
   };
 }
 
