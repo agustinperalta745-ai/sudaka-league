@@ -2179,17 +2179,29 @@ function normalizeCuartosResult(result) {
 }
 
 function getInterdivisionalResultPhaseKey(phaseKey) {
-  if (phaseKey === "octavos_playoffs") return "octavos";
-  if (phaseKey === "cuartos_playoffs") return "cuartos";
-  if (phaseKey === "semifinal_playoffs") return "semifinal";
-  if (phaseKey === "final_playoffs") return "final";
-  return phaseKey;
+  if (phaseKey === "octavos_playoffs" || phaseKey === "octavos") return "octavos";
+  if (phaseKey === "cuartos_playoffs" || phaseKey === "cuartos") return "cuartos";
+  if (phaseKey === "semifinal_playoffs" || phaseKey === "semis") return "semis";
+  if (phaseKey === "final_playoffs" || phaseKey === "finalpo") return "final_playoffs";
+  if (phaseKey === "final_copa_interdivisional" || phaseKey === "final") return "final";
+  return null;
 }
 
 function getInterdivisionalMatchResult(phaseKey, matchId) {
   const phaseResultKey = getInterdivisionalResultPhaseKey(phaseKey);
-  const resultKey = `${phaseResultKey}-${matchId}`;
-  const sourceResult = INTERDIVISIONAL_RESULTS_SOURCE?.[resultKey];
+  if (!phaseResultKey) return null;
+
+  const phaseResults = INTERDIVISIONAL_RESULTS_SOURCE?.[phaseResultKey];
+  if (!phaseResults || typeof phaseResults !== "object") return null;
+
+  const normalizedMatchId = String(matchId || "").trim();
+  if (!normalizedMatchId) return null;
+
+  const resultKey = normalizedMatchId.includes("-")
+    ? normalizedMatchId
+    : `${phaseResultKey === "final_playoffs" ? "finalpo" : phaseResultKey}-${normalizedMatchId}`;
+
+  const sourceResult = phaseResults?.[resultKey];
   if (!sourceResult || typeof sourceResult !== "object") return null;
 
   return {
