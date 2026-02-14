@@ -1,7 +1,7 @@
 {
   "source": "gesliga",
   "division": "tercera",
-  "fetchedAt": "2026-02-14T01:41:58.974Z",
+  "fetchedAt": "2026-02-14T02:23:20.650Z",
   "rows": [
     {
       "pos": 1,
@@ -31,6 +31,19 @@
     },
     {
       "pos": 3,
+      "equipo": "PSV - Eduard9419",
+      "escudoFile": "psv.png",
+      "pts": 3,
+      "pj": 1,
+      "pg": 1,
+      "pe": 0,
+      "pp": 0,
+      "gf": 4,
+      "gc": 2,
+      "dg": 2
+    },
+    {
+      "pos": 4,
       "equipo": "Bologna - JUN Smash",
       "escudoFile": "bologna.png",
       "pts": 1,
@@ -43,7 +56,7 @@
       "dg": -2
     },
     {
-      "pos": 4,
+      "pos": 5,
       "equipo": "Villareal - Facu.jey",
       "escudoFile": "villareal.png",
       "pts": 0,
@@ -56,7 +69,7 @@
       "dg": 0
     },
     {
-      "pos": 4,
+      "pos": 5,
       "equipo": "Real Sociedad - Nahuuuu",
       "escudoFile": "real-sociedad.png",
       "pts": 0,
@@ -69,7 +82,7 @@
       "dg": 0
     },
     {
-      "pos": 4,
+      "pos": 5,
       "equipo": "Valencia - Jotaropucho",
       "escudoFile": "valencia.png",
       "pts": 0,
@@ -82,7 +95,7 @@
       "dg": 0
     },
     {
-      "pos": 4,
+      "pos": 5,
       "equipo": "Betis - Lulorc",
       "escudoFile": "betis.png",
       "pts": 0,
@@ -95,7 +108,7 @@
       "dg": 0
     },
     {
-      "pos": 4,
+      "pos": 5,
       "equipo": "Monaco - Kindel",
       "escudoFile": "monaco.png",
       "pts": 0,
@@ -108,7 +121,7 @@
       "dg": 0
     },
     {
-      "pos": 4,
+      "pos": 5,
       "equipo": "Lyon - tio",
       "escudoFile": "lyon.png",
       "pts": 0,
@@ -121,20 +134,7 @@
       "dg": 0
     },
     {
-      "pos": 4,
-      "equipo": "PSV - Eduard9419",
-      "escudoFile": "psv.png",
-      "pts": 0,
-      "pj": 0,
-      "pg": 0,
-      "pe": 0,
-      "pp": 0,
-      "gf": 0,
-      "gc": 0,
-      "dg": 0
-    },
-    {
-      "pos": 4,
+      "pos": 5,
       "equipo": "Galatasaray - Pipa",
       "escudoFile": "galatasaray.png",
       "pts": 0,
@@ -147,7 +147,7 @@
       "dg": 0
     },
     {
-      "pos": 4,
+      "pos": 5,
       "equipo": "Marsella - ElLokoSantooss",
       "escudoFile": "marsella.png",
       "pts": 0,
@@ -160,7 +160,7 @@
       "dg": 0
     },
     {
-      "pos": 4,
+      "pos": 5,
       "equipo": "Roma - Kasino06",
       "escudoFile": "roma.png",
       "pts": 0,
@@ -173,7 +173,7 @@
       "dg": 0
     },
     {
-      "pos": 4,
+      "pos": 5,
       "equipo": "Fiorentina - ignafig",
       "escudoFile": "fiorentina.png",
       "pts": 0,
@@ -186,7 +186,7 @@
       "dg": 0
     },
     {
-      "pos": 4,
+      "pos": 5,
       "equipo": "Torino - Patofontanet",
       "escudoFile": "torino.png",
       "pts": 0,
@@ -199,7 +199,7 @@
       "dg": 0
     },
     {
-      "pos": 4,
+      "pos": 5,
       "equipo": "Leeds United - Messi16",
       "escudoFile": "leeds-united.png",
       "pts": 0,
@@ -212,7 +212,7 @@
       "dg": 0
     },
     {
-      "pos": 4,
+      "pos": 5,
       "equipo": "Everton - Luxo",
       "escudoFile": "everton.png",
       "pts": 0,
@@ -225,7 +225,7 @@
       "dg": 0
     },
     {
-      "pos": 4,
+      "pos": 5,
       "equipo": "Fulham - Mikoi",
       "escudoFile": "fulham.png",
       "pts": 0,
@@ -255,13 +255,13 @@
       "equipo": "Brighton - Lichacrack",
       "escudoFile": "brighton.png",
       "pts": 0,
-      "pj": 3,
+      "pj": 4,
       "pg": 0,
       "pe": 0,
-      "pp": 3,
-      "gf": 2,
-      "gc": 17,
-      "dg": -15
+      "pp": 4,
+      "gf": 4,
+      "gc": 21,
+      "dg": -17
     }
   ]
 }

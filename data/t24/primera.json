@@ -1,7 +1,7 @@
 {
   "source": "gesliga",
   "division": "primera",
-  "fetchedAt": "2026-02-14T01:41:57.915Z",
+  "fetchedAt": "2026-02-14T02:23:19.573Z",
   "rows": [
     {
       "pos": 1,
@@ -46,13 +46,13 @@
       "pos": 4,
       "equipo": "Joser17 - Brighton",
       "escudoFile": "joser17.png",
-      "pts": 21,
-      "pj": 14,
-      "pg": 6,
+      "pts": 24,
+      "pj": 16,
+      "pg": 7,
       "pe": 3,
-      "pp": 5,
-      "gf": 23,
-      "gc": 20,
+      "pp": 6,
+      "gf": 27,
+      "gc": 24,
       "dg": 3
     },
     {
@@ -72,14 +72,14 @@
       "pos": 6,
       "equipo": "Ivancarocela - Roma",
       "escudoFile": "ivancarocela.png",
-      "pts": 20,
-      "pj": 20,
+      "pts": 21,
+      "pj": 22,
       "pg": 5,
-      "pe": 5,
-      "pp": 10,
-      "gf": 23,
-      "gc": 28,
-      "dg": -5
+      "pe": 6,
+      "pp": 11,
+      "gf": 25,
+      "gc": 32,
+      "dg": -7
     },
     {
       "pos": 7,
@@ -174,6 +174,19 @@
     },
     {
       "pos": 14,
+      "equipo": "Exeeneta - Fiorentina",
+      "escudoFile": "exeeneta.png",
+      "pts": 8,
+      "pj": 6,
+      "pg": 2,
+      "pe": 2,
+      "pp": 2,
+      "gf": 9,
+      "gc": 10,
+      "dg": -1
+    },
+    {
+      "pos": 15,
       "equipo": "TinchoRamirez - Monaco",
       "escudoFile": "tinchoramirez.png",
       "pts": 6,
@@ -186,7 +199,7 @@
       "dg": 3
     },
     {
-      "pos": 15,
+      "pos": 16,
       "equipo": "HernanZayas - Nottingham Forest",
       "escudoFile": "hernanzayas.png",
       "pts": 4,
@@ -197,19 +210,6 @@
       "gf": 10,
       "gc": 17,
       "dg": -7
-    },
-    {
-      "pos": 16,
-      "equipo": "Exeeneta - Fiorentina",
-      "escudoFile": "exeeneta.png",
-      "pts": 1,
-      "pj": 2,
-      "pg": 0,
-      "pe": 1,
-      "pp": 1,
-      "gf": 1,
-      "gc": 4,
-      "dg": -3
     },
     {
       "pos": 17,
