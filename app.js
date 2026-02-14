@@ -226,6 +226,8 @@ const INTERDIVISIONAL_HISTORY_SOURCE = Array.isArray(window.INTERDIVISIONAL_HIST
   ? window.INTERDIVISIONAL_HISTORY_SEASONS
   : [];
 
+const SITE_CUP_SEASON = window.SUDAKA_SITE_DATA?.cupSeason ?? 23;
+
 const COPA_PREMIER_ACTIVE_SOURCE = window.COPA_PREMIER_ACTIVE_SEASON || null;
 const COPA_PREMIER_HISTORY_SOURCE = Array.isArray(window.COPA_PREMIER_HISTORY_SEASONS)
   ? window.COPA_PREMIER_HISTORY_SEASONS
@@ -2354,7 +2356,7 @@ function buildInterdivisionalActiveSeason(source) {
   if (!octavos) return null;
 
   const season = {
-    season: source.season || "T24",
+    season: source.season || `T${SITE_CUP_SEASON}`,
     status: "active",
     champion: null,
     phases: {
@@ -2821,7 +2823,9 @@ function renderCupActiveTab() {
 function renderCupHistoryTab() {
   if (!cupHistorySeasonSelect || !cupHistoryList || !interdivisionalState) return;
 
-  const seasons = [...interdivisionalState.seasons].sort((a, b) => b.season.localeCompare(a.season, undefined, { numeric: true }));
+  const seasons = [...interdivisionalState.seasons]
+    .filter((season) => Number.parseInt(String(season.season || "").replace(/\D/g, ""), 10) >= 23)
+    .sort((a, b) => b.season.localeCompare(a.season, undefined, { numeric: true }));
   cupHistorySeasonSelect.replaceChildren();
 
   seasons.forEach((season) => {

@@ -1,7 +1,7 @@
 {
   "seasons": [
     {
-      "season": "T23",
+      "season": "T22",
       "status": "completed",
       "champion": "Larrierismo",
       "phases": {
@@ -270,7 +270,7 @@
       }
     },
     {
-      "season": "T24",
+      "season": "T23",
       "status": "active",
       "phases": {
         "octavos_playoffs": [

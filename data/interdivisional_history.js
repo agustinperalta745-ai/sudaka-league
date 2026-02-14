@@ -1,6 +1,6 @@
 window.INTERDIVISIONAL_HISTORY_SEASONS = [
   {
-    season: "T23",
+    season: "T22",
     status: "completed",
     champion: "Larrierismo",
     phases: {
