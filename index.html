@@ -490,45 +490,63 @@ Más interacción y estadísticas
 
     </section>
 
-    <section id="sf-panel" class="league-modal sl-card" role="dialog" aria-modal="true" aria-labelledby="kofModalTitle" hidden>
+    <section id="sf-panel" class="league-modal sl-card" role="dialog" aria-modal="true" aria-labelledby="kofModalOpenTitle" hidden>
       <button class="close-btn-fixed" type="button" aria-label="Cerrar panel">×</button>
       <img id="kofModalBanner" class="modal-banner" src="assets/kof2002.jpg" alt="King of Fighters 2002 Banner" />
-      <h2 id="kofModalTitle">—</h2>
+      <h2 id="kofModalOpenTitle">🔥 SISTEMA ABIERTO – KOF 2002 🔥</h2>
 
-      <div id="kofModalTabsLabel" class="tab-bar" role="tablist" aria-label="Contenido de King of Fighters 2002">
-        <button class="tab-btn sl-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="sf-tab-necesitas" id="sf-tab-btn-necesitas" data-tab="sf-tab-necesitas">Qué necesitás para jugar</button>
-        <button class="tab-btn sl-tab" type="button" role="tab" aria-selected="false" aria-controls="sf-tab-sistema" id="sf-tab-btn-sistema" data-tab="sf-tab-sistema">Sistema de liga</button>
-        <button class="tab-btn sl-tab" type="button" role="tab" aria-selected="false" aria-controls="sf-tab-temporadas" id="sf-tab-btn-temporadas" data-tab="sf-tab-temporadas">Temporadas</button>
-      </div>
+      <div class="kof-open-layout">
+        <section class="kof-open-callout sl-card neon-box" aria-label="Importante">
+          <h3>⚠️ LEÉ ESTO PRIMERO</h3>
+          <p>Esta liga NO se juega por fechas.<br />No tenés un único rival por jornada.</p>
+          <ul>
+            <li>👉 Podés jugar contra cualquier jugador disponible.</li>
+            <li>👉 No tenés que esperar a nadie.</li>
+            <li>👉 Si coincidís con alguien, juegan y suman puntos.</li>
+          </ul>
+          <p><strong>Es un sistema libre y flexible.</strong></p>
+        </section>
 
-      <div class="tab-content">
-        <section class="tab-panel is-active" role="tabpanel" id="sf-tab-necesitas" aria-labelledby="sf-tab-btn-necesitas">
-          <h3 id="kofNeedTitle">¿Qué necesitás para jugar?</h3>
+        <section class="kof-open-section" aria-label="Dónde se juega">
+          <h3>🎮 ¿DÓNDE SE JUEGA?</h3>
+          <p>Fightcade</p>
+          <p>Salón obligatorio:</p>
+          <p><strong>#THE KING OF FIGHTERS 2002</strong></p>
+        </section>
+
+        <section class="kof-open-section" aria-label="Cómo jugar">
+          <h3>🔎 ¿CÓMO JUGAR?</h3>
           <ol>
-            <li>
-              <strong>Instalar Fightcade y el juego (obligatorio)</strong>
-              <p><a id="kofInstallVideoLink" href="#" target="_blank" rel="noopener noreferrer">Video de instalación</a></p>
-              <p class="highlight-text">Este video SOLO explica la instalación. El funcionamiento de la liga se explica en otra pestaña.</p>
-            </li>
-            <li>
-              <strong>Entrar al salón correcto (obligatorio)</strong>
-              <p>Todos los partidos de liga se juegan exclusivamente en el salón:</p>
-              <p><strong id="kofRoomName">#—</strong></p>
-            </li>
+            <li>Entrás a Fightcade</li>
+            <li>Vas al salón indicado</li>
+            <li>Avisás en el grupo que estás disponible</li>
+            <li>Coordinás con cualquier jugador libre</li>
+            <li>Juegan</li>
+            <li>Enviás el resultado</li>
           </ol>
-
-          <div class="copy-box">
-            <textarea id="kof-message" readonly>Mensaje automático de bienvenida</textarea>
-            <button class="btn sl-btn btn-secondary copy-btn" type="button" data-copy-target="kof-message">📋 Copiar mensaje</button>
-          </div>
         </section>
 
-        <section class="tab-panel" role="tabpanel" id="sf-tab-sistema" aria-labelledby="sf-tab-btn-sistema" hidden>
-          <ul id="kofSystemList"></ul>
+        <section class="kof-open-section" aria-label="Claves del sistema">
+          <h3>⏱️ CLAVES DEL SISTEMA</h3>
+          <ul>
+            <li>No hay horarios fijos</li>
+            <li>No hay lobby automático</li>
+            <li>No hay orden obligatorio</li>
+            <li>Jugás cuando coincidís</li>
+            <li>Mientras más jugás, más subís</li>
+          </ul>
         </section>
 
-        <section class="tab-panel" role="tabpanel" id="sf-tab-temporadas" aria-labelledby="sf-tab-btn-temporadas" hidden>
-          <ul id="kofSeasonsList"></ul>
+        <section class="kof-open-section" aria-label="Objetivo">
+          <h3>🏆 OBJETIVO</h3>
+          <p>Sumar puntos y escalar posiciones.</p>
+        </section>
+
+        <section class="kof-open-section" aria-label="Instalación obligatoria">
+          <h3>📹 INSTALACIÓN (OBLIGATORIO)</h3>
+          <p>Video solo para instalar Fightcade y el juego:</p>
+          <p><a href="https://www.youtube.com/watch?v=tM5yVYoY-7w&amp;t=126s" target="_blank" rel="noopener noreferrer">https://www.youtube.com/watch?v=tM5yVYoY-7w&amp;t=126s</a></p>
+          <p><strong>⚠️ El video NO explica cómo funciona la liga.</strong></p>
         </section>
       </div>
 
