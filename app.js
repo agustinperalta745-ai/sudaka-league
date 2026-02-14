@@ -216,7 +216,7 @@ const COPA_PREMIER_HISTORY_SOURCE = Array.isArray(window.COPA_PREMIER_HISTORY_SE
 
 const INTERDIVISIONAL_PHASES = [
   { key: "octavos_playoffs", label: "Octavos Play-offs" },
-  { key: "cuartos_playoffs", label: "Cuartos de final Play-offs" },
+  { key: "cuartos_playoffs", label: "Cuartos Play-offs" },
   { key: "semifinal_playoffs", label: "Semifinal Play-offs" },
   { key: "final_playoffs", label: "Final Play-offs" },
   { key: "final_copa_interdivisional", label: "Final Copa Interdivisional" }
@@ -2624,7 +2624,8 @@ function renderCupActiveTab() {
   const matches = currentSeason.phases[phaseToRender] || [];
   const section = createCupPhaseSection(phaseToRender, matches, {
     editable: false,
-    season: currentSeason
+    season: currentSeason,
+    emptyMessage: "No hay cruces cargados para esta fase"
   });
 
   if (section) {
