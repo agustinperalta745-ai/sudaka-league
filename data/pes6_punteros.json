@@ -6,6 +6,7 @@
       "usuario": "Alex_CABJ",
       "pj": 15,
       "pg": 11,
+      "pts": 35,
       "escudoFile": "bologna.png"
     },
     {
@@ -14,6 +15,7 @@
       "usuario": "Sally1901",
       "pj": 10,
       "pg": 10,
+      "pts": 30,
       "escudoFile": "marsella.png"
     },
     {
@@ -22,6 +24,7 @@
       "usuario": "Broko",
       "pj": 7,
       "pg": 5,
+      "pts": 16,
       "escudoFile": "crystal-palace.png"
     }
   ],
