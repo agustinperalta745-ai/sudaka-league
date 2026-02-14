@@ -1,7 +1,7 @@
 {
   "source": "gesliga",
   "division": "segunda",
-  "fetchedAt": "2026-02-14T04:06:59.544Z",
+  "fetchedAt": "2026-02-14T04:27:01.242Z",
   "rows": [
     {
       "pos": 1,
@@ -18,42 +18,42 @@
     },
     {
       "pos": 2,
-      "equipo": "Cacherinhooo - Fullham",
-      "escudoFile": "cacherinhooo.png",
-      "pts": 15,
-      "pj": 5,
-      "pg": 5,
-      "pe": 0,
+      "equipo": "NazaTeto - Galatasaray",
+      "escudoFile": "nazateto.png",
+      "pts": 22,
+      "pj": 8,
+      "pg": 7,
+      "pe": 1,
       "pp": 0,
-      "gf": 24,
-      "gc": 5,
-      "dg": 19
+      "gf": 21,
+      "gc": 8,
+      "dg": 13
     },
     {
       "pos": 3,
-      "equipo": "Dabidpisi - Fiorentina",
-      "escudoFile": "dabidpisi.png",
-      "pts": 11,
-      "pj": 10,
-      "pg": 3,
-      "pe": 2,
-      "pp": 5,
-      "gf": 21,
-      "gc": 17,
-      "dg": 4
+      "equipo": "Cacherinhooo - Fullham",
+      "escudoFile": "cacherinhooo.png",
+      "pts": 16,
+      "pj": 7,
+      "pg": 5,
+      "pe": 1,
+      "pp": 1,
+      "gf": 28,
+      "gc": 10,
+      "dg": 18
     },
     {
       "pos": 4,
-      "equipo": "NazaTeto - Galatasaray",
-      "escudoFile": "nazateto.png",
-      "pts": 9,
-      "pj": 3,
+      "equipo": "Dabidpisi - Fiorentina",
+      "escudoFile": "dabidpisi.png",
+      "pts": 11,
+      "pj": 11,
       "pg": 3,
-      "pe": 0,
-      "pp": 0,
-      "gf": 9,
-      "gc": 3,
-      "dg": 6
+      "pe": 2,
+      "pp": 6,
+      "gf": 22,
+      "gc": 19,
+      "dg": 3
     },
     {
       "pos": 5,
@@ -161,19 +161,6 @@
     },
     {
       "pos": 11,
-      "equipo": "Slasher7 - Crystal Palace",
-      "escudoFile": "slasher7.png",
-      "pts": 0,
-      "pj": 0,
-      "pg": 0,
-      "pe": 0,
-      "pp": 0,
-      "gf": 0,
-      "gc": 0,
-      "dg": 0
-    },
-    {
-      "pos": 11,
       "equipo": "Leom - Real Sociedad",
       "escudoFile": "leom.png",
       "pts": 0,
@@ -251,7 +238,7 @@
       "dg": 0
     },
     {
-      "pos": 20,
+      "pos": 19,
       "equipo": "Romancito - Valencia",
       "escudoFile": "romancito.png",
       "pts": 0,
@@ -261,6 +248,19 @@
       "pp": 2,
       "gf": 2,
       "gc": 7,
+      "dg": -5
+    },
+    {
+      "pos": 20,
+      "equipo": "Slasher7 - Crystal Palace",
+      "escudoFile": "slasher7.png",
+      "pts": 0,
+      "pj": 2,
+      "pg": 0,
+      "pe": 0,
+      "pp": 2,
+      "gf": 0,
+      "gc": 5,
       "dg": -5
     }
   ]
