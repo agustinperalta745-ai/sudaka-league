@@ -2022,6 +2022,8 @@ function normalizeWinnerValue(value) {
 function normalizeMatchResult(result) {
   if (!result || typeof result !== "object") return null;
 
+  if (result.home == null || result.away == null) return null;
+
   const home = Number(result.home);
   const away = Number(result.away);
 
@@ -2042,6 +2044,8 @@ function normalizeMatchResult(result) {
 function normalizeMatchPens(match) {
   const pens = match?.pens ?? match?.penalties ?? null;
   if (!pens || typeof pens !== "object") return null;
+
+  if (pens.home == null || pens.away == null) return null;
 
   const home = Number(pens.home);
   const away = Number(pens.away);
@@ -2170,6 +2174,8 @@ function normalizeCuartosSide(side) {
 function normalizeCuartosResult(result) {
   if (!result || typeof result !== "object") return null;
 
+  if (result.home == null || result.away == null) return null;
+
   const home = Number(result.home);
   const away = Number(result.away);
 
@@ -2271,6 +2277,27 @@ function getWinner(match, fallbackLabel) {
   return createPlaceholderSide(fallbackLabel);
 }
 
+
+function isWinnerReference(side) {
+  return !!side && typeof side === "object" && typeof side.winnerOf === "string" && side.winnerOf.trim() !== "";
+}
+
+function resolvePhaseSide(sourceSide, resolvedWinnerSide, fallbackLabel) {
+  if (isWinnerReference(sourceSide)) {
+    const referenceLabel = typeof sourceSide.placeholder === "string" && sourceSide.placeholder.trim() !== ""
+      ? sourceSide.placeholder.trim()
+      : fallbackLabel;
+
+    if (resolvedWinnerSide) {
+      return formatSide(resolvedWinnerSide, referenceLabel);
+    }
+
+    return createPlaceholderSide(referenceLabel);
+  }
+
+  return formatSide(sourceSide || resolvedWinnerSide, fallbackLabel);
+}
+
 function buildPhaseMatches(sourceMatches, sourceWinners, phaseKey) {
   const next = [];
   const totalMatches = Math.ceil((sourceWinners?.length || 0) / 2);
@@ -2290,8 +2317,8 @@ function buildPhaseMatches(sourceMatches, sourceWinners, phaseKey) {
       ...normalizedSourceMatch,
       id: matchId,
       label: sourceMatch?.label || `${phaseLabel} ${index + 1}`,
-      home: formatSide(sourceMatch?.home || sourceHome, sourceHome?.player || `Ganador ${phaseLabel} ${index * 2 + 1}`),
-      away: formatSide(sourceMatch?.away || sourceAway, sourceAway?.player || `Ganador ${phaseLabel} ${index * 2 + 2}`)
+      home: resolvePhaseSide(sourceMatch?.home, sourceHome, sourceHome?.player || `Ganador ${phaseLabel} ${index * 2 + 1}`),
+      away: resolvePhaseSide(sourceMatch?.away, sourceAway, sourceAway?.player || `Ganador ${phaseLabel} ${index * 2 + 2}`)
     });
   }
 
@@ -2360,23 +2387,25 @@ function buildInterdivisionalActiveSeason(source) {
     shield: "assets/escudos/universitario.png"
   };
 
+  const finalCopaSourceMatch = Array.isArray(sourceFinalCopa) ? sourceFinalCopa[0] : null;
   const rival = finalPlayoffsMatch?.winner === "home"
     ? formatSide(finalPlayoffsMatch.home, "Ganador Final Play-offs")
     : finalPlayoffsMatch?.winner === "away"
       ? formatSide(finalPlayoffsMatch.away, "Ganador Final Play-offs")
       : createPlaceholderSide("Ganador Final Play-offs");
 
-  const finalCopaSourceMatch = Array.isArray(sourceFinalCopa) ? sourceFinalCopa[0] : null;
+  const finalCopaResult = getInterdivisionalMatchResult("final", finalCopaSourceMatch?.id || "1");
+  const normalizedFinalCopaMatch = normalizeMatchData(finalCopaResult || finalCopaSourceMatch || {}, "active");
+
   const finalCopaMatch = {
+    ...normalizedFinalCopaMatch,
+    id: finalCopaSourceMatch?.id || "1",
     label: finalCopaSourceMatch?.label || "Final Copa Interdivisional",
-    home: directQualified,
-    away: rival,
-    winner: null,
-    result: null,
-    pens: null
+    home: resolvePhaseSide(finalCopaSourceMatch?.home, directQualified, directQualified.player),
+    away: resolvePhaseSide(finalCopaSourceMatch?.away, rival, "Ganador Final Play-offs")
   };
 
-  season.phases.final_copa_interdivisional = [normalizeMatchData(finalCopaMatch, "active")];
+  season.phases.final_copa_interdivisional = [finalCopaMatch];
 
   return season;
 }
@@ -2468,14 +2497,15 @@ function getFinalCopaInterdivisionalMatch(season) {
       : createPlaceholderSide("Ganador Final Play-offs");
 
   const sourceMatch = season?.phases?.final_copa_interdivisional?.[0] || null;
-  return normalizeMatchData({
+  const result = normalizeMatchData(sourceMatch || {}, "active");
+
+  return {
+    ...result,
+    id: sourceMatch?.id || "1",
     label: sourceMatch?.label || "Final Copa Interdivisional",
-    home: directQualified,
-    away: rival,
-    winner: null,
-    result: null,
-    pens: null
-  }, "active");
+    home: resolvePhaseSide(sourceMatch?.home, directQualified, directQualified.player),
+    away: resolvePhaseSide(sourceMatch?.away, rival, "Ganador Final Play-offs")
+  };
 }
 
 function createCupCrossingTeamNode(teamData, context = {}) {
