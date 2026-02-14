@@ -1,7 +1,7 @@
 {
   "source": "gesliga",
   "division": "primera",
-  "fetchedAt": "2026-02-14T20:54:44.143Z",
+  "fetchedAt": "2026-02-14T21:49:37.984Z",
   "rows": [
     {
       "pos": 1,
@@ -109,19 +109,6 @@
     },
     {
       "pos": 9,
-      "equipo": "Naxul90 - Everton",
-      "escudoFile": "naxul90.png",
-      "pts": 12,
-      "pj": 9,
-      "pg": 4,
-      "pe": 0,
-      "pp": 5,
-      "gf": 19,
-      "gc": 19,
-      "dg": 0
-    },
-    {
-      "pos": 10,
       "equipo": "Crislort26 - Marcella",
       "escudoFile": "crislort26.png",
       "pts": 12,
@@ -134,7 +121,33 @@
       "dg": 0
     },
     {
+      "pos": 10,
+      "equipo": "Naxul90 - Everton",
+      "escudoFile": "naxul90.png",
+      "pts": 12,
+      "pj": 10,
+      "pg": 4,
+      "pe": 0,
+      "pp": 6,
+      "gf": 19,
+      "gc": 23,
+      "dg": -4
+    },
+    {
       "pos": 11,
+      "equipo": "Exeeneta - Fiorentina",
+      "escudoFile": "exeeneta.png",
+      "pts": 11,
+      "pj": 7,
+      "pg": 3,
+      "pe": 2,
+      "pp": 2,
+      "gf": 13,
+      "gc": 10,
+      "dg": 3
+    },
+    {
+      "pos": 12,
       "equipo": "Soylefo - Fullham",
       "escudoFile": "soylefo.png",
       "pts": 10,
@@ -147,7 +160,7 @@
       "dg": -1
     },
     {
-      "pos": 12,
+      "pos": 13,
       "equipo": "Lombardo - Valencia",
       "escudoFile": "lombardo.png",
       "pts": 9,
@@ -160,7 +173,7 @@
       "dg": -3
     },
     {
-      "pos": 13,
+      "pos": 14,
       "equipo": "Patry - Feeyenord",
       "escudoFile": "patry.png",
       "pts": 9,
@@ -171,19 +184,6 @@
       "gf": 12,
       "gc": 23,
       "dg": -11
-    },
-    {
-      "pos": 14,
-      "equipo": "Exeeneta - Fiorentina",
-      "escudoFile": "exeeneta.png",
-      "pts": 8,
-      "pj": 6,
-      "pg": 2,
-      "pe": 2,
-      "pp": 2,
-      "gf": 9,
-      "gc": 10,
-      "dg": -1
     },
     {
       "pos": 15,
