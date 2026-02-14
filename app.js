@@ -492,6 +492,8 @@ let openTitlesRankingId = null;
 let interdivisionalState = null;
 let cupPanelTab = "active";
 let cupActivePhase = "2";
+let cupHistoryExpandedSeason = "";
+const cupHistoryExpandedPhasesBySeason = new Map();
 let copaPremierState = null;
 let cupPremierPanelTab = "active";
 let cupPremierActivePhase = "cuartos";
@@ -2828,9 +2830,11 @@ function renderCupActiveTab() {
 function renderCupHistoryTab() {
   if (!cupHistorySeasonSelect || !cupHistoryList || !interdivisionalState) return;
 
+  const currentSeason = getCurrentInterdivisionalSeason();
   const seasons = [...interdivisionalState.seasons]
-    .filter((season) => Number.parseInt(String(season.season || "").replace(/\D/g, ""), 10) >= 23)
+    .filter((season) => season.season !== currentSeason?.season)
     .sort((a, b) => b.season.localeCompare(a.season, undefined, { numeric: true }));
+
   cupHistorySeasonSelect.replaceChildren();
 
   seasons.forEach((season) => {
@@ -2847,22 +2851,195 @@ function renderCupHistoryTab() {
   }
 
   const selectedSeason = seasons.find((season) => season.season === cupHistorySeasonSelect.value) || seasons[0];
+  const selectedSeasonKey = selectedSeason?.season || seasons[0]?.season || "";
+
+  if (!cupHistoryExpandedSeason || !seasons.some((season) => season.season === cupHistoryExpandedSeason)) {
+    cupHistoryExpandedSeason = selectedSeasonKey;
+  }
+
   cupHistoryList.replaceChildren();
-  if (!selectedSeason) return;
+  if (!seasons.length) return;
 
-  INTERDIVISIONAL_PHASES.forEach((phase) => {
-    const matches = selectedSeason.phases[phase.key] || [];
-    if (matches.length === 0) return;
+  seasons.forEach((season, seasonIndex) => {
+    ensureInterdivisionalProgression(season);
+    const seasonItem = createCupHistorySeasonAccordionItem(season, seasonIndex, {
+      isOpen: season.season === cupHistoryExpandedSeason
+    });
+    cupHistoryList.appendChild(seasonItem);
+  });
+}
 
-    const section = createCupPhaseSection(phase.key, matches, {
-      editable: false,
-      season: selectedSeason
+function getDefaultCupHistoryPhaseKey(season) {
+  const visiblePhases = getVisiblePhaseKeysForSeason(season);
+
+  return [...visiblePhases].reverse().find((phaseKey) => {
+    if (phaseKey === "final_copa_interdivisional") {
+      return Boolean(getFinalCopaInterdivisionalMatch(season));
+    }
+
+    return (season?.phases?.[phaseKey] || []).length > 0;
+  }) || visiblePhases[visiblePhases.length - 1] || INTERDIVISIONAL_PHASES[0].key;
+}
+
+function getCupHistoryMatchesByPhase(season, phaseKey) {
+  if (phaseKey === "final_copa_interdivisional") {
+    const finalMatch = getFinalCopaInterdivisionalMatch(season);
+    return finalMatch ? [finalMatch] : [];
+  }
+
+  return season?.phases?.[phaseKey] || [];
+}
+
+function createCupHistoryPhaseAccordionItem(season, phaseKey, itemId, isOpen) {
+  const matches = getCupHistoryMatchesByPhase(season, phaseKey);
+  const section = createCupPhaseSection(phaseKey, matches, {
+    editable: false,
+    season,
+    skipDivisionFilter: phaseKey === "final_copa_interdivisional",
+    emptyMessage: phaseKey === "final_copa_interdivisional"
+      ? "FASE 5: todavía no hay datos cargados para esta fase."
+      : "No hay cruces cargados para esta fase"
+  });
+
+  if (!section) return null;
+
+  const item = document.createElement("article");
+  item.className = "cup-history-phase-item history-accordion-item sl-card";
+
+  const trigger = document.createElement("button");
+  trigger.type = "button";
+  trigger.className = "cup-history-phase-trigger history-accordion-trigger sl-pill";
+  trigger.setAttribute("aria-expanded", String(isOpen));
+  trigger.setAttribute("aria-controls", itemId);
+
+  const title = document.createElement("span");
+  title.textContent = `${getPhaseLabel(phaseKey)} (${matches.length})`;
+
+  const chevron = document.createElement("span");
+  chevron.className = "history-chevron";
+  chevron.setAttribute("aria-hidden", "true");
+  chevron.textContent = "⌄";
+
+  trigger.append(title, chevron);
+
+  const panel = document.createElement("div");
+  panel.className = "cup-history-phase-panel history-accordion-panel";
+  panel.id = itemId;
+  panel.hidden = !isOpen;
+  panel.dataset.expanded = String(isOpen);
+  panel.appendChild(section);
+
+  if (isOpen) {
+    panel.style.maxHeight = "none";
+    item.classList.add("is-open");
+  }
+
+  trigger.addEventListener("click", () => {
+    const isExpanded = trigger.getAttribute("aria-expanded") === "true";
+    const nextOpen = !isExpanded;
+    const phaseState = cupHistoryExpandedPhasesBySeason.get(season.season) || {};
+
+    item.parentElement?.querySelectorAll(".cup-history-phase-item").forEach((entry) => {
+      const entryTrigger = entry.querySelector(".cup-history-phase-trigger");
+      const entryPanel = entry.querySelector(".cup-history-phase-panel");
+      if (!entryTrigger || !entryPanel) return;
+
+      entryTrigger.setAttribute("aria-expanded", "false");
+      entry.classList.remove("is-open");
+      animateHistoryPanel(entryPanel, false);
     });
 
-    if (section) {
-      cupHistoryList.appendChild(section);
+    if (nextOpen) {
+      trigger.setAttribute("aria-expanded", "true");
+      item.classList.add("is-open");
+      animateHistoryPanel(panel, true);
+      phaseState.openPhase = phaseKey;
+      cupHistoryExpandedPhasesBySeason.set(season.season, phaseState);
     }
   });
+
+  return item;
+}
+
+function createCupHistorySeasonAccordionItem(season, seasonIndex, options = {}) {
+  const { isOpen = false } = options;
+  const item = document.createElement("article");
+  item.className = "cup-history-season-item history-accordion-item sl-card";
+
+  const trigger = document.createElement("button");
+  trigger.type = "button";
+  trigger.className = "cup-history-season-trigger history-accordion-trigger sl-pill";
+  trigger.setAttribute("aria-expanded", String(isOpen));
+  trigger.setAttribute("aria-controls", `cup-history-season-panel-${seasonIndex}`);
+
+  const title = document.createElement("span");
+  title.textContent = season.status === "completed" && season.champion
+    ? `${season.season} — Campeón: ${season.champion}`
+    : season.season;
+
+  const chevron = document.createElement("span");
+  chevron.className = "history-chevron";
+  chevron.setAttribute("aria-hidden", "true");
+  chevron.textContent = "⌄";
+  trigger.append(title, chevron);
+
+  const panel = document.createElement("div");
+  panel.className = "cup-history-season-panel history-accordion-panel";
+  panel.id = `cup-history-season-panel-${seasonIndex}`;
+  panel.hidden = !isOpen;
+  panel.dataset.expanded = String(isOpen);
+
+  const phaseList = document.createElement("div");
+  phaseList.className = "cup-history-phase-list";
+
+  const visiblePhases = getVisiblePhaseKeysForSeason(season);
+  const rememberedState = cupHistoryExpandedPhasesBySeason.get(season.season) || {};
+  const defaultPhase = rememberedState.openPhase || getDefaultCupHistoryPhaseKey(season);
+
+  visiblePhases.forEach((phaseKey, phaseIndex) => {
+    const phaseItem = createCupHistoryPhaseAccordionItem(
+      season,
+      phaseKey,
+      `cup-history-${season.season}-phase-panel-${phaseIndex}`,
+      phaseKey === defaultPhase
+    );
+
+    if (phaseItem) {
+      phaseList.appendChild(phaseItem);
+    }
+  });
+
+  panel.appendChild(phaseList);
+
+  if (isOpen) {
+    panel.style.maxHeight = "none";
+    item.classList.add("is-open");
+  }
+
+  trigger.addEventListener("click", () => {
+    const isExpanded = trigger.getAttribute("aria-expanded") === "true";
+    const nextOpen = !isExpanded;
+
+    item.parentElement?.querySelectorAll(".cup-history-season-item").forEach((entry) => {
+      const entryTrigger = entry.querySelector(".cup-history-season-trigger");
+      const entryPanel = entry.querySelector(".cup-history-season-panel");
+      if (!entryTrigger || !entryPanel) return;
+
+      entryTrigger.setAttribute("aria-expanded", "false");
+      entry.classList.remove("is-open");
+      animateHistoryPanel(entryPanel, false);
+    });
+
+    if (nextOpen) {
+      trigger.setAttribute("aria-expanded", "true");
+      item.classList.add("is-open");
+      animateHistoryPanel(panel, true);
+      cupHistoryExpandedSeason = season.season;
+      cupHistorySeasonSelect.value = season.season;
+    }
+  });
+
+  return item;
 }
 
 function setCupTab(tab) {
@@ -2933,7 +3110,10 @@ function setupCupCrossingsAccordion() {
   }
 
   if (cupHistorySeasonSelect) {
-    cupHistorySeasonSelect.addEventListener("change", renderCupHistoryTab);
+    cupHistorySeasonSelect.addEventListener("change", () => {
+      cupHistoryExpandedSeason = cupHistorySeasonSelect.value;
+      renderCupHistoryTab();
+    });
   }
 
   setCupTab("active");
