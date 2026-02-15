@@ -4,7 +4,7 @@
 
   globalScope.SUDAKA_SITE_DATA = {
     pes6CuposLibres: 20,
-    kofCuposLibres: 3,
+    kofCuposLibres: 2,
     leagueSeason,
     cupSeason
   };
