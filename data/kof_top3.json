@@ -1,23 +1,23 @@
 {
-  "updatedAt": "2026-02-14T01:06:00Z",
+  "updatedAt": "2026-02-14T23:20:00Z",
   "top3": [
     {
       "pos": 1,
-      "user": "TMK Darkii",
-      "wins": 3,
+      "user": "Rulitox17",
+      "wins": 4,
       "gloveImage": "azul.png",
       "glowColor": "#000000"
     },
     {
       "pos": 2,
-      "user": "Rulitox17",
-      "wins": 3,
-      "gloveImage": "violeta.png",
+      "user": "TSK Capibara",
+      "wins": 2,
+      "gloveImage": "negro.png",
       "glowColor": "#8A2BE2"
     },
     {
       "pos": 3,
-      "user": "TSK Capibara",
+      "user": "TMK DarkII",
       "wins": 2,
       "gloveImage": "negro.png",
       "glowColor": "#FF6A00"
