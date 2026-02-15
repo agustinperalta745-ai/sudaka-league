@@ -9,6 +9,47 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles-v2.css?v=20260212-01">
+  <style>
+    :root {
+      --topbar-logo-size: clamp(52px, 8vw, 82px);
+      --topbar-height: calc(var(--topbar-logo-size) + clamp(8px, 1.7vw, 14px));
+    }
+
+    .topbar-inner {
+      min-height: var(--topbar-height);
+      padding-block: clamp(4px, 1vw, 7px);
+      display: flex;
+      align-items: center;
+    }
+
+    .topbar-brand {
+      display: inline-flex;
+      align-items: center;
+      flex-shrink: 0;
+      background: transparent;
+    }
+
+    .topbar-logo {
+      height: var(--topbar-logo-size);
+      width: auto;
+      max-height: none;
+      max-width: none;
+      object-fit: contain;
+      flex-shrink: 0;
+      background: transparent;
+      filter: drop-shadow(0 7px 10px rgba(0, 120, 255, 0.35));
+    }
+
+    @media (max-width: 768px) {
+      :root {
+        --topbar-logo-size: clamp(52px, 13vw, 64px);
+      }
+
+      .topbar-inner {
+        gap: 0.65rem;
+      }
+    }
+  </style>
   </head>
 <body>
   <div class="bg-effects" aria-hidden="true"></div>
