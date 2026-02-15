@@ -30,14 +30,27 @@
     }
 
     .topbar-logo {
-      height: var(--topbar-logo-size);
+      height: 100%;
       width: auto;
       max-height: none;
       max-width: none;
       object-fit: contain;
       flex-shrink: 0;
       background: transparent;
-      filter: drop-shadow(0 7px 10px rgba(0, 120, 255, 0.35));
+      image-rendering: -webkit-optimize-contrast;
+      transform: translateZ(0) scale(1.35);
+      transform-origin: left center;
+      backface-visibility: hidden;
+      filter: drop-shadow(0 0 6px rgba(0, 140, 255, 0.55)) drop-shadow(0 0 14px rgba(0, 140, 255, 0.25));
+    }
+
+    .topbar-logo-wrap {
+      height: var(--topbar-logo-size);
+      width: auto;
+      display: inline-flex;
+      align-items: center;
+      overflow: visible;
+      flex-shrink: 0;
     }
 
     @media (max-width: 768px) {
@@ -48,6 +61,10 @@
       .topbar-inner {
         gap: 0.65rem;
       }
+
+      .topbar-logo {
+        transform: translateZ(0) scale(1.45);
+      }
     }
   </style>
   </head>
@@ -57,12 +74,14 @@
   <header class="topbar" aria-label="Barra superior de Sudaka League">
     <div class="topbar-inner">
       <a class="topbar-brand" href="#inicio" aria-label="Ir al inicio">
-        <img
-          class="topbar-logo"
-          src="assets/slr-logo.png"
-          alt="Logo de Sudaka League"
-          onerror="this.style.display='none'; this.nextElementSibling.hidden = false;"
-        />
+        <span class="topbar-logo-wrap">
+          <img
+            class="topbar-logo"
+            src="assets/slr-logo.png"
+            alt="Logo de Sudaka League"
+            onerror="this.style.display='none'; this.nextElementSibling.hidden = false;"
+          />
+        </span>
         <span class="topbar-title">SUDAKA LEAGUE</span>
       </a>
       <nav class="topbar-actions" aria-label="Redes sociales de Sudaka League">
