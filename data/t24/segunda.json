@@ -1,7 +1,7 @@
 {
   "source": "gesliga",
   "division": "segunda",
-  "fetchedAt": "2026-02-15T16:14:38.241Z",
+  "fetchedAt": "2026-02-15T17:01:00.125Z",
   "rows": [
     {
       "pos": 1,
@@ -70,6 +70,32 @@
     },
     {
       "pos": 6,
+      "equipo": "Leom - Real Sociedad",
+      "escudoFile": "leom.png",
+      "pts": 6,
+      "pj": 2,
+      "pg": 2,
+      "pe": 0,
+      "pp": 0,
+      "gf": 4,
+      "gc": 1,
+      "dg": 3
+    },
+    {
+      "pos": 7,
+      "equipo": "Rubencho - Monaco",
+      "escudoFile": "rubencho.png",
+      "pts": 6,
+      "pj": 4,
+      "pg": 1,
+      "pe": 3,
+      "pp": 0,
+      "gf": 3,
+      "gc": 1,
+      "dg": 2
+    },
+    {
+      "pos": 8,
       "equipo": "Diegarcho - Torino",
       "escudoFile": "diegarcho.png",
       "pts": 5,
@@ -82,7 +108,7 @@
       "dg": -6
     },
     {
-      "pos": 7,
+      "pos": 9,
       "equipo": "Tank - Betis",
       "escudoFile": "tank.png",
       "pts": 2,
@@ -95,20 +121,7 @@
       "dg": 0
     },
     {
-      "pos": 8,
-      "equipo": "Rubencho - Monaco",
-      "escudoFile": "rubencho.png",
-      "pts": 2,
-      "pj": 2,
-      "pg": 0,
-      "pe": 2,
-      "pp": 0,
-      "gf": 0,
-      "gc": 0,
-      "dg": 0
-    },
-    {
-      "pos": 9,
+      "pos": 10,
       "equipo": "Fernet - Villareal",
       "escudoFile": "fernet.png",
       "pts": 2,
@@ -121,7 +134,20 @@
       "dg": -5
     },
     {
-      "pos": 10,
+      "pos": 11,
+      "equipo": "Bocajuniors12 - Fenerbache",
+      "escudoFile": "bocajuniors12.png",
+      "pts": 1,
+      "pj": 4,
+      "pg": 0,
+      "pe": 1,
+      "pp": 3,
+      "gf": 2,
+      "gc": 7,
+      "dg": -5
+    },
+    {
+      "pos": 12,
       "equipo": "Leocarp7 - Everton",
       "escudoFile": "leocarp7.png",
       "pts": 1,
@@ -134,7 +160,7 @@
       "dg": -20
     },
     {
-      "pos": 11,
+      "pos": 13,
       "equipo": "TCL06 - Feeyenord",
       "escudoFile": "tcl06.png",
       "pts": 0,
@@ -147,33 +173,7 @@
       "dg": 0
     },
     {
-      "pos": 11,
-      "equipo": "Bocajuniors12 - Fenerbache",
-      "escudoFile": "bocajuniors12.png",
-      "pts": 0,
-      "pj": 0,
-      "pg": 0,
-      "pe": 0,
-      "pp": 0,
-      "gf": 0,
-      "gc": 0,
-      "dg": 0
-    },
-    {
-      "pos": 11,
-      "equipo": "Leom - Real Sociedad",
-      "escudoFile": "leom.png",
-      "pts": 0,
-      "pj": 0,
-      "pg": 0,
-      "pe": 0,
-      "pp": 0,
-      "gf": 0,
-      "gc": 0,
-      "dg": 0
-    },
-    {
-      "pos": 11,
+      "pos": 13,
       "equipo": "Joaquito12 - PSV",
       "escudoFile": "joaquito12.png",
       "pts": 0,
@@ -186,7 +186,7 @@
       "dg": 0
     },
     {
-      "pos": 11,
+      "pos": 13,
       "equipo": "Gab0211 - Nottingham Forest",
       "escudoFile": "gab0211.png",
       "pts": 0,
@@ -199,7 +199,7 @@
       "dg": 0
     },
     {
-      "pos": 11,
+      "pos": 13,
       "equipo": "Ian - Roma",
       "escudoFile": "ian.png",
       "pts": 0,
@@ -212,7 +212,7 @@
       "dg": 0
     },
     {
-      "pos": 11,
+      "pos": 13,
       "equipo": "TrueBlueFC - Bologna",
       "escudoFile": "truebluefc.png",
       "pts": 0,
@@ -225,7 +225,7 @@
       "dg": 0
     },
     {
-      "pos": 11,
+      "pos": 13,
       "equipo": "XxFacuprogamerxX - Brighton",
       "escudoFile": "xxfacuprogamerxx.png",
       "pts": 0,
