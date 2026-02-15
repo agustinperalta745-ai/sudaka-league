@@ -516,6 +516,8 @@ const CUP_HISTORY_PHASES = [
   { id: "5", key: "final_copa_interdivisional", label: "5TA FASE" }
 ];
 
+const CUP_HISTORY_MIN_SEASON_NUMBER = 23;
+
 const T24_DIVISIONS = [
   { key: "primera", label: "Primera División" },
   { key: "segunda", label: "Segunda División" },
@@ -2814,6 +2816,45 @@ function createCupPhaseTabs() {
   return tabs;
 }
 
+function renderCupPhaseContent(container, season, phaseKey, options = {}) {
+  if (!container || !season) return;
+
+  const {
+    emptyMessage = "No hay cruces cargados para esta fase",
+    cuartosEmptyMessage = "Cuartos aún no cargados"
+  } = options;
+
+  if (phaseKey === "final_copa_interdivisional") {
+    const section = createCupPhaseSection(phaseKey, [getFinalCopaInterdivisionalMatch(season)], {
+      editable: false,
+      season,
+      skipDivisionFilter: true,
+      emptyMessage: "FASE 5: todavía no hay datos cargados para esta fase."
+    });
+
+    if (section) {
+      container.appendChild(section);
+    }
+    return;
+  }
+
+  const matches = season.phases[phaseKey] || [];
+  const isCuartosPhase = phaseKey === "cuartos_playoffs";
+  const phaseEmptyMessage = isCuartosPhase && season?.metadata?.cuartosLoaded === false
+    ? cuartosEmptyMessage
+    : emptyMessage;
+
+  const section = createCupPhaseSection(phaseKey, matches, {
+    editable: false,
+    season,
+    emptyMessage: phaseEmptyMessage
+  });
+
+  if (section) {
+    container.appendChild(section);
+  }
+}
+
 function renderCupActiveTab() {
   if (!cupCrossingsList || !interdivisionalState) return;
 
@@ -2827,45 +2868,31 @@ function renderCupActiveTab() {
   const phaseToRender = selectedPhase || visiblePhases[visiblePhases.length - 1] || INTERDIVISIONAL_PHASES[0].key;
 
   cupCrossingsList.appendChild(createCupPhaseTabs());
+  renderCupPhaseContent(cupCrossingsList, currentSeason, phaseToRender);
+}
 
-  if (phaseToRender === "final_copa_interdivisional") {
-    const section = createCupPhaseSection(phaseToRender, [getFinalCopaInterdivisionalMatch(currentSeason)], {
-      editable: false,
-      season: currentSeason,
-      skipDivisionFilter: true,
-      emptyMessage: "FASE 5: todavía no hay datos cargados para esta fase."
-    });
+function getValidCupHistorySeasons() {
+  if (!interdivisionalState || !Array.isArray(interdivisionalState.seasons)) return [];
 
-    if (section) {
-      cupCrossingsList.appendChild(section);
-    }
-    return;
-  }
+  return [...interdivisionalState.seasons]
+    .filter((season) => parseSeasonNumber(season?.season) >= CUP_HISTORY_MIN_SEASON_NUMBER)
+    .sort((a, b) => parseSeasonNumber(a.season) - parseSeasonNumber(b.season));
+}
 
-  const matches = currentSeason.phases[phaseToRender] || [];
-  const isCuartosPhase = phaseToRender === "cuartos_playoffs";
-  const emptyMessage = isCuartosPhase && currentSeason?.metadata?.cuartosLoaded === false
-    ? "Cuartos aún no cargados"
-    : "No hay cruces cargados para esta fase";
+function getCupHistoryDefaultSeason(seasons) {
+  if (!Array.isArray(seasons) || !seasons.length) return null;
 
-  const section = createCupPhaseSection(phaseToRender, matches, {
-    editable: false,
-    season: currentSeason,
-    emptyMessage
-  });
+  const explicitT23 = seasons.find((season) => String(season.season).toUpperCase() === "T23");
+  if (explicitT23) return explicitT23;
 
-  if (section) {
-    cupCrossingsList.appendChild(section);
-  }
+  return seasons[0];
 }
 
 function renderCupHistoryTab() {
   if (!cupHistorySeasonSelect || !cupHistoryList || !interdivisionalState) return;
 
-  const currentSeason = getCurrentInterdivisionalSeason();
-  const seasons = [...interdivisionalState.seasons]
-    .filter((season) => season.season !== currentSeason?.season)
-    .sort((a, b) => b.season.localeCompare(a.season, undefined, { numeric: true }));
+  const seasons = getValidCupHistorySeasons();
+  const defaultSeason = getCupHistoryDefaultSeason(seasons);
 
   cupHistorySeasonSelect.replaceChildren();
 
@@ -2878,48 +2905,37 @@ function renderCupHistoryTab() {
     cupHistorySeasonSelect.appendChild(option);
   });
 
-  if (!cupHistorySeasonSelect.value && seasons[0]) {
-    cupHistorySeasonSelect.value = seasons[0].season;
+  cupHistoryList.replaceChildren();
+  if (!defaultSeason) return;
+
+  const selectedSeasonByKey = seasons.find((season) => season.season === cupHistorySeasonSelect.value);
+  const selectedSeason = selectedSeasonByKey || defaultSeason;
+
+  if (!selectedSeasonByKey) {
+    cupHistorySeasonSelect.value = defaultSeason.season;
   }
 
-  cupHistoryList.replaceChildren();
-  if (!seasons.length) return;
-
-  const selectedSeason = seasons.find((season) => season.season === cupHistorySeasonSelect.value) || seasons[0];
-  if (!selectedSeason) return;
-
-  cupHistorySeasonSelect.value = selectedSeason.season;
   ensureInterdivisionalProgression(selectedSeason);
 
   const isSeasonChange = cupHistorySeasonKey !== selectedSeason.season;
   cupHistorySeasonKey = selectedSeason.season;
   if (isSeasonChange) {
-    cupHistorySelectedPhase = "";
+    cupHistorySelectedPhase = CUP_HISTORY_PHASES[0].key;
   }
 
-  const selectedPhase = getCupHistorySelectedPhaseKey(selectedSeason);
+  const selectedPhase = getCupHistorySelectedPhaseKey();
   cupHistoryList.appendChild(createCupHistoryPhaseTabs(selectedSeason, selectedPhase));
-
-  const matches = getCupHistoryMatchesByPhase(selectedSeason, selectedPhase);
-  const section = createCupPhaseSection(selectedPhase, matches, {
-    editable: false,
-    season: selectedSeason,
-    skipDivisionFilter: selectedPhase === "final_copa_interdivisional",
+  renderCupPhaseContent(cupHistoryList, selectedSeason, selectedPhase, {
     emptyMessage: "Sin datos para esta fase"
   });
-
-  if (section) {
-    cupHistoryList.appendChild(section);
-  }
 }
 
-function getCupHistorySelectedPhaseKey(season) {
+function getCupHistorySelectedPhaseKey() {
   if (cupHistorySelectedPhase && CUP_HISTORY_PHASES.some((phase) => phase.key === cupHistorySelectedPhase)) {
     return cupHistorySelectedPhase;
   }
 
-  const firstPhaseWithData = CUP_HISTORY_PHASES.find((phase) => getCupHistoryMatchesByPhase(season, phase.key).length > 0);
-  cupHistorySelectedPhase = firstPhaseWithData?.key || CUP_HISTORY_PHASES[0].key;
+  cupHistorySelectedPhase = CUP_HISTORY_PHASES[0].key;
   return cupHistorySelectedPhase;
 }
 
@@ -2946,15 +2962,6 @@ function createCupHistoryPhaseTabs(season, selectedPhase) {
   });
 
   return tabs;
-}
-
-function getCupHistoryMatchesByPhase(season, phaseKey) {
-  if (phaseKey === "final_copa_interdivisional") {
-    const finalMatch = getFinalCopaInterdivisionalMatch(season);
-    return finalMatch ? [finalMatch] : [];
-  }
-
-  return season?.phases?.[phaseKey] || [];
 }
 
 function setCupTab(tab) {
