@@ -152,7 +152,7 @@ a {
   min-width: 0;
   display: inline-flex;
   align-items: center;
-  gap: clamp(0.55rem, 1.2vw, 0.9rem);
+  gap: clamp(1rem, 1.4vw, 1.125rem);
   flex-shrink: 1;
   text-decoration: none;
   color: inherit;
