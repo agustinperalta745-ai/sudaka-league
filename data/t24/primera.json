@@ -1,7 +1,7 @@
 {
   "source": "gesliga",
   "division": "primera",
-  "fetchedAt": "2026-02-15T19:54:58.672Z",
+  "fetchedAt": "2026-02-15T20:36:05.557Z",
   "rows": [
     {
       "pos": 1,
@@ -33,13 +33,13 @@
       "pos": 3,
       "equipo": "Pelufo - Real Sociedad",
       "escudoFile": "pelufo.png",
-      "pts": 24,
-      "pj": 10,
-      "pg": 8,
+      "pts": 27,
+      "pj": 12,
+      "pg": 9,
       "pe": 0,
-      "pp": 2,
-      "gf": 21,
-      "gc": 8,
+      "pp": 3,
+      "gf": 23,
+      "gc": 10,
       "dg": 13
     },
     {
@@ -57,16 +57,16 @@
     },
     {
       "pos": 5,
-      "equipo": "Joelignacho - Betis",
-      "escudoFile": "joelignacho.png",
-      "pts": 21,
-      "pj": 18,
-      "pg": 6,
-      "pe": 3,
-      "pp": 9,
-      "gf": 29,
-      "gc": 35,
-      "dg": -6
+      "equipo": "Exeeneta - Fiorentina",
+      "escudoFile": "exeeneta.png",
+      "pts": 23,
+      "pj": 12,
+      "pg": 7,
+      "pe": 2,
+      "pp": 3,
+      "gf": 26,
+      "gc": 16,
+      "dg": 10
     },
     {
       "pos": 6,
@@ -83,6 +83,19 @@
     },
     {
       "pos": 7,
+      "equipo": "Joelignacho - Betis",
+      "escudoFile": "joelignacho.png",
+      "pts": 21,
+      "pj": 20,
+      "pg": 6,
+      "pe": 3,
+      "pp": 11,
+      "gf": 32,
+      "gc": 44,
+      "dg": -12
+    },
+    {
+      "pos": 8,
       "equipo": "Facualanis - Crystal Palace",
       "escudoFile": "facualanis.png",
       "pts": 19,
@@ -93,19 +106,6 @@
       "gf": 21,
       "gc": 16,
       "dg": 5
-    },
-    {
-      "pos": 8,
-      "equipo": "Exeeneta - Fiorentina",
-      "escudoFile": "exeeneta.png",
-      "pts": 14,
-      "pj": 8,
-      "pg": 4,
-      "pe": 2,
-      "pp": 2,
-      "gf": 15,
-      "gc": 11,
-      "dg": 4
     },
     {
       "pos": 9,
