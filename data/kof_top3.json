@@ -3,23 +3,23 @@
   "top3": [
     {
       "pos": 1,
-      "user": "TSC Capibara",
-      "wins": 2,
-      "gloveImage": "negro.png",
+      "user": "TMK Darkii",
+      "wins": 3,
+      "gloveImage": "azul.png",
       "glowColor": "#000000"
     },
     {
       "pos": 2,
       "user": "Rulitox17",
-      "wins": 1,
+      "wins": 3,
       "gloveImage": "violeta.png",
       "glowColor": "#8A2BE2"
     },
     {
       "pos": 3,
-      "user": "SoyLefo",
-      "wins": 1,
-      "gloveImage": "naranja.png",
+      "user": "TSK Capibara",
+      "wins": 2,
+      "gloveImage": "negro.png",
       "glowColor": "#FF6A00"
     }
   ]
