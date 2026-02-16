@@ -11,7 +11,7 @@ const interdivisionalResults = {
   },
   cuartos: {
     "cuartos-1": { score: null, pens: null, winner: null },
-    "cuartos-2": { score: null, pens: null, winner: null },
+    "cuartos-2": { score: { home: 0, away: 3 } , pens: null, winner: "away" },
     "cuartos-3": { score: { home: 1, away: 3 } , pens: null, winner: "away" },
     "cuartos-4": { score: null, pens: null, winner: null }
   },
