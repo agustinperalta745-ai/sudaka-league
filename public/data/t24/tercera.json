@@ -1,10 +1,23 @@
 {
   "source": "gesliga",
   "division": "tercera",
-  "fetchedAt": "2026-02-16T14:27:36.563Z",
+  "fetchedAt": "2026-02-16T16:27:16.449Z",
   "rows": [
     {
       "pos": 1,
+      "equipo": "Fenerbache - jona96delgado",
+      "escudoFile": "fenerbache.png",
+      "pts": 16,
+      "pj": 6,
+      "pg": 5,
+      "pe": 1,
+      "pp": 0,
+      "gf": 27,
+      "gc": 8,
+      "dg": 19
+    },
+    {
+      "pos": 2,
       "equipo": "Crystal Palace - Broko",
       "escudoFile": "crystal-palace.png",
       "pts": 16,
@@ -15,19 +28,6 @@
       "gf": 23,
       "gc": 11,
       "dg": 12
-    },
-    {
-      "pos": 2,
-      "equipo": "Fenerbache - jona96delgado",
-      "escudoFile": "fenerbache.png",
-      "pts": 13,
-      "pj": 5,
-      "pg": 4,
-      "pe": 1,
-      "pp": 0,
-      "gf": 22,
-      "gc": 7,
-      "dg": 15
     },
     {
       "pos": 3,
@@ -73,13 +73,13 @@
       "equipo": "Marsella - ElLokoSantooss",
       "escudoFile": "marsella.png",
       "pts": 3,
-      "pj": 1,
+      "pj": 2,
       "pg": 1,
       "pe": 0,
-      "pp": 0,
-      "gf": 3,
-      "gc": 2,
-      "dg": 1
+      "pp": 1,
+      "gf": 4,
+      "gc": 7,
+      "dg": -3
     },
     {
       "pos": 7,
