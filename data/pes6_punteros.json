@@ -3,11 +3,11 @@
     {
       "divisionKey": "primera",
       "divisionLabel": "1ª División",
-      "usuario": "Alex_CABJ",
-      "pj": 15,
-      "pg": 11,
-      "pts": 35,
-      "escudoFile": "bologna.png"
+      "usuario": "H09",
+      "pj": 30,
+      "pg": 10,
+      "pts": 36,
+      "escudoFile": "villareal.png"
     },
     {
       "divisionKey": "segunda",
@@ -21,12 +21,12 @@
     {
       "divisionKey": "tercera",
       "divisionLabel": "3ª División",
-      "usuario": "Broko",
-      "pj": 7,
+      "usuario": "Jona96delgado",
+      "pj": 6,
       "pg": 5,
       "pts": 16,
-      "escudoFile": "crystal-palace.png"
+      "escudoFile": "fenerbahce.png"
     }
   ],
-  "updatedAt": "2026-02-12T16:42:00"
+  "updatedAt": "2026-02-16T14:35:00"
 }
