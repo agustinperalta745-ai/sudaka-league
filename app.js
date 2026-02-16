@@ -1023,10 +1023,10 @@ function buildBountyRow({
   enableParticles = false
 } = {}) {
   const row = document.createElement("article");
-  row.className = "pes6-leader-card kof-top3-card bounty-row";
+  row.className = "pes6-leader-card kof-top3-card bounty-row bountyRow";
 
   const left = document.createElement("div");
-  left.className = "pes6-leader-main";
+  left.className = "pes6-leader-main content";
 
   const iconNode = document.createElement("span");
   iconNode.className = "bounty-row-icon";
@@ -1060,10 +1060,10 @@ function buildBountyRow({
   }
 
   const info = document.createElement("div");
-  info.className = "pes6-leader-info";
+  info.className = "pes6-leader-info content";
 
   const userName = document.createElement("p");
-  userName.className = "pes6-leader-user";
+  userName.className = "pes6-leader-user text";
   userName.textContent = String(user || "—");
 
   info.appendChild(userName);
@@ -1072,18 +1072,18 @@ function buildBountyRow({
   if (enableGlow && gloveImage) {
     const glowColor = getKofGlowColor(gloveImage);
     row.style.setProperty("--glow-color", glowColor);
+    row.style.setProperty("--bountyColor", glowColor);
     row.classList.add("is-glow");
 
     if (enableParticles) {
       row.classList.add("has-particles");
-      const particlesWrap = document.createElement("span");
-      particlesWrap.className = "bounty-particles";
+      const particlesWrap = document.createElement("div");
+      particlesWrap.className = "bounty-particles bountyParticles";
       particlesWrap.setAttribute("aria-hidden", "true");
 
       for (let i = 0; i < BOUNTY_PARTICLES_COUNT; i += 1) {
         const particle = document.createElement("span");
-        particle.className = "bounty-particle";
-        particle.style.setProperty("--particle-index", String(i));
+        particle.className = `bounty-particle particle p${i}`;
         particlesWrap.appendChild(particle);
       }
 
