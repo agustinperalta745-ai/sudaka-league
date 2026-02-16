@@ -91,7 +91,7 @@ const KOF_LEAGUE = {
 };
 
 const KOF_TOP3_DATA_PATH = "./data/kof_top3.json";
-const BOUNTY_PARTICLES_COUNT = 8;
+const BOUNTY_PARTICLES_COUNT = 10;
 const BOUNTY_DATA = window.SUDAKA_BOUNTY_DATA && typeof window.SUDAKA_BOUNTY_DATA === "object"
   ? window.SUDAKA_BOUNTY_DATA
   : {
@@ -1026,7 +1026,7 @@ function buildBountyRow({
   row.className = "pes6-leader-card kof-top3-card bounty-row bountyRow";
 
   const left = document.createElement("div");
-  left.className = "pes6-leader-main content";
+  left.className = "pes6-leader-main leftGroup";
 
   const iconNode = document.createElement("span");
   iconNode.className = "bounty-row-icon";
@@ -1035,6 +1035,7 @@ function buildBountyRow({
 
   const gloveWrap = document.createElement("span");
   gloveWrap.className = "pes6-leader-shield kof-top3-glove bounty-row-glove";
+  let hasGlove = false;
 
   if (gloveImage) {
     const gloveSlug = normalizeKofGloveColor(gloveImage);
@@ -1054,48 +1055,56 @@ function buildBountyRow({
     };
 
     gloveWrap.appendChild(gloveImg);
-  } else {
-    gloveWrap.classList.add("is-empty");
-    gloveWrap.setAttribute("aria-hidden", "true");
+    hasGlove = true;
   }
 
   const info = document.createElement("div");
-  info.className = "pes6-leader-info content";
+  info.className = "pes6-leader-info";
 
   const userName = document.createElement("p");
-  userName.className = "pes6-leader-user text";
+  userName.className = "pes6-leader-user";
   userName.textContent = String(user || "—");
 
   info.appendChild(userName);
-  left.append(iconNode, gloveWrap, info);
+  left.append(iconNode);
+
+  if (hasGlove) {
+    left.append(gloveWrap);
+  }
+
+  left.append(info);
+
+  let glowColor = null;
+  if (gloveImage) {
+    glowColor = getKofGlowColor(gloveImage);
+    row.style.setProperty("--bountyColor", glowColor);
+  }
 
   if (enableGlow && gloveImage) {
-    const glowColor = getKofGlowColor(gloveImage);
     row.style.setProperty("--glow-color", glowColor);
-    row.style.setProperty("--bountyColor", glowColor);
     row.classList.add("is-glow");
+  }
 
-    if (enableParticles) {
-      row.classList.add("has-particles");
-      const particlesWrap = document.createElement("div");
-      particlesWrap.className = "bounty-particles bountyParticles";
-      particlesWrap.setAttribute("aria-hidden", "true");
+  if (enableParticles) {
+    row.classList.add("has-particles");
+    const particlesWrap = document.createElement("div");
+    particlesWrap.className = "bounty-particles bountyParticles";
+    particlesWrap.setAttribute("aria-hidden", "true");
 
-      for (let i = 0; i < BOUNTY_PARTICLES_COUNT; i += 1) {
-        const particle = document.createElement("span");
-        particle.className = `bounty-particle particle p${i}`;
-        particlesWrap.appendChild(particle);
-      }
-
-      row.appendChild(particlesWrap);
+    for (let i = 0; i < BOUNTY_PARTICLES_COUNT; i += 1) {
+      const particle = document.createElement("span");
+      particle.className = `bounty-particle particle p${i}`;
+      particlesWrap.appendChild(particle);
     }
+
+    row.appendChild(particlesWrap);
   }
 
   row.append(left);
 
   if (showBadge) {
     const badge = document.createElement("span");
-    badge.className = "mini-badge bounty-row-badge";
+    badge.className = "mini-badge bounty-row-badge rightGroup";
     badge.textContent = String(badgeText || "—");
     row.append(badge);
   }
