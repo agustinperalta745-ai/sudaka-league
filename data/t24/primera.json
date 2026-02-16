@@ -1,7 +1,7 @@
 {
   "source": "gesliga",
   "division": "primera",
-  "fetchedAt": "2026-02-15T23:55:27.931Z",
+  "fetchedAt": "2026-02-16T05:44:28.896Z",
   "rows": [
     {
       "pos": 1,
@@ -31,6 +31,19 @@
     },
     {
       "pos": 3,
+      "equipo": "Joser17 - Brighton",
+      "escudoFile": "joser17.png",
+      "pts": 28,
+      "pj": 18,
+      "pg": 8,
+      "pe": 4,
+      "pp": 6,
+      "gf": 30,
+      "gc": 25,
+      "dg": 5
+    },
+    {
+      "pos": 4,
       "equipo": "Pelufo - Real Sociedad",
       "escudoFile": "pelufo.png",
       "pts": 27,
@@ -41,19 +54,6 @@
       "gf": 23,
       "gc": 10,
       "dg": 13
-    },
-    {
-      "pos": 4,
-      "equipo": "Joser17 - Brighton",
-      "escudoFile": "joser17.png",
-      "pts": 24,
-      "pj": 16,
-      "pg": 7,
-      "pe": 3,
-      "pp": 6,
-      "gf": 27,
-      "gc": 24,
-      "dg": 3
     },
     {
       "pos": 5,
@@ -73,13 +73,13 @@
       "equipo": "Ivancarocela - Roma",
       "escudoFile": "ivancarocela.png",
       "pts": 21,
-      "pj": 22,
+      "pj": 23,
       "pg": 5,
       "pe": 6,
-      "pp": 11,
-      "gf": 25,
-      "gc": 32,
-      "dg": -7
+      "pp": 12,
+      "gf": 27,
+      "gc": 35,
+      "dg": -8
     },
     {
       "pos": 7,
@@ -109,6 +109,19 @@
     },
     {
       "pos": 9,
+      "equipo": "Naxul90 - Everton",
+      "escudoFile": "naxul90.png",
+      "pts": 16,
+      "pj": 14,
+      "pg": 5,
+      "pe": 1,
+      "pp": 8,
+      "gf": 24,
+      "gc": 30,
+      "dg": -6
+    },
+    {
+      "pos": 10,
       "equipo": "Larrierismo - Lyom",
       "escudoFile": "larrierismo.png",
       "pts": 12,
@@ -121,7 +134,7 @@
       "dg": 4
     },
     {
-      "pos": 10,
+      "pos": 11,
       "equipo": "Crislort26 - Marcella",
       "escudoFile": "crislort26.png",
       "pts": 12,
@@ -132,19 +145,6 @@
       "gf": 15,
       "gc": 15,
       "dg": 0
-    },
-    {
-      "pos": 11,
-      "equipo": "Naxul90 - Everton",
-      "escudoFile": "naxul90.png",
-      "pts": 12,
-      "pj": 11,
-      "pg": 4,
-      "pe": 0,
-      "pp": 7,
-      "gf": 20,
-      "gc": 25,
-      "dg": -5
     },
     {
       "pos": 12,
