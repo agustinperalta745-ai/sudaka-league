@@ -91,6 +91,15 @@ const KOF_LEAGUE = {
 };
 
 const KOF_TOP3_DATA_PATH = "./data/kof_top3.json";
+const BOUNTY_PARTICLES_COUNT = 8;
+const BOUNTY_DATA = window.SUDAKA_BOUNTY_DATA && typeof window.SUDAKA_BOUNTY_DATA === "object"
+  ? window.SUDAKA_BOUNTY_DATA
+  : {
+    bountyUser: "Rulitox17",
+    bountyGloveImage: "violeta.png",
+    hunterUser: null,
+    hunterGloveImage: null
+  };
 
 const KOF_GLOVES_UTILS = window.KOF_GLOVES_UTILS || {};
 const normalizeKofGloveColor = typeof KOF_GLOVES_UTILS.normalizeColorName === "function"
@@ -457,6 +466,7 @@ const pes6Updated = document.getElementById("pes6-updated");
 const kofTop3Section = document.getElementById("kof-top3-section");
 const kofTop3List = document.getElementById("kof-top3");
 const kofUpdated = document.getElementById("kof-updated");
+const bountyWeekList = document.getElementById("bounty-week-list");
 const sfSlotsValue = document.getElementById("sf-slots");
 const sfSlotsBadge = document.getElementById("sf-slots-badge");
 const donationProgressText = document.getElementById("donation-progress-text");
@@ -1002,6 +1012,107 @@ function createKofTop3Item(player = {}, positionIndex = 0) {
   item.append(left, wins);
   return item;
 }
+
+function buildBountyRow({ label = "", user = "", gloveImage = null, enableGlow = false, enableParticles = false } = {}) {
+  const row = document.createElement("article");
+  row.className = "pes6-leader-card kof-top3-card bounty-row";
+
+  const left = document.createElement("div");
+  left.className = "pes6-leader-main";
+
+  const gloveWrap = document.createElement("span");
+  gloveWrap.className = "pes6-leader-shield kof-top3-glove bounty-row-glove";
+
+  if (gloveImage) {
+    const gloveSlug = normalizeKofGloveColor(gloveImage);
+    const gloveImg = document.createElement("img");
+    gloveImg.loading = "lazy";
+    gloveImg.decoding = "async";
+    gloveImg.alt = `Guante ${gloveSlug || "blanco"}`;
+    gloveImg.src = getKofGloveImagePath(gloveSlug || gloveImage);
+
+    gloveImg.onerror = () => {
+      if (gloveImg.dataset.fallbackApplied === "1") {
+        gloveImg.remove();
+        return;
+      }
+      gloveImg.dataset.fallbackApplied = "1";
+      gloveImg.src = toAssetPath("assets/blanco.png");
+    };
+
+    gloveWrap.appendChild(gloveImg);
+  } else {
+    gloveWrap.classList.add("is-empty");
+    gloveWrap.setAttribute("aria-hidden", "true");
+  }
+
+  const info = document.createElement("div");
+  info.className = "pes6-leader-info";
+
+  const userName = document.createElement("p");
+  userName.className = "pes6-leader-user";
+  userName.textContent = `${label}: ${String(user || "—")}`;
+
+  info.appendChild(userName);
+  left.append(gloveWrap, info);
+
+  if (enableGlow && gloveImage) {
+    const glowColor = getKofGlowColor(gloveImage);
+    row.style.setProperty("--glow-color", glowColor);
+    row.classList.add("is-glow");
+
+    if (enableParticles) {
+      row.classList.add("has-particles");
+      const particlesWrap = document.createElement("span");
+      particlesWrap.className = "bounty-particles";
+      particlesWrap.setAttribute("aria-hidden", "true");
+
+      for (let i = 0; i < BOUNTY_PARTICLES_COUNT; i += 1) {
+        const particle = document.createElement("span");
+        particle.className = "bounty-particle";
+        particle.style.setProperty("--particle-index", String(i));
+        particlesWrap.appendChild(particle);
+      }
+
+      row.appendChild(particlesWrap);
+    }
+  }
+
+  row.append(left);
+  return row;
+}
+
+function renderBountyWeek() {
+  if (!bountyWeekList) return;
+
+  bountyWeekList.replaceChildren();
+
+  const bountyUser = String(BOUNTY_DATA?.bountyUser || "—");
+  const bountyGloveImage = BOUNTY_DATA?.bountyGloveImage || null;
+  const hunterUserValue = BOUNTY_DATA?.hunterUser;
+  const hunterHasUser = hunterUserValue !== null && String(hunterUserValue || "").trim() !== "";
+  const hunterUser = hunterHasUser ? String(hunterUserValue) : "Sin cazador";
+  const hunterGloveImage = hunterHasUser ? (BOUNTY_DATA?.hunterGloveImage || null) : null;
+
+  const bountyRow = buildBountyRow({
+    label: "Bounty",
+    user: bountyUser,
+    gloveImage: bountyGloveImage,
+    enableGlow: true,
+    enableParticles: true
+  });
+
+  const hunterRow = buildBountyRow({
+    label: "Cazador",
+    user: hunterUser,
+    gloveImage: hunterGloveImage,
+    enableGlow: hunterHasUser,
+    enableParticles: false
+  });
+
+  bountyWeekList.append(bountyRow, hunterRow);
+}
+
 
 async function renderKofTop3() {
   if (!kofTop3Section || !kofTop3List) return;
@@ -3494,6 +3605,7 @@ async function initializeApp() {
   await initializeCopaPremierState();
   await loadPes6Leaders();
   await renderKofTop3();
+  renderBountyWeek();
   applyKofLeagueContent();
   applyWhatsAppLinks();
   updateSeasonStatus();
