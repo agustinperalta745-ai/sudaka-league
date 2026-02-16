@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-02-14T23:20:00Z",
+  "updatedAt": "2026-02-16T18:50:00Z",
   "top3": [
     {
       "pos": 1,
@@ -10,16 +10,16 @@
     },
     {
       "pos": 2,
-      "user": "TSK Capibara",
-      "wins": 2,
-      "gloveImage": "negro.png",
+      "user": "Adolfo Ruletas",
+      "wins": 3,
+      "gloveImage": "gris.png",
       "glowColor": "#8A2BE2"
     },
     {
       "pos": 3,
-      "user": "TMK DarkII",
+      "user": "TSK Capibara",
       "wins": 2,
-      "gloveImage": "azul.png",
+      "gloveImage": "negro.png",
       "glowColor": "#FF6A00"
     }
   ]
