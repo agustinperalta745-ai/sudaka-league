@@ -1013,12 +1013,25 @@ function createKofTop3Item(player = {}, positionIndex = 0) {
   return item;
 }
 
-function buildBountyRow({ label = "", user = "", gloveImage = null, enableGlow = false, enableParticles = false } = {}) {
+function buildBountyRow({
+  icon = "",
+  user = "",
+  gloveImage = null,
+  badgeText = "",
+  showBadge = false,
+  enableGlow = false,
+  enableParticles = false
+} = {}) {
   const row = document.createElement("article");
   row.className = "pes6-leader-card kof-top3-card bounty-row";
 
   const left = document.createElement("div");
   left.className = "pes6-leader-main";
+
+  const iconNode = document.createElement("span");
+  iconNode.className = "bounty-row-icon";
+  iconNode.setAttribute("aria-hidden", "true");
+  iconNode.textContent = String(icon || "");
 
   const gloveWrap = document.createElement("span");
   gloveWrap.className = "pes6-leader-shield kof-top3-glove bounty-row-glove";
@@ -1051,10 +1064,10 @@ function buildBountyRow({ label = "", user = "", gloveImage = null, enableGlow =
 
   const userName = document.createElement("p");
   userName.className = "pes6-leader-user";
-  userName.textContent = `${label}: ${String(user || "—")}`;
+  userName.textContent = String(user || "—");
 
   info.appendChild(userName);
-  left.append(gloveWrap, info);
+  left.append(iconNode, gloveWrap, info);
 
   if (enableGlow && gloveImage) {
     const glowColor = getKofGlowColor(gloveImage);
@@ -1079,6 +1092,14 @@ function buildBountyRow({ label = "", user = "", gloveImage = null, enableGlow =
   }
 
   row.append(left);
+
+  if (showBadge) {
+    const badge = document.createElement("span");
+    badge.className = "mini-badge bounty-row-badge";
+    badge.textContent = String(badgeText || "—");
+    row.append(badge);
+  }
+
   return row;
 }
 
@@ -1093,19 +1114,23 @@ function renderBountyWeek() {
   const hunterHasUser = hunterUserValue !== null && String(hunterUserValue || "").trim() !== "";
   const hunterUser = hunterHasUser ? String(hunterUserValue) : "Sin cazador";
   const hunterGloveImage = hunterHasUser ? (BOUNTY_DATA?.hunterGloveImage || null) : null;
+  const bountyBadgeText = hunterHasUser ? "Derrotado" : "Bounty activo";
 
   const bountyRow = buildBountyRow({
-    label: "Bounty",
+    icon: "🎯",
     user: bountyUser,
     gloveImage: bountyGloveImage,
+    badgeText: bountyBadgeText,
+    showBadge: true,
     enableGlow: true,
-    enableParticles: true
+    enableParticles: !hunterHasUser
   });
 
   const hunterRow = buildBountyRow({
-    label: "Cazador",
+    icon: "⚔️",
     user: hunterUser,
     gloveImage: hunterGloveImage,
+    showBadge: false,
     enableGlow: hunterHasUser,
     enableParticles: false
   });

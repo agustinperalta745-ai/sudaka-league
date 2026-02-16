@@ -680,8 +680,28 @@ summary:focus-visible,
   min-height: 56px;
 }
 
+.bounty-row .pes6-leader-main {
+  flex-wrap: nowrap;
+}
+
+.bounty-row-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  font-size: 1rem;
+  line-height: 1;
+}
+
 .bounty-row .pes6-leader-user {
   letter-spacing: 0.03em;
+  text-align: left;
+}
+
+.bounty-row .pes6-leader-info {
+  flex: 1 1 auto;
 }
 
 .bounty-row-glove.is-empty {
@@ -709,8 +729,8 @@ summary:focus-visible,
 }
 
 .bounty-particle {
-  --particle-x: calc(28% + (var(--particle-index) * 5%));
-  --particle-y: 68%;
+  --particle-x: calc(7% + (var(--particle-index) * 1.4%));
+  --particle-y: 72%;
   --particle-size: calc(3px + (var(--particle-index) % 3));
   position: absolute;
   left: var(--particle-x);
@@ -734,7 +754,7 @@ summary:focus-visible,
     opacity: 0.75;
   }
   100% {
-    transform: translate3d(18px, -52px, 0) scale(1.15);
+    transform: translate3d(8px, -54px, 0) scale(1.15);
     opacity: 0;
   }
 }
