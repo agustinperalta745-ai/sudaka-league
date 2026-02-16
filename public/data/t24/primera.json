@@ -1,7 +1,7 @@
 {
   "source": "gesliga",
   "division": "primera",
-  "fetchedAt": "2026-02-16T17:38:37.070Z",
+  "fetchedAt": "2026-02-16T18:01:00.570Z",
   "rows": [
     {
       "pos": 1,
@@ -31,6 +31,19 @@
     },
     {
       "pos": 3,
+      "equipo": "Exeeneta - Fiorentina",
+      "escudoFile": "exeeneta.png",
+      "pts": 33,
+      "pj": 16,
+      "pg": 10,
+      "pe": 3,
+      "pp": 3,
+      "gf": 33,
+      "gc": 20,
+      "dg": 13
+    },
+    {
+      "pos": 4,
       "equipo": "Joser17 - Brighton",
       "escudoFile": "joser17.png",
       "pts": 31,
@@ -43,30 +56,17 @@
       "dg": 5
     },
     {
-      "pos": 4,
-      "equipo": "Exeeneta - Fiorentina",
-      "escudoFile": "exeeneta.png",
-      "pts": 30,
-      "pj": 15,
-      "pg": 9,
-      "pe": 3,
-      "pp": 3,
-      "gf": 31,
-      "gc": 19,
-      "dg": 12
-    },
-    {
       "pos": 5,
       "equipo": "Pelufo - Real Sociedad",
       "escudoFile": "pelufo.png",
       "pts": 27,
-      "pj": 13,
+      "pj": 14,
       "pg": 9,
       "pe": 0,
-      "pp": 4,
-      "gf": 24,
-      "gc": 12,
-      "dg": 12
+      "pp": 5,
+      "gf": 25,
+      "gc": 14,
+      "dg": 11
     },
     {
       "pos": 6,
@@ -137,27 +137,27 @@
       "pos": 11,
       "equipo": "Soylefo - Fullham",
       "escudoFile": "soylefo.png",
-      "pts": 13,
-      "pj": 11,
-      "pg": 4,
+      "pts": 16,
+      "pj": 12,
+      "pg": 5,
       "pe": 1,
       "pp": 6,
-      "gf": 19,
-      "gc": 21,
-      "dg": -2
+      "gf": 21,
+      "gc": 22,
+      "dg": -1
     },
     {
       "pos": 12,
       "equipo": "Patry - Feeyenord",
       "escudoFile": "patry.png",
       "pts": 13,
-      "pj": 15,
+      "pj": 16,
       "pg": 3,
       "pe": 4,
-      "pp": 8,
-      "gf": 14,
-      "gc": 25,
-      "dg": -11
+      "pp": 9,
+      "gf": 15,
+      "gc": 27,
+      "dg": -12
     },
     {
       "pos": 13,

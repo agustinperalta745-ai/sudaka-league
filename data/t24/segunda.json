@@ -1,23 +1,36 @@
 {
   "source": "gesliga",
   "division": "segunda",
-  "fetchedAt": "2026-02-16T17:38:37.613Z",
+  "fetchedAt": "2026-02-16T18:01:01.229Z",
   "rows": [
     {
       "pos": 1,
       "equipo": "Sally1901 - Marsella",
       "escudoFile": "sally1901.png",
       "pts": 36,
-      "pj": 12,
+      "pj": 13,
       "pg": 12,
       "pe": 0,
-      "pp": 0,
-      "gf": 36,
-      "gc": 10,
-      "dg": 26
+      "pp": 1,
+      "gf": 37,
+      "gc": 14,
+      "dg": 23
     },
     {
       "pos": 2,
+      "equipo": "Cacherinhooo - Fullham",
+      "escudoFile": "cacherinhooo.png",
+      "pts": 25,
+      "pj": 10,
+      "pg": 8,
+      "pe": 1,
+      "pp": 1,
+      "gf": 41,
+      "gc": 13,
+      "dg": 28
+    },
+    {
+      "pos": 3,
       "equipo": "NazaTeto - Galatasaray",
       "escudoFile": "nazateto.png",
       "pts": 22,
@@ -28,19 +41,6 @@
       "gf": 21,
       "gc": 8,
       "dg": 13
-    },
-    {
-      "pos": 3,
-      "equipo": "Cacherinhooo - Fullham",
-      "escudoFile": "cacherinhooo.png",
-      "pts": 19,
-      "pj": 8,
-      "pg": 6,
-      "pe": 1,
-      "pp": 1,
-      "gf": 32,
-      "gc": 12,
-      "dg": 20
     },
     {
       "pos": 4,
@@ -226,19 +226,6 @@
     },
     {
       "pos": 18,
-      "equipo": "TrueBlueFC - Bologna",
-      "escudoFile": "truebluefc.png",
-      "pts": 0,
-      "pj": 3,
-      "pg": 0,
-      "pe": 0,
-      "pp": 3,
-      "gf": 4,
-      "gc": 9,
-      "dg": -5
-    },
-    {
-      "pos": 19,
       "equipo": "Romancito - Valencia",
       "escudoFile": "romancito.png",
       "pts": 0,
@@ -251,7 +238,7 @@
       "dg": -5
     },
     {
-      "pos": 20,
+      "pos": 19,
       "equipo": "Slasher7 - Crystal Palace",
       "escudoFile": "slasher7.png",
       "pts": 0,
@@ -262,6 +249,19 @@
       "gf": 0,
       "gc": 5,
       "dg": -5
+    },
+    {
+      "pos": 20,
+      "equipo": "TrueBlueFC - Bologna",
+      "escudoFile": "truebluefc.png",
+      "pts": 0,
+      "pj": 4,
+      "pg": 0,
+      "pe": 0,
+      "pp": 4,
+      "gf": 4,
+      "gc": 14,
+      "dg": -10
     }
   ]
 }
