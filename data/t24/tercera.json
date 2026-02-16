@@ -1,20 +1,20 @@
 {
   "source": "gesliga",
   "division": "tercera",
-  "fetchedAt": "2026-02-16T22:01:29.219Z",
+  "fetchedAt": "2026-02-16T23:49:08.705Z",
   "rows": [
     {
       "pos": 1,
       "equipo": "Fenerbache - jona96delgado",
       "escudoFile": "fenerbache.png",
-      "pts": 20,
-      "pj": 9,
-      "pg": 6,
+      "pts": 29,
+      "pj": 12,
+      "pg": 9,
       "pe": 2,
       "pp": 1,
-      "gf": 39,
-      "gc": 17,
-      "dg": 22
+      "gf": 56,
+      "gc": 28,
+      "dg": 28
     },
     {
       "pos": 2,
@@ -34,16 +34,29 @@
       "equipo": "PSV - Eduard9419",
       "escudoFile": "psv.png",
       "pts": 13,
-      "pj": 5,
+      "pj": 6,
       "pg": 4,
       "pe": 1,
-      "pp": 0,
-      "gf": 15,
-      "gc": 8,
-      "dg": 7
+      "pp": 1,
+      "gf": 17,
+      "gc": 12,
+      "dg": 5
     },
     {
       "pos": 4,
+      "equipo": "Lyon - 7LibertadoresSLP",
+      "escudoFile": "lyon.png",
+      "pts": 9,
+      "pj": 4,
+      "pg": 3,
+      "pe": 0,
+      "pp": 1,
+      "gf": 7,
+      "gc": 8,
+      "dg": -1
+    },
+    {
+      "pos": 5,
       "equipo": "Nottingham Forest - Ropedri1",
       "escudoFile": "nottingham-forest.png",
       "pts": 6,
@@ -56,7 +69,7 @@
       "dg": 2
     },
     {
-      "pos": 5,
+      "pos": 6,
       "equipo": "Marsella - ElLokoSantooss",
       "escudoFile": "marsella.png",
       "pts": 6,
@@ -69,7 +82,7 @@
       "dg": -1
     },
     {
-      "pos": 6,
+      "pos": 7,
       "equipo": "Bologna - JUN Smash",
       "escudoFile": "bologna.png",
       "pts": 4,
@@ -82,43 +95,30 @@
       "dg": 1
     },
     {
-      "pos": 7,
-      "equipo": "Lyon - 7LibertadoresSLP",
-      "escudoFile": "lyon.png",
-      "pts": 3,
-      "pj": 2,
-      "pg": 1,
-      "pe": 0,
-      "pp": 1,
-      "gf": 5,
-      "gc": 8,
-      "dg": -3
-    },
-    {
       "pos": 8,
       "equipo": "Brighton - Lichacrack",
       "escudoFile": "brighton.png",
       "pts": 3,
-      "pj": 11,
+      "pj": 12,
       "pg": 1,
       "pe": 0,
-      "pp": 10,
-      "gf": 9,
-      "gc": 38,
-      "dg": -29
+      "pp": 11,
+      "gf": 15,
+      "gc": 45,
+      "dg": -30
     },
     {
       "pos": 9,
       "equipo": "Feeyenord - SantisimonFC",
       "escudoFile": "feeyenord.png",
       "pts": 1,
-      "pj": 5,
+      "pj": 8,
       "pg": 0,
       "pe": 1,
-      "pp": 4,
-      "gf": 6,
-      "gc": 17,
-      "dg": -11
+      "pp": 7,
+      "gf": 9,
+      "gc": 25,
+      "dg": -16
     },
     {
       "pos": 10,
