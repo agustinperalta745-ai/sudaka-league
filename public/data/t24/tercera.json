@@ -1,19 +1,19 @@
 {
   "source": "gesliga",
   "division": "tercera",
-  "fetchedAt": "2026-02-16T21:50:03.537Z",
+  "fetchedAt": "2026-02-16T22:01:29.219Z",
   "rows": [
     {
       "pos": 1,
       "equipo": "Fenerbache - jona96delgado",
       "escudoFile": "fenerbache.png",
-      "pts": 19,
-      "pj": 8,
+      "pts": 20,
+      "pj": 9,
       "pg": 6,
-      "pe": 1,
+      "pe": 2,
       "pp": 1,
-      "gf": 35,
-      "gc": 13,
+      "gf": 39,
+      "gc": 17,
       "dg": 22
     },
     {
@@ -109,6 +109,19 @@
     },
     {
       "pos": 9,
+      "equipo": "Feeyenord - SantisimonFC",
+      "escudoFile": "feeyenord.png",
+      "pts": 1,
+      "pj": 5,
+      "pg": 0,
+      "pe": 1,
+      "pp": 4,
+      "gf": 6,
+      "gc": 17,
+      "dg": -11
+    },
+    {
+      "pos": 10,
       "equipo": "Villareal - Facu.jey",
       "escudoFile": "villareal.png",
       "pts": 0,
@@ -121,7 +134,7 @@
       "dg": 0
     },
     {
-      "pos": 9,
+      "pos": 10,
       "equipo": "Real Sociedad - CUPO LIBRE",
       "escudoFile": "real-sociedad.png",
       "pts": 0,
@@ -134,7 +147,7 @@
       "dg": 0
     },
     {
-      "pos": 9,
+      "pos": 10,
       "equipo": "Valencia - Jotaropucho",
       "escudoFile": "valencia.png",
       "pts": 0,
@@ -147,7 +160,7 @@
       "dg": 0
     },
     {
-      "pos": 9,
+      "pos": 10,
       "equipo": "Betis - Lulorc",
       "escudoFile": "betis.png",
       "pts": 0,
@@ -160,7 +173,7 @@
       "dg": 0
     },
     {
-      "pos": 9,
+      "pos": 10,
       "equipo": "Monaco - Kindel",
       "escudoFile": "monaco.png",
       "pts": 0,
@@ -173,7 +186,7 @@
       "dg": 0
     },
     {
-      "pos": 9,
+      "pos": 10,
       "equipo": "Galatasaray - Pipa",
       "escudoFile": "galatasaray.png",
       "pts": 0,
@@ -186,7 +199,7 @@
       "dg": 0
     },
     {
-      "pos": 9,
+      "pos": 10,
       "equipo": "Roma - Kasino06",
       "escudoFile": "roma.png",
       "pts": 0,
@@ -199,7 +212,7 @@
       "dg": 0
     },
     {
-      "pos": 9,
+      "pos": 10,
       "equipo": "Fiorentina - ignafig",
       "escudoFile": "fiorentina.png",
       "pts": 0,
@@ -212,7 +225,7 @@
       "dg": 0
     },
     {
-      "pos": 9,
+      "pos": 10,
       "equipo": "Torino - CUPO LIBRE",
       "escudoFile": "torino.png",
       "pts": 0,
@@ -225,7 +238,7 @@
       "dg": 0
     },
     {
-      "pos": 9,
+      "pos": 10,
       "equipo": "Everton - Luxo",
       "escudoFile": "everton.png",
       "pts": 0,
@@ -238,7 +251,7 @@
       "dg": 0
     },
     {
-      "pos": 9,
+      "pos": 10,
       "equipo": "Fulham - Mikoi",
       "escudoFile": "fulham.png",
       "pts": 0,
@@ -249,19 +262,6 @@
       "gf": 0,
       "gc": 0,
       "dg": 0
-    },
-    {
-      "pos": 20,
-      "equipo": "Feeyenord - SantisimonFC",
-      "escudoFile": "feeyenord.png",
-      "pts": 0,
-      "pj": 4,
-      "pg": 0,
-      "pe": 0,
-      "pp": 4,
-      "gf": 2,
-      "gc": 13,
-      "dg": -11
     }
   ]
 }
