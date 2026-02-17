@@ -3,17 +3,17 @@
     {
       "divisionKey": "primera",
       "divisionLabel": "1ª División",
-      "usuario": "H09",
-      "pj": 30,
-      "pg": 10,
-      "pts": 36,
-      "escudoFile": "villarreal.png"
+      "usuario": "Exeeneta",
+      "pj": 20,
+      "pg": 11,
+      "pts": 38,
+      "escudoFile": "fiorentina.png"
     },
     {
       "divisionKey": "segunda",
       "divisionLabel": "2ª División",
       "usuario": "Sally1901",
-      "pj": 12,
+      "pj": 13,
       "pg": 12,
       "pts": 36,
       "escudoFile": "marsella.png"
@@ -22,11 +22,11 @@
       "divisionKey": "tercera",
       "divisionLabel": "3ª División",
       "usuario": "Jona96delgado",
-      "pj": 6,
-      "pg": 5,
-      "pts": 16,
+      "pj": 15,
+      "pg": 12,
+      "pts": 38,
       "escudoFile": "fenerbahce.png"
     }
   ],
-  "updatedAt": "2026-02-16T14:35:00"
+  "updatedAt": "2026-02-17T17:00:00"
 }
