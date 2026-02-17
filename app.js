@@ -838,10 +838,16 @@ function startCountdown(endDate, elementId) {
   const el = document.getElementById(elementId);
   if (!el) return;
 
+  const parsedTarget = new Date(endDate).getTime();
+
+  if (!endDate || Number.isNaN(parsedTarget)) {
+    el.innerText = "Fecha no definida";
+    return;
+  }
+
   function update() {
-    const now = new Date().getTime();
-    const target = new Date(endDate).getTime();
-    const distance = target - now;
+    const now = Date.now();
+    const distance = parsedTarget - now;
 
     if (distance <= 0) {
       el.innerText = "Finalizado";
@@ -3723,10 +3729,8 @@ async function initializeApp() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const interdivisional = window.INTERDIVISIONAL_ACTIVE_SEASON;
-  if (interdivisional?.endDate) {
-    startCountdown(interdivisional.endDate, "interdivisional-countdown");
-  }
+  const endDate = window.interdivisionalConfig?.endDate;
+  startCountdown(endDate, "interdivisional-countdown");
 });
 
 initializeApp();
