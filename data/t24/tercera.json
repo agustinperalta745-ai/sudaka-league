@@ -1,7 +1,7 @@
 {
   "source": "gesliga",
   "division": "tercera",
-  "fetchedAt": "2026-02-17T05:14:56.241Z",
+  "fetchedAt": "2026-02-17T05:36:42.420Z",
   "rows": [
     {
       "pos": 1,
@@ -20,27 +20,27 @@
       "pos": 2,
       "equipo": "Crystal Palace - Broko",
       "escudoFile": "crystal-palace.png",
-      "pts": 19,
-      "pj": 10,
-      "pg": 6,
-      "pe": 1,
-      "pp": 3,
-      "gf": 27,
-      "gc": 16,
+      "pts": 26,
+      "pj": 14,
+      "pg": 8,
+      "pe": 2,
+      "pp": 4,
+      "gf": 33,
+      "gc": 22,
       "dg": 11
     },
     {
       "pos": 3,
       "equipo": "PSV - Eduard9419",
       "escudoFile": "psv.png",
-      "pts": 19,
-      "pj": 8,
-      "pg": 6,
-      "pe": 1,
+      "pts": 23,
+      "pj": 10,
+      "pg": 7,
+      "pe": 2,
       "pp": 1,
-      "gf": 24,
-      "gc": 13,
-      "dg": 11
+      "gf": 28,
+      "gc": 15,
+      "dg": 13
     },
     {
       "pos": 4,
@@ -60,13 +60,13 @@
       "equipo": "Lyon - 7LibertadoresSLP",
       "escudoFile": "lyon.png",
       "pts": 12,
-      "pj": 9,
+      "pj": 11,
       "pg": 4,
       "pe": 0,
-      "pp": 5,
-      "gf": 11,
-      "gc": 19,
-      "dg": -8
+      "pp": 7,
+      "gf": 13,
+      "gc": 23,
+      "dg": -10
     },
     {
       "pos": 6,
