@@ -1316,6 +1316,15 @@ summary:focus-visible,
     url("/sudaka-league/assets/copa-premier-bg.png") center/cover no-repeat;
 }
 
+
+.cup-countdown-chip {
+  margin-top: 0.55rem;
+  border-color: rgba(88, 201, 255, 0.5);
+  background: rgba(6, 14, 26, 0.78);
+  color: var(--text-main);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
 .cup-toggle-label {
   margin: 0;
   padding-top: 0.7rem;

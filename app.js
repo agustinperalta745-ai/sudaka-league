@@ -248,9 +248,9 @@ const COPA_PREMIER_HISTORY_SOURCE = Array.isArray(window.COPA_PREMIER_HISTORY_SE
 const INTERDIVISIONAL_PHASES = [
   { key: "octavos_playoffs", label: "Octavos Play-offs" },
   { key: "cuartos_playoffs", label: "Cuartos Play-offs" },
-  { key: "semifinal_playoffs", label: "Semifinal Play-offs" },
+  { key: "semifinal_playoffs", label: "Semi final Play-offs" },
   { key: "final_playoffs", label: "Final Play-offs" },
-  { key: "final_copa_interdivisional", label: "Final Copa Interdivisional" }
+  { key: "final_copa_interdivisional", label: "Final Copa Interdivicional" }
 ];
 
 const COPA_PREMIER_PHASES = [
@@ -794,16 +794,54 @@ function hasLoadedInterdivisionalMatches(season, phaseKey) {
   return Array.isArray(matches) && matches.length > 0;
 }
 
+function hasPhaseLoadedInSource(source, keys = []) {
+  if (!source || typeof source !== "object") return false;
+
+  return keys.some((key) => {
+    const matches = source[key];
+    return Array.isArray(matches) && matches.length > 0;
+  });
+}
+
+function detectInterdivisionalPhaseFromSource(source) {
+  if (!source || typeof source !== "object") return null;
+
+  if (hasPhaseLoadedInSource(source, ["final_copa_interdivisional", "final_copa_interdivicional", "final"])) {
+    return "final_copa_interdivisional";
+  }
+
+  if (hasPhaseLoadedInSource(source, ["final_playoffs", "finalpo"])) {
+    return "final_playoffs";
+  }
+
+  if (hasPhaseLoadedInSource(source, ["semifinal_playoffs", "semis"])) {
+    return "semifinal_playoffs";
+  }
+
+  if (hasPhaseLoadedInSource(source, ["cuartos_playoffs", "cuartos"])) {
+    return "cuartos_playoffs";
+  }
+
+  if (hasPhaseLoadedInSource(source, ["octavos_playoffs", "octavos"])) {
+    return "octavos_playoffs";
+  }
+
+  return null;
+}
+
 function getCurrentInterdivisionalPhase(season) {
   if (!season) return INTERDIVISIONAL_PHASES[0].key;
 
-  const phaseOverride = typeof season.phaseOverride === "string"
-    ? season.phaseOverride.trim()
-    : "";
+  const sourcePhases = detectInterdivisionalPhaseFromSource(INTERDIVISIONAL_ACTIVE_SOURCE)
+    || detectInterdivisionalPhaseFromSource(INTERDIVISIONAL_ACTIVE_SOURCE?.phases)
+    || detectInterdivisionalPhaseFromSource(INTERDIVISIONAL_RESULTS_SOURCE);
 
-  if (phaseOverride) {
-    const overridePhase = INTERDIVISIONAL_PHASES.find((phase) => phase.label === phaseOverride);
-    if (overridePhase) return overridePhase.key;
+  if (sourcePhases) {
+    return sourcePhases;
+  }
+
+  if (hasLoadedInterdivisionalMatches(season, "final_copa_interdivisional")) {
+    return "final_copa_interdivisional";
   }
 
   if (hasLoadedInterdivisionalMatches(season, "final_playoffs")) {
@@ -836,31 +874,47 @@ function updateCupRemaining() {
   }
 }
 
-function iniciarContador() {
-  const deadline = new Date(copaInterdivisionalConfig.deadline);
-  const contadorEl = document.getElementById("contador-inter");
+function formatInterdivisionalCountdown(msRemaining) {
+  if (msRemaining <= 0) return "FINALIZADO";
 
-  if (!contadorEl || Number.isNaN(deadline.getTime())) return;
+  const totalMinutes = Math.max(0, Math.floor(msRemaining / (1000 * 60)));
+  const days = Math.floor(totalMinutes / (60 * 24));
+  const hours = Math.floor((totalMinutes % (60 * 24)) / 60);
+  const minutes = totalMinutes % 60;
+
+  if (days > 0) {
+    return `⏳ ${days}d ${hours}h ${minutes}m`;
+  }
+
+  if (hours > 0) {
+    return `⏳ ${hours}h ${minutes}m`;
+  }
+
+  return `⏳ ${Math.max(0, minutes)}m`;
+}
+
+function iniciarContador() {
+  const contadorEl = document.getElementById("contador-inter");
+  if (!contadorEl) return;
+
+  contadorEl.classList.add("mini-badge", "cup-countdown-chip");
+
+  const deadlineValue = copaInterdivisionalConfig?.deadline;
+  const deadline = deadlineValue ? new Date(deadlineValue) : null;
+  const hasValidDeadline = deadline instanceof Date && !Number.isNaN(deadline.getTime());
 
   function actualizar() {
-    const ahora = new Date();
-    const diferencia = deadline - ahora;
-
-    if (diferencia <= 0) {
-      contadorEl.textContent = "FINALIZADO";
+    if (!hasValidDeadline) {
+      contadorEl.textContent = "Sin fecha";
       return;
     }
 
-    const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
-    const horas = Math.floor((diferencia / (1000 * 60 * 60)) % 24);
-    const minutos = Math.floor((diferencia / (1000 * 60)) % 60);
-
-    contadorEl.textContent =
-      dias + "d " + horas + "h " + minutos + "m restantes";
+    const diferencia = deadline.getTime() - Date.now();
+    contadorEl.textContent = formatInterdivisionalCountdown(diferencia);
   }
 
   actualizar();
-  setInterval(actualizar, 60000);
+  setInterval(actualizar, 30000);
 }
 
 function updateSeasonStatus() {
@@ -2986,13 +3040,9 @@ function updateCupCardHeader() {
 
   const displaySeason = currentSeason.season;
 
-  const phaseOverrideLabel = typeof currentSeason.phaseOverride === "string"
-    ? currentSeason.phaseOverride.trim()
-    : "";
-
   if (cupCurrentSeason) cupCurrentSeason.textContent = `Temporada ${displaySeason}`;
   if (cupCurrentPhase) {
-    cupCurrentPhase.textContent = `Fase: ${phaseOverrideLabel || getPhaseLabel(activePhase)}`;
+    cupCurrentPhase.textContent = `Fase: ${getPhaseLabel(activePhase)}`;
   }
 
   if (cupStatus) {
