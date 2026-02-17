@@ -1,20 +1,20 @@
 {
   "source": "gesliga",
   "division": "tercera",
-  "fetchedAt": "2026-02-17T20:02:09.740Z",
+  "fetchedAt": "2026-02-17T21:57:39.003Z",
   "rows": [
     {
       "pos": 1,
       "equipo": "Fenerbache - jona96delgado",
       "escudoFile": "fenerbache.png",
-      "pts": 38,
-      "pj": 15,
+      "pts": 39,
+      "pj": 17,
       "pg": 12,
-      "pe": 2,
-      "pp": 1,
-      "gf": 65,
-      "gc": 32,
-      "dg": 33
+      "pe": 3,
+      "pp": 2,
+      "gf": 67,
+      "gc": 35,
+      "dg": 32
     },
     {
       "pos": 2,
@@ -70,6 +70,19 @@
     },
     {
       "pos": 6,
+      "equipo": "Bologna - JUN Smash",
+      "escudoFile": "bologna.png",
+      "pts": 8,
+      "pj": 6,
+      "pg": 2,
+      "pe": 2,
+      "pp": 2,
+      "gf": 10,
+      "gc": 8,
+      "dg": 2
+    },
+    {
+      "pos": 7,
       "equipo": "Nottingham Forest - Ropedri1",
       "escudoFile": "nottingham-forest.png",
       "pts": 6,
@@ -82,7 +95,7 @@
       "dg": 2
     },
     {
-      "pos": 7,
+      "pos": 8,
       "equipo": "Brighton - Lichacrack",
       "escudoFile": "brighton.png",
       "pts": 6,
@@ -93,19 +106,6 @@
       "gf": 17,
       "gc": 47,
       "dg": -30
-    },
-    {
-      "pos": 8,
-      "equipo": "Bologna - JUN Smash",
-      "escudoFile": "bologna.png",
-      "pts": 4,
-      "pj": 4,
-      "pg": 1,
-      "pe": 1,
-      "pp": 2,
-      "gf": 7,
-      "gc": 6,
-      "dg": 1
     },
     {
       "pos": 9,
