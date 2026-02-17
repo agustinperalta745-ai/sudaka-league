@@ -427,7 +427,6 @@ const backToTopButton = document.getElementById("back-to-top");
 const pes6Status = document.getElementById("pes6Status");
 const pes6Remaining = document.getElementById("pes6-remaining");
 const kofRemaining = document.getElementById("kof-remaining");
-const cupRemaining = document.getElementById("cup-remaining");
 const pes6SeasonName = document.getElementById("pes6SeasonName");
 const cupStatus = document.getElementById("cupStatus");
 const cupInterdivisionalCard = document.getElementById("cup-interdivisional-card");
@@ -749,8 +748,6 @@ async function renderT24Tables() {
 // Asignación centralizada de links editables.
 
 const PES6_FINAL_TARGET = new Date("2026-02-22T23:59:00-03:00");
-const INTERDIVISIONAL_END_DATE = "2026-02-18T23:59:00-03:00";
-
 function updateCountdown(targetDate, el, options = {}) {
   if (!el) return;
 
@@ -832,30 +829,36 @@ function updateMainSeasonCountdowns() {
 }
 
 function updateCupRemaining() {
-  if (!cupRemaining) return;
-
-  const currentPhase = getCurrentCupHeaderPhase();
-  if (currentPhase === "semifinal_playoffs") {
-    const endDate = new Date(INTERDIVISIONAL_END_DATE);
-    const diffMs = endDate.getTime() - Date.now();
-
-    if (diffMs <= 0) {
-      cupRemaining.textContent = "FINALIZADA";
-    } else {
-      const totalSeconds = Math.floor(diffMs / 1000);
-      const days = Math.floor(totalSeconds / 86400);
-      const hours = Math.floor((totalSeconds % 86400) / 3600);
-      const minutes = Math.floor((totalSeconds % 3600) / 60);
-      const seconds = totalSeconds % 60;
-      cupRemaining.textContent = `Finaliza en: ${days}d ${hours}h ${minutes}m ${seconds}s`;
-    }
-  } else {
-    cupRemaining.textContent = "";
-  }
-
   if (cupPremierRemaining) {
     cupPremierRemaining.textContent = "INACTIVA";
   }
+}
+
+function startCountdown(endDate, elementId) {
+  const el = document.getElementById(elementId);
+  if (!el) return;
+
+  function update() {
+    const now = new Date().getTime();
+    const target = new Date(endDate).getTime();
+    const distance = target - now;
+
+    if (distance <= 0) {
+      el.innerText = "Finalizado";
+      clearInterval(interval);
+      return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    el.innerText = `${days}d ${hours}h ${minutes}m ${seconds}s restantes`;
+  }
+
+  update();
+  const interval = setInterval(update, 1000);
 }
 
 function updateSeasonStatus() {
@@ -3717,7 +3720,13 @@ async function initializeApp() {
   handlePes6HashRoute();
   setInterval(updateSeasonStatus, 60000);
   setInterval(updateMainSeasonCountdowns, 60000);
-  setInterval(updateCupRemaining, 1000);
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  const interdivisional = window.INTERDIVISIONAL_ACTIVE_SEASON;
+  if (interdivisional?.endDate) {
+    startCountdown(interdivisional.endDate, "interdivisional-countdown");
+  }
+});
 
 initializeApp();
