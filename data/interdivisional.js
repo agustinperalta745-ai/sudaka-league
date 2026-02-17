@@ -2,6 +2,7 @@ const { cupSeason = 23 } = window.SUDAKA_SITE_DATA || {};
 
 window.INTERDIVISIONAL_ACTIVE_SEASON = {
   season: `T${cupSeason}`,
+  endDate: "2026-02-18T23:59:00-03:00",
   phaseOverride: null,
 
   octavos: [
