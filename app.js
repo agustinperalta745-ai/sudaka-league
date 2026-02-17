@@ -749,7 +749,7 @@ async function renderT24Tables() {
 // Asignación centralizada de links editables.
 
 const PES6_FINAL_TARGET = new Date("2026-02-22T23:59:00-03:00");
-const CUP_INTERDIVISIONAL_FINAL_TARGET = new Date("2026-02-16T23:59:00-03:00");
+const INTERDIVISIONAL_END_DATE = "2026-02-18T23:59:00-03:00";
 
 function updateCountdown(targetDate, el, options = {}) {
   if (!el) return;
@@ -781,17 +781,41 @@ function updateLeagueRemaining(targetDate, el) {
   updateCountdown(targetDate, el, { showHoursOnLastDay: true });
 }
 
+function getCurrentCupHeaderPhase() {
+  const currentSeason = getCurrentInterdivisionalSeason();
+  if (!currentSeason) return INTERDIVISIONAL_PHASES[0].key;
+
+  const visiblePhases = getVisiblePhaseKeysForSeason(currentSeason);
+  const selectedPhase = CUP_PHASE_BUTTONS.find((phase) => phase.id === cupActivePhase)?.key;
+  return selectedPhase || visiblePhases[visiblePhases.length - 1] || INTERDIVISIONAL_PHASES[0].key;
+}
+
 function updateMainSeasonCountdowns() {
   updateLeagueRemaining(PES6_FINAL_TARGET, pes6Remaining);
   updateLeagueRemaining(PES6_FINAL_TARGET, kofRemaining);
 }
 
 function updateCupRemaining() {
-  updateCountdown(CUP_INTERDIVISIONAL_FINAL_TARGET, cupRemaining, {
-    showHoursOnLastDay: true,
-    formatDays: (value) => `${value} días restantes`,
-    formatHours: (value) => `${value} horas restantes`
-  });
+  if (!cupRemaining) return;
+
+  const currentPhase = getCurrentCupHeaderPhase();
+  if (currentPhase === "semifinal_playoffs") {
+    const endDate = new Date(INTERDIVISIONAL_END_DATE);
+    const diffMs = endDate.getTime() - Date.now();
+
+    if (diffMs <= 0) {
+      cupRemaining.textContent = "FINALIZADA";
+    } else {
+      const totalSeconds = Math.floor(diffMs / 1000);
+      const days = Math.floor(totalSeconds / 86400);
+      const hours = Math.floor((totalSeconds % 86400) / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+      cupRemaining.textContent = `Finaliza en: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
+  } else {
+    cupRemaining.textContent = "";
+  }
 
   if (cupPremierRemaining) {
     cupPremierRemaining.textContent = "INACTIVA";
@@ -2917,9 +2941,7 @@ function updateCupCardHeader() {
   const currentSeason = getCurrentInterdivisionalSeason();
   if (!currentSeason) return;
 
-  const visiblePhases = getVisiblePhaseKeysForSeason(currentSeason);
-  const selectedPhase = CUP_PHASE_BUTTONS.find((phase) => phase.id === cupActivePhase)?.key;
-  const activePhase = selectedPhase || visiblePhases[visiblePhases.length - 1] || INTERDIVISIONAL_PHASES[0].key;
+  const activePhase = getCurrentCupHeaderPhase();
 
   const displaySeason = currentSeason.season;
 
@@ -2929,6 +2951,8 @@ function updateCupCardHeader() {
   if (cupStatus) {
     cupStatus.textContent = "COPA";
   }
+
+  updateCupRemaining();
 }
 
 function setCupActivePhase(phaseId) {
@@ -3651,7 +3675,7 @@ async function initializeApp() {
   handlePes6HashRoute();
   setInterval(updateSeasonStatus, 60000);
   setInterval(updateMainSeasonCountdowns, 60000);
-  setInterval(updateCupRemaining, 60000);
+  setInterval(updateCupRemaining, 1000);
 }
 
 initializeApp();
