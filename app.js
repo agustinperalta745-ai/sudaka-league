@@ -785,9 +785,45 @@ function getCurrentCupHeaderPhase() {
   const currentSeason = getCurrentInterdivisionalSeason();
   if (!currentSeason) return INTERDIVISIONAL_PHASES[0].key;
 
-  const visiblePhases = getVisiblePhaseKeysForSeason(currentSeason);
-  const selectedPhase = CUP_PHASE_BUTTONS.find((phase) => phase.id === cupActivePhase)?.key;
-  return selectedPhase || visiblePhases[visiblePhases.length - 1] || INTERDIVISIONAL_PHASES[0].key;
+  return getCurrentInterdivisionalPhase(currentSeason);
+}
+
+function hasLoadedInterdivisionalMatches(season, phaseKey) {
+  if (!season?.phases || !phaseKey) return false;
+
+  const matches = season.phases[phaseKey];
+  return Array.isArray(matches) && matches.length > 0;
+}
+
+function getCurrentInterdivisionalPhase(season) {
+  if (!season) return INTERDIVISIONAL_PHASES[0].key;
+
+  const phaseOverride = typeof season.phaseOverride === "string"
+    ? season.phaseOverride.trim()
+    : "";
+
+  if (phaseOverride) {
+    const overridePhase = INTERDIVISIONAL_PHASES.find((phase) => phase.label === phaseOverride);
+    if (overridePhase) return overridePhase.key;
+  }
+
+  if (hasLoadedInterdivisionalMatches(season, "final_playoffs")) {
+    return "final_playoffs";
+  }
+
+  if (hasLoadedInterdivisionalMatches(season, "semifinal_playoffs")) {
+    return "semifinal_playoffs";
+  }
+
+  if (hasLoadedInterdivisionalMatches(season, "cuartos_playoffs")) {
+    return "cuartos_playoffs";
+  }
+
+  if (hasLoadedInterdivisionalMatches(season, "octavos_playoffs")) {
+    return "octavos_playoffs";
+  }
+
+  return INTERDIVISIONAL_PHASES[0].key;
 }
 
 function updateMainSeasonCountdowns() {
@@ -2945,8 +2981,14 @@ function updateCupCardHeader() {
 
   const displaySeason = currentSeason.season;
 
+  const phaseOverrideLabel = typeof currentSeason.phaseOverride === "string"
+    ? currentSeason.phaseOverride.trim()
+    : "";
+
   if (cupCurrentSeason) cupCurrentSeason.textContent = `Temporada ${displaySeason}`;
-  if (cupCurrentPhase) cupCurrentPhase.textContent = `Fase: ${getPhaseLabel(activePhase)}`;
+  if (cupCurrentPhase) {
+    cupCurrentPhase.textContent = `Fase: ${phaseOverrideLabel || getPhaseLabel(activePhase)}`;
+  }
 
   if (cupStatus) {
     cupStatus.textContent = "COPA";
