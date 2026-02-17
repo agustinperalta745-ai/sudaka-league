@@ -16,7 +16,7 @@ const interdivisionalResults = {
     "cuartos-4": { score: { home: 3, away: 0 } , pens: null, winner: "home" }
   },
   semis: {
-    "semis-1": { score: null, pens: null, winner: null },
+    "semis-1": { score: { home: 2, away: 2 } , pens: { home: 2, away: 3 }, winner: "away" },
     "semis-2": { score: null, pens: null, winner: null }
   },
   final_playoffs: {
