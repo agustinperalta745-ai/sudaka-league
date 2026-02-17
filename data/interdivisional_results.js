@@ -20,7 +20,7 @@ const interdivisionalResults = {
     "semis-2": { score: { home: 2, away: 0 }, pens: null, winner: "home" }
   },
   final_playoffs: {
-    "finalpo-1": { score: null, pens: null, winner: null }
+    "finalpo-1": { score: { home: 1, away: 2 }, pens: null, winner: "away" }
   },
   final: {
     "final-1": { score: null, pens: null, winner: null }
