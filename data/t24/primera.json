@@ -1,7 +1,7 @@
 {
   "source": "gesliga",
   "division": "primera",
-  "fetchedAt": "2026-02-17T19:18:34.696Z",
+  "fetchedAt": "2026-02-17T19:54:02.917Z",
   "rows": [
     {
       "pos": 1,
@@ -86,13 +86,13 @@
       "equipo": "Ivancarocela - Roma",
       "escudoFile": "ivancarocela.png",
       "pts": 27,
-      "pj": 26,
+      "pj": 27,
       "pg": 7,
       "pe": 6,
-      "pp": 13,
+      "pp": 14,
       "gf": 31,
-      "gc": 41,
-      "dg": -10
+      "gc": 42,
+      "dg": -11
     },
     {
       "pos": 8,
@@ -137,27 +137,27 @@
       "pos": 11,
       "equipo": "Soylefo - Fullham",
       "escudoFile": "soylefo.png",
-      "pts": 16,
-      "pj": 12,
+      "pts": 18,
+      "pj": 14,
       "pg": 5,
-      "pe": 1,
+      "pe": 3,
       "pp": 6,
-      "gf": 21,
-      "gc": 22,
+      "gf": 23,
+      "gc": 24,
       "dg": -1
     },
     {
       "pos": 12,
       "equipo": "Patry - Feeyenord",
       "escudoFile": "patry.png",
-      "pts": 13,
-      "pj": 17,
-      "pg": 3,
-      "pe": 4,
+      "pts": 18,
+      "pj": 20,
+      "pg": 4,
+      "pe": 6,
       "pp": 10,
-      "gf": 16,
-      "gc": 29,
-      "dg": -13
+      "gf": 19,
+      "gc": 31,
+      "dg": -12
     },
     {
       "pos": 13,
