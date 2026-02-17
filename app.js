@@ -1,3 +1,5 @@
+import { copaInterdivisionalConfig } from "./data/copa_config.js";
+
 // === HISTORIAL PES 6 (EDITAR SOLO ESTO) ===
 const PES6_HISTORY = [
   {
@@ -834,37 +836,31 @@ function updateCupRemaining() {
   }
 }
 
-function startCountdown(endDate, elementId) {
-  const el = document.getElementById(elementId);
-  if (!el) return;
+function iniciarContador() {
+  const deadline = new Date(copaInterdivisionalConfig.deadline);
+  const contadorEl = document.getElementById("contador-inter");
 
-  const parsedTarget = new Date(endDate).getTime();
+  if (!contadorEl || Number.isNaN(deadline.getTime())) return;
 
-  if (!endDate || Number.isNaN(parsedTarget)) {
-    el.innerText = "Fecha no definida";
-    return;
-  }
+  function actualizar() {
+    const ahora = new Date();
+    const diferencia = deadline - ahora;
 
-  function update() {
-    const now = Date.now();
-    const distance = parsedTarget - now;
-
-    if (distance <= 0) {
-      el.innerText = "Finalizado";
-      clearInterval(interval);
+    if (diferencia <= 0) {
+      contadorEl.textContent = "FINALIZADO";
       return;
     }
 
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+    const horas = Math.floor((diferencia / (1000 * 60 * 60)) % 24);
+    const minutos = Math.floor((diferencia / (1000 * 60)) % 60);
 
-    el.innerText = `${days}d ${hours}h ${minutes}m ${seconds}s restantes`;
+    contadorEl.textContent =
+      dias + "d " + horas + "h " + minutos + "m restantes";
   }
 
-  update();
-  const interval = setInterval(update, 1000);
+  actualizar();
+  setInterval(actualizar, 60000);
 }
 
 function updateSeasonStatus() {
@@ -3728,9 +3724,6 @@ async function initializeApp() {
   setInterval(updateMainSeasonCountdowns, 60000);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const endDate = window.interdivisionalConfig?.endDate;
-  startCountdown(endDate, "interdivisional-countdown");
-});
+document.addEventListener("DOMContentLoaded", iniciarContador);
 
 initializeApp();
