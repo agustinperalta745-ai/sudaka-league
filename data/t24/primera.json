@@ -1,7 +1,7 @@
 {
   "source": "gesliga",
   "division": "primera",
-  "fetchedAt": "2026-02-18T20:01:01.799Z",
+  "fetchedAt": "2026-02-18T21:58:03.454Z",
   "rows": [
     {
       "pos": 1,
@@ -86,13 +86,13 @@
       "equipo": "Ivancarocela - Roma",
       "escudoFile": "ivancarocela.png",
       "pts": 27,
-      "pj": 27,
+      "pj": 29,
       "pg": 7,
       "pe": 6,
-      "pp": 14,
-      "gf": 31,
-      "gc": 42,
-      "dg": -11
+      "pp": 16,
+      "gf": 33,
+      "gc": 46,
+      "dg": -13
     },
     {
       "pos": 8,
@@ -187,6 +187,19 @@
     },
     {
       "pos": 15,
+      "equipo": "Edug98 - Fenerbache",
+      "escudoFile": "edug98.png",
+      "pts": 10,
+      "pj": 4,
+      "pg": 3,
+      "pe": 1,
+      "pp": 0,
+      "gf": 7,
+      "gc": 2,
+      "dg": 5
+    },
+    {
+      "pos": 16,
       "equipo": "Lombardo - Valencia",
       "escudoFile": "lombardo.png",
       "pts": 9,
@@ -197,19 +210,6 @@
       "gf": 9,
       "gc": 12,
       "dg": -3
-    },
-    {
-      "pos": 16,
-      "equipo": "Edug98 - Fenerbache",
-      "escudoFile": "edug98.png",
-      "pts": 4,
-      "pj": 2,
-      "pg": 1,
-      "pe": 1,
-      "pp": 0,
-      "gf": 3,
-      "gc": 0,
-      "dg": 3
     },
     {
       "pos": 17,

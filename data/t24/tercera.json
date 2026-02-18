@@ -1,7 +1,7 @@
 {
   "source": "gesliga",
   "division": "tercera",
-  "fetchedAt": "2026-02-18T20:01:03.108Z",
+  "fetchedAt": "2026-02-18T21:58:04.665Z",
   "rows": [
     {
       "pos": 1,
@@ -44,6 +44,19 @@
     },
     {
       "pos": 4,
+      "equipo": "Lyon - 7LibertadoresSLP",
+      "escudoFile": "lyon.png",
+      "pts": 16,
+      "pj": 14,
+      "pg": 5,
+      "pe": 1,
+      "pp": 8,
+      "gf": 14,
+      "gc": 26,
+      "dg": -12
+    },
+    {
+      "pos": 5,
       "equipo": "Marsella - ElLokoSantooss",
       "escudoFile": "marsella.png",
       "pts": 15,
@@ -56,30 +69,17 @@
       "dg": -2
     },
     {
-      "pos": 5,
-      "equipo": "Lyon - 7LibertadoresSLP",
-      "escudoFile": "lyon.png",
-      "pts": 12,
-      "pj": 12,
-      "pg": 4,
-      "pe": 0,
-      "pp": 8,
-      "gf": 13,
-      "gc": 26,
-      "dg": -13
-    },
-    {
       "pos": 6,
       "equipo": "Bologna - JUN Smash",
       "escudoFile": "bologna.png",
-      "pts": 11,
-      "pj": 7,
+      "pts": 12,
+      "pj": 9,
       "pg": 3,
-      "pe": 2,
-      "pp": 2,
+      "pe": 3,
+      "pp": 3,
       "gf": 12,
-      "gc": 8,
-      "dg": 4
+      "gc": 9,
+      "dg": 3
     },
     {
       "pos": 7,
