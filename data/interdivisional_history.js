@@ -122,6 +122,132 @@ window.INTERDIVISIONAL_HISTORY = {
         result: { home: 1, away: 3 }
       }
     ]
+  },
+  T23: {
+    status: "completed",
+    champion: "H09",
+    fase1: [
+      {
+        label: "Octavos Play-offs 1",
+        home: { club: "Lanús", player: "Eduq98", division: "Primera", shield: "assets/lanus.png" },
+        away: { club: "Argentinos", player: "Facualanis", division: "Segunda", shield: "assets/argentinos.png" },
+        winner: "home",
+        result: { home: 3, away: 0 }
+      },
+      {
+        label: "Octavos Play-offs 2",
+        home: { club: "Millonarios", player: "Fafafa", division: "Primera" },
+        away: { club: "Cruzeiro", player: "Crislot26", division: "Segunda", shield: "assets/cruzeiro.png" },
+        winner: "away",
+        result: { home: 0, away: 0, pensHome: 1, pensAway: 3 }
+      },
+      {
+        label: "Octavos Play-offs 3",
+        home: { club: "Santos FC", player: "LombardoCABJ", division: "Primera", shield: "assets/santos.png" },
+        away: { club: "Sao Paulo", player: "SoyLefo", division: "Segunda", shield: "assets/saopaulo.png" },
+        winner: "away",
+        result: { home: 1, away: 2 }
+      },
+      {
+        label: "Octavos Play-offs 4",
+        home: { club: "Estudiantes", player: "Exeeneta", division: "Primera", shield: "assets/estudiantes.png" },
+        away: { club: "Internacional SC", player: "Joser17", division: "Segunda", shield: "assets/internacional_sc.png" },
+        winner: "home",
+        result: { home: 3, away: 1 }
+      },
+      {
+        label: "Octavos Play-offs 5",
+        home: { club: "Peñarol", player: "TunTun", division: "Primera", shield: "assets/penarol (1).png" },
+        away: { club: "Huracán", player: "Leom", division: "Tercera", shield: "assets/huracan.png" },
+        winner: "away",
+        result: { home: 0, away: 3 }
+      },
+      {
+        label: "Octavos Play-offs 6",
+        home: { club: "Nacional", player: "Aacuis09", division: "Primera" },
+        away: { club: "Peñarol", player: "Cacherinhooo", division: "Tercera", shield: "assets/penarol (1).png" },
+        winner: "away",
+        result: { home: 0, away: 2 }
+      },
+      {
+        label: "Octavos Play-offs 7",
+        home: { club: "Colo Colo", player: "Broko", division: "Primera", shield: "assets/colocolo.png" },
+        away: { club: "Internacional SC", player: "Gab0211", division: "Tercera", shield: "assets/internacional_sc.png" },
+        winner: "home",
+        result: { home: 3, away: 0 }
+      },
+      {
+        label: "Octavos Play-offs 8",
+        home: { club: "Argentinos JRS", player: "Ivanarocela", division: "Primera", shield: "assets/argentinos.png" },
+        away: { club: "Colo Colo", player: "Joelignacho", division: "Segunda", shield: "assets/colocolo.png" },
+        winner: "away",
+        result: { home: 1, away: 2 }
+      }
+    ],
+    fase2: [
+      {
+        label: "Cuartos Play-offs 1",
+        home: { club: "Lanús", player: "Eduq98", division: "Primera", shield: "assets/lanus.png" },
+        away: { club: "Cruzeiro", player: "Crislot26", division: "Segunda", shield: "assets/cruzeiro.png" },
+        winner: "home",
+        result: { home: 3, away: 0 }
+      },
+      {
+        label: "Cuartos Play-offs 2",
+        home: { club: "Sao Paulo", player: "SoyLefo", division: "Segunda", shield: "assets/saopaulo.png" },
+        away: { club: "Estudiantes", player: "Exeeneta", division: "Primera", shield: "assets/estudiantes.png" },
+        winner: "away",
+        result: { home: 0, away: 3 }
+      },
+      {
+        label: "Cuartos Play-offs 3",
+        home: { club: "Huracán", player: "Leom", division: "Tercera", shield: "assets/huracan.png" },
+        away: { club: "Peñarol", player: "Cacherinhooo", division: "Tercera", shield: "assets/penarol (1).png" },
+        winner: "away",
+        result: { home: 1, away: 3 }
+      },
+      {
+        label: "Cuartos Play-offs 4",
+        home: { club: "Colo Colo", player: "Broko", division: "Primera", shield: "assets/colocolo.png" },
+        away: { club: "Colo Colo", player: "Joelignacho", division: "Segunda", shield: "assets/colocolo.png" },
+        winner: "home",
+        result: { home: 3, away: 0 }
+      }
+    ],
+    fase3: [
+      {
+        label: "Semifinal Play-offs 1",
+        home: { club: "Lanús", player: "Eduq98", division: "Primera", shield: "assets/lanus.png" },
+        away: { club: "Estudiantes", player: "Exeeneta", division: "Primera", shield: "assets/estudiantes.png" },
+        winner: "away",
+        result: { home: 2, away: 2, pensHome: 2, pensAway: 3 }
+      },
+      {
+        label: "Semifinal Play-offs 2",
+        home: { club: "Peñarol", player: "Cacherinhooo", division: "Tercera", shield: "assets/penarol (1).png" },
+        away: { club: "Colo Colo", player: "Broko", division: "Primera", shield: "assets/colocolo.png" },
+        winner: "home",
+        result: { home: 2, away: 0 }
+      }
+    ],
+    fase4: [
+      {
+        label: "Final Play-offs",
+        home: { club: "Estudiantes", player: "Exeeneta", division: "Primera", shield: "assets/estudiantes.png" },
+        away: { club: "Peñarol", player: "Cacherinhooo", division: "Tercera", shield: "assets/penarol (1).png" },
+        winner: "home",
+        result: { home: 2, away: 1 }
+      }
+    ],
+    fase5: [
+      {
+        label: "Final Copa Interdivisional",
+        home: { club: "Universitario", player: "H09", division: "2da Div", shield: "assets/escudos/universitario.png" },
+        away: { club: "Estudiantes", player: "Exeeneta", division: "Primera", shield: "assets/estudiantes.png" },
+        winner: "home",
+        result: { home: 1, away: 0 }
+      }
+    ]
   }
 };
 
