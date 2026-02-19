@@ -20,7 +20,7 @@ const PES6_HISTORY = [
   },
   {
     season: "Temporada 19",
-    divisions: { div1: "Alex_CABJ", div2: "Cacherinhooo", div3: "Switch", div4: "NO EXISTIA" },
+    divisions: { div1: "Alex_cabj", div2: "Cacherinhooo", div3: "Switch", div4: "NO EXISTIA" },
     cups: { interdiv: "Pelufo", superfinal: "Pelufo", interliga: "Feretche (S.F.A)" },
     awards: { balonOro: "NO EXISTIA", puskas: "Gargarensis" }
   },
@@ -44,7 +44,7 @@ const PES6_HISTORY = [
   },
   {
     season: "Temporada 23",
-    divisions: { div1: "Alex_CABJ", div2: "H09", div3: "Leom", div4: "Jona96delgado" },
+    divisions: { div1: "Alex_cabj", div2: "H09", div3: "Leom", div4: "Jona96delgado" },
     cups: { interdiv: "H09", superfinal: "Alex_cabj", interliga: "POR DEFINIR" },
     awards: { balonOro: "NO SE DISPUTA", puskas: "Tank" }
   }
@@ -117,7 +117,7 @@ const PES6_PALMARES = {
     {
       nombre: "División 1",
       trofeo: "assets/trofeo_div1.png",
-      campeones: ["Alex_CABJ"]
+      campeones: ["Alex_cabj"]
     },
     {
       nombre: "División 2",
