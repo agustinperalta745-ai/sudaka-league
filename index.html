@@ -172,37 +172,33 @@
     </section>
 
     <section class="section hud-separator cup-interdivisional-section" aria-labelledby="cup-season-title">
-      <div id="interdivisional-season-card" class="season-card sl-card cup-interdivisional-card neon-box neon-border inter-card-bg">
-        <article id="cup-interdivisional-card" role="button" tabindex="0" aria-expanded="false" aria-controls="cup-crossings-panel">
+      <div id="interdivisional-season-card" class="season-card sl-card cup-interdivisional-card neon-box neon-border inter-card-bg inactive-card">
+        <article id="cup-interdivisional-card" aria-expanded="false" aria-controls="cup-crossings-panel">
           <div class="season-card-header">
             <h3 id="cup-season-title">Copa Interdivisional SLP</h3>
             <span id="cupStatus" class="season-badge season-badge-active neon-box">COPA</span>
           </div>
           <p id="cup-current-season" class="season-title">Temporada T23</p>
           <p id="cup-current-phase" class="season-note">Fase: -</p>
-          <div class="countdown-container">
-            <div id="contador-inter" class="contador-copa"></div>
+          <p class="season-countdown-label"><span class="season-end" id="cup-interdivisional-remaining">INACTIVA</span></p>
+          <div class="cup-card-actions" aria-label="Acciones Copa Interdivisional">
+            <button id="cup-toggle-crossings" class="cup-tab-btn sl-tab neon-box" type="button">Ver cruces</button>
+            <button id="cup-toggle-history" class="cup-tab-btn sl-tab neon-box" type="button">Historial</button>
           </div>
-          <p id="cup-toggle-label" class="cup-toggle-label">Ver cruces</p>
         </article>
       </div>
 
       <div id="cup-crossings-panel" class="cup-crossings-panel neon-border inter-panel-bg" hidden>
-        <div class="cup-card-tabs" role="tablist" aria-label="Contenido Copa Interdivisional">
-          <button id="cup-tab-active" class="cup-tab-btn sl-tab is-active neon-box" type="button" role="tab" aria-selected="true" aria-controls="cup-tab-panel-active">Activa</button>
-          <button id="cup-tab-history" class="cup-tab-btn sl-tab neon-box" type="button" role="tab" aria-selected="false" aria-controls="cup-tab-panel-history">Historial Interdivisional</button>
-        </div>
-
-        <section id="cup-tab-panel-active" class="cup-tab-panel is-active" role="tabpanel" aria-labelledby="cup-tab-active">
-          <div id="cup-crossings-list" class="cup-interdivisional-rounds" aria-live="polite"></div>
-        </section>
-
-        <section id="cup-tab-panel-history" class="cup-tab-panel" role="tabpanel" aria-labelledby="cup-tab-history" hidden>
+        <section id="cup-tab-panel-history" class="cup-tab-panel is-active" role="tabpanel" aria-labelledby="cup-toggle-history">
           <div class="cup-history-toolbar">
             <label for="cup-history-season">Temporada</label>
             <select id="cup-history-season"></select>
           </div>
           <div id="cup-history-list" class="cup-interdivisional-rounds" aria-live="polite"></div>
+        </section>
+
+        <section id="cup-tab-panel-active" class="cup-tab-panel" role="tabpanel" aria-labelledby="cup-toggle-crossings" hidden>
+          <div id="cup-crossings-list" class="cup-interdivisional-rounds" aria-live="polite"></div>
         </section>
       </div>
     </section>

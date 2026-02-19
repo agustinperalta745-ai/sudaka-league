@@ -429,15 +429,16 @@ const pes6Remaining = document.getElementById("pes6-remaining");
 const kofRemaining = document.getElementById("kof-remaining");
 const pes6SeasonName = document.getElementById("pes6SeasonName");
 const cupStatus = document.getElementById("cupStatus");
+const cupInterdivisionalSeasonCard = document.getElementById("interdivisional-season-card");
 const cupInterdivisionalCard = document.getElementById("cup-interdivisional-card");
 const cupCrossingsPanel = document.getElementById("cup-crossings-panel");
 const cupCrossingsList = document.getElementById("cup-crossings-list");
 const cupHistoryList = document.getElementById("cup-history-list");
-const cupToggleLabel = document.getElementById("cup-toggle-label");
+const cupInterdivisionalRemaining = document.getElementById("cup-interdivisional-remaining");
+const cupToggleCrossingsButton = document.getElementById("cup-toggle-crossings");
+const cupToggleHistoryButton = document.getElementById("cup-toggle-history");
 const cupCurrentSeason = document.getElementById("cup-current-season");
 const cupCurrentPhase = document.getElementById("cup-current-phase");
-const cupTabActive = document.getElementById("cup-tab-active");
-const cupTabHistory = document.getElementById("cup-tab-history");
 const cupTabPanelActive = document.getElementById("cup-tab-panel-active");
 const cupTabPanelHistory = document.getElementById("cup-tab-panel-history");
 const cupHistorySeasonSelect = document.getElementById("cup-history-season");
@@ -500,7 +501,7 @@ let lastFocusedElement = null;
 let showAllTitlesRanking = false;
 let openTitlesRankingId = null;
 let interdivisionalState = null;
-let cupPanelTab = "active";
+let cupPanelView = "closed";
 let cupActivePhase = "2";
 let cupHistorySeasonKey = "";
 let cupHistorySelectedPhase = "";
@@ -870,6 +871,10 @@ function updateCupRemaining() {
   if (cupPremierRemaining) {
     cupPremierRemaining.textContent = "INACTIVA";
   }
+
+  if (cupInterdivisionalRemaining) {
+    cupInterdivisionalRemaining.textContent = "INACTIVA";
+  }
 }
 
 function formatInterdivisionalCountdown(msRemaining) {
@@ -889,20 +894,6 @@ function formatInterdivisionalCountdown(msRemaining) {
   }
 
   return `${Math.max(0, minutes)}m`;
-}
-
-function iniciarContador() {
-  const contadorEl = document.getElementById("contador-inter");
-  if (!contadorEl) return;
-
-  contadorEl.classList.add("mini-badge", "cup-countdown-chip");
-
-  function actualizar() {
-    contadorEl.innerHTML = `<span class="cup-countdown-text">INACTIVA</span>`;
-  }
-
-  actualizar();
-  setInterval(actualizar, 30000);
 }
 
 function updateSeasonStatus() {
@@ -3027,6 +3018,7 @@ function updateCupCardHeader() {
     if (cupCurrentSeason) cupCurrentSeason.textContent = "Temporada Próxima";
     if (cupCurrentPhase) cupCurrentPhase.textContent = "Fase: Por definir";
     if (cupStatus) cupStatus.textContent = "COPA";
+    if (cupInterdivisionalSeasonCard) cupInterdivisionalSeasonCard.classList.add("inactive-card");
     updateCupRemaining();
     return;
   }
@@ -3041,6 +3033,10 @@ function updateCupCardHeader() {
 
   if (cupStatus) {
     cupStatus.textContent = "COPA";
+  }
+
+  if (cupInterdivisionalSeasonCard) {
+    cupInterdivisionalSeasonCard.classList.toggle("inactive-card", currentSeason.status !== "active");
   }
 
   updateCupRemaining();
@@ -3122,8 +3118,6 @@ function renderCupActiveTab() {
   const currentSeason = getCurrentInterdivisionalSeason();
 
   if (!currentSeason) {
-    cupCrossingsList.appendChild(createCupPhaseTabs());
-
     const emptyState = document.createElement("section");
     emptyState.className = "cup-round-section";
 
@@ -3133,7 +3127,7 @@ function renderCupActiveTab() {
 
     const message = document.createElement("p");
     message.className = "cup-round-empty-note";
-    message.textContent = "No hay una temporada activa. La pestaña ACTIVA queda lista para cargar la próxima copa.";
+    message.textContent = "No hay copa activa.";
 
     emptyState.append(title, message);
     cupCrossingsList.appendChild(emptyState);
@@ -3242,20 +3236,28 @@ function createCupHistoryPhaseTabs(season, selectedPhase) {
   return tabs;
 }
 
-function setCupTab(tab) {
-  cupPanelTab = tab;
+function setCupPanelView(view) {
+  cupPanelView = view;
 
-  const isActiveTab = tab === "active";
-  if (cupTabActive && cupTabHistory && cupTabPanelActive && cupTabPanelHistory) {
-    cupTabActive.classList.toggle("is-active", isActiveTab);
-    cupTabHistory.classList.toggle("is-active", !isActiveTab);
-    cupTabActive.setAttribute("aria-selected", String(isActiveTab));
-    cupTabHistory.setAttribute("aria-selected", String(!isActiveTab));
-    cupTabPanelActive.hidden = !isActiveTab;
-    cupTabPanelHistory.hidden = isActiveTab;
-    cupTabPanelActive.classList.toggle("is-active", isActiveTab);
-    cupTabPanelHistory.classList.toggle("is-active", !isActiveTab);
+  const isOpen = view !== "closed";
+  const isCrossingsView = view === "crossings";
+  const isHistoryView = view === "history";
+
+  if (cupToggleCrossingsButton && cupToggleHistoryButton) {
+    cupToggleCrossingsButton.classList.toggle("is-active", isCrossingsView);
+    cupToggleHistoryButton.classList.toggle("is-active", isHistoryView);
+    cupToggleCrossingsButton.setAttribute("aria-pressed", String(isCrossingsView));
+    cupToggleHistoryButton.setAttribute("aria-pressed", String(isHistoryView));
   }
+
+  if (cupTabPanelActive && cupTabPanelHistory) {
+    cupTabPanelActive.hidden = !isCrossingsView;
+    cupTabPanelHistory.hidden = !isHistoryView;
+    cupTabPanelActive.classList.toggle("is-active", isCrossingsView);
+    cupTabPanelHistory.classList.toggle("is-active", isHistoryView);
+  }
+
+  setCupCrossingsExpanded(isOpen);
 }
 
 function renderInterdivisionalCard() {
@@ -3265,10 +3267,9 @@ function renderInterdivisionalCard() {
 }
 
 function setCupCrossingsExpanded(expanded) {
-  if (!cupInterdivisionalCard || !cupCrossingsPanel || !cupToggleLabel) return;
+  if (!cupInterdivisionalCard || !cupCrossingsPanel) return;
 
   cupInterdivisionalCard.setAttribute("aria-expanded", String(expanded));
-  cupToggleLabel.textContent = expanded ? "Ocultar" : "Ver cruces";
 
   if (expanded) {
     cupCrossingsPanel.hidden = false;
@@ -3291,22 +3292,18 @@ function setCupCrossingsExpanded(expanded) {
 function setupCupCrossingsAccordion() {
   if (!cupInterdivisionalCard || !cupCrossingsPanel) return;
 
-  const toggleCrossings = () => {
-    const isExpanded = cupInterdivisionalCard.getAttribute("aria-expanded") === "true";
-    setCupCrossingsExpanded(!isExpanded);
-  };
+  if (cupToggleCrossingsButton) {
+    cupToggleCrossingsButton.addEventListener("click", () => {
+      const nextView = cupPanelView === "crossings" ? "closed" : "crossings";
+      setCupPanelView(nextView);
+    });
+  }
 
-  cupInterdivisionalCard.addEventListener("click", toggleCrossings);
-  cupInterdivisionalCard.addEventListener("keydown", (event) => {
-    if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault();
-      toggleCrossings();
-    }
-  });
-
-  if (cupTabActive && cupTabHistory) {
-    cupTabActive.addEventListener("click", () => setCupTab("active"));
-    cupTabHistory.addEventListener("click", () => setCupTab("history"));
+  if (cupToggleHistoryButton) {
+    cupToggleHistoryButton.addEventListener("click", () => {
+      const nextView = cupPanelView === "history" ? "closed" : "history";
+      setCupPanelView(nextView);
+    });
   }
 
   if (cupHistorySeasonSelect) {
@@ -3315,7 +3312,7 @@ function setupCupCrossingsAccordion() {
     });
   }
 
-  setCupTab("active");
+  setCupPanelView("closed");
 }
 
 async function initializeInterdivisionalState() {
@@ -3785,7 +3782,5 @@ async function initializeApp() {
   setInterval(updateSeasonStatus, 60000);
   setInterval(updateMainSeasonCountdowns, 60000);
 }
-
-document.addEventListener("DOMContentLoaded", iniciarContador);
 
 initializeApp();
