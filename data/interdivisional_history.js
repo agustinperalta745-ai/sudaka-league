@@ -139,7 +139,8 @@ window.INTERDIVISIONAL_HISTORY = {
         home: { club: "Millonarios", player: "Fafafa", division: "Primera" },
         away: { club: "Cruzeiro", player: "Crislot26", division: "Segunda", shield: "assets/cruzeiro.png" },
         winner: "away",
-        result: { home: 0, away: 0, pensHome: 1, pensAway: 3 }
+        result: { home: 0, away: 0, pensHome: 1, pensAway: 3 },
+        pens: { home: 1, away: 3 }
       },
       {
         label: "Octavos Play-offs 3",
@@ -220,7 +221,8 @@ window.INTERDIVISIONAL_HISTORY = {
         home: { club: "Lanús", player: "Edug98", division: "Primera", shield: "assets/lanus.png" },
         away: { club: "Estudiantes", player: "Exeeneta", division: "Primera", shield: "assets/estudiantes.png" },
         winner: "away",
-        result: { home: 2, away: 2, pensHome: 2, pensAway: 3 }
+        result: { home: 2, away: 2, pensHome: 2, pensAway: 3 },
+        pens: { home: 2, away: 3 }
       },
       {
         label: "Semifinal Play-offs 2",
