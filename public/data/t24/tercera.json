@@ -1,7 +1,7 @@
 {
   "source": "gesliga",
   "division": "tercera",
-  "fetchedAt": "2026-02-19T11:10:24.156Z",
+  "fetchedAt": "2026-02-19T14:35:19.897Z",
   "rows": [
     {
       "pos": 1,
@@ -31,42 +31,42 @@
     },
     {
       "pos": 3,
-      "equipo": "PSV - Eduard9419",
-      "escudoFile": "psv.png",
-      "pts": 23,
-      "pj": 10,
+      "equipo": "Bologna - JUN Smash",
+      "escudoFile": "bologna.png",
+      "pts": 24,
+      "pj": 13,
       "pg": 7,
-      "pe": 2,
-      "pp": 1,
-      "gf": 28,
-      "gc": 15,
-      "dg": 13
+      "pe": 3,
+      "pp": 3,
+      "gf": 22,
+      "gc": 13,
+      "dg": 9
     },
     {
       "pos": 4,
-      "equipo": "Bologna - JUN Smash",
-      "escudoFile": "bologna.png",
-      "pts": 18,
-      "pj": 11,
-      "pg": 5,
-      "pe": 3,
+      "equipo": "PSV - Eduard9419",
+      "escudoFile": "psv.png",
+      "pts": 23,
+      "pj": 12,
+      "pg": 7,
+      "pe": 2,
       "pp": 3,
-      "gf": 16,
-      "gc": 11,
-      "dg": 5
+      "gf": 30,
+      "gc": 21,
+      "dg": 9
     },
     {
       "pos": 5,
       "equipo": "Lyon - 7LibertadoresSLP",
       "escudoFile": "lyon.png",
-      "pts": 16,
-      "pj": 14,
+      "pts": 17,
+      "pj": 16,
       "pg": 5,
-      "pe": 1,
-      "pp": 8,
-      "gf": 14,
-      "gc": 26,
-      "dg": -12
+      "pe": 2,
+      "pp": 9,
+      "gf": 15,
+      "gc": 30,
+      "dg": -15
     },
     {
       "pos": 6,
@@ -85,14 +85,14 @@
       "pos": 7,
       "equipo": "Nottingham Forest - Ropedri1",
       "escudoFile": "nottingham-forest.png",
-      "pts": 6,
-      "pj": 6,
-      "pg": 2,
-      "pe": 0,
+      "pts": 10,
+      "pj": 8,
+      "pg": 3,
+      "pe": 1,
       "pp": 4,
-      "gf": 8,
-      "gc": 8,
-      "dg": 0
+      "gf": 12,
+      "gc": 9,
+      "dg": 3
     },
     {
       "pos": 8,
