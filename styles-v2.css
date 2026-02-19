@@ -1324,6 +1324,27 @@ summary:focus-visible,
   color: var(--text-main);
   font-weight: 700;
   letter-spacing: 0.02em;
+  text-shadow: 0 0 7px rgba(88, 201, 255, 0.25);
+  box-shadow: 0 0 0 1px rgba(88, 201, 255, 0.18), 0 0 16px -10px rgba(88, 201, 255, 0.52);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+
+.cup-countdown-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.cup-countdown-text {
+  line-height: 1.1;
 }
 .cup-toggle-label {
   margin: 0;
@@ -2500,6 +2521,32 @@ summary:focus-visible,
 
   .cup-match-versus {
     align-self: center;
+  }
+
+  #cup-interdivisional-card .cup-countdown-chip {
+    font-size: 15px;
+    padding: 10px 14px;
+    min-height: 44px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    flex: 0 0 auto;
+    align-self: flex-start;
+    background: rgba(7, 17, 31, 0.92);
+    border-color: rgba(112, 217, 255, 0.78);
+    box-shadow: 0 0 0 1px rgba(112, 217, 255, 0.28), 0 0 20px -8px rgba(79, 197, 255, 0.78);
+  }
+
+  #cup-interdivisional-card .cup-countdown-chip .cup-countdown-icon {
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
+  }
+
+  #cup-interdivisional-card .cup-countdown-chip .cup-countdown-text {
+    line-height: 1;
   }
 }
 
