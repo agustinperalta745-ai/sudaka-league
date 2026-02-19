@@ -1,7 +1,7 @@
 {
   "source": "gesliga",
   "division": "tercera",
-  "fetchedAt": "2026-02-18T23:05:12.785Z",
+  "fetchedAt": "2026-02-19T00:03:16.901Z",
   "rows": [
     {
       "pos": 1,
@@ -57,6 +57,19 @@
     },
     {
       "pos": 5,
+      "equipo": "Bologna - JUN Smash",
+      "escudoFile": "bologna.png",
+      "pts": 15,
+      "pj": 10,
+      "pg": 4,
+      "pe": 3,
+      "pp": 3,
+      "gf": 15,
+      "gc": 11,
+      "dg": 4
+    },
+    {
+      "pos": 6,
       "equipo": "Marsella - ElLokoSantooss",
       "escudoFile": "marsella.png",
       "pts": 15,
@@ -69,30 +82,17 @@
       "dg": -2
     },
     {
-      "pos": 6,
-      "equipo": "Bologna - JUN Smash",
-      "escudoFile": "bologna.png",
-      "pts": 12,
-      "pj": 9,
-      "pg": 3,
-      "pe": 3,
-      "pp": 3,
-      "gf": 12,
-      "gc": 9,
-      "dg": 3
-    },
-    {
       "pos": 7,
       "equipo": "Nottingham Forest - Ropedri1",
       "escudoFile": "nottingham-forest.png",
       "pts": 6,
-      "pj": 4,
+      "pj": 5,
       "pg": 2,
       "pe": 0,
-      "pp": 2,
-      "gf": 6,
-      "gc": 4,
-      "dg": 2
+      "pp": 3,
+      "gf": 8,
+      "gc": 7,
+      "dg": 1
     },
     {
       "pos": 8,
