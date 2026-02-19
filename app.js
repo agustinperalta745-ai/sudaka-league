@@ -141,7 +141,7 @@ const PES6_PALMARES = {
     {
       nombre: "Copa Interdivisional",
       trofeo: "assets/trofeo_interdiv.png",
-      campeones: ["Larrierismo"]
+      campeones: ["H09"]
     },
     {
       nombre: "Super Final",
