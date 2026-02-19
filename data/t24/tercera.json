@@ -1,7 +1,7 @@
 {
   "source": "gesliga",
   "division": "tercera",
-  "fetchedAt": "2026-02-19T14:35:19.897Z",
+  "fetchedAt": "2026-02-19T18:02:19.396Z",
   "rows": [
     {
       "pos": 1,
@@ -18,7 +18,7 @@
     },
     {
       "pos": 2,
-      "equipo": "Crystal Palace - Broko",
+      "equipo": "Crystal Palace - ABANDONO",
       "escudoFile": "crystal-palace.png",
       "pts": 26,
       "pj": 14,
@@ -135,7 +135,7 @@
     },
     {
       "pos": 10,
-      "equipo": "Valencia - Jotaropucho",
+      "equipo": "Valencia - SebaJM28",
       "escudoFile": "valencia.png",
       "pts": 0,
       "pj": 0,
