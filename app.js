@@ -883,14 +883,14 @@ function formatInterdivisionalCountdown(msRemaining) {
   const minutes = totalMinutes % 60;
 
   if (days > 0) {
-    return `⏳ ${days}d ${hours}h ${minutes}m`;
+    return `${days}d ${hours}h ${minutes}m`;
   }
 
   if (hours > 0) {
-    return `⏳ ${hours}h ${minutes}m`;
+    return `${hours}h ${minutes}m`;
   }
 
-  return `⏳ ${Math.max(0, minutes)}m`;
+  return `${Math.max(0, minutes)}m`;
 }
 
 function iniciarContador() {
@@ -910,7 +910,8 @@ function iniciarContador() {
     }
 
     const diferencia = deadline.getTime() - Date.now();
-    contadorEl.textContent = formatInterdivisionalCountdown(diferencia);
+    const tiempoRestante = formatInterdivisionalCountdown(diferencia);
+    contadorEl.innerHTML = `<span class="cup-countdown-icon" aria-hidden="true">⏳</span><span class="cup-countdown-text">${tiempoRestante}</span>`;
   }
 
   actualizar();
