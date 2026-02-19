@@ -217,7 +217,7 @@ window.INTERDIVISIONAL_HISTORY = {
     fase3: [
       {
         label: "Semifinal Play-offs 1",
-        home: { club: "Lanús", player: "Eduq98", division: "Primera", shield: "assets/lanus.png" },
+        home: { club: "Lanús", player: "Edug98", division: "Primera", shield: "assets/lanus.png" },
         away: { club: "Estudiantes", player: "Exeeneta", division: "Primera", shield: "assets/estudiantes.png" },
         winner: "away",
         result: { home: 2, away: 2, pensHome: 2, pensAway: 3 }
