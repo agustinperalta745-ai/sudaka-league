@@ -1,5 +1,3 @@
-import { copaInterdivisionalConfig } from "./data/copa_config.js";
-
 // === HISTORIAL PES 6 (EDITAR SOLO ESTO) ===
 const PES6_HISTORY = [
   {
@@ -47,7 +45,7 @@ const PES6_HISTORY = [
   {
     season: "Temporada 23",
     divisions: { div1: "Alex_CABJ", div2: "H09", div3: "Leom", div4: "Jona96delgado" },
-    cups: { interdiv: "POR DEFINIR", superfinal: "POR DEFINIR", interliga: "POR DEFINIR" },
+    cups: { interdiv: "H09", superfinal: "Alex_cabj", interliga: "POR DEFINIR" },
     awards: { balonOro: "NO SE DISPUTA", puskas: "Tank" }
   }
 ];
@@ -146,7 +144,7 @@ const PES6_PALMARES = {
     {
       nombre: "Super Final",
       trofeo: "assets/trofeo_superfinal.png",
-      campeones: ["Larrierismo"]
+      campeones: ["Alex_cabj"]
     },
     {
       nombre: "Final Interliga vs S.F.A",
@@ -782,7 +780,7 @@ function updateLeagueRemaining(targetDate, el) {
 
 function getCurrentCupHeaderPhase() {
   const currentSeason = getCurrentInterdivisionalSeason();
-  if (!currentSeason) return INTERDIVISIONAL_PHASES[0].key;
+  if (!currentSeason) return null;
 
   return getCurrentInterdivisionalPhase(currentSeason);
 }
@@ -899,19 +897,8 @@ function iniciarContador() {
 
   contadorEl.classList.add("mini-badge", "cup-countdown-chip");
 
-  const deadlineValue = copaInterdivisionalConfig?.deadline;
-  const deadline = deadlineValue ? new Date(deadlineValue) : null;
-  const hasValidDeadline = deadline instanceof Date && !Number.isNaN(deadline.getTime());
-
   function actualizar() {
-    if (!hasValidDeadline) {
-      contadorEl.textContent = "Sin fecha";
-      return;
-    }
-
-    const diferencia = deadline.getTime() - Date.now();
-    const tiempoRestante = formatInterdivisionalCountdown(diferencia);
-    contadorEl.innerHTML = `<span class="cup-countdown-icon" aria-hidden="true">⏳</span><span class="cup-countdown-text">${tiempoRestante}</span>`;
+    contadorEl.innerHTML = `<span class="cup-countdown-text">INACTIVA</span>`;
   }
 
   actualizar();
@@ -2781,9 +2768,9 @@ function normalizeInterdivisionalState(data) {
 function getCurrentInterdivisionalSeason() {
   if (!interdivisionalState || !Array.isArray(interdivisionalState.seasons)) return null;
 
-  const active = interdivisionalState.seasons.find((season) => season.status === "active");
-  return active || interdivisionalState.seasons[interdivisionalState.seasons.length - 1] || null;
+  return interdivisionalState.seasons.find((season) => season.status === "active") || null;
 }
+
 
 function isPhaseComplete(matches = []) {
   return Array.isArray(matches) && matches.length > 0 && matches.every((match) => !!match.winner);
@@ -3035,10 +3022,16 @@ function createCupPhaseSection(phaseKey, matches, options = {}) {
 
 function updateCupCardHeader() {
   const currentSeason = getCurrentInterdivisionalSeason();
-  if (!currentSeason) return;
+
+  if (!currentSeason) {
+    if (cupCurrentSeason) cupCurrentSeason.textContent = "Temporada Próxima";
+    if (cupCurrentPhase) cupCurrentPhase.textContent = "Fase: Por definir";
+    if (cupStatus) cupStatus.textContent = "COPA";
+    updateCupRemaining();
+    return;
+  }
 
   const activePhase = getCurrentCupHeaderPhase();
-
   const displaySeason = currentSeason.season;
 
   if (cupCurrentSeason) cupCurrentSeason.textContent = `Temporada ${displaySeason}`;
@@ -3127,7 +3120,25 @@ function renderCupActiveTab() {
 
   cupCrossingsList.replaceChildren();
   const currentSeason = getCurrentInterdivisionalSeason();
-  if (!currentSeason) return;
+
+  if (!currentSeason) {
+    cupCrossingsList.appendChild(createCupPhaseTabs());
+
+    const emptyState = document.createElement("section");
+    emptyState.className = "cup-round-section";
+
+    const title = document.createElement("h4");
+    title.className = "cup-round-title";
+    title.textContent = "Copa Interdivisional inactiva";
+
+    const message = document.createElement("p");
+    message.className = "cup-round-empty-note";
+    message.textContent = "No hay una temporada activa. La pestaña ACTIVA queda lista para cargar la próxima copa.";
+
+    emptyState.append(title, message);
+    cupCrossingsList.appendChild(emptyState);
+    return;
+  }
 
   ensureInterdivisionalProgression(currentSeason);
   const selectedPhase = CUP_PHASE_BUTTONS.find((phase) => phase.id === cupActivePhase)?.key;
