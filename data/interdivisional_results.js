@@ -23,7 +23,7 @@ const interdivisionalResults = {
     "finalpo-1": { score: { home: 2, away: 1 }, pens: null, winner: "home" }
   },
   final: {
-    "final-1": { score: null, pens: null, winner: null }
+    "final-1": { score: { home: 1, away: 0 }, pens: null, winner: "home" }
   }
 };
 
