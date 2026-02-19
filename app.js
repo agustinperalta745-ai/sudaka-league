@@ -1888,7 +1888,7 @@ function renderPalmares() {
     {
       key: "cups",
       title: "Copas",
-      subtitle: "Últimos campeones de copas (Temporada 22)",
+      subtitle: "Últimos campeones de copas (Temporada 23)",
       items: PES6_PALMARES.copas,
       winnersKey: "campeones",
       winnerLabel: "Ganador"
