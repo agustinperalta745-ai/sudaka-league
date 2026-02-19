@@ -1,7 +1,7 @@
 {
   "source": "gesliga",
   "division": "tercera",
-  "fetchedAt": "2026-02-19T00:03:16.901Z",
+  "fetchedAt": "2026-02-19T01:00:40.755Z",
   "rows": [
     {
       "pos": 1,
@@ -44,6 +44,19 @@
     },
     {
       "pos": 4,
+      "equipo": "Bologna - JUN Smash",
+      "escudoFile": "bologna.png",
+      "pts": 18,
+      "pj": 11,
+      "pg": 5,
+      "pe": 3,
+      "pp": 3,
+      "gf": 16,
+      "gc": 11,
+      "dg": 5
+    },
+    {
+      "pos": 5,
       "equipo": "Lyon - 7LibertadoresSLP",
       "escudoFile": "lyon.png",
       "pts": 16,
@@ -54,19 +67,6 @@
       "gf": 14,
       "gc": 26,
       "dg": -12
-    },
-    {
-      "pos": 5,
-      "equipo": "Bologna - JUN Smash",
-      "escudoFile": "bologna.png",
-      "pts": 15,
-      "pj": 10,
-      "pg": 4,
-      "pe": 3,
-      "pp": 3,
-      "gf": 15,
-      "gc": 11,
-      "dg": 4
     },
     {
       "pos": 6,
@@ -86,13 +86,13 @@
       "equipo": "Nottingham Forest - Ropedri1",
       "escudoFile": "nottingham-forest.png",
       "pts": 6,
-      "pj": 5,
+      "pj": 6,
       "pg": 2,
       "pe": 0,
-      "pp": 3,
+      "pp": 4,
       "gf": 8,
-      "gc": 7,
-      "dg": 1
+      "gc": 8,
+      "dg": 0
     },
     {
       "pos": 8,
