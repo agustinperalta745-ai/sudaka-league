@@ -1,20 +1,20 @@
 {
   "source": "gesliga",
   "division": "tercera",
-  "fetchedAt": "2026-02-20T03:33:47.453Z",
+  "fetchedAt": "2026-02-20T05:14:46.208Z",
   "rows": [
     {
       "pos": 1,
       "equipo": "Fenerbache - jona96delgado",
       "escudoFile": "fenerbache.png",
-      "pts": 39,
-      "pj": 17,
-      "pg": 12,
+      "pts": 42,
+      "pj": 18,
+      "pg": 13,
       "pe": 3,
       "pp": 2,
-      "gf": 67,
-      "gc": 35,
-      "dg": 32
+      "gf": 70,
+      "gc": 36,
+      "dg": 34
     },
     {
       "pos": 2,
@@ -57,6 +57,19 @@
     },
     {
       "pos": 5,
+      "equipo": "Marsella - ElLokoSantooss",
+      "escudoFile": "marsella.png",
+      "pts": 18,
+      "pj": 11,
+      "pg": 6,
+      "pe": 0,
+      "pp": 5,
+      "gf": 18,
+      "gc": 20,
+      "dg": -2
+    },
+    {
+      "pos": 6,
       "equipo": "Lyon - 7LibertadoresSLP",
       "escudoFile": "lyon.png",
       "pts": 17,
@@ -69,30 +82,17 @@
       "dg": -15
     },
     {
-      "pos": 6,
-      "equipo": "Marsella - ElLokoSantooss",
-      "escudoFile": "marsella.png",
-      "pts": 15,
-      "pj": 10,
-      "pg": 5,
-      "pe": 0,
-      "pp": 5,
-      "gf": 15,
-      "gc": 18,
-      "dg": -3
-    },
-    {
       "pos": 7,
       "equipo": "Nottingham Forest - Ropedri1",
       "escudoFile": "nottingham-forest.png",
       "pts": 10,
-      "pj": 8,
+      "pj": 9,
       "pg": 3,
       "pe": 1,
-      "pp": 4,
-      "gf": 12,
-      "gc": 9,
-      "dg": 3
+      "pp": 5,
+      "gf": 14,
+      "gc": 12,
+      "dg": 2
     },
     {
       "pos": 8,
@@ -132,19 +132,6 @@
       "gf": 9,
       "gc": 25,
       "dg": -16
-    },
-    {
-      "pos": 11,
-      "equipo": "Real Sociedad - CUPO LIBRE",
-      "escudoFile": "real-sociedad.png",
-      "pts": 0,
-      "pj": 0,
-      "pg": 0,
-      "pe": 0,
-      "pp": 0,
-      "gf": 0,
-      "gc": 0,
-      "dg": 0
     },
     {
       "pos": 11,
@@ -251,7 +238,7 @@
       "dg": 0
     },
     {
-      "pos": 20,
+      "pos": 19,
       "equipo": "Villareal - Facu.jey",
       "escudoFile": "villareal.png",
       "pts": 0,
@@ -262,6 +249,19 @@
       "gf": 2,
       "gc": 3,
       "dg": -1
+    },
+    {
+      "pos": 20,
+      "equipo": "Real Sociedad - Lucasmanzi6",
+      "escudoFile": "real-sociedad.png",
+      "pts": 0,
+      "pj": 1,
+      "pg": 0,
+      "pe": 0,
+      "pp": 1,
+      "gf": 1,
+      "gc": 3,
+      "dg": -2
     }
   ]
 }
