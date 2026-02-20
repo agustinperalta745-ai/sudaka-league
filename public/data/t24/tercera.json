@@ -1,7 +1,7 @@
 {
   "source": "gesliga",
   "division": "tercera",
-  "fetchedAt": "2026-02-20T19:54:39.118Z",
+  "fetchedAt": "2026-02-20T20:57:55.293Z",
   "rows": [
     {
       "pos": 1,
@@ -98,17 +98,30 @@
       "pos": 8,
       "equipo": "Torino - Tomimanzi",
       "escudoFile": "torino.png",
-      "pts": 8,
-      "pj": 5,
-      "pg": 2,
+      "pts": 11,
+      "pj": 6,
+      "pg": 3,
       "pe": 2,
       "pp": 1,
-      "gf": 9,
+      "gf": 14,
       "gc": 7,
-      "dg": 2
+      "dg": 7
     },
     {
       "pos": 9,
+      "equipo": "Feeyenord - SantisimonFC",
+      "escudoFile": "feeyenord.png",
+      "pts": 7,
+      "pj": 10,
+      "pg": 2,
+      "pe": 1,
+      "pp": 7,
+      "gf": 13,
+      "gc": 27,
+      "dg": -14
+    },
+    {
+      "pos": 10,
       "equipo": "Brighton - Lichacrack",
       "escudoFile": "brighton.png",
       "pts": 7,
@@ -121,20 +134,20 @@
       "dg": -33
     },
     {
-      "pos": 10,
+      "pos": 11,
       "equipo": "Real Sociedad - Lucasmanzi6",
       "escudoFile": "real-sociedad.png",
       "pts": 3,
-      "pj": 4,
+      "pj": 6,
       "pg": 1,
       "pe": 0,
-      "pp": 3,
-      "gf": 4,
-      "gc": 9,
-      "dg": -5
+      "pp": 5,
+      "gf": 6,
+      "gc": 13,
+      "dg": -7
     },
     {
-      "pos": 11,
+      "pos": 12,
       "equipo": "Everton - Luxo",
       "escudoFile": "everton.png",
       "pts": 1,
@@ -147,30 +160,17 @@
       "dg": -1
     },
     {
-      "pos": 12,
+      "pos": 13,
       "equipo": "Fiorentina - CUPO LIBRE",
       "escudoFile": "fiorentina.png",
       "pts": 1,
-      "pj": 3,
+      "pj": 4,
       "pg": 0,
       "pe": 1,
-      "pp": 2,
+      "pp": 3,
       "gf": 0,
-      "gc": 3,
-      "dg": -3
-    },
-    {
-      "pos": 13,
-      "equipo": "Feeyenord - SantisimonFC",
-      "escudoFile": "feeyenord.png",
-      "pts": 1,
-      "pj": 8,
-      "pg": 0,
-      "pe": 1,
-      "pp": 7,
-      "gf": 9,
-      "gc": 25,
-      "dg": -16
+      "gc": 8,
+      "dg": -8
     },
     {
       "pos": 14,
