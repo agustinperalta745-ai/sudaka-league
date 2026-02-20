@@ -1,7 +1,7 @@
 {
   "source": "gesliga",
   "division": "tercera",
-  "fetchedAt": "2026-02-20T21:53:07.974Z",
+  "fetchedAt": "2026-02-20T23:00:54.227Z",
   "rows": [
     {
       "pos": 1,
@@ -57,6 +57,19 @@
     },
     {
       "pos": 5,
+      "equipo": "Lyon - 7LibertadoresSLP",
+      "escudoFile": "lyon.png",
+      "pts": 26,
+      "pj": 19,
+      "pg": 8,
+      "pe": 2,
+      "pp": 9,
+      "gf": 18,
+      "gc": 30,
+      "dg": -12
+    },
+    {
+      "pos": 6,
       "equipo": "Marsella - ElLokoSantooss",
       "escudoFile": "marsella.png",
       "pts": 22,
@@ -69,7 +82,7 @@
       "dg": -1
     },
     {
-      "pos": 6,
+      "pos": 7,
       "equipo": "Nottingham Forest - Ropedri1",
       "escudoFile": "nottingham-forest.png",
       "pts": 17,
@@ -80,19 +93,6 @@
       "gf": 23,
       "gc": 17,
       "dg": 6
-    },
-    {
-      "pos": 7,
-      "equipo": "Lyon - 7LibertadoresSLP",
-      "escudoFile": "lyon.png",
-      "pts": 17,
-      "pj": 16,
-      "pg": 5,
-      "pe": 2,
-      "pp": 9,
-      "gf": 15,
-      "gc": 30,
-      "dg": -15
     },
     {
       "pos": 8,
@@ -200,19 +200,6 @@
     },
     {
       "pos": 14,
-      "equipo": "Monaco - Elpibejanson11",
-      "escudoFile": "monaco.png",
-      "pts": 0,
-      "pj": 0,
-      "pg": 0,
-      "pe": 0,
-      "pp": 0,
-      "gf": 0,
-      "gc": 0,
-      "dg": 0
-    },
-    {
-      "pos": 14,
       "equipo": "Galatasaray - Matymanzi6",
       "escudoFile": "galatasaray.png",
       "pts": 0,
@@ -251,17 +238,30 @@
       "dg": 0
     },
     {
-      "pos": 20,
+      "pos": 19,
       "equipo": "Villareal - Facu.jey",
       "escudoFile": "villareal.png",
       "pts": 0,
-      "pj": 1,
+      "pj": 2,
       "pg": 0,
       "pe": 0,
-      "pp": 1,
+      "pp": 2,
       "gf": 2,
-      "gc": 3,
-      "dg": -1
+      "gc": 4,
+      "dg": -2
+    },
+    {
+      "pos": 20,
+      "equipo": "Monaco - Elpibejanson11",
+      "escudoFile": "monaco.png",
+      "pts": 0,
+      "pj": 2,
+      "pg": 0,
+      "pe": 0,
+      "pp": 2,
+      "gf": 0,
+      "gc": 2,
+      "dg": -2
     }
   ]
 }

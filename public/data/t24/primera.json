@@ -1,20 +1,20 @@
 {
   "source": "gesliga",
   "division": "primera",
-  "fetchedAt": "2026-02-20T21:53:06.678Z",
+  "fetchedAt": "2026-02-20T23:00:53.015Z",
   "rows": [
     {
       "pos": 1,
       "equipo": "Exeeneta - Fiorentina",
       "escudoFile": "exeeneta.png",
-      "pts": 38,
-      "pj": 20,
-      "pg": 11,
+      "pts": 41,
+      "pj": 21,
+      "pg": 12,
       "pe": 5,
       "pp": 4,
-      "gf": 35,
-      "gc": 24,
-      "dg": 11
+      "gf": 41,
+      "gc": 25,
+      "dg": 16
     },
     {
       "pos": 2,
@@ -34,13 +34,13 @@
       "equipo": "H09 - Villareal",
       "escudoFile": "h09.png",
       "pts": 36,
-      "pj": 30,
+      "pj": 32,
       "pg": 10,
       "pe": 6,
-      "pp": 14,
-      "gf": 50,
-      "gc": 60,
-      "dg": -10
+      "pp": 16,
+      "gf": 52,
+      "gc": 71,
+      "dg": -19
     },
     {
       "pos": 4,
@@ -161,6 +161,19 @@
     },
     {
       "pos": 13,
+      "equipo": "Edug98 - Fenerbache",
+      "escudoFile": "edug98.png",
+      "pts": 16,
+      "pj": 6,
+      "pg": 5,
+      "pe": 1,
+      "pp": 0,
+      "gf": 18,
+      "gc": 4,
+      "dg": 14
+    },
+    {
+      "pos": 14,
       "equipo": "Larrierismo - Lyom",
       "escudoFile": "larrierismo.png",
       "pts": 12,
@@ -173,7 +186,7 @@
       "dg": 4
     },
     {
-      "pos": 14,
+      "pos": 15,
       "equipo": "Crislort26 - Marcella",
       "escudoFile": "crislort26.png",
       "pts": 12,
@@ -184,19 +197,6 @@
       "gf": 15,
       "gc": 15,
       "dg": 0
-    },
-    {
-      "pos": 15,
-      "equipo": "Edug98 - Fenerbache",
-      "escudoFile": "edug98.png",
-      "pts": 10,
-      "pj": 4,
-      "pg": 3,
-      "pe": 1,
-      "pp": 0,
-      "gf": 7,
-      "gc": 2,
-      "dg": 5
     },
     {
       "pos": 16,
@@ -216,13 +216,13 @@
       "equipo": "HernanZayas - Nottingham Forest",
       "escudoFile": "hernanzayas.png",
       "pts": 4,
-      "pj": 6,
+      "pj": 7,
       "pg": 1,
       "pe": 1,
-      "pp": 4,
-      "gf": 10,
-      "gc": 17,
-      "dg": -7
+      "pp": 5,
+      "gf": 11,
+      "gc": 23,
+      "dg": -12
     },
     {
       "pos": 18,
