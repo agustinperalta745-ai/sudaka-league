@@ -1,33 +1,33 @@
 {
   "source": "gesliga",
   "division": "tercera",
-  "fetchedAt": "2026-02-20T11:50:28.551Z",
+  "fetchedAt": "2026-02-20T14:25:56.026Z",
   "rows": [
     {
       "pos": 1,
       "equipo": "Fenerbache - jona96delgado",
       "escudoFile": "fenerbache.png",
-      "pts": 42,
-      "pj": 18,
-      "pg": 13,
+      "pts": 45,
+      "pj": 19,
+      "pg": 14,
       "pe": 3,
       "pp": 2,
-      "gf": 70,
-      "gc": 36,
-      "dg": 34
+      "gf": 73,
+      "gc": 37,
+      "dg": 36
     },
     {
       "pos": 2,
       "equipo": "PSV - Eduard9419",
       "escudoFile": "psv.png",
-      "pts": 27,
-      "pj": 14,
+      "pts": 28,
+      "pj": 16,
       "pg": 8,
-      "pe": 3,
-      "pp": 3,
-      "gf": 33,
-      "gc": 23,
-      "dg": 10
+      "pe": 4,
+      "pp": 4,
+      "gf": 36,
+      "gc": 28,
+      "dg": 8
     },
     {
       "pos": 3,
@@ -60,16 +60,29 @@
       "equipo": "Marsella - ElLokoSantooss",
       "escudoFile": "marsella.png",
       "pts": 18,
-      "pj": 11,
+      "pj": 12,
       "pg": 6,
       "pe": 0,
-      "pp": 5,
-      "gf": 18,
-      "gc": 20,
-      "dg": -2
+      "pp": 6,
+      "gf": 20,
+      "gc": 24,
+      "dg": -4
     },
     {
       "pos": 6,
+      "equipo": "Nottingham Forest - Ropedri1",
+      "escudoFile": "nottingham-forest.png",
+      "pts": 17,
+      "pj": 12,
+      "pg": 5,
+      "pe": 2,
+      "pp": 5,
+      "gf": 23,
+      "gc": 17,
+      "dg": 6
+    },
+    {
+      "pos": 7,
       "equipo": "Lyon - 7LibertadoresSLP",
       "escudoFile": "lyon.png",
       "pts": 17,
@@ -80,19 +93,6 @@
       "gf": 15,
       "gc": 30,
       "dg": -15
-    },
-    {
-      "pos": 7,
-      "equipo": "Nottingham Forest - Ropedri1",
-      "escudoFile": "nottingham-forest.png",
-      "pts": 10,
-      "pj": 9,
-      "pg": 3,
-      "pe": 1,
-      "pp": 5,
-      "gf": 14,
-      "gc": 12,
-      "dg": 2
     },
     {
       "pos": 8,
@@ -255,13 +255,13 @@
       "equipo": "Real Sociedad - Lucasmanzi6",
       "escudoFile": "real-sociedad.png",
       "pts": 0,
-      "pj": 1,
+      "pj": 2,
       "pg": 0,
       "pe": 0,
-      "pp": 1,
-      "gf": 1,
-      "gc": 3,
-      "dg": -2
+      "pp": 2,
+      "gf": 2,
+      "gc": 6,
+      "dg": -4
     }
   ]
 }
