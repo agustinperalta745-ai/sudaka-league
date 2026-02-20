@@ -1,7 +1,7 @@
 {
   "source": "gesliga",
   "division": "segunda",
-  "fetchedAt": "2026-02-19T23:01:37.763Z",
+  "fetchedAt": "2026-02-20T00:02:43.030Z",
   "rows": [
     {
       "pos": 1,
@@ -96,29 +96,29 @@
     },
     {
       "pos": 8,
-      "equipo": "Diegarcho - Torino",
-      "escudoFile": "diegarcho.png",
+      "equipo": "Slasher7 - Crystal Palace",
+      "escudoFile": "slasher7.png",
       "pts": 6,
-      "pj": 8,
-      "pg": 1,
-      "pe": 3,
-      "pp": 4,
-      "gf": 4,
-      "gc": 11,
-      "dg": -7
+      "pj": 4,
+      "pg": 2,
+      "pe": 0,
+      "pp": 2,
+      "gf": 2,
+      "gc": 5,
+      "dg": -3
     },
     {
       "pos": 9,
-      "equipo": "Slasher7 - Crystal Palace",
-      "escudoFile": "slasher7.png",
-      "pts": 4,
-      "pj": 4,
+      "equipo": "Diegarcho - Torino",
+      "escudoFile": "diegarcho.png",
+      "pts": 5,
+      "pj": 8,
       "pg": 1,
-      "pe": 1,
-      "pp": 2,
-      "gf": 1,
-      "gc": 5,
-      "dg": -4
+      "pe": 2,
+      "pp": 5,
+      "gf": 4,
+      "gc": 12,
+      "dg": -8
     },
     {
       "pos": 10,
