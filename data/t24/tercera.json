@@ -1,7 +1,7 @@
 {
   "source": "gesliga",
   "division": "tercera",
-  "fetchedAt": "2026-02-20T00:02:43.605Z",
+  "fetchedAt": "2026-02-20T03:33:47.453Z",
   "rows": [
     {
       "pos": 1,
@@ -31,6 +31,19 @@
     },
     {
       "pos": 3,
+      "equipo": "Bologna - JUN Smash",
+      "escudoFile": "bologna.png",
+      "pts": 27,
+      "pj": 14,
+      "pg": 8,
+      "pe": 3,
+      "pp": 3,
+      "gf": 23,
+      "gc": 13,
+      "dg": 10
+    },
+    {
+      "pos": 4,
       "equipo": "Crystal Palace - ABANDONO",
       "escudoFile": "crystal-palace.png",
       "pts": 26,
@@ -41,19 +54,6 @@
       "gf": 33,
       "gc": 22,
       "dg": 11
-    },
-    {
-      "pos": 4,
-      "equipo": "Bologna - JUN Smash",
-      "escudoFile": "bologna.png",
-      "pts": 24,
-      "pj": 13,
-      "pg": 7,
-      "pe": 3,
-      "pp": 3,
-      "gf": 22,
-      "gc": 13,
-      "dg": 9
     },
     {
       "pos": 5,
@@ -73,13 +73,13 @@
       "equipo": "Marsella - ElLokoSantooss",
       "escudoFile": "marsella.png",
       "pts": 15,
-      "pj": 9,
+      "pj": 10,
       "pg": 5,
       "pe": 0,
-      "pp": 4,
+      "pp": 5,
       "gf": 15,
-      "gc": 17,
-      "dg": -2
+      "gc": 18,
+      "dg": -3
     },
     {
       "pos": 7,
@@ -226,7 +226,7 @@
     },
     {
       "pos": 11,
-      "equipo": "Torino - CUPO LIBRE",
+      "equipo": "Torino - Tomimanzi",
       "escudoFile": "torino.png",
       "pts": 0,
       "pj": 0,
