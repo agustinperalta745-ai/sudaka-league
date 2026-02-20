@@ -1,7 +1,7 @@
 {
   "source": "gesliga",
   "division": "tercera",
-  "fetchedAt": "2026-02-20T18:05:55.968Z",
+  "fetchedAt": "2026-02-20T19:54:39.118Z",
   "rows": [
     {
       "pos": 1,
@@ -59,14 +59,14 @@
       "pos": 5,
       "equipo": "Marsella - ElLokoSantooss",
       "escudoFile": "marsella.png",
-      "pts": 18,
-      "pj": 12,
-      "pg": 6,
-      "pe": 0,
+      "pts": 22,
+      "pj": 14,
+      "pg": 7,
+      "pe": 1,
       "pp": 6,
-      "gf": 20,
-      "gc": 24,
-      "dg": -4
+      "gf": 26,
+      "gc": 27,
+      "dg": -1
     },
     {
       "pos": 6,
@@ -96,6 +96,19 @@
     },
     {
       "pos": 8,
+      "equipo": "Torino - Tomimanzi",
+      "escudoFile": "torino.png",
+      "pts": 8,
+      "pj": 5,
+      "pg": 2,
+      "pe": 2,
+      "pp": 1,
+      "gf": 9,
+      "gc": 7,
+      "dg": 2
+    },
+    {
+      "pos": 9,
       "equipo": "Brighton - Lichacrack",
       "escudoFile": "brighton.png",
       "pts": 7,
@@ -106,19 +119,6 @@
       "gf": 18,
       "gc": 51,
       "dg": -33
-    },
-    {
-      "pos": 9,
-      "equipo": "Torino - Tomimanzi",
-      "escudoFile": "torino.png",
-      "pts": 4,
-      "pj": 2,
-      "pg": 1,
-      "pe": 1,
-      "pp": 0,
-      "gf": 4,
-      "gc": 1,
-      "dg": 3
     },
     {
       "pos": 10,
@@ -148,16 +148,16 @@
     },
     {
       "pos": 12,
-      "equipo": "Fiorentina - Therootse",
+      "equipo": "Fiorentina - CUPO LIBRE",
       "escudoFile": "fiorentina.png",
       "pts": 1,
-      "pj": 2,
+      "pj": 3,
       "pg": 0,
       "pe": 1,
-      "pp": 1,
+      "pp": 2,
       "gf": 0,
-      "gc": 1,
-      "dg": -1
+      "gc": 3,
+      "dg": -3
     },
     {
       "pos": 13,
@@ -200,7 +200,7 @@
     },
     {
       "pos": 14,
-      "equipo": "Monaco - Kindel",
+      "equipo": "Monaco - Elpibejanson11",
       "escudoFile": "monaco.png",
       "pts": 0,
       "pj": 0,
