@@ -1,7 +1,7 @@
 {
   "source": "gesliga",
   "division": "primera",
-  "fetchedAt": "2026-02-21T21:47:38.287Z",
+  "fetchedAt": "2026-02-21T22:54:27.665Z",
   "rows": [
     {
       "pos": 1,
@@ -20,14 +20,14 @@
       "pos": 2,
       "equipo": "Alex_CABJ - Bologna",
       "escudoFile": "alexcabj.png",
-      "pts": 37,
-      "pj": 19,
-      "pg": 11,
+      "pts": 40,
+      "pj": 21,
+      "pg": 12,
       "pe": 4,
-      "pp": 4,
-      "gf": 38,
-      "gc": 20,
-      "dg": 18
+      "pp": 5,
+      "gf": 40,
+      "gc": 23,
+      "dg": 17
     },
     {
       "pos": 3,
@@ -226,6 +226,19 @@
     },
     {
       "pos": 18,
+      "equipo": "FAFAFA - Torino",
+      "escudoFile": "fafafa.png",
+      "pts": 3,
+      "pj": 2,
+      "pg": 1,
+      "pe": 0,
+      "pp": 1,
+      "gf": 3,
+      "gc": 2,
+      "dg": 1
+    },
+    {
+      "pos": 19,
       "equipo": "Aacuis09 - PSV",
       "escudoFile": "aacuis09.png",
       "pts": 1,
@@ -238,20 +251,7 @@
       "dg": -4
     },
     {
-      "pos": 19,
-      "equipo": "FAFAFA - Torino",
-      "escudoFile": "fafafa.png",
-      "pts": 0,
-      "pj": 0,
-      "pg": 0,
-      "pe": 0,
-      "pp": 0,
-      "gf": 0,
-      "gc": 0,
-      "dg": 0
-    },
-    {
-      "pos": 19,
+      "pos": 20,
       "equipo": "Tumtum - Galatasaray",
       "escudoFile": "tumtum.png",
       "pts": 0,
