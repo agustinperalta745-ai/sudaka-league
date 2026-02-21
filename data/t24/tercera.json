@@ -1,7 +1,7 @@
 {
   "source": "gesliga",
   "division": "tercera",
-  "fetchedAt": "2026-02-21T19:54:54.733Z",
+  "fetchedAt": "2026-02-21T20:51:19.391Z",
   "rows": [
     {
       "pos": 1,
@@ -70,6 +70,19 @@
     },
     {
       "pos": 6,
+      "equipo": "Marsella - ElLokoSantooss",
+      "escudoFile": "marsella.png",
+      "pts": 25,
+      "pj": 20,
+      "pg": 7,
+      "pe": 4,
+      "pp": 9,
+      "gf": 31,
+      "gc": 40,
+      "dg": -9
+    },
+    {
+      "pos": 7,
       "equipo": "Torino - Tomimanzi",
       "escudoFile": "torino.png",
       "pts": 23,
@@ -82,7 +95,7 @@
       "dg": 14
     },
     {
-      "pos": 7,
+      "pos": 8,
       "equipo": "Nottingham Forest - Ropedri1",
       "escudoFile": "nottingham-forest.png",
       "pts": 23,
@@ -93,19 +106,6 @@
       "gf": 34,
       "gc": 28,
       "dg": 6
-    },
-    {
-      "pos": 8,
-      "equipo": "Marsella - ElLokoSantooss",
-      "escudoFile": "marsella.png",
-      "pts": 23,
-      "pj": 18,
-      "pg": 7,
-      "pe": 2,
-      "pp": 9,
-      "gf": 29,
-      "gc": 38,
-      "dg": -9
     },
     {
       "pos": 9,
@@ -135,6 +135,19 @@
     },
     {
       "pos": 11,
+      "equipo": "Monaco - Elpibejanson11",
+      "escudoFile": "monaco.png",
+      "pts": 9,
+      "pj": 9,
+      "pg": 2,
+      "pe": 3,
+      "pp": 4,
+      "gf": 8,
+      "gc": 12,
+      "dg": -4
+    },
+    {
+      "pos": 12,
       "equipo": "Feeyenord - SantisimonFC",
       "escudoFile": "feeyenord.png",
       "pts": 7,
@@ -147,7 +160,7 @@
       "dg": -19
     },
     {
-      "pos": 12,
+      "pos": 13,
       "equipo": "Brighton - Lichacrack",
       "escudoFile": "brighton.png",
       "pts": 7,
@@ -160,20 +173,20 @@
       "dg": -33
     },
     {
-      "pos": 13,
-      "equipo": "Monaco - Elpibejanson11",
-      "escudoFile": "monaco.png",
+      "pos": 14,
+      "equipo": "Fiorentina - Messi16",
+      "escudoFile": "fiorentina.png",
       "pts": 6,
-      "pj": 7,
+      "pj": 10,
       "pg": 1,
       "pe": 3,
-      "pp": 3,
-      "gf": 5,
-      "gc": 8,
-      "dg": -3
+      "pp": 6,
+      "gf": 6,
+      "gc": 16,
+      "dg": -10
     },
     {
-      "pos": 14,
+      "pos": 15,
       "equipo": "Villareal - Facu.jey",
       "escudoFile": "villareal.png",
       "pts": 3,
@@ -186,7 +199,7 @@
       "dg": -1
     },
     {
-      "pos": 15,
+      "pos": 16,
       "equipo": "Real Sociedad - Lucasmanzi6",
       "escudoFile": "real-sociedad.png",
       "pts": 3,
@@ -197,19 +210,6 @@
       "gf": 6,
       "gc": 13,
       "dg": -7
-    },
-    {
-      "pos": 16,
-      "equipo": "Fiorentina - Messi16",
-      "escudoFile": "fiorentina.png",
-      "pts": 1,
-      "pj": 6,
-      "pg": 0,
-      "pe": 1,
-      "pp": 5,
-      "gf": 0,
-      "gc": 11,
-      "dg": -11
     },
     {
       "pos": 17,
