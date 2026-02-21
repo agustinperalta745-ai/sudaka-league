@@ -1,7 +1,7 @@
 {
   "source": "gesliga",
   "division": "tercera",
-  "fetchedAt": "2026-02-21T11:44:15.694Z",
+  "fetchedAt": "2026-02-21T13:54:20.648Z",
   "rows": [
     {
       "pos": 1,
@@ -31,6 +31,19 @@
     },
     {
       "pos": 3,
+      "equipo": "Lyon - 7LibertadoresSLP",
+      "escudoFile": "lyon.png",
+      "pts": 32,
+      "pj": 24,
+      "pg": 10,
+      "pe": 2,
+      "pp": 12,
+      "gf": 24,
+      "gc": 38,
+      "dg": -14
+    },
+    {
+      "pos": 4,
       "equipo": "PSV - Eduard9419",
       "escudoFile": "psv.png",
       "pts": 30,
@@ -43,7 +56,7 @@
       "dg": 8
     },
     {
-      "pos": 4,
+      "pos": 5,
       "equipo": "Crystal Palace - CUPO LIBRE",
       "escudoFile": "crystal-palace.png",
       "pts": 26,
@@ -56,30 +69,17 @@
       "dg": 11
     },
     {
-      "pos": 5,
-      "equipo": "Lyon - 7LibertadoresSLP",
-      "escudoFile": "lyon.png",
-      "pts": 26,
-      "pj": 22,
-      "pg": 8,
-      "pe": 2,
-      "pp": 12,
-      "gf": 21,
-      "gc": 38,
-      "dg": -17
-    },
-    {
       "pos": 6,
       "equipo": "Nottingham Forest - Ropedri1",
       "escudoFile": "nottingham-forest.png",
       "pts": 23,
-      "pj": 14,
+      "pj": 16,
       "pg": 7,
       "pe": 2,
-      "pp": 5,
-      "gf": 31,
-      "gc": 20,
-      "dg": 11
+      "pp": 7,
+      "gf": 34,
+      "gc": 28,
+      "dg": 6
     },
     {
       "pos": 7,
@@ -109,6 +109,19 @@
     },
     {
       "pos": 9,
+      "equipo": "Fulham - Lokuraa",
+      "escudoFile": "fulham.png",
+      "pts": 10,
+      "pj": 6,
+      "pg": 3,
+      "pe": 1,
+      "pp": 2,
+      "gf": 17,
+      "gc": 13,
+      "dg": 4
+    },
+    {
+      "pos": 10,
       "equipo": "Everton - Luxo",
       "escudoFile": "everton.png",
       "pts": 9,
@@ -121,7 +134,7 @@
       "dg": 5
     },
     {
-      "pos": 10,
+      "pos": 11,
       "equipo": "Feeyenord - SantisimonFC",
       "escudoFile": "feeyenord.png",
       "pts": 7,
@@ -134,7 +147,7 @@
       "dg": -19
     },
     {
-      "pos": 11,
+      "pos": 12,
       "equipo": "Brighton - Lichacrack",
       "escudoFile": "brighton.png",
       "pts": 7,
@@ -147,7 +160,7 @@
       "dg": -33
     },
     {
-      "pos": 12,
+      "pos": 13,
       "equipo": "Monaco - Elpibejanson11",
       "escudoFile": "monaco.png",
       "pts": 6,
@@ -158,19 +171,6 @@
       "gf": 5,
       "gc": 8,
       "dg": -3
-    },
-    {
-      "pos": 13,
-      "equipo": "Fulham - Lokuraa",
-      "escudoFile": "fulham.png",
-      "pts": 4,
-      "pj": 4,
-      "pg": 1,
-      "pe": 1,
-      "pp": 2,
-      "gf": 9,
-      "gc": 10,
-      "dg": -1
     },
     {
       "pos": 14,
@@ -203,13 +203,13 @@
       "equipo": "Fiorentina - Messi16",
       "escudoFile": "fiorentina.png",
       "pts": 1,
-      "pj": 4,
+      "pj": 6,
       "pg": 0,
       "pe": 1,
-      "pp": 3,
+      "pp": 5,
       "gf": 0,
-      "gc": 8,
-      "dg": -8
+      "gc": 11,
+      "dg": -11
     },
     {
       "pos": 17,
