@@ -1,20 +1,20 @@
 {
   "source": "gesliga",
   "division": "primera",
-  "fetchedAt": "2026-02-21T17:54:20.461Z",
+  "fetchedAt": "2026-02-21T19:05:03.910Z",
   "rows": [
     {
       "pos": 1,
       "equipo": "Exeeneta - Fiorentina",
       "escudoFile": "exeeneta.png",
-      "pts": 41,
-      "pj": 21,
-      "pg": 12,
-      "pe": 5,
+      "pts": 45,
+      "pj": 23,
+      "pg": 13,
+      "pe": 6,
       "pp": 4,
-      "gf": 41,
-      "gc": 25,
-      "dg": 16
+      "gf": 44,
+      "gc": 27,
+      "dg": 17
     },
     {
       "pos": 2,
@@ -59,14 +59,14 @@
       "pos": 5,
       "equipo": "TinchoRamirez - Monaco",
       "escudoFile": "tinchoramirez.png",
-      "pts": 29,
-      "pj": 14,
+      "pts": 30,
+      "pj": 16,
       "pg": 9,
-      "pe": 2,
-      "pp": 3,
-      "gf": 29,
-      "gc": 15,
-      "dg": 14
+      "pe": 3,
+      "pp": 4,
+      "gf": 31,
+      "gc": 18,
+      "dg": 13
     },
     {
       "pos": 6,

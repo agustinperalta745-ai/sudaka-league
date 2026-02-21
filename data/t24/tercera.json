@@ -1,7 +1,7 @@
 {
   "source": "gesliga",
   "division": "tercera",
-  "fetchedAt": "2026-02-21T17:54:21.781Z",
+  "fetchedAt": "2026-02-21T19:05:05.225Z",
   "rows": [
     {
       "pos": 1,
@@ -21,13 +21,13 @@
       "equipo": "Bologna - JUN Smash",
       "escudoFile": "bologna.png",
       "pts": 37,
-      "pj": 20,
+      "pj": 22,
       "pg": 11,
       "pe": 4,
-      "pp": 5,
-      "gf": 29,
-      "gc": 16,
-      "dg": 13
+      "pp": 7,
+      "gf": 32,
+      "gc": 22,
+      "dg": 10
     },
     {
       "pos": 3,
@@ -70,6 +70,19 @@
     },
     {
       "pos": 6,
+      "equipo": "Torino - Tomimanzi",
+      "escudoFile": "torino.png",
+      "pts": 23,
+      "pj": 10,
+      "pg": 7,
+      "pe": 2,
+      "pp": 1,
+      "gf": 26,
+      "gc": 12,
+      "dg": 14
+    },
+    {
+      "pos": 7,
       "equipo": "Nottingham Forest - Ropedri1",
       "escudoFile": "nottingham-forest.png",
       "pts": 23,
@@ -82,7 +95,7 @@
       "dg": 6
     },
     {
-      "pos": 7,
+      "pos": 8,
       "equipo": "Marsella - ElLokoSantooss",
       "escudoFile": "marsella.png",
       "pts": 23,
@@ -93,19 +106,6 @@
       "gf": 29,
       "gc": 38,
       "dg": -9
-    },
-    {
-      "pos": 8,
-      "equipo": "Torino - Tomimanzi",
-      "escudoFile": "torino.png",
-      "pts": 17,
-      "pj": 8,
-      "pg": 5,
-      "pe": 2,
-      "pp": 1,
-      "gf": 20,
-      "gc": 9,
-      "dg": 11
     },
     {
       "pos": 9,
