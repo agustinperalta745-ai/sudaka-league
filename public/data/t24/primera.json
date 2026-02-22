@@ -1,33 +1,33 @@
 {
   "source": "gesliga",
   "division": "primera",
-  "fetchedAt": "2026-02-22T11:43:26.865Z",
+  "fetchedAt": "2026-02-22T13:54:50.014Z",
   "rows": [
     {
       "pos": 1,
       "equipo": "Exeeneta - Fiorentina",
       "escudoFile": "exeeneta.png",
-      "pts": 45,
-      "pj": 23,
-      "pg": 13,
-      "pe": 6,
+      "pts": 49,
+      "pj": 25,
+      "pg": 14,
+      "pe": 7,
       "pp": 4,
-      "gf": 44,
-      "gc": 27,
-      "dg": 17
+      "gf": 47,
+      "gc": 29,
+      "dg": 18
     },
     {
       "pos": 2,
       "equipo": "Alex_CABJ - Bologna",
       "escudoFile": "alexcabj.png",
       "pts": 40,
-      "pj": 21,
+      "pj": 23,
       "pg": 12,
       "pe": 4,
-      "pp": 5,
+      "pp": 7,
       "gf": 40,
-      "gc": 23,
-      "dg": 17
+      "gc": 26,
+      "dg": 14
     },
     {
       "pos": 3,
@@ -44,6 +44,19 @@
     },
     {
       "pos": 4,
+      "equipo": "Edug98 - Fenerbache",
+      "escudoFile": "edug98.png",
+      "pts": 31,
+      "pj": 12,
+      "pg": 10,
+      "pe": 1,
+      "pp": 1,
+      "gf": 35,
+      "gc": 8,
+      "dg": 27
+    },
+    {
+      "pos": 5,
       "equipo": "Joser17 - Brighton",
       "escudoFile": "joser17.png",
       "pts": 31,
@@ -56,7 +69,7 @@
       "dg": 5
     },
     {
-      "pos": 5,
+      "pos": 6,
       "equipo": "TinchoRamirez - Monaco",
       "escudoFile": "tinchoramirez.png",
       "pts": 30,
@@ -69,7 +82,20 @@
       "dg": 13
     },
     {
-      "pos": 6,
+      "pos": 7,
+      "equipo": "Ivancarocela - Roma",
+      "escudoFile": "ivancarocela.png",
+      "pts": 28,
+      "pj": 31,
+      "pg": 7,
+      "pe": 7,
+      "pp": 17,
+      "gf": 35,
+      "gc": 50,
+      "dg": -15
+    },
+    {
+      "pos": 8,
       "equipo": "Pelufo - Real Sociedad",
       "escudoFile": "pelufo.png",
       "pts": 27,
@@ -82,20 +108,7 @@
       "dg": 11
     },
     {
-      "pos": 7,
-      "equipo": "Ivancarocela - Roma",
-      "escudoFile": "ivancarocela.png",
-      "pts": 27,
-      "pj": 29,
-      "pg": 7,
-      "pe": 6,
-      "pp": 16,
-      "gf": 33,
-      "gc": 46,
-      "dg": -13
-    },
-    {
-      "pos": 8,
+      "pos": 9,
       "equipo": "Joelignacho - Betis",
       "escudoFile": "joelignacho.png",
       "pts": 24,
@@ -108,7 +121,7 @@
       "dg": -13
     },
     {
-      "pos": 9,
+      "pos": 10,
       "equipo": "Patry - Feeyenord",
       "escudoFile": "patry.png",
       "pts": 22,
@@ -121,7 +134,7 @@
       "dg": -11
     },
     {
-      "pos": 10,
+      "pos": 11,
       "equipo": "Facualanis - Crystal Palace",
       "escudoFile": "facualanis.png",
       "pts": 19,
@@ -134,20 +147,20 @@
       "dg": 5
     },
     {
-      "pos": 11,
+      "pos": 12,
       "equipo": "Naxul90 - Everton",
       "escudoFile": "naxul90.png",
       "pts": 19,
-      "pj": 18,
+      "pj": 20,
       "pg": 6,
       "pe": 1,
-      "pp": 11,
-      "gf": 26,
-      "gc": 36,
-      "dg": -10
+      "pp": 13,
+      "gf": 27,
+      "gc": 45,
+      "dg": -18
     },
     {
-      "pos": 12,
+      "pos": 13,
       "equipo": "Soylefo - Fullham",
       "escudoFile": "soylefo.png",
       "pts": 18,
@@ -158,19 +171,6 @@
       "gf": 23,
       "gc": 24,
       "dg": -1
-    },
-    {
-      "pos": 13,
-      "equipo": "Edug98 - Fenerbache",
-      "escudoFile": "edug98.png",
-      "pts": 16,
-      "pj": 6,
-      "pg": 5,
-      "pe": 1,
-      "pp": 0,
-      "gf": 18,
-      "gc": 4,
-      "dg": 14
     },
     {
       "pos": 14,
@@ -200,6 +200,19 @@
     },
     {
       "pos": 16,
+      "equipo": "FAFAFA - Torino",
+      "escudoFile": "fafafa.png",
+      "pts": 12,
+      "pj": 10,
+      "pg": 3,
+      "pe": 3,
+      "pp": 4,
+      "gf": 14,
+      "gc": 15,
+      "dg": -1
+    },
+    {
+      "pos": 17,
       "equipo": "Lombardo - Valencia",
       "escudoFile": "lombardo.png",
       "pts": 9,
@@ -210,19 +223,6 @@
       "gf": 9,
       "gc": 12,
       "dg": -3
-    },
-    {
-      "pos": 17,
-      "equipo": "FAFAFA - Torino",
-      "escudoFile": "fafafa.png",
-      "pts": 4,
-      "pj": 4,
-      "pg": 1,
-      "pe": 1,
-      "pp": 2,
-      "gf": 5,
-      "gc": 5,
-      "dg": 0
     },
     {
       "pos": 18,
