@@ -3,16 +3,16 @@
   "top3": [
     {
       "pos": 1,
-      "user": "Rulitox17",
-      "wins": 4,
-      "gloveImage": "violeta.png",
+      "user": "Adolfo Ruletas",
+      "wins": 5,
+      "gloveImage": "gris.png",
       "glowColor": "#000000"
     },
     {
       "pos": 2,
-      "user": "Adolfo Ruletas",
-      "wins": 3,
-      "gloveImage": "gris.png",
+      "user": "Rulitox17",
+      "wins": 4,
+      "gloveImage": "violeta.png",
       "glowColor": "#8A2BE2"
     },
     {
