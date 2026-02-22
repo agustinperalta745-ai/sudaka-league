@@ -1,7 +1,7 @@
 {
   "source": "gesliga",
   "division": "primera",
-  "fetchedAt": "2026-02-22T13:54:50.014Z",
+  "fetchedAt": "2026-02-22T14:57:41.009Z",
   "rows": [
     {
       "pos": 1,
@@ -31,6 +31,19 @@
     },
     {
       "pos": 3,
+      "equipo": "Edug98 - Fenerbache",
+      "escudoFile": "edug98.png",
+      "pts": 37,
+      "pj": 14,
+      "pg": 12,
+      "pe": 1,
+      "pp": 1,
+      "gf": 41,
+      "gc": 9,
+      "dg": 32
+    },
+    {
+      "pos": 4,
       "equipo": "H09 - Villareal",
       "escudoFile": "h09.png",
       "pts": 36,
@@ -41,19 +54,6 @@
       "gf": 52,
       "gc": 71,
       "dg": -19
-    },
-    {
-      "pos": 4,
-      "equipo": "Edug98 - Fenerbache",
-      "escudoFile": "edug98.png",
-      "pts": 31,
-      "pj": 12,
-      "pg": 10,
-      "pe": 1,
-      "pp": 1,
-      "gf": 35,
-      "gc": 8,
-      "dg": 27
     },
     {
       "pos": 5,
@@ -125,13 +125,13 @@
       "equipo": "Patry - Feeyenord",
       "escudoFile": "patry.png",
       "pts": 22,
-      "pj": 22,
+      "pj": 23,
       "pg": 5,
       "pe": 7,
-      "pp": 10,
+      "pp": 11,
       "gf": 22,
-      "gc": 33,
-      "dg": -11
+      "gc": 37,
+      "dg": -15
     },
     {
       "pos": 11,
@@ -228,14 +228,14 @@
       "pos": 18,
       "equipo": "HernanZayas - Nottingham Forest",
       "escudoFile": "hernanzayas.png",
-      "pts": 4,
-      "pj": 7,
-      "pg": 1,
+      "pts": 7,
+      "pj": 10,
+      "pg": 2,
       "pe": 1,
-      "pp": 5,
-      "gf": 11,
-      "gc": 23,
-      "dg": -12
+      "pp": 7,
+      "gf": 16,
+      "gc": 29,
+      "dg": -13
     },
     {
       "pos": 19,
