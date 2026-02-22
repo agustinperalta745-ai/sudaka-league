@@ -1,7 +1,7 @@
 {
   "source": "gesliga",
   "division": "tercera",
-  "fetchedAt": "2026-02-22T19:55:06.013Z",
+  "fetchedAt": "2026-02-22T20:55:15.007Z",
   "rows": [
     {
       "pos": 1,
@@ -70,6 +70,19 @@
     },
     {
       "pos": 6,
+      "equipo": "Torino - Tomimanzi",
+      "escudoFile": "torino.png",
+      "pts": 27,
+      "pj": 12,
+      "pg": 8,
+      "pe": 3,
+      "pp": 1,
+      "gf": 31,
+      "gc": 15,
+      "dg": 16
+    },
+    {
+      "pos": 7,
       "equipo": "Crystal Palace - CUPO LIBRE",
       "escudoFile": "crystal-palace.png",
       "pts": 26,
@@ -80,19 +93,6 @@
       "gf": 33,
       "gc": 22,
       "dg": 11
-    },
-    {
-      "pos": 7,
-      "equipo": "Torino - Tomimanzi",
-      "escudoFile": "torino.png",
-      "pts": 24,
-      "pj": 11,
-      "pg": 7,
-      "pe": 3,
-      "pp": 1,
-      "gf": 27,
-      "gc": 13,
-      "dg": 14
     },
     {
       "pos": 8,
@@ -125,13 +125,13 @@
       "equipo": "Fiorentina - Messi16",
       "escudoFile": "fiorentina.png",
       "pts": 11,
-      "pj": 15,
+      "pj": 16,
       "pg": 2,
       "pe": 5,
-      "pp": 8,
-      "gf": 14,
-      "gc": 26,
-      "dg": -12
+      "pp": 9,
+      "gf": 16,
+      "gc": 29,
+      "dg": -13
     },
     {
       "pos": 11,
@@ -161,6 +161,19 @@
     },
     {
       "pos": 13,
+      "equipo": "Brighton - Lichacrack",
+      "escudoFile": "brighton.png",
+      "pts": 10,
+      "pj": 20,
+      "pg": 3,
+      "pe": 1,
+      "pp": 16,
+      "gf": 24,
+      "gc": 66,
+      "dg": -42
+    },
+    {
+      "pos": 14,
       "equipo": "Everton - Luxo",
       "escudoFile": "everton.png",
       "pts": 9,
@@ -171,19 +184,6 @@
       "gf": 12,
       "gc": 7,
       "dg": 5
-    },
-    {
-      "pos": 14,
-      "equipo": "Brighton - Lichacrack",
-      "escudoFile": "brighton.png",
-      "pts": 7,
-      "pj": 19,
-      "pg": 2,
-      "pe": 1,
-      "pp": 16,
-      "gf": 21,
-      "gc": 64,
-      "dg": -43
     },
     {
       "pos": 15,
@@ -203,13 +203,13 @@
       "equipo": "Real Sociedad - Lucasmanzi6",
       "escudoFile": "real-sociedad.png",
       "pts": 6,
-      "pj": 11,
+      "pj": 12,
       "pg": 1,
       "pe": 3,
-      "pp": 7,
-      "gf": 10,
-      "gc": 20,
-      "dg": -10
+      "pp": 8,
+      "gf": 12,
+      "gc": 24,
+      "dg": -12
     },
     {
       "pos": 17,
