@@ -1,7 +1,7 @@
 {
   "source": "gesliga",
   "division": "primera",
-  "fetchedAt": "2026-02-22T14:57:41.009Z",
+  "fetchedAt": "2026-02-22T15:52:14.081Z",
   "rows": [
     {
       "pos": 1,
@@ -18,6 +18,19 @@
     },
     {
       "pos": 2,
+      "equipo": "Edug98 - Fenerbache",
+      "escudoFile": "edug98.png",
+      "pts": 43,
+      "pj": 16,
+      "pg": 14,
+      "pe": 1,
+      "pp": 1,
+      "gf": 47,
+      "gc": 10,
+      "dg": 37
+    },
+    {
+      "pos": 3,
       "equipo": "Alex_CABJ - Bologna",
       "escudoFile": "alexcabj.png",
       "pts": 40,
@@ -28,19 +41,6 @@
       "gf": 40,
       "gc": 26,
       "dg": 14
-    },
-    {
-      "pos": 3,
-      "equipo": "Edug98 - Fenerbache",
-      "escudoFile": "edug98.png",
-      "pts": 37,
-      "pj": 14,
-      "pg": 12,
-      "pe": 1,
-      "pp": 1,
-      "gf": 41,
-      "gc": 9,
-      "dg": 32
     },
     {
       "pos": 4,
@@ -125,13 +125,13 @@
       "equipo": "Patry - Feeyenord",
       "escudoFile": "patry.png",
       "pts": 22,
-      "pj": 23,
+      "pj": 26,
       "pg": 5,
       "pe": 7,
-      "pp": 11,
-      "gf": 22,
-      "gc": 37,
-      "dg": -15
+      "pp": 14,
+      "gf": 23,
+      "gc": 44,
+      "dg": -21
     },
     {
       "pos": 11,
@@ -213,6 +213,19 @@
     },
     {
       "pos": 17,
+      "equipo": "HernanZayas - Nottingham Forest",
+      "escudoFile": "hernanzayas.png",
+      "pts": 10,
+      "pj": 11,
+      "pg": 3,
+      "pe": 1,
+      "pp": 7,
+      "gf": 17,
+      "gc": 29,
+      "dg": -12
+    },
+    {
+      "pos": 18,
       "equipo": "Lombardo - Valencia",
       "escudoFile": "lombardo.png",
       "pts": 9,
@@ -223,19 +236,6 @@
       "gf": 9,
       "gc": 12,
       "dg": -3
-    },
-    {
-      "pos": 18,
-      "equipo": "HernanZayas - Nottingham Forest",
-      "escudoFile": "hernanzayas.png",
-      "pts": 7,
-      "pj": 10,
-      "pg": 2,
-      "pe": 1,
-      "pp": 7,
-      "gf": 16,
-      "gc": 29,
-      "dg": -13
     },
     {
       "pos": 19,
