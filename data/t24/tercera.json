@@ -1,7 +1,7 @@
 {
   "source": "gesliga",
   "division": "tercera",
-  "fetchedAt": "2026-02-22T19:14:17.738Z",
+  "fetchedAt": "2026-02-22T19:55:06.013Z",
   "rows": [
     {
       "pos": 1,
@@ -85,13 +85,13 @@
       "pos": 7,
       "equipo": "Torino - Tomimanzi",
       "escudoFile": "torino.png",
-      "pts": 23,
-      "pj": 10,
+      "pts": 24,
+      "pj": 11,
       "pg": 7,
-      "pe": 2,
+      "pe": 3,
       "pp": 1,
-      "gf": 26,
-      "gc": 12,
+      "gf": 27,
+      "gc": 13,
       "dg": 14
     },
     {
@@ -111,17 +111,30 @@
       "pos": 9,
       "equipo": "Monaco - Elpibejanson11",
       "escudoFile": "monaco.png",
-      "pts": 12,
-      "pj": 10,
-      "pg": 3,
+      "pts": 15,
+      "pj": 11,
+      "pg": 4,
       "pe": 3,
       "pp": 4,
-      "gf": 12,
+      "gf": 15,
       "gc": 12,
-      "dg": 0
+      "dg": 3
     },
     {
       "pos": 10,
+      "equipo": "Fiorentina - Messi16",
+      "escudoFile": "fiorentina.png",
+      "pts": 11,
+      "pj": 15,
+      "pg": 2,
+      "pe": 5,
+      "pp": 8,
+      "gf": 14,
+      "gc": 26,
+      "dg": -12
+    },
+    {
+      "pos": 11,
       "equipo": "Feeyenord - SantisimonFC",
       "escudoFile": "feeyenord.png",
       "pts": 11,
@@ -134,7 +147,7 @@
       "dg": -17
     },
     {
-      "pos": 11,
+      "pos": 12,
       "equipo": "Fulham - Lokuraa",
       "escudoFile": "fulham.png",
       "pts": 10,
@@ -147,7 +160,7 @@
       "dg": 4
     },
     {
-      "pos": 12,
+      "pos": 13,
       "equipo": "Everton - Luxo",
       "escudoFile": "everton.png",
       "pts": 9,
@@ -160,30 +173,17 @@
       "dg": 5
     },
     {
-      "pos": 13,
-      "equipo": "Fiorentina - Messi16",
-      "escudoFile": "fiorentina.png",
-      "pts": 8,
-      "pj": 14,
-      "pg": 1,
-      "pe": 5,
-      "pp": 8,
-      "gf": 8,
-      "gc": 23,
-      "dg": -15
-    },
-    {
       "pos": 14,
       "equipo": "Brighton - Lichacrack",
       "escudoFile": "brighton.png",
       "pts": 7,
-      "pj": 17,
+      "pj": 19,
       "pg": 2,
       "pe": 1,
-      "pp": 14,
-      "gf": 18,
-      "gc": 55,
-      "dg": -37
+      "pp": 16,
+      "gf": 21,
+      "gc": 64,
+      "dg": -43
     },
     {
       "pos": 15,
@@ -202,13 +202,13 @@
       "pos": 16,
       "equipo": "Real Sociedad - Lucasmanzi6",
       "escudoFile": "real-sociedad.png",
-      "pts": 5,
-      "pj": 10,
+      "pts": 6,
+      "pj": 11,
       "pg": 1,
-      "pe": 2,
+      "pe": 3,
       "pp": 7,
-      "gf": 9,
-      "gc": 19,
+      "gf": 10,
+      "gc": 20,
       "dg": -10
     },
     {
