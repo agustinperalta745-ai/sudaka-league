@@ -147,9 +147,9 @@ const PES6_PALMARES = {
       campeones: ["Alex_cabj"]
     },
     {
-      nombre: "Final Interliga vs S.F.A",
+      nombre: "Final Interliga vs S.F.A (3ra Edición)",
       trofeo: "assets/trofeo_interliga.png",
-      campeones: ["Faquuvilla (S.F.A)"]
+      campeones: ["GALENZO (S.F.A)"]
     }
   ],
   individuales: [
