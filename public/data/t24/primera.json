@@ -1,7 +1,7 @@
 {
   "source": "gesliga",
   "division": "primera",
-  "fetchedAt": "2026-02-21T23:48:11.052Z",
+  "fetchedAt": "2026-02-22T05:02:24.194Z",
   "rows": [
     {
       "pos": 1,
@@ -109,6 +109,19 @@
     },
     {
       "pos": 9,
+      "equipo": "Patry - Feeyenord",
+      "escudoFile": "patry.png",
+      "pts": 22,
+      "pj": 22,
+      "pg": 5,
+      "pe": 7,
+      "pp": 10,
+      "gf": 22,
+      "gc": 33,
+      "dg": -11
+    },
+    {
+      "pos": 10,
       "equipo": "Facualanis - Crystal Palace",
       "escudoFile": "facualanis.png",
       "pts": 19,
@@ -121,7 +134,7 @@
       "dg": 5
     },
     {
-      "pos": 10,
+      "pos": 11,
       "equipo": "Naxul90 - Everton",
       "escudoFile": "naxul90.png",
       "pts": 19,
@@ -134,7 +147,7 @@
       "dg": -10
     },
     {
-      "pos": 11,
+      "pos": 12,
       "equipo": "Soylefo - Fullham",
       "escudoFile": "soylefo.png",
       "pts": 18,
@@ -145,19 +158,6 @@
       "gf": 23,
       "gc": 24,
       "dg": -1
-    },
-    {
-      "pos": 12,
-      "equipo": "Patry - Feeyenord",
-      "escudoFile": "patry.png",
-      "pts": 18,
-      "pj": 20,
-      "pg": 4,
-      "pe": 6,
-      "pp": 10,
-      "gf": 19,
-      "gc": 31,
-      "dg": -12
     },
     {
       "pos": 13,
@@ -213,6 +213,19 @@
     },
     {
       "pos": 17,
+      "equipo": "FAFAFA - Torino",
+      "escudoFile": "fafafa.png",
+      "pts": 4,
+      "pj": 4,
+      "pg": 1,
+      "pe": 1,
+      "pp": 2,
+      "gf": 5,
+      "gc": 5,
+      "dg": 0
+    },
+    {
+      "pos": 18,
       "equipo": "HernanZayas - Nottingham Forest",
       "escudoFile": "hernanzayas.png",
       "pts": 4,
@@ -223,19 +236,6 @@
       "gf": 11,
       "gc": 23,
       "dg": -12
-    },
-    {
-      "pos": 18,
-      "equipo": "FAFAFA - Torino",
-      "escudoFile": "fafafa.png",
-      "pts": 3,
-      "pj": 2,
-      "pg": 1,
-      "pe": 0,
-      "pp": 1,
-      "gf": 3,
-      "gc": 2,
-      "dg": 1
     },
     {
       "pos": 19,
