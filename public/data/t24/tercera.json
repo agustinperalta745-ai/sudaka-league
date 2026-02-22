@@ -1,7 +1,7 @@
 {
   "source": "gesliga",
   "division": "tercera",
-  "fetchedAt": "2026-02-22T17:59:00.693Z",
+  "fetchedAt": "2026-02-22T19:14:17.738Z",
   "rows": [
     {
       "pos": 1,
@@ -109,6 +109,19 @@
     },
     {
       "pos": 9,
+      "equipo": "Monaco - Elpibejanson11",
+      "escudoFile": "monaco.png",
+      "pts": 12,
+      "pj": 10,
+      "pg": 3,
+      "pe": 3,
+      "pp": 4,
+      "gf": 12,
+      "gc": 12,
+      "dg": 0
+    },
+    {
+      "pos": 10,
       "equipo": "Feeyenord - SantisimonFC",
       "escudoFile": "feeyenord.png",
       "pts": 11,
@@ -121,7 +134,7 @@
       "dg": -17
     },
     {
-      "pos": 10,
+      "pos": 11,
       "equipo": "Fulham - Lokuraa",
       "escudoFile": "fulham.png",
       "pts": 10,
@@ -134,7 +147,7 @@
       "dg": 4
     },
     {
-      "pos": 11,
+      "pos": 12,
       "equipo": "Everton - Luxo",
       "escudoFile": "everton.png",
       "pts": 9,
@@ -145,19 +158,6 @@
       "gf": 12,
       "gc": 7,
       "dg": 5
-    },
-    {
-      "pos": 12,
-      "equipo": "Monaco - Elpibejanson11",
-      "escudoFile": "monaco.png",
-      "pts": 9,
-      "pj": 9,
-      "pg": 2,
-      "pe": 3,
-      "pp": 4,
-      "gf": 8,
-      "gc": 12,
-      "dg": -4
     },
     {
       "pos": 13,
@@ -177,13 +177,13 @@
       "equipo": "Brighton - Lichacrack",
       "escudoFile": "brighton.png",
       "pts": 7,
-      "pj": 16,
+      "pj": 17,
       "pg": 2,
       "pe": 1,
-      "pp": 13,
+      "pp": 14,
       "gf": 18,
-      "gc": 51,
-      "dg": -33
+      "gc": 55,
+      "dg": -37
     },
     {
       "pos": 15,
