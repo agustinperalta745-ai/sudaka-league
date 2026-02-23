@@ -230,6 +230,16 @@ const PES6_HISTORY_META = {
 };
 
 let INTERDIVISIONAL_ACTIVE_SOURCE = window.INTERDIVISIONAL_ACTIVE_SEASON || null;
+const INTERDIVISIONAL_CONFIG_SOURCE = window.interdivisionalConfig
+  && typeof window.interdivisionalConfig === "object"
+  ? window.interdivisionalConfig
+  : {};
+const INTERDIVISIONAL_COPA_CONFIG_SOURCE = window.copaInterdivisionalConfig
+  && typeof window.copaInterdivisionalConfig === "object"
+  ? window.copaInterdivisionalConfig
+  : {};
+const INTERDIVISIONAL_IS_ENABLED = INTERDIVISIONAL_CONFIG_SOURCE.active !== false
+  && INTERDIVISIONAL_COPA_CONFIG_SOURCE.active !== false;
 const INTERDIVISIONAL_CUARTOS_SOURCE = Array.isArray(window.INTERDIVISIONAL_CUARTOS_PLAYOFFS)
   ? window.INTERDIVISIONAL_CUARTOS_PLAYOFFS
   : [];
@@ -286,12 +296,19 @@ const ASSETS_BASE_PATH = getAssetsBasePath();
 
 
 async function loadInterdivisionalActiveSource() {
+  if (!INTERDIVISIONAL_IS_ENABLED) return null;
+
+  const sourcePath = typeof INTERDIVISIONAL_CONFIG_SOURCE.activeSource === "string"
+    && INTERDIVISIONAL_CONFIG_SOURCE.activeSource.trim() !== ""
+    ? INTERDIVISIONAL_CONFIG_SOURCE.activeSource.trim()
+    : "data/copaInterdivisionalActiva.json";
+
   try {
-    const response = await fetch(withAssetBasePath("data/copaInterdivisionalActiva.json"), { cache: "no-cache" });
+    const response = await fetch(withAssetBasePath(sourcePath), { cache: "no-cache" });
     if (!response.ok) return null;
     return await response.json();
   } catch (error) {
-    console.warn("No se pudo cargar data/copaInterdivisionalActiva.json", error);
+    console.warn(`No se pudo cargar ${sourcePath}`, error);
     return null;
   }
 }
@@ -520,7 +537,7 @@ let showAllTitlesRanking = false;
 let openTitlesRankingId = null;
 let interdivisionalState = null;
 let cupPanelView = "closed";
-let cupActivePhase = "2";
+let cupActivePhase = "1";
 let cupHistorySeasonKey = "";
 let cupHistorySelectedPhase = "";
 let copaPremierState = null;
@@ -891,7 +908,8 @@ function updateCupRemaining() {
   }
 
   if (cupInterdivisionalRemaining) {
-    cupInterdivisionalRemaining.textContent = "INACTIVA";
+    const currentSeason = getCurrentInterdivisionalSeason();
+    cupInterdivisionalRemaining.textContent = currentSeason?.status === "active" ? "ACTIVA" : "INACTIVA";
   }
 }
 
@@ -2587,11 +2605,23 @@ function getInterdivisionalResultPhaseKey(phaseKey) {
   return null;
 }
 
-function getInterdivisionalMatchResult(phaseKey, matchId) {
+function getInterdivisionalResultsPool(seasonLabel) {
+  const normalizedSeason = String(seasonLabel || "").trim().toUpperCase();
+  const bySeason = normalizedSeason ? INTERDIVISIONAL_RESULTS_SOURCE?.[normalizedSeason] : null;
+
+  if (bySeason && typeof bySeason === "object") {
+    return bySeason;
+  }
+
+  return INTERDIVISIONAL_RESULTS_SOURCE;
+}
+
+function getInterdivisionalMatchResult(phaseKey, matchId, seasonLabel) {
   const phaseResultKey = getInterdivisionalResultPhaseKey(phaseKey);
   if (!phaseResultKey) return null;
 
-  const phaseResults = INTERDIVISIONAL_RESULTS_SOURCE?.[phaseResultKey];
+  const resultsPool = getInterdivisionalResultsPool(seasonLabel);
+  const phaseResults = resultsPool?.[phaseResultKey];
   if (!phaseResults || typeof phaseResults !== "object") return null;
 
   const normalizedMatchId = String(matchId || "").trim();
@@ -2692,7 +2722,7 @@ function resolvePhaseSide(sourceSide, resolvedWinnerSide, fallbackLabel) {
   return formatSide(sourceSide || resolvedWinnerSide, fallbackLabel);
 }
 
-function buildPhaseMatches(sourceMatches, sourceWinners, phaseKey) {
+function buildPhaseMatches(sourceMatches, sourceWinners, phaseKey, seasonLabel) {
   const next = [];
   const totalMatches = Math.ceil((sourceWinners?.length || 0) / 2);
   const phaseLabel = getPhaseLabel(phaseKey);
@@ -2704,7 +2734,7 @@ function buildPhaseMatches(sourceMatches, sourceWinners, phaseKey) {
     const sourceHome = sourceWinners[index * 2];
     const sourceAway = sourceWinners[index * 2 + 1];
 
-    const sourceResult = getInterdivisionalMatchResult(phaseKey, matchId);
+    const sourceResult = getInterdivisionalMatchResult(phaseKey, matchId, seasonLabel);
     const normalizedSourceMatch = normalizeMatchData(sourceResult || sourceMatch || {}, "active");
 
     next.push({
@@ -2728,14 +2758,16 @@ function buildInterdivisionalActiveSeason(source) {
 
   if (!octavosSource) return null;
 
+  const seasonLabel = source.season || `T${SITE_CUP_SEASON}`;
+
   const season = {
-    season: source.season || `T${SITE_CUP_SEASON}`,
+    season: seasonLabel,
     status: "active",
     champion: null,
     phases: {
       octavos_playoffs: normalizeActiveOctavos(octavosSource).map((match, index) => {
         const matchId = match.id || `${index + 1}`;
-        const sourceResult = getInterdivisionalMatchResult("octavos", matchId);
+        const sourceResult = getInterdivisionalMatchResult("octavos", matchId, seasonLabel);
         const normalizedMatch = normalizeMatchData(sourceResult || match, "active");
 
         return {
@@ -2760,13 +2792,13 @@ function buildInterdivisionalActiveSeason(source) {
   const sourceFinalCopa = getActiveSourcePhaseMatches(source, "final_copa_interdivisional");
 
   const winnersOctavos = season.phases.octavos_playoffs.map((match, index) => getWinner(match, `Ganador Octavos ${index + 1}`));
-  season.phases.cuartos_playoffs = buildPhaseMatches(sourceCuartos, winnersOctavos, "cuartos_playoffs");
+  season.phases.cuartos_playoffs = buildPhaseMatches(sourceCuartos, winnersOctavos, "cuartos_playoffs", seasonLabel);
 
   const winnersCuartos = season.phases.cuartos_playoffs.map((match, index) => getWinner(match, `Ganador Cuartos ${index + 1}`));
-  season.phases.semifinal_playoffs = buildPhaseMatches(sourceSemis, winnersCuartos, "semifinal_playoffs");
+  season.phases.semifinal_playoffs = buildPhaseMatches(sourceSemis, winnersCuartos, "semifinal_playoffs", seasonLabel);
 
   const winnersSemis = season.phases.semifinal_playoffs.map((match, index) => getWinner(match, `Ganador Semi ${index + 1}`));
-  season.phases.final_playoffs = buildPhaseMatches(sourceFinalPlayoffs, winnersSemis, "final_playoffs");
+  season.phases.final_playoffs = buildPhaseMatches(sourceFinalPlayoffs, winnersSemis, "final_playoffs", seasonLabel);
 
   const finalPlayoffsMatch = season.phases.final_playoffs[0] || null;
   const directQualified = {
@@ -2783,7 +2815,7 @@ function buildInterdivisionalActiveSeason(source) {
       ? formatSide(finalPlayoffsMatch.away, "Ganador Final Play-offs")
       : createPlaceholderSide("Ganador Final Play-offs");
 
-  const finalCopaResult = getInterdivisionalMatchResult("final", finalCopaSourceMatch?.id || "1");
+  const finalCopaResult = getInterdivisionalMatchResult("final", finalCopaSourceMatch?.id || "1", seasonLabel);
   const normalizedFinalCopaMatch = normalizeMatchData(finalCopaResult || finalCopaSourceMatch || {}, "active");
 
   const finalCopaMatch = {
@@ -3101,8 +3133,8 @@ function updateCupCardHeader() {
   const currentSeason = getCurrentInterdivisionalSeason();
 
   if (!currentSeason) {
-    if (cupCurrentSeason) cupCurrentSeason.textContent = "Temporada Próxima";
-    if (cupCurrentPhase) cupCurrentPhase.textContent = "Fase: Por definir";
+    if (cupCurrentSeason) cupCurrentSeason.textContent = "Sin temporada activa";
+    if (cupCurrentPhase) cupCurrentPhase.textContent = "Fase: Sin definir";
     if (cupStatus) cupStatus.textContent = "COPA";
     if (cupInterdivisionalSeasonCard) cupInterdivisionalSeasonCard.classList.add("inactive-card");
     updateCupRemaining();
@@ -3403,9 +3435,13 @@ function setupCupCrossingsAccordion() {
 
 async function initializeInterdivisionalState() {
   try {
-    const activeSourceFromJson = await loadInterdivisionalActiveSource();
-    if (activeSourceFromJson && typeof activeSourceFromJson === "object") {
-      INTERDIVISIONAL_ACTIVE_SOURCE = activeSourceFromJson;
+    if (INTERDIVISIONAL_IS_ENABLED) {
+      const activeSourceFromJson = await loadInterdivisionalActiveSource();
+      if (activeSourceFromJson && typeof activeSourceFromJson === "object") {
+        INTERDIVISIONAL_ACTIVE_SOURCE = activeSourceFromJson;
+      }
+    } else {
+      INTERDIVISIONAL_ACTIVE_SOURCE = null;
     }
 
     interdivisionalState = buildInterdivisionalStateFromDataFiles();
