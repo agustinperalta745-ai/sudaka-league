@@ -19,7 +19,7 @@
         "phase": "octavos_playoffs",
         "teamA": { "user": "Ache14", "division": "1ra", "club": "Villarreal", "logo": "/assets/escudos/villarreal.png" },
         "teamB": { "user": "Cacherinhooo", "division": "2da", "club": "Fullham", "logo": "/assets/escudos/fulham.png" },
-        "score": { "a": 0, "b": 3 },
+        "score": { "a": 0, "b": 4 },
         "pens": { "enabled": false, "a": 0, "b": 0 },
         "winner": "b",
         "status": "finished"
