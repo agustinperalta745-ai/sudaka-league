@@ -260,12 +260,27 @@ const COPA_PREMIER_HISTORY_SOURCE = Array.isArray(window.COPA_PREMIER_HISTORY_SE
   : [];
 
 const INTERDIVISIONAL_PHASES = [
-  { key: "octavos_playoffs", label: "Octavos Play-offs" },
-  { key: "cuartos_playoffs", label: "Cuartos Play-offs" },
-  { key: "semifinal_playoffs", label: "Semi final Play-offs" },
+  { key: "octavos_playoffs", label: "Octavos de Final Play-offs" },
+  { key: "cuartos_playoffs", label: "Cuartos de Final Play-offs" },
+  { key: "semifinal_playoffs", label: "Semifinales Play-offs" },
   { key: "final_playoffs", label: "Final Play-offs" },
-  { key: "final_copa_interdivisional", label: "Final Copa Interdivicional" }
+  { key: "final_copa_interdivisional", label: "Final Copa Interdivisional" }
 ];
+
+const INTERDIVISIONAL_PHASE_NUMBER_MAP = {
+  "1": "octavos_playoffs",
+  "2": "cuartos_playoffs",
+  "3": "semifinal_playoffs",
+  "4": "final_playoffs",
+  "5": "final_copa_interdivisional"
+};
+
+const INTERDIVISIONAL_FIRST_DEADLINE = new Date(
+  INTERDIVISIONAL_COPA_CONFIG_SOURCE.firstDeadline || "2026-02-24T23:00:00-03:00"
+);
+const INTERDIVISIONAL_SECOND_DEADLINE = new Date(
+  INTERDIVISIONAL_COPA_CONFIG_SOURCE.secondDeadline || "2026-02-26T23:00:00-03:00"
+);
 
 const COPA_PREMIER_PHASES = [
   { key: "cuartos", label: "🔥 CUARTOS (BO3)" },
@@ -893,6 +908,11 @@ function detectInterdivisionalPhaseFromSource(source) {
 function getCurrentInterdivisionalPhase(season) {
   if (!season) return INTERDIVISIONAL_PHASES[0].key;
 
+  const numericCurrentPhase = INTERDIVISIONAL_PHASE_NUMBER_MAP[String(INTERDIVISIONAL_ACTIVE_SOURCE?.currentPhase || "")];
+  if (numericCurrentPhase) {
+    return numericCurrentPhase;
+  }
+
   const sourcePhases = detectInterdivisionalPhaseFromSource(INTERDIVISIONAL_ACTIVE_SOURCE)
     || detectInterdivisionalPhaseFromSource(INTERDIVISIONAL_ACTIVE_SOURCE?.phases)
     || detectInterdivisionalPhaseFromSource(INTERDIVISIONAL_RESULTS_SOURCE);
@@ -936,7 +956,26 @@ function updateCupRemaining() {
 
   if (cupInterdivisionalRemaining) {
     const currentSeason = getCurrentInterdivisionalSeason();
-    cupInterdivisionalRemaining.textContent = currentSeason?.status === "active" ? "ACTIVA" : "INACTIVA";
+
+    if (currentSeason?.status === "active") {
+      const now = Date.now();
+      const firstDeadlineTime = INTERDIVISIONAL_FIRST_DEADLINE.getTime();
+      const secondDeadlineTime = INTERDIVISIONAL_SECOND_DEADLINE.getTime();
+      const activeDeadline = (now >= firstDeadlineTime && now < secondDeadlineTime)
+        ? INTERDIVISIONAL_SECOND_DEADLINE
+        : INTERDIVISIONAL_FIRST_DEADLINE;
+
+      updateCountdown(activeDeadline, cupInterdivisionalRemaining, {
+        showHoursOnLastDay: true,
+        showMinutesAndSecondsOnLastHour: true,
+        formatDays: (days) => `${days}d`,
+        formatHours: (hours, minutes) => `${hours}h ${minutes}m`,
+        formatMinutesAndSeconds: (minutes, seconds) => `${minutes}m ${seconds}s`,
+        formatEnded: () => "FINALIZADA"
+      });
+    } else {
+      cupInterdivisionalRemaining.textContent = "INACTIVA";
+    }
   }
 }
 
