@@ -1,6 +1,7 @@
 {
   "season": "T25",
   "status": "active",
+  "currentPhase": 1,
   "phases": {
     "octavos_playoffs": [
       {
