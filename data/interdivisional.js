@@ -1,7 +1,7 @@
 window.INTERDIVISIONAL_ACTIVE_SEASON = {
-  season: "Próxima",
-  status: "inactive",
-  note: "Completar este objeto cuando se abra la próxima Copa Interdivisional.",
+  season: "T25",
+  status: "active",
+  source: "data/copaInterdivisionalActiva.json",
   phases: {
     octavos_playoffs: [],
     cuartos_playoffs: [],
