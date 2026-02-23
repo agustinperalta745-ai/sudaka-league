@@ -21,7 +21,7 @@
         "score": { "a": 0, "b": 3 },
         "pens": { "enabled": false, "a": 0, "b": 0 },
         "winner": "b",
-        "status": "pending"
+        "status": "finished"
       },
       {
         "id": "3",
