@@ -229,7 +229,7 @@ const PES6_HISTORY_META = {
   ]
 };
 
-const INTERDIVISIONAL_ACTIVE_SOURCE = window.INTERDIVISIONAL_ACTIVE_SEASON || null;
+let INTERDIVISIONAL_ACTIVE_SOURCE = window.INTERDIVISIONAL_ACTIVE_SEASON || null;
 const INTERDIVISIONAL_CUARTOS_SOURCE = Array.isArray(window.INTERDIVISIONAL_CUARTOS_PLAYOFFS)
   ? window.INTERDIVISIONAL_CUARTOS_PLAYOFFS
   : [];
@@ -283,6 +283,18 @@ function getAssetsBasePath() {
 
 const ASSETS_BASE_PATH = getAssetsBasePath();
 
+
+
+async function loadInterdivisionalActiveSource() {
+  try {
+    const response = await fetch(withAssetBasePath("data/copaInterdivisionalActiva.json"), { cache: "no-cache" });
+    if (!response.ok) return null;
+    return await response.json();
+  } catch (error) {
+    console.warn("No se pudo cargar data/copaInterdivisionalActiva.json", error);
+    return null;
+  }
+}
 const AWARD_GLOVE_TROPHIES = {
   balonOro: "assets/guantes/balon-oro.png",
   puskas: "assets/guantes/puskas.png"
@@ -2426,6 +2438,79 @@ function normalizeMatchData(match, seasonStatus = "active") {
   };
 }
 
+
+
+function normalizeTeamFromActiveSchema(team) {
+  if (!team || typeof team !== "object") return null;
+
+  if (typeof team.winnerOf === "string" && team.winnerOf.trim() !== "") {
+    return {
+      winnerOf: team.winnerOf.trim(),
+      placeholder: typeof team.placeholder === "string" && team.placeholder.trim() !== ""
+        ? team.placeholder.trim()
+        : "Por definir"
+    };
+  }
+
+  return {
+    player: team.user || team.player || "Por definir",
+    division: normalizeDivisionName(team.division),
+    club: team.club || "",
+    shield: team.logo || team.shield || ""
+  };
+}
+
+function normalizeActiveSchemaMatch(match, fallbackPhase) {
+  if (!match || typeof match !== "object") return match;
+
+  const hasActiveSchemaTeams = match.teamA || match.teamB;
+  const hasActiveSchemaScore = match.score && typeof match.score === "object";
+
+  if (!hasActiveSchemaTeams && !hasActiveSchemaScore) return match;
+
+  const score = match.score || {};
+  const pens = match.pens || {};
+  const status = typeof match.status === "string" ? match.status.trim().toLowerCase() : "";
+  const isPlayed = ["played", "jugado", "finalizado", "completed"].includes(status)
+    || normalizeWinnerValue(match.winner) != null;
+
+  return {
+    id: match.id,
+    phase: match.phase || fallbackPhase,
+    label: match.label,
+    home: normalizeTeamFromActiveSchema(match.teamA) || match.home,
+    away: normalizeTeamFromActiveSchema(match.teamB) || match.away,
+    status: match.status,
+    winner: match.winner,
+    result: isPlayed
+      ? {
+        home: Number(score.a ?? 0),
+        away: Number(score.b ?? 0)
+      }
+      : null,
+    pens: isPlayed && pens.enabled === true
+      ? {
+        home: Number(pens.a ?? 0),
+        away: Number(pens.b ?? 0)
+      }
+      : null
+  };
+}
+
+function getActiveSourcePhaseMatches(source, phaseKey) {
+  if (!source || typeof source !== "object") return [];
+
+  const sourcePhases = source.phases || {};
+  const directMatches = source[phaseKey];
+  const phaseMatches = sourcePhases[phaseKey];
+  const matches = Array.isArray(directMatches)
+    ? directMatches
+    : Array.isArray(phaseMatches)
+      ? phaseMatches
+      : [];
+
+  return matches.map((match) => normalizeActiveSchemaMatch(match, phaseKey));
+}
 function normalizeActiveOctavos(data) {
   if (!Array.isArray(data)) return [];
 
@@ -2637,20 +2722,18 @@ function buildPhaseMatches(sourceMatches, sourceWinners, phaseKey) {
 function buildInterdivisionalActiveSeason(source) {
   if (!source) return null;
 
-  const octavos = Array.isArray(source.octavos_playoffs)
-    ? source.octavos_playoffs
-    : Array.isArray(source.octavos)
-      ? source.octavos
-      : null;
+  const octavos = getActiveSourcePhaseMatches(source, "octavos_playoffs");
+  const legacyOctavos = Array.isArray(source.octavos) ? source.octavos : null;
+  const octavosSource = octavos.length > 0 ? octavos : legacyOctavos;
 
-  if (!octavos) return null;
+  if (!octavosSource) return null;
 
   const season = {
     season: source.season || `T${SITE_CUP_SEASON}`,
     status: "active",
     champion: null,
     phases: {
-      octavos_playoffs: normalizeActiveOctavos(octavos).map((match, index) => {
+      octavos_playoffs: normalizeActiveOctavos(octavosSource).map((match, index) => {
         const matchId = match.id || `${index + 1}`;
         const sourceResult = getInterdivisionalMatchResult("octavos", matchId);
         const normalizedMatch = normalizeMatchData(sourceResult || match, "active");
@@ -2671,13 +2754,10 @@ function buildInterdivisionalActiveSeason(source) {
     }
   };
 
-  const sourcePhases = source.phases || {};
-  const sourceCuartos = Array.isArray(source.cuartos_playoffs)
-    ? source.cuartos_playoffs
-    : sourcePhases.cuartos_playoffs;
-  const sourceSemis = Array.isArray(source.semifinal_playoffs) ? source.semifinal_playoffs : sourcePhases.semifinal_playoffs;
-  const sourceFinalPlayoffs = Array.isArray(source.final_playoffs) ? source.final_playoffs : sourcePhases.final_playoffs;
-  const sourceFinalCopa = Array.isArray(source.final_copa_interdivisional) ? source.final_copa_interdivisional : sourcePhases.final_copa_interdivisional;
+  const sourceCuartos = getActiveSourcePhaseMatches(source, "cuartos_playoffs");
+  const sourceSemis = getActiveSourcePhaseMatches(source, "semifinal_playoffs");
+  const sourceFinalPlayoffs = getActiveSourcePhaseMatches(source, "final_playoffs");
+  const sourceFinalCopa = getActiveSourcePhaseMatches(source, "final_copa_interdivisional");
 
   const winnersOctavos = season.phases.octavos_playoffs.map((match, index) => getWinner(match, `Ganador Octavos ${index + 1}`));
   season.phases.cuartos_playoffs = buildPhaseMatches(sourceCuartos, winnersOctavos, "cuartos_playoffs");
@@ -3323,6 +3403,11 @@ function setupCupCrossingsAccordion() {
 
 async function initializeInterdivisionalState() {
   try {
+    const activeSourceFromJson = await loadInterdivisionalActiveSource();
+    if (activeSourceFromJson && typeof activeSourceFromJson === "object") {
+      INTERDIVISIONAL_ACTIVE_SOURCE = activeSourceFromJson;
+    }
+
     interdivisionalState = buildInterdivisionalStateFromDataFiles();
   } catch (error) {
     console.error("Error al inicializar Interdivisional", error);
