@@ -47,6 +47,12 @@ const PES6_HISTORY = [
     divisions: { div1: "Alex_cabj", div2: "H09", div3: "Leom", div4: "Jona96delgado" },
     cups: { interdiv: "H09", superfinal: "Alex_cabj", interliga: "POR DEFINIR" },
     awards: { balonOro: "NO SE DISPUTA", puskas: "Tank" }
+  },
+  {
+    season: "Temporada 24",
+    divisions: { div1: "Exeeneta", div2: "Sally1901", div3: "Jona96delgado" },
+    cups: { interdiv: "AÚN NO SE DEFINE", superfinal: "AÚN NO SE DEFINE", interliga: "NO SE DISPUTA" },
+    awards: { balonOro: "NO SE DISPUTA", puskas: "AÚN NO SE DEFINE" }
   }
 ];
 
