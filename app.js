@@ -259,13 +259,6 @@ const INTERDIVISIONAL_PHASE_NUMBER_MAP = {
   "5": "final_copa_interdivisional"
 };
 
-const INTERDIVISIONAL_FIRST_DEADLINE = new Date(
-  "2026-02-24T23:00:00-03:00"
-);
-const INTERDIVISIONAL_SECOND_DEADLINE = new Date(
-  "2026-02-26T23:00:00-03:00"
-);
-
 const COPA_PREMIER_PHASES = [
   { key: "cuartos", label: "🔥 CUARTOS (BO3)" },
   { key: "semifinales", label: "🥊 SEMIFINALES (BO3)" },
@@ -310,17 +303,14 @@ async function loadInterdivisionalCurrentSource() {
 
 async function loadInterdivisionalHistorySource() {
   if (!INTERDIVISIONAL_IS_ENABLED) return [];
-  const sourcePath = "data/interdivisional_history.json";
 
-  try {
-    const response = await fetch(withAssetBasePath(sourcePath), { cache: "no-cache" });
-    if (!response.ok) return [];
-    const data = await response.json();
-    return Array.isArray(data) ? data : [];
-  } catch (error) {
-    console.warn("No se pudo cargar data/interdivisional_history.json", error);
-    return [];
+  const historyBySeason = window.INTERDIVISIONAL_HISTORY;
+  if (historyBySeason && typeof historyBySeason === "object") {
+    return getInterdivisionalHistorySeasonsSource(historyBySeason, []);
   }
+
+  console.warn("No se encontró window.INTERDIVISIONAL_HISTORY (data/interdivisional_history.js)");
+  return [];
 }
 const AWARD_GLOVE_TROPHIES = {
   balonOro: "assets/guantes/balon-oro.png",
@@ -953,21 +943,23 @@ function updateCupRemaining() {
     const currentSeason = getCurrentInterdivisionalSeason();
 
     if (currentSeason?.status === "active") {
-      const now = Date.now();
-      const firstDeadlineTime = INTERDIVISIONAL_FIRST_DEADLINE.getTime();
-      const secondDeadlineTime = INTERDIVISIONAL_SECOND_DEADLINE.getTime();
-      const activeDeadline = (now >= firstDeadlineTime && now < secondDeadlineTime)
-        ? INTERDIVISIONAL_SECOND_DEADLINE
-        : INTERDIVISIONAL_FIRST_DEADLINE;
+      const activePhaseKey = getCurrentInterdivisionalPhase(currentSeason);
+      const phaseDeadlines = INTERDIVISIONAL_ACTIVE_SOURCE?.phaseDeadlines || {};
+      const deadlineValue = phaseDeadlines?.[activePhaseKey] || null;
+      const activeDeadline = deadlineValue ? new Date(deadlineValue) : null;
 
-      updateCountdown(activeDeadline, cupInterdivisionalRemaining, {
-        showHoursOnLastDay: true,
-        showMinutesAndSecondsOnLastHour: true,
-        formatDays: (days) => `${days}d`,
-        formatHours: (hours, minutes) => `${hours}h ${minutes}m`,
-        formatMinutesAndSeconds: (minutes, seconds) => `${minutes}m ${seconds}s`,
-        formatEnded: () => "FINALIZADA"
-      });
+      if (activeDeadline && !Number.isNaN(activeDeadline.getTime())) {
+        updateCountdown(activeDeadline, cupInterdivisionalRemaining, {
+          showHoursOnLastDay: true,
+          showMinutesAndSecondsOnLastHour: true,
+          formatDays: (days) => `${days}d`,
+          formatHours: (hours, minutes) => `${hours}h ${minutes}m`,
+          formatMinutesAndSeconds: (minutes, seconds) => `${minutes}m ${seconds}s`,
+          formatEnded: () => "FINALIZADA"
+        });
+      } else {
+        cupInterdivisionalRemaining.textContent = "SIN CIERRE";
+      }
     } else {
       cupInterdivisionalRemaining.textContent = "INACTIVA";
     }
