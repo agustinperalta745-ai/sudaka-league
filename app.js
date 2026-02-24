@@ -2415,10 +2415,19 @@ function cloneInterdivisionalData(data) {
 }
 
 function normalizeWinnerValue(value) {
-  if (value == null || typeof value !== "string") return null;
+  if (value == null) return null;
 
-  const normalizedWinner = value.trim().toLowerCase();
-  return normalizedWinner === "home" || normalizedWinner === "away" ? normalizedWinner : null;
+  const normalizedWinner = String(value).trim().toLowerCase();
+
+  if (["home", "a", "teama", "team_a", "1", "player1", "jugador1"].includes(normalizedWinner)) {
+    return "home";
+  }
+
+  if (["away", "b", "teamb", "team_b", "2", "player2", "jugador2"].includes(normalizedWinner)) {
+    return "away";
+  }
+
+  return null;
 }
 
 function normalizeMatchResult(result) {
@@ -2486,7 +2495,7 @@ function isMatchPlayed(match, seasonStatus = "active") {
 
   if (typeof match.status === "string") {
     const normalizedStatus = match.status.trim().toLowerCase();
-    if (["played", "jugado", "finalizado", "completed"].includes(normalizedStatus)) {
+    if (["played", "jugado", "finalizado", "completed", "finished"].includes(normalizedStatus)) {
       return true;
     }
   }
@@ -2496,8 +2505,15 @@ function isMatchPlayed(match, seasonStatus = "active") {
 
 function normalizeMatchData(match, seasonStatus = "active") {
   const winner = normalizeWinnerValue(match.winner);
-  const result = normalizeMatchResult(match.result);
-  const pens = normalizeMatchPens(match);
+  const result = normalizeMatchResult(match.result)
+    || normalizeMatchResult(match.score)
+    || ((match?.score1 != null && match?.score2 != null)
+      ? normalizeMatchResult({ home: match.score1, away: match.score2 })
+      : null);
+  const pens = normalizeMatchPens(match)
+    || ((match?.penalties1 != null && match?.penalties2 != null)
+      ? normalizeMatchPens({ pens: { home: match.penalties1, away: match.penalties2 } })
+      : null);
   const played = isMatchPlayed(match, seasonStatus);
 
   if (!played) {
@@ -2552,7 +2568,7 @@ function normalizeActiveSchemaMatch(match, fallbackPhase) {
   const score = match.score || {};
   const pens = match.pens || {};
   const status = typeof match.status === "string" ? match.status.trim().toLowerCase() : "";
-  const isPlayed = ["played", "jugado", "finalizado", "completed"].includes(status)
+  const isPlayed = ["played", "jugado", "finalizado", "completed", "finished"].includes(status)
     || normalizeWinnerValue(match.winner) != null;
 
   return {
@@ -2576,6 +2592,19 @@ function normalizeActiveSchemaMatch(match, fallbackPhase) {
       }
       : null
   };
+}
+
+function getMatchCenteredResultLines(matchData) {
+  const normalizedMatch = normalizeMatchData(matchData || {}, "active");
+  if (!normalizedMatch.played || !hasMatchResult(normalizedMatch)) return [];
+
+  const lines = [`${normalizedMatch.result.home} - ${normalizedMatch.result.away}`];
+
+  if (hasMatchPens(normalizedMatch)) {
+    lines.push(`Penales: ${normalizedMatch.pens.home} - ${normalizedMatch.pens.away}`);
+  }
+
+  return lines;
 }
 
 function getActiveSourcePhaseMatches(source, phaseKey) {
@@ -2993,7 +3022,7 @@ function getFinalCopaInterdivisionalMatch(season) {
 }
 
 function createCupCrossingTeamNode(teamData, context = {}) {
-  const { editable = false, side = "home", matchData = null } = context;
+  const { editable = false, side = "home", matchData = null, showSideScore = false } = context;
   const team = document.createElement(editable ? "button" : "div");
   team.className = "cup-crossing-team";
   if (editable) {
@@ -3049,7 +3078,7 @@ function createCupCrossingTeamNode(teamData, context = {}) {
     && typeof matchData.pens.home === "number"
     && typeof matchData.pens.away === "number";
 
-  if (matchData?.played && hasResult) {
+  if (showSideScore && matchData?.played && hasResult) {
     const scoreBox = document.createElement("div");
     scoreBox.className = "cup-crossing-score";
     scoreBox.style.display = "flex";
@@ -3127,10 +3156,31 @@ function createCupCrossingCard(matchData, options = {}) {
   versus.className = "cup-match-versus";
   versus.textContent = "VS";
 
+  const centeredResultLines = getMatchCenteredResultLines(matchData);
+  const centerNode = document.createElement("div");
+  centerNode.style.display = "flex";
+  centerNode.style.flexDirection = "column";
+  centerNode.style.alignItems = "center";
+  centerNode.style.justifyContent = "center";
+  centerNode.style.gap = "0.2rem";
+  centerNode.appendChild(versus);
+
+  if (centeredResultLines.length > 0) {
+    centeredResultLines.forEach((line, index) => {
+      const lineNode = document.createElement("span");
+      lineNode.textContent = line;
+      lineNode.style.fontSize = index === 0 ? "0.85rem" : "0.72rem";
+      lineNode.style.fontWeight = index === 0 ? "700" : "600";
+      lineNode.style.lineHeight = "1.1";
+      lineNode.style.color = "rgba(240, 255, 255, 0.9)";
+      centerNode.appendChild(lineNode);
+    });
+  }
+
   body.append(
-    createCupCrossingTeamNode(matchData.home, { editable, side: "home", matchData }),
-    versus,
-    createCupCrossingTeamNode(matchData.away, { editable, side: "away", matchData })
+    createCupCrossingTeamNode(matchData.home, { editable, side: "home", matchData, showSideScore: false }),
+    centerNode,
+    createCupCrossingTeamNode(matchData.away, { editable, side: "away", matchData, showSideScore: false })
   );
 
   card.append(label, body);
