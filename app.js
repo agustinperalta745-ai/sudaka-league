@@ -229,28 +229,12 @@ const PES6_HISTORY_META = {
   ]
 };
 
-let INTERDIVISIONAL_ACTIVE_SOURCE = window.INTERDIVISIONAL_ACTIVE_SEASON || null;
-const INTERDIVISIONAL_CONFIG_SOURCE = window.interdivisionalConfig
-  && typeof window.interdivisionalConfig === "object"
-  ? window.interdivisionalConfig
-  : {};
-const INTERDIVISIONAL_COPA_CONFIG_SOURCE = window.copaInterdivisionalConfig
-  && typeof window.copaInterdivisionalConfig === "object"
-  ? window.copaInterdivisionalConfig
-  : {};
-const INTERDIVISIONAL_IS_ENABLED = INTERDIVISIONAL_CONFIG_SOURCE.active !== false
-  && INTERDIVISIONAL_COPA_CONFIG_SOURCE.active !== false;
-const INTERDIVISIONAL_CUARTOS_SOURCE = Array.isArray(window.INTERDIVISIONAL_CUARTOS_PLAYOFFS)
-  ? window.INTERDIVISIONAL_CUARTOS_PLAYOFFS
-  : [];
-const INTERDIVISIONAL_RESULTS_SOURCE = window.INTERDIVISIONAL_RESULTS
-  && typeof window.INTERDIVISIONAL_RESULTS === "object"
-  ? window.INTERDIVISIONAL_RESULTS
-  : {};
-const INTERDIVISIONAL_HISTORY_SOURCE = getInterdivisionalHistorySeasonsSource(
-  window.INTERDIVISIONAL_HISTORY,
-  window.INTERDIVISIONAL_HISTORY_SEASONS
-);
+let INTERDIVISIONAL_MASTER_SOURCE = null;
+let INTERDIVISIONAL_ACTIVE_SOURCE = null;
+const INTERDIVISIONAL_IS_ENABLED = true;
+const INTERDIVISIONAL_CUARTOS_SOURCE = [];
+const INTERDIVISIONAL_RESULTS_SOURCE = {};
+const INTERDIVISIONAL_HISTORY_SOURCE = [];
 
 const SITE_CUP_SEASON = window.SUDAKA_SITE_DATA?.cupSeason ?? 23;
 
@@ -276,10 +260,10 @@ const INTERDIVISIONAL_PHASE_NUMBER_MAP = {
 };
 
 const INTERDIVISIONAL_FIRST_DEADLINE = new Date(
-  INTERDIVISIONAL_COPA_CONFIG_SOURCE.firstDeadline || "2026-02-24T23:00:00-03:00"
+  "2026-02-24T23:00:00-03:00"
 );
 const INTERDIVISIONAL_SECOND_DEADLINE = new Date(
-  INTERDIVISIONAL_COPA_CONFIG_SOURCE.secondDeadline || "2026-02-26T23:00:00-03:00"
+  "2026-02-26T23:00:00-03:00"
 );
 
 const COPA_PREMIER_PHASES = [
@@ -310,20 +294,16 @@ const ASSETS_BASE_PATH = getAssetsBasePath();
 
 
 
-async function loadInterdivisionalActiveSource() {
+async function loadInterdivisionalMasterSource() {
   if (!INTERDIVISIONAL_IS_ENABLED) return null;
-
-  const sourcePath = typeof INTERDIVISIONAL_CONFIG_SOURCE.activeSource === "string"
-    && INTERDIVISIONAL_CONFIG_SOURCE.activeSource.trim() !== ""
-    ? INTERDIVISIONAL_CONFIG_SOURCE.activeSource.trim()
-    : "data/copaInterdivisionalActiva.json";
+  const sourcePath = "data/copaInterdivisional.json";
 
   try {
     const response = await fetch(withAssetBasePath(sourcePath), { cache: "no-cache" });
     if (!response.ok) return null;
     return await response.json();
   } catch (error) {
-    console.warn(`No se pudo cargar ${sourcePath}`, error);
+    console.warn("No se pudo cargar data/copaInterdivisional.json", error);
     return null;
   }
 }
@@ -2925,19 +2905,43 @@ function buildInterdivisionalActiveSeason(source) {
 
 function buildInterdivisionalStateFromDataFiles() {
   const seasons = [];
-  const activeSeason = buildInterdivisionalActiveSeason(INTERDIVISIONAL_ACTIVE_SOURCE);
 
-  if (activeSeason) {
-    seasons.push(activeSeason);
+  if (INTERDIVISIONAL_MASTER_SOURCE && typeof INTERDIVISIONAL_MASTER_SOURCE === "object") {
+    const activeSeasonKey = INTERDIVISIONAL_MASTER_SOURCE.activeSeason;
+    const sourceSeasons = INTERDIVISIONAL_MASTER_SOURCE.seasons && typeof INTERDIVISIONAL_MASTER_SOURCE.seasons === "object"
+      ? INTERDIVISIONAL_MASTER_SOURCE.seasons
+      : {};
+
+    Object.entries(sourceSeasons).forEach(([seasonKey, sourceSeason]) => {
+      const normalizedSeason = buildInterdivisionalActiveSeason({
+        ...(sourceSeason || {}),
+        season: seasonKey
+      });
+
+      if (!normalizedSeason) return;
+
+      normalizedSeason.status = seasonKey === activeSeasonKey ? "active" : "completed";
+      if (normalizedSeason.status === "completed") {
+        normalizedSeason.champion = sourceSeason?.champion || normalizedSeason.champion || null;
+      }
+      seasons.push(normalizedSeason);
+    });
   }
 
-  INTERDIVISIONAL_HISTORY_SOURCE.forEach((season) => {
-    const normalizedSeason = {
-      ...cloneInterdivisionalData(season),
-      status: "completed"
-    };
-    seasons.push(normalizedSeason);
-  });
+  if (seasons.length === 0) {
+    const activeSeason = buildInterdivisionalActiveSeason(INTERDIVISIONAL_ACTIVE_SOURCE);
+    if (activeSeason) {
+      seasons.push(activeSeason);
+    }
+
+    INTERDIVISIONAL_HISTORY_SOURCE.forEach((season) => {
+      const normalizedSeason = {
+        ...cloneInterdivisionalData(season),
+        status: "completed"
+      };
+      seasons.push(normalizedSeason);
+    });
+  }
 
   return normalizeInterdivisionalState({ seasons });
 }
@@ -3549,9 +3553,16 @@ function setupCupCrossingsAccordion() {
 async function initializeInterdivisionalState() {
   try {
     if (INTERDIVISIONAL_IS_ENABLED) {
-      const activeSourceFromJson = await loadInterdivisionalActiveSource();
-      if (activeSourceFromJson && typeof activeSourceFromJson === "object") {
-        INTERDIVISIONAL_ACTIVE_SOURCE = activeSourceFromJson;
+      const masterSourceFromJson = await loadInterdivisionalMasterSource();
+      if (masterSourceFromJson && typeof masterSourceFromJson === "object") {
+        INTERDIVISIONAL_MASTER_SOURCE = masterSourceFromJson;
+        const activeSeasonKey = masterSourceFromJson.activeSeason;
+        const activeSeasonSource = activeSeasonKey && masterSourceFromJson.seasons
+          ? masterSourceFromJson.seasons[activeSeasonKey]
+          : null;
+        INTERDIVISIONAL_ACTIVE_SOURCE = activeSeasonSource && typeof activeSeasonSource === "object"
+          ? { ...activeSeasonSource, season: activeSeasonKey || activeSeasonSource.season }
+          : null;
       }
     } else {
       INTERDIVISIONAL_ACTIVE_SOURCE = null;

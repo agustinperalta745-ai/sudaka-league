@@ -1,0 +1,1213 @@
+{
+  "activeSeason": "T25",
+  "seasons": {
+    "T25": {
+      "season": "T25",
+      "status": "active",
+      "currentPhase": 1,
+      "phases": {
+        "octavos_playoffs": [
+          {
+            "id": "1",
+            "phase": "octavos_playoffs",
+            "teamA": {
+              "user": "Alex_CABJ",
+              "division": "1ra",
+              "club": "Bologna",
+              "logo": "/assets/escudos/bologna.png"
+            },
+            "teamB": {
+              "user": "Jona96delgado",
+              "division": "3ra",
+              "club": "Fenerbahce",
+              "logo": "/assets/escudos/fenerbahce.png"
+            },
+            "score": {
+              "a": 0,
+              "b": 0
+            },
+            "pens": {
+              "enabled": false,
+              "a": 0,
+              "b": 0
+            },
+            "winner": null,
+            "status": "pending"
+          },
+          {
+            "id": "2",
+            "phase": "octavos_playoffs",
+            "teamA": {
+              "user": "Ache14",
+              "division": "1ra",
+              "club": "Villarreal",
+              "logo": "/assets/escudos/villarreal.png"
+            },
+            "teamB": {
+              "user": "Cacherinhooo",
+              "division": "2da",
+              "club": "Fullham",
+              "logo": "/assets/escudos/fulham.png"
+            },
+            "score": {
+              "a": 0,
+              "b": 4
+            },
+            "pens": {
+              "enabled": false,
+              "a": 0,
+              "b": 0
+            },
+            "winner": "b",
+            "status": "finished"
+          },
+          {
+            "id": "3",
+            "phase": "octavos_playoffs",
+            "teamA": {
+              "user": "Joser17",
+              "division": "1ra",
+              "club": "Brighton",
+              "logo": "/assets/escudos/brighton.png"
+            },
+            "teamB": {
+              "user": "NazaTeto",
+              "division": "2da",
+              "club": "Galatasaray",
+              "logo": "/assets/escudos/galatasaray.png"
+            },
+            "score": {
+              "a": 0,
+              "b": 0
+            },
+            "pens": {
+              "enabled": false,
+              "a": 0,
+              "b": 0
+            },
+            "winner": null,
+            "status": "pending"
+          },
+          {
+            "id": "4",
+            "phase": "octavos_playoffs",
+            "teamA": {
+              "user": "TinchoRamirez",
+              "division": "1ra",
+              "club": "Monaco",
+              "logo": "/assets/escudos/monaco.png"
+            },
+            "teamB": {
+              "user": "JUNSmash",
+              "division": "3ra",
+              "club": "Bologna",
+              "logo": "/assets/escudos/bologna.png"
+            },
+            "score": {
+              "a": 0,
+              "b": 0
+            },
+            "pens": {
+              "enabled": false,
+              "a": 0,
+              "b": 0
+            },
+            "winner": null,
+            "status": "pending"
+          },
+          {
+            "id": "5",
+            "phase": "octavos_playoffs",
+            "teamA": {
+              "user": "Ivancarocela",
+              "division": "1ra",
+              "club": "Roma",
+              "logo": "/assets/escudos/roma.png"
+            },
+            "teamB": {
+              "user": "Leom",
+              "division": "2da",
+              "club": "Sociedad",
+              "logo": "/assets/escudos/sociedad.png"
+            },
+            "score": {
+              "a": 0,
+              "b": 0
+            },
+            "pens": {
+              "enabled": false,
+              "a": 0,
+              "b": 0
+            },
+            "winner": null,
+            "status": "pending"
+          },
+          {
+            "id": "6",
+            "phase": "octavos_playoffs",
+            "teamA": {
+              "user": "Pelufo",
+              "division": "1ra",
+              "club": "Sociedad",
+              "logo": "/assets/escudos/sociedad.png"
+            },
+            "teamB": {
+              "user": "Dabidpisi",
+              "division": "2da",
+              "club": "Fiorentina",
+              "logo": "/assets/escudos/fiorentina.png"
+            },
+            "score": {
+              "a": 0,
+              "b": 0
+            },
+            "pens": {
+              "enabled": false,
+              "a": 0,
+              "b": 0
+            },
+            "winner": null,
+            "status": "pending"
+          },
+          {
+            "id": "7",
+            "phase": "octavos_playoffs",
+            "teamA": {
+              "user": "Joelignacho",
+              "division": "1ra",
+              "club": "Betis",
+              "logo": "/assets/escudos/betis.png"
+            },
+            "teamB": {
+              "user": "TheoHernandez",
+              "division": "2da",
+              "club": "Lyon",
+              "logo": "/assets/escudos/lyon.png"
+            },
+            "score": {
+              "a": 0,
+              "b": 0
+            },
+            "pens": {
+              "enabled": false,
+              "a": 0,
+              "b": 0
+            },
+            "winner": null,
+            "status": "pending"
+          },
+          {
+            "id": "8",
+            "phase": "octavos_playoffs",
+            "teamA": {
+              "user": "Rubéncho",
+              "division": "2da",
+              "club": "Monaco",
+              "logo": "/assets/escudos/monaco.png"
+            },
+            "teamB": {
+              "user": "7LibertadoresSLP",
+              "division": "3ra",
+              "club": "Lyon",
+              "logo": "/assets/escudos/lyon.png"
+            },
+            "score": {
+              "a": 0,
+              "b": 0
+            },
+            "pens": {
+              "enabled": false,
+              "a": 0,
+              "b": 0
+            },
+            "winner": null,
+            "status": "pending"
+          }
+        ],
+        "cuartos_playoffs": [
+          {
+            "id": "1",
+            "phase": "cuartos_playoffs",
+            "teamA": {
+              "winnerOf": "octavos_playoffs:1",
+              "placeholder": "Ganador Octavos 1"
+            },
+            "teamB": {
+              "winnerOf": "octavos_playoffs:2",
+              "placeholder": "Ganador Octavos 2"
+            },
+            "score": {
+              "a": 0,
+              "b": 0
+            },
+            "pens": {
+              "enabled": false,
+              "a": 0,
+              "b": 0
+            },
+            "winner": null,
+            "status": "pending"
+          },
+          {
+            "id": "2",
+            "phase": "cuartos_playoffs",
+            "teamA": {
+              "winnerOf": "octavos_playoffs:3",
+              "placeholder": "Ganador Octavos 3"
+            },
+            "teamB": {
+              "winnerOf": "octavos_playoffs:4",
+              "placeholder": "Ganador Octavos 4"
+            },
+            "score": {
+              "a": 0,
+              "b": 0
+            },
+            "pens": {
+              "enabled": false,
+              "a": 0,
+              "b": 0
+            },
+            "winner": null,
+            "status": "pending"
+          },
+          {
+            "id": "3",
+            "phase": "cuartos_playoffs",
+            "teamA": {
+              "winnerOf": "octavos_playoffs:5",
+              "placeholder": "Ganador Octavos 5"
+            },
+            "teamB": {
+              "winnerOf": "octavos_playoffs:6",
+              "placeholder": "Ganador Octavos 6"
+            },
+            "score": {
+              "a": 0,
+              "b": 0
+            },
+            "pens": {
+              "enabled": false,
+              "a": 0,
+              "b": 0
+            },
+            "winner": null,
+            "status": "pending"
+          },
+          {
+            "id": "4",
+            "phase": "cuartos_playoffs",
+            "teamA": {
+              "winnerOf": "octavos_playoffs:7",
+              "placeholder": "Ganador Octavos 7"
+            },
+            "teamB": {
+              "winnerOf": "octavos_playoffs:8",
+              "placeholder": "Ganador Octavos 8"
+            },
+            "score": {
+              "a": 0,
+              "b": 0
+            },
+            "pens": {
+              "enabled": false,
+              "a": 0,
+              "b": 0
+            },
+            "winner": null,
+            "status": "pending"
+          }
+        ],
+        "semifinal_playoffs": [
+          {
+            "id": "1",
+            "phase": "semifinal_playoffs",
+            "teamA": {
+              "winnerOf": "cuartos_playoffs:1",
+              "placeholder": "Ganador Cuartos 1"
+            },
+            "teamB": {
+              "winnerOf": "cuartos_playoffs:2",
+              "placeholder": "Ganador Cuartos 2"
+            },
+            "score": {
+              "a": 0,
+              "b": 0
+            },
+            "pens": {
+              "enabled": false,
+              "a": 0,
+              "b": 0
+            },
+            "winner": null,
+            "status": "pending"
+          },
+          {
+            "id": "2",
+            "phase": "semifinal_playoffs",
+            "teamA": {
+              "winnerOf": "cuartos_playoffs:3",
+              "placeholder": "Ganador Cuartos 3"
+            },
+            "teamB": {
+              "winnerOf": "cuartos_playoffs:4",
+              "placeholder": "Ganador Cuartos 4"
+            },
+            "score": {
+              "a": 0,
+              "b": 0
+            },
+            "pens": {
+              "enabled": false,
+              "a": 0,
+              "b": 0
+            },
+            "winner": null,
+            "status": "pending"
+          }
+        ],
+        "final_playoffs": [
+          {
+            "id": "1",
+            "phase": "final_playoffs",
+            "teamA": {
+              "winnerOf": "semifinal_playoffs:1",
+              "placeholder": "Ganador Semifinal 1"
+            },
+            "teamB": {
+              "winnerOf": "semifinal_playoffs:2",
+              "placeholder": "Ganador Semifinal 2"
+            },
+            "score": {
+              "a": 0,
+              "b": 0
+            },
+            "pens": {
+              "enabled": false,
+              "a": 0,
+              "b": 0
+            },
+            "winner": null,
+            "status": "pending"
+          }
+        ],
+        "final_copa_interdivisional": [
+          {
+            "id": "1",
+            "phase": "final_copa_interdivisional",
+            "teamA": {
+              "user": "Sally1901",
+              "division": "2da",
+              "club": "Marsella",
+              "logo": "/assets/escudos/marsella.png"
+            },
+            "teamB": {
+              "winnerOf": "final_playoffs:1",
+              "placeholder": "Ganador Final Play-offs"
+            },
+            "score": {
+              "a": 0,
+              "b": 0
+            },
+            "pens": {
+              "enabled": false,
+              "a": 0,
+              "b": 0
+            },
+            "winner": null,
+            "status": "pending"
+          }
+        ]
+      }
+    },
+    "T24": {
+      "season": "T24",
+      "status": "completed",
+      "currentPhase": 5,
+      "champion": null,
+      "phases": {
+        "octavos_playoffs": [
+          {
+            "id": "1",
+            "phase": "octavos_playoffs",
+            "teamA": {
+              "user": "Edug98",
+              "division": "Primera",
+              "club": "Lanús",
+              "logo": ""
+            },
+            "teamB": {
+              "user": "Facualanis",
+              "division": "Segunda",
+              "club": "Argentinos",
+              "logo": ""
+            },
+            "score": {
+              "a": 0,
+              "b": 0
+            },
+            "pens": {
+              "enabled": false,
+              "a": 0,
+              "b": 0
+            },
+            "winner": null,
+            "status": "pending"
+          },
+          {
+            "id": "2",
+            "phase": "octavos_playoffs",
+            "teamA": {
+              "user": "Fafafa",
+              "division": "Primera",
+              "club": "Millonarios",
+              "logo": ""
+            },
+            "teamB": {
+              "user": "Crislot26",
+              "division": "Segunda",
+              "club": "Cruzeiro",
+              "logo": ""
+            },
+            "score": {
+              "a": 0,
+              "b": 0
+            },
+            "pens": {
+              "enabled": false,
+              "a": 0,
+              "b": 0
+            },
+            "winner": null,
+            "status": "pending"
+          },
+          {
+            "id": "3",
+            "phase": "octavos_playoffs",
+            "teamA": {
+              "user": "LombardoCABJ",
+              "division": "Primera",
+              "club": "Santos FC",
+              "logo": ""
+            },
+            "teamB": {
+              "user": "SoyLefo",
+              "division": "Segunda",
+              "club": "Sao Paulo",
+              "logo": ""
+            },
+            "score": {
+              "a": 1,
+              "b": 2
+            },
+            "pens": {
+              "enabled": false,
+              "a": 0,
+              "b": 0
+            },
+            "winner": "b",
+            "status": "finished"
+          },
+          {
+            "id": "4",
+            "phase": "octavos_playoffs",
+            "teamA": {
+              "user": "Exeeneta",
+              "division": "Primera",
+              "club": "Estudiantes",
+              "logo": ""
+            },
+            "teamB": {
+              "user": "Joser17",
+              "division": "Segunda",
+              "club": "Internacional SC",
+              "logo": ""
+            },
+            "score": {
+              "a": 0,
+              "b": 0
+            },
+            "pens": {
+              "enabled": false,
+              "a": 0,
+              "b": 0
+            },
+            "winner": null,
+            "status": "pending"
+          },
+          {
+            "id": "5",
+            "phase": "octavos_playoffs",
+            "teamA": {
+              "user": "TunTun",
+              "division": "Primera",
+              "club": "Peñarol",
+              "logo": ""
+            },
+            "teamB": {
+              "user": "Leom",
+              "division": "Tercera",
+              "club": "Huracán",
+              "logo": ""
+            },
+            "score": {
+              "a": 0,
+              "b": 0
+            },
+            "pens": {
+              "enabled": false,
+              "a": 0,
+              "b": 0
+            },
+            "winner": null,
+            "status": "pending"
+          },
+          {
+            "id": "6",
+            "phase": "octavos_playoffs",
+            "teamA": {
+              "user": "Aacuis09",
+              "division": "Primera",
+              "club": "Nacional",
+              "logo": ""
+            },
+            "teamB": {
+              "user": "Cacherinhooo",
+              "division": "Tercera",
+              "club": "Peñarol",
+              "logo": ""
+            },
+            "score": {
+              "a": 0,
+              "b": 0
+            },
+            "pens": {
+              "enabled": false,
+              "a": 0,
+              "b": 0
+            },
+            "winner": null,
+            "status": "pending"
+          },
+          {
+            "id": "7",
+            "phase": "octavos_playoffs",
+            "teamA": {
+              "user": "Broko",
+              "division": "Primera",
+              "club": "Colo Colo",
+              "logo": ""
+            },
+            "teamB": {
+              "user": "Gab0211",
+              "division": "Tercera",
+              "club": "Internacional SC",
+              "logo": ""
+            },
+            "score": {
+              "a": 0,
+              "b": 0
+            },
+            "pens": {
+              "enabled": false,
+              "a": 0,
+              "b": 0
+            },
+            "winner": null,
+            "status": "pending"
+          },
+          {
+            "id": "8",
+            "phase": "octavos_playoffs",
+            "teamA": {
+              "user": "Ivanarocela",
+              "division": "Primera",
+              "club": "Argentinos JRS",
+              "logo": ""
+            },
+            "teamB": {
+              "user": "Joelignacho",
+              "division": "Segunda",
+              "club": "Colo Colo",
+              "logo": ""
+            },
+            "score": {
+              "a": 0,
+              "b": 0
+            },
+            "pens": {
+              "enabled": false,
+              "a": 0,
+              "b": 0
+            },
+            "winner": null,
+            "status": "pending"
+          }
+        ],
+        "cuartos_playoffs": [
+          {
+            "id": "1",
+            "phase": "cuartos_playoffs",
+            "teamA": {
+              "user": "GANADOR 1",
+              "division": "1ra",
+              "club": "",
+              "logo": "equipo1.png"
+            },
+            "teamB": {
+              "user": "GANADOR 2",
+              "division": "2da",
+              "club": "",
+              "logo": "equipo2.png"
+            },
+            "score": {
+              "a": 0,
+              "b": 0
+            },
+            "pens": {
+              "enabled": false,
+              "a": 0,
+              "b": 0
+            },
+            "winner": null,
+            "status": "pending"
+          },
+          {
+            "id": "2",
+            "phase": "cuartos_playoffs",
+            "teamA": {
+              "user": "GANADOR 3",
+              "division": "1ra",
+              "club": "",
+              "logo": "equipo3.png"
+            },
+            "teamB": {
+              "user": "GANADOR 4",
+              "division": "3ra",
+              "club": "",
+              "logo": "equipo4.png"
+            },
+            "score": {
+              "a": 0,
+              "b": 0
+            },
+            "pens": {
+              "enabled": false,
+              "a": 0,
+              "b": 0
+            },
+            "winner": null,
+            "status": "pending"
+          },
+          {
+            "id": "3",
+            "phase": "cuartos_playoffs",
+            "teamA": {
+              "user": "GANADOR 5",
+              "division": "1ra",
+              "club": "",
+              "logo": "equipo5.png"
+            },
+            "teamB": {
+              "user": "GANADOR 6",
+              "division": "2da",
+              "club": "",
+              "logo": "equipo6.png"
+            },
+            "score": {
+              "a": 0,
+              "b": 0
+            },
+            "pens": {
+              "enabled": false,
+              "a": 0,
+              "b": 0
+            },
+            "winner": null,
+            "status": "pending"
+          },
+          {
+            "id": "4",
+            "phase": "cuartos_playoffs",
+            "teamA": {
+              "user": "GANADOR 7",
+              "division": "3ra",
+              "club": "",
+              "logo": "equipo7.png"
+            },
+            "teamB": {
+              "user": "GANADOR 8",
+              "division": "1ra",
+              "club": "",
+              "logo": "equipo8.png"
+            },
+            "score": {
+              "a": 0,
+              "b": 0
+            },
+            "pens": {
+              "enabled": false,
+              "a": 0,
+              "b": 0
+            },
+            "winner": null,
+            "status": "pending"
+          }
+        ],
+        "semifinal_playoffs": [],
+        "final_playoffs": [],
+        "final_copa_interdivisional": []
+      }
+    },
+    "T23": {
+      "season": "T23",
+      "status": "completed",
+      "currentPhase": 5,
+      "champion": "Larrierismo",
+      "phases": {
+        "octavos_playoffs": [
+          {
+            "id": "1",
+            "phase": "octavos_playoffs",
+            "teamA": {
+              "user": "Edug98",
+              "division": "Primera",
+              "club": "Lanús",
+              "logo": ""
+            },
+            "teamB": {
+              "user": "Facualanis",
+              "division": "Segunda",
+              "club": "Argentinos",
+              "logo": ""
+            },
+            "score": {
+              "a": 2,
+              "b": 0
+            },
+            "pens": {
+              "enabled": false,
+              "a": 0,
+              "b": 0
+            },
+            "winner": "a",
+            "status": "finished"
+          },
+          {
+            "id": "2",
+            "phase": "octavos_playoffs",
+            "teamA": {
+              "user": "Fafafa",
+              "division": "Primera",
+              "club": "Millonarios",
+              "logo": ""
+            },
+            "teamB": {
+              "user": "Crislot26",
+              "division": "Segunda",
+              "club": "Cruzeiro",
+              "logo": ""
+            },
+            "score": {
+              "a": 0,
+              "b": 0
+            },
+            "pens": {
+              "enabled": false,
+              "a": 0,
+              "b": 0
+            },
+            "winner": "b",
+            "status": "finished"
+          },
+          {
+            "id": "3",
+            "phase": "octavos_playoffs",
+            "teamA": {
+              "user": "LombardoCABJ",
+              "division": "Primera",
+              "club": "Santos FC",
+              "logo": ""
+            },
+            "teamB": {
+              "user": "SoyLefo",
+              "division": "Segunda",
+              "club": "Sao Paulo",
+              "logo": ""
+            },
+            "score": {
+              "a": 1,
+              "b": 2
+            },
+            "pens": {
+              "enabled": false,
+              "a": 0,
+              "b": 0
+            },
+            "winner": "b",
+            "status": "finished"
+          },
+          {
+            "id": "4",
+            "phase": "octavos_playoffs",
+            "teamA": {
+              "user": "Exeeneta",
+              "division": "Primera",
+              "club": "Estudiantes",
+              "logo": ""
+            },
+            "teamB": {
+              "user": "Joser17",
+              "division": "Segunda",
+              "club": "Internacional SC",
+              "logo": ""
+            },
+            "score": {
+              "a": 0,
+              "b": 0
+            },
+            "pens": {
+              "enabled": false,
+              "a": 0,
+              "b": 0
+            },
+            "winner": "b",
+            "status": "finished"
+          },
+          {
+            "id": "5",
+            "phase": "octavos_playoffs",
+            "teamA": {
+              "user": "TunTun",
+              "division": "Primera",
+              "club": "Peñarol",
+              "logo": ""
+            },
+            "teamB": {
+              "user": "Leom",
+              "division": "Tercera",
+              "club": "Huracán",
+              "logo": ""
+            },
+            "score": {
+              "a": 0,
+              "b": 0
+            },
+            "pens": {
+              "enabled": false,
+              "a": 0,
+              "b": 0
+            },
+            "winner": "b",
+            "status": "finished"
+          },
+          {
+            "id": "6",
+            "phase": "octavos_playoffs",
+            "teamA": {
+              "user": "Aacuis09",
+              "division": "Primera",
+              "club": "Nacional",
+              "logo": ""
+            },
+            "teamB": {
+              "user": "Cacherinhooo",
+              "division": "Tercera",
+              "club": "Peñarol",
+              "logo": ""
+            },
+            "score": {
+              "a": 0,
+              "b": 0
+            },
+            "pens": {
+              "enabled": false,
+              "a": 0,
+              "b": 0
+            },
+            "winner": "b",
+            "status": "finished"
+          },
+          {
+            "id": "7",
+            "phase": "octavos_playoffs",
+            "teamA": {
+              "user": "Broko",
+              "division": "Primera",
+              "club": "Colo Colo",
+              "logo": ""
+            },
+            "teamB": {
+              "user": "Gab0211",
+              "division": "Tercera",
+              "club": "Internacional SC",
+              "logo": ""
+            },
+            "score": {
+              "a": 0,
+              "b": 0
+            },
+            "pens": {
+              "enabled": false,
+              "a": 0,
+              "b": 0
+            },
+            "winner": "b",
+            "status": "finished"
+          },
+          {
+            "id": "8",
+            "phase": "octavos_playoffs",
+            "teamA": {
+              "user": "Ivanarocela",
+              "division": "Primera",
+              "club": "Argentinos JRS",
+              "logo": ""
+            },
+            "teamB": {
+              "user": "Joelignacho",
+              "division": "Segunda",
+              "club": "Colo Colo",
+              "logo": ""
+            },
+            "score": {
+              "a": 0,
+              "b": 0
+            },
+            "pens": {
+              "enabled": false,
+              "a": 0,
+              "b": 0
+            },
+            "winner": "b",
+            "status": "finished"
+          }
+        ],
+        "cuartos_playoffs": [
+          {
+            "id": "1",
+            "phase": "cuartos_playoffs",
+            "teamA": {
+              "user": "Edug98",
+              "division": "Primera",
+              "club": "Lanús",
+              "logo": ""
+            },
+            "teamB": {
+              "user": "Crislot26",
+              "division": "Segunda",
+              "club": "Cruzeiro",
+              "logo": ""
+            },
+            "score": {
+              "a": 1,
+              "b": 1
+            },
+            "pens": {
+              "enabled": true,
+              "a": 4,
+              "b": 5
+            },
+            "winner": "b",
+            "status": "finished"
+          },
+          {
+            "id": "2",
+            "phase": "cuartos_playoffs",
+            "teamA": {
+              "user": "LombardoCABJ",
+              "division": "Primera",
+              "club": "Santos FC",
+              "logo": ""
+            },
+            "teamB": {
+              "user": "Joser17",
+              "division": "Segunda",
+              "club": "Internacional SC",
+              "logo": ""
+            },
+            "score": {
+              "a": 0,
+              "b": 0
+            },
+            "pens": {
+              "enabled": false,
+              "a": 0,
+              "b": 0
+            },
+            "winner": "a",
+            "status": "finished"
+          },
+          {
+            "id": "3",
+            "phase": "cuartos_playoffs",
+            "teamA": {
+              "user": "Leom",
+              "division": "Tercera",
+              "club": "Huracán",
+              "logo": ""
+            },
+            "teamB": {
+              "user": "Cacherinhooo",
+              "division": "Tercera",
+              "club": "Peñarol",
+              "logo": ""
+            },
+            "score": {
+              "a": 0,
+              "b": 0
+            },
+            "pens": {
+              "enabled": false,
+              "a": 0,
+              "b": 0
+            },
+            "winner": "b",
+            "status": "finished"
+          },
+          {
+            "id": "4",
+            "phase": "cuartos_playoffs",
+            "teamA": {
+              "user": "Gab0211",
+              "division": "Tercera",
+              "club": "Internacional SC",
+              "logo": ""
+            },
+            "teamB": {
+              "user": "Joelignacho",
+              "division": "Segunda",
+              "club": "Colo Colo",
+              "logo": ""
+            },
+            "score": {
+              "a": 0,
+              "b": 0
+            },
+            "pens": {
+              "enabled": false,
+              "a": 0,
+              "b": 0
+            },
+            "winner": "b",
+            "status": "finished"
+          }
+        ],
+        "semifinal_playoffs": [
+          {
+            "id": "1",
+            "phase": "semifinal_playoffs",
+            "teamA": {
+              "user": "Crislot26",
+              "division": "Segunda",
+              "club": "Cruzeiro",
+              "logo": ""
+            },
+            "teamB": {
+              "user": "LombardoCABJ",
+              "division": "Primera",
+              "club": "Santos FC",
+              "logo": ""
+            },
+            "score": {
+              "a": 0,
+              "b": 2
+            },
+            "pens": {
+              "enabled": false,
+              "a": 0,
+              "b": 0
+            },
+            "winner": "b",
+            "status": "finished"
+          },
+          {
+            "id": "2",
+            "phase": "semifinal_playoffs",
+            "teamA": {
+              "user": "Cacherinhooo",
+              "division": "Tercera",
+              "club": "Peñarol",
+              "logo": ""
+            },
+            "teamB": {
+              "user": "Joelignacho",
+              "division": "Segunda",
+              "club": "Colo Colo",
+              "logo": ""
+            },
+            "score": {
+              "a": 0,
+              "b": 0
+            },
+            "pens": {
+              "enabled": false,
+              "a": 0,
+              "b": 0
+            },
+            "winner": "a",
+            "status": "finished"
+          }
+        ],
+        "final_playoffs": [
+          {
+            "id": "1",
+            "phase": "final_playoffs",
+            "teamA": {
+              "user": "LombardoCABJ",
+              "division": "Primera",
+              "club": "Santos FC",
+              "logo": ""
+            },
+            "teamB": {
+              "user": "Cacherinhooo",
+              "division": "Tercera",
+              "club": "Peñarol",
+              "logo": ""
+            },
+            "score": {
+              "a": 2,
+              "b": 2
+            },
+            "pens": {
+              "enabled": true,
+              "a": 2,
+              "b": 4
+            },
+            "winner": "b",
+            "status": "finished"
+          }
+        ],
+        "final_copa_interdivisional": [
+          {
+            "id": "1",
+            "phase": "final_copa_interdivisional",
+            "teamA": {
+              "user": "Crislot26",
+              "division": "Segunda",
+              "club": "Cruzeiro",
+              "logo": ""
+            },
+            "teamB": {
+              "user": "Larrierismo",
+              "division": "Primera",
+              "club": "Lanús",
+              "logo": ""
+            },
+            "score": {
+              "a": 1,
+              "b": 3
+            },
+            "pens": {
+              "enabled": false,
+              "a": 0,
+              "b": 0
+            },
+            "winner": "b",
+            "status": "finished"
+          }
+        ]
+      }
+    }
+  }
+}
