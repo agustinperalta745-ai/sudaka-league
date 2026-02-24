@@ -1,10 +1,6 @@
 # Data de Copa Interdivisional
 
-La UI consume un único archivo maestro para Copa Interdivisional:
+La UI de Copa Interdivisional usa exactamente dos fuentes:
 
-- `data/copaInterdivisional.json`
-
-Estructura:
-
-- `activeSeason`: temporada activa actual.
-- `seasons`: objeto con todas las temporadas (activas e históricas).
+- `data/interdivisional_current.json`: copa activa.
+- `data/interdivisional_history.js`: historial.

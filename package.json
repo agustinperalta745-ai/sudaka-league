@@ -3,8 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "fetch:gesliga:t24": "node scripts/fetch-gesliga-t24.mjs",
-    "interdivisional:archive": "node scripts/interdivisional-auto-archive.js"
+    "fetch:gesliga:t24": "node scripts/fetch-gesliga-t24.mjs"
   },
   "dependencies": {
     "cheerio": "^1.2.0"
