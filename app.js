@@ -233,8 +233,8 @@ let INTERDIVISIONAL_MASTER_SOURCE = null;
 let INTERDIVISIONAL_ACTIVE_SOURCE = null;
 const INTERDIVISIONAL_IS_ENABLED = true;
 const INTERDIVISIONAL_CUARTOS_SOURCE = [];
-const INTERDIVISIONAL_RESULTS_SOURCE = {};
-const INTERDIVISIONAL_HISTORY_SOURCE = [];
+const INTERDIVISIONAL_RESULTS_SOURCE = window.INTERDIVISIONAL_RESULTS || window.interdivisionalResults || {};
+const INTERDIVISIONAL_HISTORY_SOURCE = getInterdivisionalHistorySeasonsSource(window.INTERDIVISIONAL_HISTORY, []);
 
 const SITE_CUP_SEASON = window.SUDAKA_SITE_DATA?.cupSeason ?? 23;
 
@@ -2466,6 +2466,10 @@ function hasMatchPens(match) {
     && typeof (match.pens ?? match.penalties).away === "number";
 }
 
+function isPlayedCurrent(match) {
+  return isMatchPlayed(match, "active") || hasMatchResult(match);
+}
+
 function isMatchPlayed(match, seasonStatus = "active") {
   if (!match || typeof match !== "object") return false;
 
@@ -2911,8 +2915,17 @@ function buildInterdivisionalStateFromDataFiles() {
     const sourceSeasons = INTERDIVISIONAL_MASTER_SOURCE.seasons && typeof INTERDIVISIONAL_MASTER_SOURCE.seasons === "object"
       ? INTERDIVISIONAL_MASTER_SOURCE.seasons
       : {};
+    const historyBySeason = new Map(INTERDIVISIONAL_HISTORY_SOURCE.map((season) => [String(season?.season || "").toUpperCase(), season]));
 
     Object.entries(sourceSeasons).forEach(([seasonKey, sourceSeason]) => {
+      const normalizedSeasonKey = String(seasonKey || "").toUpperCase();
+      if (seasonKey !== activeSeasonKey && historyBySeason.has(normalizedSeasonKey)) {
+        const historySeason = cloneInterdivisionalData(historyBySeason.get(normalizedSeasonKey));
+        historySeason.status = "completed";
+        seasons.push(historySeason);
+        return;
+      }
+
       const normalizedSeason = buildInterdivisionalActiveSeason({
         ...(sourceSeason || {}),
         season: seasonKey
@@ -3026,7 +3039,7 @@ function getFinalCopaInterdivisionalMatch(season) {
 }
 
 function createCupCrossingTeamNode(teamData, context = {}) {
-  const { editable = false, side = "home", matchData = null, showSideScore = false } = context;
+  const { editable = false, side = "home", matchData = null, showSideScore = false, isCurrentSeason = false } = context;
   const team = document.createElement(editable ? "button" : "div");
   team.className = "cup-crossing-team";
   if (editable) {
@@ -3035,7 +3048,7 @@ function createCupCrossingTeamNode(teamData, context = {}) {
   }
 
   if (matchData) {
-    const isPlayed = matchData.played === true || hasMatchResult(matchData);
+    const isPlayed = isCurrentSeason ? isPlayedCurrent(matchData) : matchData.played === true;
     const winner = normalizeWinnerValue(matchData.winner);
     const isHomeWinner = winner === "home";
     const isAwayWinner = winner === "away";
@@ -3082,7 +3095,7 @@ function createCupCrossingTeamNode(teamData, context = {}) {
     && typeof matchData.pens.home === "number"
     && typeof matchData.pens.away === "number";
 
-  if (showSideScore && (matchData?.played || hasResult) && hasResult) {
+  if (showSideScore && ((isCurrentSeason ? isPlayedCurrent(matchData) : matchData?.played === true) && hasResult)) {
     const scoreBox = document.createElement("div");
     scoreBox.className = "cup-crossing-score";
     scoreBox.style.display = "flex";
@@ -3145,9 +3158,13 @@ function createCupCrossingTeamNode(teamData, context = {}) {
 }
 
 function createCupCrossingCard(matchData, options = {}) {
-  const { editable = false, season = null } = options;
-  const normalizedMatch = normalizeMatchData(matchData || {}, season?.status || "active");
-  const isPlayed = normalizedMatch.played === true || hasMatchResult(normalizedMatch);
+  const { editable = false, season = null, isCurrentSeason = false } = options;
+  const normalizedMatch = isCurrentSeason
+    ? normalizeMatchData(matchData || {}, season?.status || "active")
+    : { ...(matchData || {}) };
+  const isPlayed = isCurrentSeason
+    ? isPlayedCurrent(normalizedMatch)
+    : normalizedMatch.played === true;
   const card = document.createElement("article");
   card.className = "cup-match-card";
 
@@ -3187,9 +3204,9 @@ function createCupCrossingCard(matchData, options = {}) {
   }
 
   body.append(
-    createCupCrossingTeamNode(normalizedMatch.home, { editable, side: "home", matchData: normalizedMatch, showSideScore: isPlayed }),
+    createCupCrossingTeamNode(normalizedMatch.home, { editable, side: "home", matchData: normalizedMatch, showSideScore: isPlayed, isCurrentSeason }),
     centerNode,
-    createCupCrossingTeamNode(normalizedMatch.away, { editable, side: "away", matchData: normalizedMatch, showSideScore: isPlayed })
+    createCupCrossingTeamNode(normalizedMatch.away, { editable, side: "away", matchData: normalizedMatch, showSideScore: isPlayed, isCurrentSeason })
   );
 
   card.append(label, body);
@@ -3324,6 +3341,7 @@ function renderCupPhaseContent(container, season, phaseKey, options = {}) {
     const section = createCupPhaseSection(phaseKey, [getFinalCopaInterdivisionalMatch(season)], {
       editable: false,
       season,
+      isCurrentSeason: season?.status === "active",
       skipDivisionFilter: true,
       emptyMessage: "FASE 5: todavía no hay datos cargados para esta fase."
     });
@@ -3343,6 +3361,7 @@ function renderCupPhaseContent(container, season, phaseKey, options = {}) {
   const section = createCupPhaseSection(phaseKey, matches, {
     editable: false,
     season,
+    isCurrentSeason: season?.status === "active",
     emptyMessage: phaseEmptyMessage
   });
 
@@ -3394,8 +3413,8 @@ function getValidCupHistorySeasons() {
 function getCupHistoryDefaultSeason(seasons) {
   if (!Array.isArray(seasons) || !seasons.length) return null;
 
-  const explicitT23 = seasons.find((season) => String(season.season).toUpperCase() === "T23");
-  if (explicitT23) return explicitT23;
+  const explicitT24 = seasons.find((season) => String(season.season).toUpperCase() === "T24");
+  if (explicitT24) return explicitT24;
 
   return seasons[0];
 }
@@ -3437,6 +3456,15 @@ function renderCupHistoryTab() {
 
   const selectedPhase = getCupHistorySelectedPhaseKey();
   cupHistoryList.appendChild(createCupHistoryPhaseTabs(selectedSeason, selectedPhase));
+
+  if (!selectedSeason.phases || Object.values(selectedSeason.phases).every((matches) => !Array.isArray(matches) || matches.length === 0)) {
+    const message = document.createElement("p");
+    message.className = "cup-round-empty-note";
+    message.textContent = "Sin datos para esta temporada";
+    cupHistoryList.appendChild(message);
+    return;
+  }
+
   renderCupPhaseContent(cupHistoryList, selectedSeason, selectedPhase, {
     emptyMessage: "Sin datos para esta fase"
   });
