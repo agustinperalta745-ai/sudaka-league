@@ -59,7 +59,8 @@
               "b": 0
             },
             "winner": "b",
-            "status": "finished"
+            "status": "finished",
+            "played": true
           },
           {
             "id": "3",
