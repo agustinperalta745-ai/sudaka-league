@@ -3035,7 +3035,7 @@ function createCupCrossingTeamNode(teamData, context = {}) {
   }
 
   if (matchData) {
-    const isPlayed = matchData.played === true;
+    const isPlayed = matchData.played === true || hasMatchResult(matchData);
     const winner = normalizeWinnerValue(matchData.winner);
     const isHomeWinner = winner === "home";
     const isAwayWinner = winner === "away";
@@ -3082,7 +3082,7 @@ function createCupCrossingTeamNode(teamData, context = {}) {
     && typeof matchData.pens.home === "number"
     && typeof matchData.pens.away === "number";
 
-  if (showSideScore && matchData?.played && hasResult) {
+  if (showSideScore && (matchData?.played || hasResult) && hasResult) {
     const scoreBox = document.createElement("div");
     scoreBox.className = "cup-crossing-score";
     scoreBox.style.display = "flex";
@@ -3110,7 +3110,7 @@ function createCupCrossingTeamNode(teamData, context = {}) {
 
       const penLabel = document.createElement("span");
       penLabel.className = "pen-label";
-      penLabel.textContent = "Pen";
+      penLabel.textContent = "PEN";
       penLabel.style.fontSize = "0.62rem";
       penLabel.style.lineHeight = "1";
       penLabel.style.letterSpacing = "0.08em";
@@ -3146,12 +3146,14 @@ function createCupCrossingTeamNode(teamData, context = {}) {
 
 function createCupCrossingCard(matchData, options = {}) {
   const { editable = false, season = null } = options;
+  const normalizedMatch = normalizeMatchData(matchData || {}, season?.status || "active");
+  const isPlayed = normalizedMatch.played === true || hasMatchResult(normalizedMatch);
   const card = document.createElement("article");
   card.className = "cup-match-card";
 
   const label = document.createElement("p");
   label.className = "cup-match-label";
-  label.textContent = matchData.label;
+  label.textContent = normalizedMatch.label;
 
   const body = document.createElement("div");
   body.className = "cup-crossing-body";
@@ -3159,8 +3161,11 @@ function createCupCrossingCard(matchData, options = {}) {
   const versus = document.createElement("p");
   versus.className = "cup-match-versus";
   versus.textContent = "VS";
+  versus.style.display = isPlayed ? "none" : "";
 
-  const centeredResultLines = getMatchCenteredResultLines(matchData);
+  const centeredResultLines = !isPlayed && hasMatchPens(normalizedMatch)
+    ? [`PEN ${normalizedMatch.pens.home} - ${normalizedMatch.pens.away}`]
+    : [];
   const centerNode = document.createElement("div");
   centerNode.style.display = "flex";
   centerNode.style.flexDirection = "column";
@@ -3182,9 +3187,9 @@ function createCupCrossingCard(matchData, options = {}) {
   }
 
   body.append(
-    createCupCrossingTeamNode(matchData.home, { editable, side: "home", matchData, showSideScore: false }),
+    createCupCrossingTeamNode(normalizedMatch.home, { editable, side: "home", matchData: normalizedMatch, showSideScore: isPlayed }),
     centerNode,
-    createCupCrossingTeamNode(matchData.away, { editable, side: "away", matchData, showSideScore: false })
+    createCupCrossingTeamNode(normalizedMatch.away, { editable, side: "away", matchData: normalizedMatch, showSideScore: isPlayed })
   );
 
   card.append(label, body);
