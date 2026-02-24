@@ -234,7 +234,7 @@ let INTERDIVISIONAL_ACTIVE_SOURCE = null;
 const INTERDIVISIONAL_IS_ENABLED = true;
 const INTERDIVISIONAL_CUARTOS_SOURCE = [];
 const INTERDIVISIONAL_RESULTS_SOURCE = {};
-const INTERDIVISIONAL_HISTORY_SOURCE = [];
+let INTERDIVISIONAL_HISTORY_SOURCE = [];
 
 const SITE_CUP_SEASON = window.SUDAKA_SITE_DATA?.cupSeason ?? 23;
 
@@ -294,17 +294,32 @@ const ASSETS_BASE_PATH = getAssetsBasePath();
 
 
 
-async function loadInterdivisionalMasterSource() {
+async function loadInterdivisionalCurrentSource() {
   if (!INTERDIVISIONAL_IS_ENABLED) return null;
-  const sourcePath = "data/copaInterdivisional.json";
+  const sourcePath = "data/interdivisional_current.json";
 
   try {
     const response = await fetch(withAssetBasePath(sourcePath), { cache: "no-cache" });
     if (!response.ok) return null;
     return await response.json();
   } catch (error) {
-    console.warn("No se pudo cargar data/copaInterdivisional.json", error);
+    console.warn("No se pudo cargar data/interdivisional_current.json", error);
     return null;
+  }
+}
+
+async function loadInterdivisionalHistorySource() {
+  if (!INTERDIVISIONAL_IS_ENABLED) return [];
+  const sourcePath = "data/interdivisional_history.json";
+
+  try {
+    const response = await fetch(withAssetBasePath(sourcePath), { cache: "no-cache" });
+    if (!response.ok) return [];
+    const data = await response.json();
+    return Array.isArray(data) ? data : [];
+  } catch (error) {
+    console.warn("No se pudo cargar data/interdivisional_history.json", error);
+    return [];
   }
 }
 const AWARD_GLOVE_TROPHIES = {
@@ -3558,19 +3573,19 @@ function setupCupCrossingsAccordion() {
 async function initializeInterdivisionalState() {
   try {
     if (INTERDIVISIONAL_IS_ENABLED) {
-      const masterSourceFromJson = await loadInterdivisionalMasterSource();
-      if (masterSourceFromJson && typeof masterSourceFromJson === "object") {
-        INTERDIVISIONAL_MASTER_SOURCE = masterSourceFromJson;
-        const activeSeasonKey = masterSourceFromJson.activeSeason;
-        const activeSeasonSource = activeSeasonKey && masterSourceFromJson.seasons
-          ? masterSourceFromJson.seasons[activeSeasonKey]
-          : null;
-        INTERDIVISIONAL_ACTIVE_SOURCE = activeSeasonSource && typeof activeSeasonSource === "object"
-          ? { ...activeSeasonSource, season: activeSeasonKey || activeSeasonSource.season }
-          : null;
-      }
+      INTERDIVISIONAL_MASTER_SOURCE = null;
+      const currentSourceFromJson = await loadInterdivisionalCurrentSource();
+      INTERDIVISIONAL_ACTIVE_SOURCE = currentSourceFromJson && typeof currentSourceFromJson === "object"
+        ? currentSourceFromJson
+        : null;
+
+      const historySourceFromJson = await loadInterdivisionalHistorySource();
+      INTERDIVISIONAL_HISTORY_SOURCE = Array.isArray(historySourceFromJson)
+        ? historySourceFromJson
+        : [];
     } else {
       INTERDIVISIONAL_ACTIVE_SOURCE = null;
+      INTERDIVISIONAL_HISTORY_SOURCE = [];
     }
 
     interdivisionalState = buildInterdivisionalStateFromDataFiles();
