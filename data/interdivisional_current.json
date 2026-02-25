@@ -232,7 +232,7 @@
           "escudo": "assets/escudos/lyon.png"
         },
         "score": {
-          "a": 0,
+          "a": 2,
           "b": 0
         },
         "pens": {
@@ -240,8 +240,8 @@
           "a": 0,
           "b": 0
         },
-        "winner": null,
-        "status": "pending"
+        "winner": a,
+        "status": "finished"
       }
     ],
     "cuartos_playoffs": [
