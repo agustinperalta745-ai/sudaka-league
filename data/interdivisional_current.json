@@ -98,10 +98,10 @@
         "phase": "cuartos_playoffs",
         "teamA": { "winnerOf": "octavos_playoffs:1", "placeholder": "Ganador 1", "escudo": "" },
         "teamB": { "winnerOf": "octavos_playoffs:2", "placeholder": "Ganador 2", "escudo": "" },
-        "score": { "a": 0, "b": 0 },
+        "score": { "a": 0, "b": 5 },
         "pens": { "enabled": false, "a": 0, "b": 0 },
-        "winner": null,
-        "status": "pending"
+        "winner": "b",
+        "status": "finished"
       },
       {
         "id": "2",
