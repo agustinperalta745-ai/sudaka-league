@@ -2502,6 +2502,13 @@ function normalizeMatchData(match, seasonStatus = "active") {
       ? normalizeMatchPens({ pens: { home: match.penalties1, away: match.penalties2 } })
       : null);
   const played = isMatchPlayed(match, seasonStatus);
+  const inferredWinner = winner
+    || (result && Number.isFinite(result.home) && Number.isFinite(result.away)
+      ? (result.home > result.away ? "home" : result.away > result.home ? "away" : null)
+      : null)
+    || (pens && Number.isFinite(pens.home) && Number.isFinite(pens.away)
+      ? (pens.home > pens.away ? "home" : pens.away > pens.home ? "away" : null)
+      : null);
 
   if (!played) {
     return {
@@ -2516,7 +2523,7 @@ function normalizeMatchData(match, seasonStatus = "active") {
   return {
     ...match,
     played: true,
-    winner,
+    winner: inferredWinner,
     result,
     pens
   };
@@ -2540,7 +2547,8 @@ function normalizeTeamFromActiveSchema(team) {
     player: team.user || team.player || "Por definir",
     division: normalizeDivisionName(team.division),
     club: team.club || "",
-    shield: team.logo || team.shield || ""
+    shield: team.logo || team.shield || team.escudo || "",
+    escudo: team.escudo || team.logo || team.shield || ""
   };
 }
 
@@ -2786,6 +2794,13 @@ function isWinnerReference(side) {
 }
 
 function resolvePhaseSide(sourceSide, resolvedWinnerSide, fallbackLabel) {
+  const sourcePlayerLabel = typeof sourceSide?.player === "string"
+    ? sourceSide.player.trim().toLowerCase()
+    : typeof sourceSide?.user === "string"
+      ? sourceSide.user.trim().toLowerCase()
+      : "";
+  const looksLikeWinnerPlaceholder = /^ganador\s+\d+$/i.test(sourcePlayerLabel);
+
   if (isWinnerReference(sourceSide)) {
     const referenceLabel = typeof sourceSide.placeholder === "string" && sourceSide.placeholder.trim() !== ""
       ? sourceSide.placeholder.trim()
@@ -2796,6 +2811,14 @@ function resolvePhaseSide(sourceSide, resolvedWinnerSide, fallbackLabel) {
     }
 
     return createPlaceholderSide(referenceLabel);
+  }
+
+  if (looksLikeWinnerPlaceholder) {
+    if (resolvedWinnerSide) {
+      return formatSide(resolvedWinnerSide, fallbackLabel || sourceSide?.player || sourceSide?.user || "Por definir");
+    }
+
+    return createPlaceholderSide(fallbackLabel || sourceSide?.player || sourceSide?.user || "Por definir");
   }
 
   return formatSide(sourceSide || resolvedWinnerSide, fallbackLabel);
