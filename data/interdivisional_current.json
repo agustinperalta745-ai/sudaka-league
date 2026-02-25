@@ -17,14 +17,16 @@
         "teamA": {
           "user": "AlexCABJ",
           "division": "Primera",
-          "club": "",
-          "logo": ""
+          "club": "Bologna",
+          "logo": "assets/escudos/bologna.png",
+          "escudo": "assets/escudos/bologna.png"
         },
         "teamB": {
           "user": "Jona96delgado",
           "division": "Tercera",
-          "club": "",
-          "logo": ""
+          "club": "Fenerbache",
+          "logo": "assets/escudos/fenerbahce.png",
+          "escudo": "assets/escudos/fenerbahce.png"
         },
         "score": {
           "a": 1,
@@ -45,13 +47,15 @@
           "user": "Ache14",
           "division": "Primera",
           "club": "",
-          "logo": ""
+          "logo": "",
+          "escudo": ""
         },
         "teamB": {
           "user": "Cacherinhooo",
           "division": "Segunda",
-          "club": "",
-          "logo": ""
+          "club": "Fullham",
+          "logo": "assets/escudos/fulham.png",
+          "escudo": "assets/escudos/fulham.png"
         },
         "score": {
           "a": 0,
@@ -71,14 +75,16 @@
         "teamA": {
           "user": "Joser17",
           "division": "Primera",
-          "club": "",
-          "logo": ""
+          "club": "Brighton",
+          "logo": "assets/escudos/brighton.png",
+          "escudo": "assets/escudos/brighton.png"
         },
         "teamB": {
           "user": "NazaTeto",
           "division": "Segunda",
-          "club": "",
-          "logo": ""
+          "club": "Galatasaray",
+          "logo": "assets/escudos/galatasaray.png",
+          "escudo": "assets/escudos/galatasaray.png"
         },
         "score": {
           "a": 0,
@@ -98,14 +104,16 @@
         "teamA": {
           "user": "TinchoRamirez",
           "division": "Primera",
-          "club": "",
-          "logo": ""
+          "club": "Monaco",
+          "logo": "assets/escudos/monaco.png",
+          "escudo": "assets/escudos/monaco.png"
         },
         "teamB": {
           "user": "JUNSmash",
           "division": "Tercera",
-          "club": "",
-          "logo": ""
+          "club": "Bologna",
+          "logo": "assets/escudos/bologna.png",
+          "escudo": "assets/escudos/bologna.png"
         },
         "score": {
           "a": 0,
@@ -125,14 +133,16 @@
         "teamA": {
           "user": "Ivancarocela",
           "division": "Primera",
-          "club": "",
-          "logo": ""
+          "club": "Roma",
+          "logo": "assets/escudos/roma.png",
+          "escudo": "assets/escudos/roma.png"
         },
         "teamB": {
           "user": "Leom",
           "division": "Segunda",
-          "club": "",
-          "logo": ""
+          "club": "Real Sociedad",
+          "logo": "assets/escudos/sociedad.png",
+          "escudo": "assets/escudos/sociedad.png"
         },
         "score": {
           "a": 0,
@@ -152,14 +162,16 @@
         "teamA": {
           "user": "Pelufo",
           "division": "Primera",
-          "club": "",
-          "logo": ""
+          "club": "Real Sociedad",
+          "logo": "assets/escudos/sociedad.png",
+          "escudo": "assets/escudos/sociedad.png"
         },
         "teamB": {
           "user": "Dabidpisi",
           "division": "Segunda",
-          "club": "",
-          "logo": ""
+          "club": "Fiorentina",
+          "logo": "assets/escudos/fiorentina.png",
+          "escudo": "assets/escudos/fiorentina.png"
         },
         "score": {
           "a": 0,
@@ -179,14 +191,16 @@
         "teamA": {
           "user": "Joelignacho",
           "division": "Primera",
-          "club": "",
-          "logo": ""
+          "club": "Betis",
+          "logo": "assets/escudos/betis.png",
+          "escudo": "assets/escudos/betis.png"
         },
         "teamB": {
           "user": "TheoHernandez",
           "division": "Segunda",
-          "club": "",
-          "logo": ""
+          "club": "Lyom",
+          "logo": "assets/escudos/lyon.png",
+          "escudo": "assets/escudos/lyon.png"
         },
         "score": {
           "a": 0,
@@ -206,14 +220,16 @@
         "teamA": {
           "user": "Rubéncho",
           "division": "Segunda",
-          "club": "",
-          "logo": ""
+          "club": "Monaco",
+          "logo": "assets/escudos/monaco.png",
+          "escudo": "assets/escudos/monaco.png"
         },
         "teamB": {
           "user": "7LibertadoresSLP",
           "division": "Tercera",
-          "club": "",
-          "logo": ""
+          "club": "Lyon",
+          "logo": "assets/escudos/lyon.png",
+          "escudo": "assets/escudos/lyon.png"
         },
         "score": {
           "a": 0,
@@ -233,16 +249,14 @@
         "id": "1",
         "phase": "cuartos_playoffs",
         "teamA": {
-          "user": "GANADOR 1",
-          "division": "1ra",
-          "club": "",
-          "logo": "equipo1.png"
+          "winnerOf": "octavos_playoffs:1",
+          "placeholder": "Ganador 1",
+          "escudo": ""
         },
         "teamB": {
-          "user": "GANADOR 2",
-          "division": "2da",
-          "club": "",
-          "logo": "equipo2.png"
+          "winnerOf": "octavos_playoffs:2",
+          "placeholder": "Ganador 2",
+          "escudo": ""
         },
         "score": {
           "a": 0,
@@ -260,16 +274,14 @@
         "id": "2",
         "phase": "cuartos_playoffs",
         "teamA": {
-          "user": "GANADOR 3",
-          "division": "1ra",
-          "club": "",
-          "logo": "equipo3.png"
+          "winnerOf": "octavos_playoffs:3",
+          "placeholder": "Ganador 3",
+          "escudo": ""
         },
         "teamB": {
-          "user": "GANADOR 4",
-          "division": "3ra",
-          "club": "",
-          "logo": "equipo4.png"
+          "winnerOf": "octavos_playoffs:4",
+          "placeholder": "Ganador 4",
+          "escudo": ""
         },
         "score": {
           "a": 0,
@@ -287,16 +299,14 @@
         "id": "3",
         "phase": "cuartos_playoffs",
         "teamA": {
-          "user": "GANADOR 5",
-          "division": "1ra",
-          "club": "",
-          "logo": "equipo5.png"
+          "winnerOf": "octavos_playoffs:5",
+          "placeholder": "Ganador 5",
+          "escudo": ""
         },
         "teamB": {
-          "user": "GANADOR 6",
-          "division": "2da",
-          "club": "",
-          "logo": "equipo6.png"
+          "winnerOf": "octavos_playoffs:6",
+          "placeholder": "Ganador 6",
+          "escudo": ""
         },
         "score": {
           "a": 0,
@@ -314,16 +324,14 @@
         "id": "4",
         "phase": "cuartos_playoffs",
         "teamA": {
-          "user": "GANADOR 7",
-          "division": "3ra",
-          "club": "",
-          "logo": "equipo7.png"
+          "winnerOf": "octavos_playoffs:7",
+          "placeholder": "Ganador 7",
+          "escudo": ""
         },
         "teamB": {
-          "user": "GANADOR 8",
-          "division": "1ra",
-          "club": "",
-          "logo": "equipo8.png"
+          "winnerOf": "octavos_playoffs:8",
+          "placeholder": "Ganador 8",
+          "escudo": ""
         },
         "score": {
           "a": 0,
