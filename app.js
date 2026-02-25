@@ -422,16 +422,9 @@ function toAssetPath(assetPath = "") {
 }
 
 function getCupCrossingTeamLogoPath(teamData) {
-  if (teamData.shield) {
-    return toAssetPath(teamData.shield);
-  }
-
-  if (teamData.escudo) {
-    return toAssetPath(teamData.escudo);
-  }
-
-  if (teamData.logo) {
-    return toAssetPath(teamData.logo);
+  const explicitLogo = teamData.escudo || teamData.logo || teamData.shield || "";
+  if (explicitLogo) {
+    return toAssetPath(explicitLogo);
   }
 
   if (CUP_CROSSING_CLUB_LOGO_MAP[teamData.club]) {
@@ -2535,11 +2528,16 @@ function normalizeTeamFromActiveSchema(team) {
   if (!team || typeof team !== "object") return null;
 
   if (typeof team.winnerOf === "string" && team.winnerOf.trim() !== "") {
+    const rawPlaceholder = typeof team.placeholder === "string" && team.placeholder.trim() !== ""
+      ? team.placeholder.trim()
+      : "Por definirse";
+    const placeholder = /^ganador\s+\d+$/i.test(rawPlaceholder)
+      ? "Por definirse"
+      : rawPlaceholder;
+
     return {
       winnerOf: team.winnerOf.trim(),
-      placeholder: typeof team.placeholder === "string" && team.placeholder.trim() !== ""
-        ? team.placeholder.trim()
-        : "Por definir"
+      placeholder
     };
   }
 
@@ -2793,7 +2791,36 @@ function isWinnerReference(side) {
   return !!side && typeof side === "object" && typeof side.winnerOf === "string" && side.winnerOf.trim() !== "";
 }
 
-function resolvePhaseSide(sourceSide, resolvedWinnerSide, fallbackLabel) {
+function getWinnerOfReferenceData(reference = "") {
+  const cleanedReference = String(reference || "").trim();
+  const [phaseRaw = "", matchIdRaw = ""] = cleanedReference.split(":");
+  const phase = phaseRaw.trim();
+  const matchId = matchIdRaw.trim();
+
+  if (!phase || !matchId) return null;
+  return { phase, matchId };
+}
+
+function getResolvedWinnerSideFromReference(reference, season) {
+  if (!season?.phases) return null;
+
+  const referenceData = getWinnerOfReferenceData(reference);
+  if (!referenceData) return null;
+
+  const phaseMatches = Array.isArray(season.phases[referenceData.phase])
+    ? season.phases[referenceData.phase]
+    : [];
+  const sourceMatch = phaseMatches.find((phaseMatch) => String(phaseMatch?.id || "").trim() === referenceData.matchId);
+  if (!sourceMatch) return null;
+
+  const winner = normalizeWinnerValue(sourceMatch.winner);
+  if (winner === "home") return sourceMatch.home;
+  if (winner === "away") return sourceMatch.away;
+
+  return null;
+}
+
+function resolvePhaseSide(sourceSide, resolvedWinnerSide, fallbackLabel, season = null) {
   const sourcePlayerLabel = typeof sourceSide?.player === "string"
     ? sourceSide.player.trim().toLowerCase()
     : typeof sourceSide?.user === "string"
@@ -2804,13 +2831,19 @@ function resolvePhaseSide(sourceSide, resolvedWinnerSide, fallbackLabel) {
   if (isWinnerReference(sourceSide)) {
     const referenceLabel = typeof sourceSide.placeholder === "string" && sourceSide.placeholder.trim() !== ""
       ? sourceSide.placeholder.trim()
-      : fallbackLabel;
+      : fallbackLabel || "Por definirse";
+    const fallbackReferenceLabel = /^ganador\s+\d+$/i.test(referenceLabel)
+      ? "Por definirse"
+      : referenceLabel;
 
-    if (resolvedWinnerSide) {
-      return formatSide(resolvedWinnerSide, referenceLabel);
+    const referencedWinnerSide = getResolvedWinnerSideFromReference(sourceSide.winnerOf, season);
+    const winnerSide = referencedWinnerSide || resolvedWinnerSide;
+
+    if (winnerSide) {
+      return formatSide(winnerSide, fallbackReferenceLabel);
     }
 
-    return createPlaceholderSide(referenceLabel);
+    return createPlaceholderSide(fallbackReferenceLabel);
   }
 
   if (looksLikeWinnerPlaceholder) {
@@ -2824,7 +2857,7 @@ function resolvePhaseSide(sourceSide, resolvedWinnerSide, fallbackLabel) {
   return formatSide(sourceSide || resolvedWinnerSide, fallbackLabel);
 }
 
-function buildPhaseMatches(sourceMatches, sourceWinners, phaseKey, seasonLabel) {
+function buildPhaseMatches(sourceMatches, sourceWinners, phaseKey, seasonLabel, season = null) {
   const next = [];
   const totalMatches = Math.ceil((sourceWinners?.length || 0) / 2);
   const phaseLabel = getPhaseLabel(phaseKey);
@@ -2843,8 +2876,8 @@ function buildPhaseMatches(sourceMatches, sourceWinners, phaseKey, seasonLabel) 
       ...normalizedSourceMatch,
       id: matchId,
       label: sourceMatch?.label || `${phaseLabel} ${index + 1}`,
-      home: resolvePhaseSide(sourceMatch?.home, sourceHome, sourceHome?.player || `Ganador ${phaseLabel} ${index * 2 + 1}`),
-      away: resolvePhaseSide(sourceMatch?.away, sourceAway, sourceAway?.player || `Ganador ${phaseLabel} ${index * 2 + 2}`)
+      home: resolvePhaseSide(sourceMatch?.home, sourceHome, sourceHome?.player || `Ganador ${phaseLabel} ${index * 2 + 1}`, season),
+      away: resolvePhaseSide(sourceMatch?.away, sourceAway, sourceAway?.player || `Ganador ${phaseLabel} ${index * 2 + 2}`, season)
     });
   }
 
@@ -2894,13 +2927,13 @@ function buildInterdivisionalActiveSeason(source) {
   const sourceFinalCopa = getActiveSourcePhaseMatches(source, "final_copa_interdivisional");
 
   const winnersOctavos = season.phases.octavos_playoffs.map((match, index) => getWinner(match, `Ganador Octavos ${index + 1}`));
-  season.phases.cuartos_playoffs = buildPhaseMatches(sourceCuartos, winnersOctavos, "cuartos_playoffs", seasonLabel);
+  season.phases.cuartos_playoffs = buildPhaseMatches(sourceCuartos, winnersOctavos, "cuartos_playoffs", seasonLabel, season);
 
   const winnersCuartos = season.phases.cuartos_playoffs.map((match, index) => getWinner(match, `Ganador Cuartos ${index + 1}`));
-  season.phases.semifinal_playoffs = buildPhaseMatches(sourceSemis, winnersCuartos, "semifinal_playoffs", seasonLabel);
+  season.phases.semifinal_playoffs = buildPhaseMatches(sourceSemis, winnersCuartos, "semifinal_playoffs", seasonLabel, season);
 
   const winnersSemis = season.phases.semifinal_playoffs.map((match, index) => getWinner(match, `Ganador Semi ${index + 1}`));
-  season.phases.final_playoffs = buildPhaseMatches(sourceFinalPlayoffs, winnersSemis, "final_playoffs", seasonLabel);
+  season.phases.final_playoffs = buildPhaseMatches(sourceFinalPlayoffs, winnersSemis, "final_playoffs", seasonLabel, season);
 
   const finalPlayoffsMatch = season.phases.final_playoffs[0] || null;
   const directQualified = {
