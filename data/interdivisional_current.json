@@ -67,9 +67,9 @@
         "teamA": { "user": "Pelufo", "division": "Primera", "club": "Real Sociedad", "logo": "assets/escudos/sociedad.png", "escudo": "assets/escudos/sociedad.png" },
         "teamB": { "user": "Dabidpisi", "division": "Segunda", "club": "Fiorentina", "logo": "assets/escudos/fiorentina.png", "escudo": "assets/escudos/fiorentina.png" },
         "score": { "a": 0, "b": 0 },
-        "pens": { "enabled": false, "a": 0, "b": 0 },
-        "winner": null,
-        "status": "pending"
+        "pens": { "enabled": false, "a": 5, "b": 3 },
+        "winner": "a",
+        "status": "finished"
       },
       {
         "id": "7",
