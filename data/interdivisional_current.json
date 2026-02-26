@@ -136,6 +136,23 @@
     ],
     "semifinal_playoffs": [],
     "final_playoffs": [],
-    "final_copa_interdivisional": []
+ "final_copa_interdivisional": [
+  {
+    "id": "1",
+    "phase": "final_copa_interdivisional",
+    "teamA": {
+      "user": "Sally1901",
+      "division": "Segunda",
+      "club": "Marsella",
+      "logo": "assets/escudos/marsella.png",
+      "escudo": "assets/escudos/marsella.png"
+    },
+    "teamB": {
+      "winnerOf": "final_playoffs:1"
+    },
+    "score": { "a": 0, "b": 0 },
+    "pens": { "enabled": false, "a": 0, "b": 0 },
+    "winner": null,
+    "status": "pending"
   }
-}
+]
