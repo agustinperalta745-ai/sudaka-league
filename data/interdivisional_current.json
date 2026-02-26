@@ -24,7 +24,7 @@
       {
         "id": "2",
         "phase": "octavos_playoffs",
-        "teamA": { "user": "Ache14", "division": "Primera", "club": "", "logo": "", "escudo": "" },
+        "teamA": { "user": "Ache14", "division": "Primera", "club": "Villareal", "logo": "assets/escudos/villareal.png", "escudo": "assets/escudos/villareal.png" },
         "teamB": { "user": "Cacherinhooo", "division": "Segunda", "club": "Fullham", "logo": "assets/escudos/fulham.png", "escudo": "assets/escudos/fulham.png" },
         "score": { "a": 0, "b": 4 },
         "pens": { "enabled": false, "a": 0, "b": 0 },
