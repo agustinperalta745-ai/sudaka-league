@@ -36,10 +36,10 @@
         "phase": "octavos_playoffs",
         "teamA": { "user": "Joser17", "division": "Primera", "club": "Brighton", "logo": "assets/escudos/brighton.png", "escudo": "assets/escudos/brighton.png" },
         "teamB": { "user": "NazaTeto", "division": "Segunda", "club": "Galatasaray", "logo": "assets/escudos/galatasaray.png", "escudo": "assets/escudos/galatasaray.png" },
-        "score": { "a": 0, "b": 0 },
+        "score": { "a": 0, "b": 3 },
         "pens": { "enabled": false, "a": 0, "b": 0 },
-        "winner": null,
-        "status": "pending"
+        "winner": "b",
+        "status": "finished"
       },
       {
         "id": "4",
