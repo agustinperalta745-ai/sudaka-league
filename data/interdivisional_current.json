@@ -56,10 +56,10 @@
         "phase": "octavos_playoffs",
         "teamA": { "user": "Ivancarocela", "division": "Primera", "club": "Roma", "logo": "assets/escudos/roma.png", "escudo": "assets/escudos/roma.png" },
         "teamB": { "user": "Leom", "division": "Segunda", "club": "Real Sociedad", "logo": "assets/escudos/sociedad.png", "escudo": "assets/escudos/sociedad.png" },
-        "score": { "a": 0, "b": 0 },
+        "score": { "a": 0, "b": 2 },
         "pens": { "enabled": false, "a": 0, "b": 0 },
-        "winner": null,
-        "status": "pending"
+        "winner": "b",
+        "status": "finished"
       },
       {
         "id": "6",
