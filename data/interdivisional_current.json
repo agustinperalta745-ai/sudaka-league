@@ -46,9 +46,9 @@
         "phase": "octavos_playoffs",
         "teamA": { "user": "TinchoRamirez", "division": "Primera", "club": "Monaco", "logo": "assets/escudos/monaco.png", "escudo": "assets/escudos/monaco.png" },
         "teamB": { "user": "JUNSmash", "division": "Tercera", "club": "Bologna", "logo": "assets/escudos/bologna.png", "escudo": "assets/escudos/bologna.png" },
-        "score": { "a": 0, "b": 0 },
+        "score": { "a": 2, "b": 0 },
         "pens": { "enabled": false, "a": 0, "b": 0 },
-        "winner": null,
+        "winner": "a",
         "status": "pending"
       },
       {
