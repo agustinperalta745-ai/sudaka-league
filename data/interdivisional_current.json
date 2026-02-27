@@ -15,7 +15,7 @@
         "id": "1",
         "phase": "octavos_playoffs",
         "teamA": { "user": "AlexCABJ", "division": "Primera", "club": "Bologna", "logo": "assets/escudos/bologna.png", "escudo": "assets/escudos/bologna.png" },
-        "teamB": { "user": "Jona96delgado", "division": "Tercera", "club": "Fenerbache", "logo": "assets/escudos/fenerbahce.png", "escudo": "assets/escudos/fenerbahce.png" },
+        "teamB": { "user": "Jona96delgado", "division": "Tercera", "club": "Fenerbahce", "logo": "assets/escudos/fenerbahce.png", "escudo": "assets/escudos/fenerbahce.png" },
         "score": { "a": 1, "b": 3 },
         "pens": { "enabled": false, "a": 0, "b": 0 },
         "winner": "b",
@@ -24,9 +24,9 @@
       {
         "id": "2",
         "phase": "octavos_playoffs",
-        "teamA": { "user": "Ache14", "division": "Primera", "club": "Villareal", "logo": "assets/escudos/villareal.png", "escudo": "assets/escudos/villareal.png" },
-        "teamB": { "user": "Cacherinhooo", "division": "Segunda", "club": "Fullham", "logo": "assets/escudos/fulham.png", "escudo": "assets/escudos/fulham.png" },
-        "score": { "a": 0, "b": 4 },
+        "teamA": { "user": "Ache14", "division": "Primera", "club": "Villarreal", "logo": "assets/escudos/villareal.png", "escudo": "assets/escudos/villareal.png" },
+        "teamB": { "user": "Cacherinhooo", "division": "Segunda", "club": "Fulham", "logo": "assets/escudos/fulham.png", "escudo": "assets/escudos/fulham.png" },
+        "score": { "a": 0, "b": 3 },
         "pens": { "enabled": false, "a": 0, "b": 0 },
         "winner": "b",
         "status": "finished"
@@ -75,7 +75,7 @@
         "id": "7",
         "phase": "octavos_playoffs",
         "teamA": { "user": "Joelignacho", "division": "Primera", "club": "Betis", "logo": "assets/escudos/betis.png", "escudo": "assets/escudos/betis.png" },
-        "teamB": { "user": "TheoHernandez", "division": "Segunda", "club": "Lyom", "logo": "assets/escudos/lyon.png", "escudo": "assets/escudos/lyon.png" },
+        "teamB": { "user": "TheoHernandez", "division": "Segunda", "club": "Lyon", "logo": "assets/escudos/lyon.png", "escudo": "assets/escudos/lyon.png" },
         "score": { "a": 0, "b": 3 },
         "pens": { "enabled": false, "a": 0, "b": 0 },
         "winner": "b",
@@ -98,7 +98,7 @@
         "phase": "cuartos_playoffs",
         "teamA": { "winnerOf": "octavos_playoffs:1", "placeholder": "Ganador 1", "escudo": "" },
         "teamB": { "winnerOf": "octavos_playoffs:2", "placeholder": "Ganador 2", "escudo": "" },
-        "score": { "a": 0, "b": 5 },
+        "score": { "a": 3, "b": 0 },
         "pens": { "enabled": false, "a": 0, "b": 0 },
         "winner": "b",
         "status": "finished"
@@ -134,25 +134,57 @@
         "status": "pending"
       }
     ],
-    "semifinal_playoffs": [],
-    "final_playoffs": [],
- "final_copa_interdivisional": [
-  {
-    "id": "1",
-    "phase": "final_copa_interdivisional",
-    "teamA": {
-      "user": "Sally1901",
-      "division": "Segunda",
-      "club": "Marsella",
-      "logo": "assets/escudos/marsella.png",
-      "escudo": "assets/escudos/marsella.png"
-    },
-    "teamB": {
-      "winnerOf": "final_playoffs:1"
-    },
-    "score": { "a": 0, "b": 0 },
-    "pens": { "enabled": false, "a": 0, "b": 0 },
-    "winner": null,
-    "status": "pending"
+    "semifinal_playoffs": [
+      {
+        "id": "1",
+        "phase": "semifinal_playoffs",
+        "teamA": { "winnerOf": "cuartos_playoffs:1", "placeholder": "Ganador C1", "escudo": "" },
+        "teamB": { "winnerOf": "cuartos_playoffs:2", "placeholder": "Ganador C2", "escudo": "" },
+        "score": { "a": 0, "b": 0 },
+        "pens": { "enabled": false, "a": 0, "b": 0 },
+        "winner": null,
+        "status": "pending"
+      },
+      {
+        "id": "2",
+        "phase": "semifinal_playoffs",
+        "teamA": { "winnerOf": "cuartos_playoffs:3", "placeholder": "Ganador C3", "escudo": "" },
+        "teamB": { "winnerOf": "cuartos_playoffs:4", "placeholder": "Ganador C4", "escudo": "" },
+        "score": { "a": 0, "b": 0 },
+        "pens": { "enabled": false, "a": 0, "b": 0 },
+        "winner": null,
+        "status": "pending"
+      }
+    ],
+    "final_playoffs": [
+      {
+        "id": "1",
+        "phase": "final_playoffs",
+        "teamA": { "winnerOf": "semifinal_playoffs:1", "placeholder": "Ganador S1", "escudo": "" },
+        "teamB": { "winnerOf": "semifinal_playoffs:2", "placeholder": "Ganador S2", "escudo": "" },
+        "score": { "a": 0, "b": 0 },
+        "pens": { "enabled": false, "a": 0, "b": 0 },
+        "winner": null,
+        "status": "pending"
+      }
+    ],
+    "final_copa_interdivisional": [
+      {
+        "id": "1",
+        "phase": "final_copa_interdivisional",
+        "teamA": {
+          "user": "Sally1901",
+          "division": "Segunda",
+          "club": "Marsella",
+          "logo": "assets/escudos/marsella.png",
+          "escudo": "assets/escudos/marsella.png"
+        },
+        "teamB": { "winnerOf": "final_playoffs:1", "placeholder": "Ganador Final Playoffs", "escudo": "" },
+        "score": { "a": 0, "b": 0 },
+        "pens": { "enabled": false, "a": 0, "b": 0 },
+        "winner": null,
+        "status": "pending"
+      }
+    ]
   }
-]
+      }
