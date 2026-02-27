@@ -100,7 +100,7 @@
         "teamB": { "winnerOf": "octavos_playoffs:2", "placeholder": "Ganador 2", "escudo": "" },
         "score": { "a": 3, "b": 0 },
         "pens": { "enabled": false, "a": 0, "b": 0 },
-        "winner": "b",
+        "winner": "a",
         "status": "finished"
       },
       {
