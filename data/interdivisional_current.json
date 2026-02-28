@@ -140,10 +140,10 @@
         "phase": "semifinal_playoffs",
         "teamA": { "winnerOf": "cuartos_playoffs:1", "placeholder": "Ganador C1", "escudo": "" },
         "teamB": { "winnerOf": "cuartos_playoffs:2", "placeholder": "Ganador C2", "escudo": "" },
-        "score": { "a": 0, "b": 0 },
+        "score": { "a": 6, "b": 2 },
         "pens": { "enabled": false, "a": 0, "b": 0 },
-        "winner": null,
-        "status": "pending"
+        "winner": "a",
+        "status": "finished"
       },
       {
         "id": "2",
