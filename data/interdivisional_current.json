@@ -108,20 +108,20 @@
         "phase": "cuartos_playoffs",
         "teamA": { "winnerOf": "octavos_playoffs:3", "placeholder": "Ganador 3", "escudo": "" },
         "teamB": { "winnerOf": "octavos_playoffs:4", "placeholder": "Ganador 4", "escudo": "" },
-        "score": { "a": 0, "b": 0 },
-        "pens": { "enabled": false, "a": 0, "b": 0 },
-        "winner": null,
-        "status": "pending"
+        "score": { "a": 3, "b": 3 },
+        "pens": { "enabled": false, "a": 5, "b": 3 },
+        "winner": "a",
+        "status": "finished"
       },
       {
         "id": "3",
         "phase": "cuartos_playoffs",
         "teamA": { "winnerOf": "octavos_playoffs:5", "placeholder": "Ganador 5", "escudo": "" },
         "teamB": { "winnerOf": "octavos_playoffs:6", "placeholder": "Ganador 6", "escudo": "" },
-        "score": { "a": 0, "b": 0 },
-        "pens": { "enabled": false, "a": 0, "b": 0 },
-        "winner": null,
-        "status": "pending"
+        "score": { "a": 1, "b": 1 },
+        "pens": { "enabled": false, "a": 5, "b": 6 },
+        "winner": "b",
+        "status": "finished"
       },
       {
         "id": "4",
