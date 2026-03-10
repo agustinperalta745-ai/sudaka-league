@@ -3474,7 +3474,7 @@ function renderCupHistoryTab() {
 
   const seasons = getValidCupHistorySeasons();
   const defaultSeason = getCupHistoryDefaultSeason(seasons);
-  const seasonKeyBeforeRender = cupHistorySeasonKey || cupHistorySeasonSelect.value;
+  const seasonKeyBeforeRender = cupHistorySeasonSelect.value || cupHistorySeasonKey;
   const normalizedSelectedKey = normalizeSeasonKey(seasonKeyBeforeRender);
 
   cupHistorySeasonSelect.replaceChildren();
