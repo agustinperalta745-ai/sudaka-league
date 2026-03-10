@@ -3454,10 +3454,16 @@ function getValidCupHistorySeasons() {
     .sort((a, b) => parseSeasonNumber(a.season) - parseSeasonNumber(b.season));
 }
 
+function normalizeSeasonKey(value) {
+  const normalized = String(value || "").trim();
+  const seasonMatch = normalized.match(/T\d+/i);
+  return seasonMatch ? seasonMatch[0].toUpperCase() : normalized.toUpperCase();
+}
+
 function getCupHistoryDefaultSeason(seasons) {
   if (!Array.isArray(seasons) || !seasons.length) return null;
 
-  const explicitT23 = seasons.find((season) => String(season.season).toUpperCase() === "T23");
+  const explicitT23 = seasons.find((season) => normalizeSeasonKey(season.season) === "T23");
   if (explicitT23) return explicitT23;
 
   return seasons[0];
@@ -3468,6 +3474,8 @@ function renderCupHistoryTab() {
 
   const seasons = getValidCupHistorySeasons();
   const defaultSeason = getCupHistoryDefaultSeason(seasons);
+  const seasonKeyBeforeRender = cupHistorySeasonKey || cupHistorySeasonSelect.value;
+  const normalizedSelectedKey = normalizeSeasonKey(seasonKeyBeforeRender);
 
   cupHistorySeasonSelect.replaceChildren();
 
@@ -3483,12 +3491,9 @@ function renderCupHistoryTab() {
   cupHistoryList.replaceChildren();
   if (!defaultSeason) return;
 
-  const selectedSeasonByKey = seasons.find((season) => season.season === cupHistorySeasonSelect.value);
+  const selectedSeasonByKey = seasons.find((season) => normalizeSeasonKey(season.season) === normalizedSelectedKey);
   const selectedSeason = selectedSeasonByKey || defaultSeason;
-
-  if (!selectedSeasonByKey) {
-    cupHistorySeasonSelect.value = defaultSeason.season;
-  }
+  cupHistorySeasonSelect.value = selectedSeason.season;
 
   ensureInterdivisionalProgression(selectedSeason);
 
