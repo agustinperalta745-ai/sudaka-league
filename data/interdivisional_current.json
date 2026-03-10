@@ -1,4 +1,4 @@
-{
+lo{
   "season": "T24",
   "status": "active",
   "currentPhase": 2,
@@ -128,10 +128,10 @@
         "phase": "cuartos_playoffs",
         "teamA": { "winnerOf": "octavos_playoffs:7", "placeholder": "Ganador 7", "escudo": "" },
         "teamB": { "winnerOf": "octavos_playoffs:8", "placeholder": "Ganador 8", "escudo": "" },
-        "score": { "a": 0, "b": 0 },
+        "score": { "a": 0, "b": 3 },
         "pens": { "enabled": false, "a": 0, "b": 0 },
-        "winner": null,
-        "status": "pending"
+        "winner": "b",
+        "status": "finished"
       }
     ],
     "semifinal_playoffs": [
